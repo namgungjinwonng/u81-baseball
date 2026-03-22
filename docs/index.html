@@ -9,8 +9,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="U-18 야구">
-<link rel="apple-touch-icon" href="./icon-192.png">
-<link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
+<link rel="apple-touch-icon" href="/icon-192.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif; background: #f0f2f5; color: #1a1a2e; }
@@ -258,7 +258,7 @@ tr:nth-child(even):hover { background: #f0f1ff; }
 <div class="header">
     <h1>U-18 대한야구소프트볼협회</h1>
     <div class="subtitle">2026 시즌 18세 이하부 전체 선수 현황 | 데이터 출처: korea-baseball.com</div>
-    <div class="subtitle" style="margin-top:6px;font-size:12px;opacity:0.6;" id="updateDate">마지막 갱신: 2026-03-22 17:13</div>
+    <div class="subtitle" style="margin-top:6px;font-size:12px;opacity:0.6;" id="updateDate">마지막 갱신: 2026-03-22 18:35</div>
     <button class="refresh-btn" onclick="refreshData()" id="refreshBtn" style="display:none;">&#x21bb; 선수정보 갱신</button>
     <div id="refreshStatus" class="refresh-status"></div>
 </div>
@@ -341,7 +341,7 @@ tr:nth-child(even):hover { background: #f0f1ff; }
     </div>
 </div>
 
-<script src="./u18_app_data.js"></script>
+<script src="u18_app_data.js"></script>
 <script>
 
 function filterTeams() {
@@ -491,7 +491,7 @@ async function refreshData() {
     status.textContent = '데이터 수집 중... (약 30초 소요)';
 
     try {
-        const resp = await fetch('/refresh', { method: 'POST' });
+        const resp = await fetch(location.origin + '/refresh', { method: 'POST' });
         if (resp.ok) {
             const result = await resp.json();
             status.textContent = `✅ 갱신 완료! ${result.teams}팀, ${result.players}명 — 3초 후 새로고침...`;
@@ -518,8 +518,8 @@ if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('./sw.js').catch(() => {});
 }
 
-// Show refresh button only on localhost
-if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+// Show refresh button only on local (localhost, 127.0.0.1, file://)
+if (location.hostname === 'localhost' || location.hostname === '127.0.0.1' || location.protocol === 'file:') {
     document.getElementById('refreshBtn').style.display = '';
 }
 
