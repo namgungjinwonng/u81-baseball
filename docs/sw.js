@@ -1,7 +1,6 @@
 const CACHE_NAME = 'u18-baseball-v1';
 const ASSETS = [
   './',
-  './index.html',
   './u18_app_data.js',
   './manifest.json',
   './icon-192.png',
