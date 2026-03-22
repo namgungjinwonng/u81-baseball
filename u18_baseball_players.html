@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 U-18 한국 고교야구 선수 정보</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif; background: #f0f2f5; color: #333; }
+
+  .header {
+    background: linear-gradient(135deg, #1a237e, #283593);
+    color: white; padding: 30px 20px; text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+  .header h1 { font-size: 2em; margin-bottom: 8px; }
+  .header p { opacity: 0.85; font-size: 0.95em; }
+
+  .controls {
+    max-width: 1400px; margin: 20px auto; padding: 0 20px;
+    display: flex; flex-wrap: wrap; gap: 12px; align-items: center;
+  }
+  .controls input, .controls select {
+    padding: 10px 14px; border: 2px solid #ddd; border-radius: 8px;
+    font-size: 14px; outline: none; transition: border-color 0.2s;
+  }
+  .controls input:focus, .controls select:focus { border-color: #1a237e; }
+  .controls input { flex: 1; min-width: 200px; }
+  .controls select { min-width: 140px; }
+
+  .stats-bar {
+    max-width: 1400px; margin: 10px auto 20px; padding: 0 20px;
+    display: flex; flex-wrap: wrap; gap: 12px;
+  }
+  .stat-card {
+    background: white; border-radius: 10px; padding: 14px 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08); flex: 1; min-width: 140px; text-align: center;
+  }
+  .stat-card .num { font-size: 1.8em; font-weight: bold; color: #1a237e; }
+  .stat-card .label { font-size: 0.85em; color: #666; margin-top: 4px; }
+
+  .tabs {
+    max-width: 1400px; margin: 0 auto; padding: 0 20px;
+    display: flex; gap: 4px; flex-wrap: wrap;
+  }
+  .tab {
+    padding: 10px 20px; background: #e0e0e0; border: none; border-radius: 8px 8px 0 0;
+    cursor: pointer; font-size: 14px; font-weight: 600; transition: all 0.2s;
+  }
+  .tab.active { background: white; color: #1a237e; }
+  .tab:hover { background: #d0d0d0; }
+
+  .content { max-width: 1400px; margin: 0 auto 40px; padding: 0 20px; }
+
+  .team-section {
+    background: white; border-radius: 0 10px 10px 10px; padding: 20px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08); margin-bottom: 20px;
+  }
+  .team-header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-bottom: 12px; border-bottom: 2px solid #e8eaf6; margin-bottom: 16px;
+    cursor: pointer; user-select: none;
+  }
+  .team-header h2 { font-size: 1.3em; color: #1a237e; }
+  .team-header .meta { display: flex; gap: 12px; font-size: 0.85em; color: #666; }
+  .team-header .meta span { background: #e8eaf6; padding: 4px 10px; border-radius: 20px; }
+  .team-header .toggle { font-size: 1.2em; color: #999; transition: transform 0.3s; }
+  .team-header.collapsed .toggle { transform: rotate(-90deg); }
+
+  .team-body { overflow: hidden; transition: max-height 0.4s ease; }
+  .team-body.collapsed { max-height: 0 !important; padding: 0; }
+
+  .staff-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+  .staff-badge {
+    background: #fff3e0; border: 1px solid #ffcc02; padding: 4px 12px;
+    border-radius: 20px; font-size: 0.85em;
+  }
+  .staff-badge.coach { background: #e8f5e9; border-color: #66bb6a; }
+
+  table {
+    width: 100%; border-collapse: collapse; font-size: 13px;
+  }
+  thead { background: #f5f5f5; }
+  th { padding: 10px 8px; text-align: left; font-weight: 600; color: #555;
+       border-bottom: 2px solid #e0e0e0; white-space: nowrap; cursor: pointer; }
+  th:hover { color: #1a237e; }
+  td { padding: 8px; border-bottom: 1px solid #f0f0f0; }
+  tr:hover td { background: #f8f9ff; }
+
+  .pos-badge {
+    display: inline-block; padding: 2px 8px; border-radius: 12px;
+    font-size: 11px; font-weight: 600; color: white;
+  }
+  .pos-투수 { background: #e53935; }
+  .pos-포수 { background: #1e88e5; }
+  .pos-내야수 { background: #43a047; }
+  .pos-외야수 { background: #fb8c00; }
+  .pos-미지정 { background: #9e9e9e; }
+
+  .grade-badge {
+    display: inline-block; width: 24px; height: 24px; line-height: 24px;
+    text-align: center; border-radius: 50%; font-size: 12px; font-weight: bold; color: white;
+  }
+  .grade-1 { background: #66bb6a; }
+  .grade-2 { background: #42a5f5; }
+  .grade-3 { background: #ef5350; }
+
+  .all-teams-table { margin-top: 20px; }
+
+  #playerView { display: none; }
+
+  .footer {
+    text-align: center; padding: 20px; color: #999; font-size: 0.85em;
+    border-top: 1px solid #e0e0e0; margin-top: 40px;
+  }
+
+  @media (max-width: 768px) {
+    .header h1 { font-size: 1.4em; }
+    .controls { flex-direction: column; }
+    table { font-size: 11px; }
+    th, td { padding: 6px 4px; }
+  }
+
+  .highlight { background: #fff59d !important; }
+
+  .pos-view-container { display: flex; flex-direction: column; gap: 20px; }
+  .pos-group {
+    background: white; border-radius: 10px; padding: 20px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+  .pos-group-header {
+    display: flex; align-items: center; gap: 16px; padding-bottom: 14px;
+    border-bottom: 3px solid #e0e0e0; margin-bottom: 16px; cursor: pointer; user-select: none;
+  }
+  .pos-group-header.pos-투수-border { border-color: #e53935; }
+  .pos-group-header.pos-포수-border { border-color: #1e88e5; }
+  .pos-group-header.pos-내야수-border { border-color: #43a047; }
+  .pos-group-header.pos-외야수-border { border-color: #fb8c00; }
+  .pos-icon {
+    width: 48px; height: 48px; border-radius: 50%; display: flex;
+    align-items: center; justify-content: center; color: white;
+    font-size: 20px; font-weight: bold; flex-shrink: 0;
+  }
+  .pos-icon.투수 { background: #e53935; }
+  .pos-icon.포수 { background: #1e88e5; }
+  .pos-icon.내야수 { background: #43a047; }
+  .pos-icon.외야수 { background: #fb8c00; }
+  .pos-group-title { font-size: 1.4em; font-weight: bold; color: #333; }
+  .pos-group-count { font-size: 0.9em; color: #888; }
+  .pos-group-toggle { margin-left: auto; font-size: 1.2em; color: #999; transition: transform 0.3s; }
+  .pos-group-body { overflow: hidden; transition: max-height 0.4s ease; }
+  .pos-group-body.collapsed { max-height: 0 !important; padding: 0; }
+
+  .pos-stats-row {
+    display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px;
+  }
+  .pos-stat-chip {
+    background: #f5f5f5; border-radius: 8px; padding: 8px 14px;
+    font-size: 0.85em; color: #555;
+  }
+  .pos-stat-chip strong { color: #1a237e; }
+
+  .pos-filter-btns {
+    max-width: 1400px; margin: 0 auto 12px; padding: 0 20px;
+    display: none; gap: 8px; flex-wrap: wrap;
+  }
+  .pos-filter-btns.visible { display: flex; }
+  .pos-btn {
+    padding: 10px 24px; border: 2px solid #ddd; border-radius: 24px;
+    background: white; cursor: pointer; font-size: 14px; font-weight: 600;
+    transition: all 0.2s; display: flex; align-items: center; gap: 8px;
+  }
+  .pos-btn:hover { border-color: #999; }
+  .pos-btn.active { color: white; border-color: transparent; }
+  .pos-btn.active.투수 { background: #e53935; }
+  .pos-btn.active.포수 { background: #1e88e5; }
+  .pos-btn.active.내야수 { background: #43a047; }
+  .pos-btn.active.외야수 { background: #fb8c00; }
+  .pos-btn.active.전체 { background: #1a237e; }
+  .pos-btn .count { font-size: 12px; opacity: 0.8; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>2026 U-18 한국 고교야구 선수 종합 정보</h1>
+  <p>대한야구소프트볼협회 등록 기준 | 총 103개 팀 | 데이터 수집일: 2026-03-21</p>
+</div>
+
+<div class="stats-bar">
+  <div class="stat-card"><div class="num" id="totalTeams">0</div><div class="label">등록 팀</div></div>
+  <div class="stat-card"><div class="num" id="totalPlayers">0</div><div class="label">총 선수</div></div>
+  <div class="stat-card"><div class="num" id="totalPitchers">0</div><div class="label">투수</div></div>
+  <div class="stat-card"><div class="num" id="totalCatchers">0</div><div class="label">포수</div></div>
+  <div class="stat-card"><div class="num" id="totalInfielders">0</div><div class="label">내야수</div></div>
+  <div class="stat-card"><div class="num" id="totalOutfielders">0</div><div class="label">외야수</div></div>
+</div>
+
+<div class="controls">
+  <input type="text" id="searchInput" placeholder="선수명, 팀명, 지역으로 검색...">
+  <select id="regionFilter">
+    <option value="">전체 지역</option>
+    <option value="서울">서울</option>
+    <option value="경기">경기</option>
+    <option value="인천">인천</option>
+    <option value="부산">부산</option>
+    <option value="대구">대구</option>
+    <option value="대전">대전</option>
+    <option value="광주">광주</option>
+    <option value="울산">울산</option>
+    <option value="세종">세종</option>
+    <option value="강원">강원</option>
+    <option value="충북">충북</option>
+    <option value="충남">충남</option>
+    <option value="전북">전북</option>
+    <option value="전남">전남</option>
+    <option value="경북">경북</option>
+    <option value="경남">경남</option>
+  </select>
+  <select id="posFilter">
+    <option value="">전체 포지션</option>
+    <option value="투수">투수</option>
+    <option value="포수">포수</option>
+    <option value="내야수">내야수</option>
+    <option value="외야수">외야수</option>
+  </select>
+  <select id="gradeFilter">
+    <option value="">전체 학년</option>
+    <option value="1">1학년</option>
+    <option value="2">2학년</option>
+    <option value="3">3학년</option>
+  </select>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="showView('team')">팀별 보기</button>
+  <button class="tab" onclick="showView('position')">포지션별 보기</button>
+  <button class="tab" onclick="showView('player')">전체 선수 목록</button>
+  <button class="tab" onclick="showView('allteams')">전체 팀 목록 (103팀)</button>
+</div>
+
+<div class="pos-filter-btns" id="posFilterBtns">
+  <button class="pos-btn active 전체" onclick="filterByPos('전체')">전체 <span class="count" id="posBtnAll"></span></button>
+  <button class="pos-btn" onclick="filterByPos('투수')">투수 <span class="count" id="posBtnP"></span></button>
+  <button class="pos-btn" onclick="filterByPos('포수')">포수 <span class="count" id="posBtnC"></span></button>
+  <button class="pos-btn" onclick="filterByPos('내야수')">내야수 <span class="count" id="posBtnIF"></span></button>
+  <button class="pos-btn" onclick="filterByPos('외야수')">외야수 <span class="count" id="posBtnOF"></span></button>
+</div>
+
+<div class="content">
+  <div id="teamView"></div>
+  <div id="positionView" style="display:none"></div>
+  <div id="playerView">
+    <div class="team-section">
+      <table>
+        <thead>
+          <tr>
+            <th onclick="sortPlayers('team')">소속팀</th>
+            <th onclick="sortPlayers('region')">지역</th>
+            <th onclick="sortPlayers('num')">등번호</th>
+            <th onclick="sortPlayers('name')">성명</th>
+            <th onclick="sortPlayers('pos')">포지션</th>
+            <th onclick="sortPlayers('grade')">학년</th>
+            <th onclick="sortPlayers('height')">신장</th>
+            <th onclick="sortPlayers('weight')">체중</th>
+            <th>투타</th>
+          </tr>
+        </thead>
+        <tbody id="playerTableBody"></tbody>
+      </table>
+    </div>
+  </div>
+  <div id="allTeamsView" style="display:none">
+    <div class="team-section">
+      <h2 style="color:#1a237e;margin-bottom:16px;">2026 U-18 전체 등록 팀 목록 (103팀)</h2>
+      <table>
+        <thead>
+          <tr><th>번호</th><th>팀명</th><th>지역</th><th>감독</th><th>선수수</th><th>상세보기</th></tr>
+        </thead>
+        <tbody id="allTeamsBody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  출처: <a href="https://www.korea-baseball.com" target="_blank">대한야구소프트볼협회</a> | 2026시즌 등록 데이터 기준
+</div>
+
+<script>
+// ========== ALL 103 TEAMS LIST ==========
+const allTeamsList = [
+  {name:"GD챌린저스BC(U-18)",region:"서울",manager:"송구홍",players:20,idx:1702},
+  {name:"강릉고",region:"강원",manager:"최재호",players:43,idx:193},
+  {name:"강원고",region:"강원",manager:"김정수",players:23,idx:575},
+  {name:"개성고",region:"부산",manager:"홍민구",players:43,idx:0},
+  {name:"거제BC(U-18)",region:"경남",manager:"권두조",players:24,idx:0},
+  {name:"경기고",region:"서울",manager:"오규택",players:60,idx:147},
+  {name:"경기상업고",region:"서울",manager:"최덕현",players:53,idx:0},
+  {name:"경기항공고",region:"경기",manager:"이동수",players:43,idx:0},
+  {name:"경남고",region:"부산",manager:"전광열",players:53,idx:176},
+  {name:"경동고",region:"서울",manager:"조정권",players:54,idx:0},
+  {name:"경민IT고",region:"경기",manager:"김종석",players:27,idx:0},
+  {name:"경북고",region:"대구",manager:"이준호",players:64,idx:185},
+  {name:"경주고",region:"경북",manager:"임원수",players:31,idx:0},
+  {name:"공주고",region:"충남",manager:"오주상",players:40,idx:0},
+  {name:"광남고BC",region:"전남",manager:"허세환",players:26,idx:0},
+  {name:"광주동성고",region:"광주",manager:"김재덕",players:32,idx:0},
+  {name:"광주제일고",region:"광주",manager:"조윤채",players:38,idx:0},
+  {name:"광주진흥고",region:"광주",manager:"김인호",players:38,idx:0},
+  {name:"군산상일고",region:"전북",manager:"석수철",players:48,idx:0},
+  {name:"금남고",region:"경남",manager:"전봉석",players:21,idx:0},
+  {name:"김포과학기술고",region:"경기",manager:"김희상",players:30,idx:0},
+  {name:"김해고",region:"경남",manager:"오성민",players:41,idx:0},
+  {name:"대구고",region:"대구",manager:"손경호",players:59,idx:0},
+  {name:"대구북구SC(U-18)",region:"대구",manager:"이시원",players:21,idx:0},
+  {name:"대구상원고",region:"대구",manager:"김승관",players:63,idx:0},
+  {name:"대전고",region:"대전",manager:"김의수",players:48,idx:0},
+  {name:"대전제일고",region:"대전",manager:"길태곤",players:36,idx:0},
+  {name:"덕수고",region:"서울",manager:"정윤진",players:45,idx:0},
+  {name:"도개고",region:"경북",manager:"이효근",players:24,idx:0},
+  {name:"동산고",region:"인천",manager:"이양기",players:41,idx:0},
+  {name:"라온고",region:"경기",manager:"강봉수",players:49,idx:592},
+  {name:"마산고",region:"경남",manager:"고윤성",players:52,idx:152},
+  {name:"마산용마고",region:"경남",manager:"진민수",players:44,idx:155},
+  {name:"명지BC(U-18)",region:"서울",manager:"민상기",players:20,idx:1890},
+  {name:"물금고",region:"경남",manager:"강승영",players:41,idx:591},
+  {name:"밀양BC(U-18)",region:"경남",manager:"최동욱",players:18,idx:1449},
+  {name:"배명고",region:"서울",manager:"김경섭",players:56,idx:160},
+  {name:"배재고",region:"서울",manager:"권오영",players:34,idx:164},
+  {name:"백송고",region:"경기",manager:"박종호",players:32,idx:593},
+  {name:"부경고",region:"부산",manager:"채종범",players:38,idx:182},
+  {name:"부산고",region:"부산",manager:"박계원",players:45,idx:191},
+  {name:"부산공업고",region:"부산",manager:"이승학",players:41,idx:188},
+  {name:"부원고야구단",region:"경기",manager:"김상현",players:26,idx:1900},
+  {name:"북일고",region:"충남",manager:"임재철",players:37,idx:142},
+  {name:"비봉고",region:"경기",manager:"신현철",players:39,idx:927},
+  {name:"상동고",region:"강원",manager:"백재호",players:44,idx:1701},
+  {name:"상우고야구단",region:"경기",manager:"신명철",players:27,idx:1899},
+  {name:"서울HG야구단(U-18)",region:"서울",manager:"박상근",players:19,idx:1761},
+  {name:"서울HK야구단(U-18)",region:"서울",manager:"김진원",players:37,idx:1759},
+  {name:"서울고",region:"서울",manager:"김동수",players:51,idx:167},
+  {name:"서울동산고",region:"서울",manager:"곽동성",players:45,idx:1158},
+  {name:"서울디자인고",region:"서울",manager:"이호",players:42,idx:555},
+  {name:"서울아이티고BC",region:"서울",manager:"조용준",players:20,idx:1826},
+  {name:"서울자동차고",region:"서울",manager:"이우종",players:29,idx:1451},
+  {name:"서울컨벤션고",region:"서울",manager:"유영원",players:53,idx:1164},
+  {name:"선린인터넷고",region:"서울",manager:"박덕희",players:46,idx:170},
+  {name:"설악고",region:"강원",manager:"윤형국",players:31,idx:194},
+  {name:"성남고",region:"서울",manager:"박혁",players:60,idx:172},
+  {name:"세광고",region:"충북",manager:"방진호",players:48,idx:138},
+  {name:"세명컴퓨터고야구단",region:"서울",manager:"안승찬",players:20,idx:1827},
+  {name:"세원고",region:"경기",manager:"오현민",players:30,idx:1696},
+  {name:"세종BC(U-18)",region:"세종",manager:"신진호",players:19,idx:1854},
+  {name:"소래고",region:"경기",manager:"김석인",players:43,idx:519},
+  {name:"수원야구단(U-18)",region:"경기",manager:"이덕진",players:21,idx:1901},
+  {name:"순천효천고BC",region:"전남",manager:"정진",players:47,idx:295},
+  {name:"신일고",region:"서울",manager:"하지호",players:34,idx:175},
+  {name:"신흥고",region:"경기",manager:"곽연수",players:30,idx:586},
+  {name:"아산BC(U-18)",region:"충남",manager:"김재우",players:18,idx:1542},
+  {name:"안산공업고",region:"경기",manager:"송원국",players:40,idx:184},
+  {name:"야로고BC",region:"경남",manager:"장인욱",players:19,idx:1338},
+  {name:"야탑고",region:"경기",manager:"최경훈",players:38,idx:178},
+  {name:"예일메디텍고",region:"경북",manager:"권시훈",players:30,idx:818},
+  {name:"우신고",region:"서울",manager:"지병호",players:49,idx:917},
+  {name:"울산BC(U-18)",region:"울산",manager:"정정오",players:21,idx:1878},
+  {name:"유신고",region:"부산",manager:"",players:0,idx:0},
+  {name:"장충고",region:"서울",manager:"",players:0,idx:0},
+  {name:"전주고",region:"전북",manager:"",players:0,idx:0},
+  {name:"창원공고야구단",region:"경남",manager:"차정민",players:35,idx:1450},
+  {name:"천안CSBC(U-18)",region:"충남",manager:"윤강민",players:19,idx:1697},
+  {name:"청담고",region:"경기",manager:"유호재",players:50,idx:815},
+  {name:"청원고",region:"서울",manager:"김수관",players:53,idx:187},
+  {name:"청주고",region:"충북",manager:"김인철",players:39,idx:421},
+  {name:"충암고",region:"서울",manager:"이영복",players:51,idx:181},
+  {name:"충훈고",region:"경기",manager:"정회선",players:43,idx:407},
+  {name:"포항제철고",region:"경북",manager:"김백만",players:29,idx:537},
+  {name:"한광BC(U-18)",region:"서울",manager:"유정민",players:20,idx:1637},
+  {name:"한국마사고BC",region:"전북",manager:"박대희",players:21,idx:1694},
+  {name:"화성동탄B(U-18)",region:"경기",manager:"이주희",players:25,idx:1546},
+  {name:"화순고",region:"전남",manager:"최길환",players:31,idx:378},
+  {name:"휘문고",region:"서울",manager:"오태근",players:42,idx:190}
+];
+
+// ========== DETAILED TEAM DATA ==========
+const teamsData = [
+  {
+    name:"GD챌린저스BC(U-18)", region:"서울", manager:"송구홍",
+    staff:[{name:"송구홍",role:"감독"},{name:"안태영",role:"코치"}],
+    players:[
+      {num:13,name:"기재혁",pos:"외야수",grade:1,height:"186cm",weight:"68kg",bt:"우투우타"},
+      {num:21,name:"김건수",pos:"투수",grade:2,height:"187cm",weight:"92kg",bt:"좌투좌타"},
+      {num:28,name:"김재준",pos:"투수",grade:3,height:"171cm",weight:"78kg",bt:"우투우타"},
+      {num:7,name:"김태양",pos:"외야수",grade:3,height:"165cm",weight:"70kg",bt:"우투우타"},
+      {num:17,name:"나하람",pos:"투수",grade:2,height:"180cm",weight:"83kg",bt:"우투우타"},
+      {num:9,name:"배석민",pos:"내야수",grade:3,height:"173cm",weight:"65kg",bt:"우투좌타"},
+      {num:23,name:"서무혁",pos:"외야수",grade:2,height:"182cm",weight:"80kg",bt:"우투우타"},
+      {num:10,name:"손주환",pos:"내야수",grade:2,height:"175cm",weight:"75kg",bt:"우투우타"},
+      {num:18,name:"신지원",pos:"투수",grade:3,height:"188cm",weight:"90kg",bt:"우투우타"},
+      {num:11,name:"안장근",pos:"투수",grade:2,height:"184cm",weight:"84kg",bt:"우투우타"},
+      {num:40,name:"용거련",pos:"투수",grade:1,height:"181cm",weight:"85kg",bt:"우투우타"},
+      {num:5,name:"윤도헌",pos:"포수",grade:3,height:"183cm",weight:"84kg",bt:"우투우타"},
+      {num:36,name:"윤현중",pos:"외야수",grade:3,height:"175cm",weight:"70kg",bt:"우투우타"},
+      {num:16,name:"이주영",pos:"내야수",grade:2,height:"175cm",weight:"68kg",bt:"우투우타"},
+      {num:1,name:"임명훈",pos:"투수",grade:3,height:"173cm",weight:"76kg",bt:"우투우타"},
+      {num:32,name:"정건우",pos:"포수",grade:2,height:"175cm",weight:"82kg",bt:"우투우타"},
+      {num:19,name:"조이준",pos:"투수",grade:3,height:"188cm",weight:"107kg",bt:"우투우타"},
+      {num:25,name:"최규호",pos:"내야수",grade:2,height:"184cm",weight:"90kg",bt:"우투우타"},
+      {num:2,name:"최승호",pos:"내야수",grade:2,height:"175cm",weight:"64kg",bt:"우투우타"},
+      {num:12,name:"최효범",pos:"포수",grade:2,height:"180cm",weight:"77kg",bt:"우투우타"}
+    ]
+  },
+  {
+    name:"충암고", region:"서울", manager:"이영복",
+    staff:[{name:"이영복",role:"감독"},{name:"김영도",role:"코치"},{name:"남경호",role:"코치"}],
+    players:[
+      {num:1,name:"김동하",pos:"투수",grade:3,height:"181cm",weight:"80kg",bt:"우투우타"},
+      {num:36,name:"김승민",pos:"투수",grade:1,height:"174cm",weight:"79kg",bt:"우투우타"},
+      {num:10,name:"김승하",pos:"투수",grade:3,height:"178cm",weight:"77kg",bt:"우투우타"},
+      {num:39,name:"김연우",pos:"외야수",grade:1,height:"180cm",weight:"70kg",bt:"우투우타"},
+      {num:51,name:"김윤",pos:"외야수",grade:2,height:"180cm",weight:"80kg",bt:"우투우타"},
+      {num:4,name:"김재현",pos:"내야수",grade:1,height:"175cm",weight:"69kg",bt:"우투우타"},
+      {num:21,name:"김정운",pos:"투수",grade:2,height:"195cm",weight:"101kg",bt:"좌투좌타"},
+      {num:15,name:"김주한",pos:"투수",grade:2,height:"179cm",weight:"87kg",bt:"좌투좌타"},
+      {num:18,name:"김지율",pos:"투수",grade:3,height:"184cm",weight:"88kg",bt:"우투우타"},
+      {num:24,name:"김현우",pos:"포수",grade:3,height:"182cm",weight:"79kg",bt:"우투우타"},
+      {num:46,name:"남은재",pos:"내야수",grade:1,height:"169cm",weight:"64kg",bt:"우투좌타"},
+      {num:9,name:"박세진",pos:"외야수",grade:1,height:"178cm",weight:"83kg",bt:"우투우타"},
+      {num:38,name:"박주영",pos:"투수",grade:1,height:"177cm",weight:"93kg",bt:"우투우타"},
+      {num:12,name:"박지성",pos:"투수",grade:2,height:"194cm",weight:"100kg",bt:"우투우타"},
+      {num:19,name:"박태성",pos:"외야수",grade:2,height:"181cm",weight:"73kg",bt:"우투우타"},
+      {num:11,name:"배윤호",pos:"내야수",grade:3,height:"180cm",weight:"80kg",bt:"우투좌타"},
+      {num:16,name:"배정호",pos:"내야수",grade:3,height:"182cm",weight:"79kg",bt:"우투우타"},
+      {num:30,name:"서원우",pos:"외야수",grade:1,height:"182cm",weight:"86kg",bt:"우투우타"},
+      {num:32,name:"서원준",pos:"투수",grade:3,height:"186cm",weight:"88kg",bt:"우투우타"},
+      {num:20,name:"석승훈",pos:"투수",grade:2,height:"180cm",weight:"80kg",bt:"우투우타"},
+      {num:5,name:"성세람",pos:"내야수",grade:2,height:"180cm",weight:"78kg",bt:"우투좌타"},
+      {num:28,name:"손준호",pos:"포수",grade:1,height:"176cm",weight:"75kg",bt:"우투우타"},
+      {num:52,name:"신윤우",pos:"내야수",grade:1,height:"180cm",weight:"95kg",bt:"우투좌타"},
+      {num:47,name:"신정민",pos:"포수",grade:1,height:"166cm",weight:"70kg",bt:"우투우타"},
+      {num:3,name:"신지호",pos:"외야수",grade:2,height:"180cm",weight:"82kg",bt:"좌투좌타"},
+      {num:23,name:"안건우",pos:"외야수",grade:1,height:"181cm",weight:"68kg",bt:"양투양타"},
+      {num:6,name:"오유찬",pos:"내야수",grade:2,height:"177cm",weight:"76kg",bt:"우투좌타"},
+      {num:50,name:"유지우",pos:"내야수",grade:1,height:"174cm",weight:"108kg",bt:"좌투좌타"},
+      {num:57,name:"이성곤",pos:"내야수",grade:1,height:"174cm",weight:"76kg",bt:"우투좌타"},
+      {num:22,name:"장근우",pos:"포수",grade:2,height:"181cm",weight:"87kg",bt:"우투우타"},
+      {num:17,name:"장민제",pos:"외야수",grade:3,height:"186cm",weight:"87kg",bt:"우투우타"},
+      {num:34,name:"장재호",pos:"투수",grade:1,height:"180cm",weight:"65kg",bt:"우투우타"},
+      {num:55,name:"전강윤",pos:"투수",grade:2,height:"182cm",weight:"88kg",bt:"우투우타"},
+      {num:29,name:"조성준",pos:"투수",grade:2,height:"185cm",weight:"90kg",bt:"좌투좌타"},
+      {num:31,name:"조인성",pos:"투수",grade:2,height:"179cm",weight:"82kg",bt:"우투우타"},
+      {num:33,name:"최산",pos:"포수",grade:1,height:"180cm",weight:"85kg",bt:"우투우타"},
+      {num:26,name:"최현우",pos:"투수",grade:1,height:"178cm",weight:"73kg",bt:"우투우타"}
+    ]
+  },
+  {
+    name:"휘문고", region:"서울", manager:"오태근",
+    staff:[{name:"오태근",role:"감독"},{name:"김재민",role:"코치"},{name:"박용진",role:"코치"},{name:"이시찬",role:"코치"}],
+    players:[
+      {num:47,name:"고우상",pos:"내야수",grade:1,height:"175cm",weight:"85kg",bt:"우투우타"},
+      {num:11,name:"김강민",pos:"투수",grade:3,height:"180cm",weight:"81kg",bt:"좌투좌타"},
+      {num:5,name:"김강민",pos:"외야수",grade:1,height:"176cm",weight:"65kg",bt:"우투좌타"},
+      {num:33,name:"김단",pos:"투수",grade:3,height:"186cm",weight:"85kg",bt:"우투좌타"},
+      {num:52,name:"김도훈",pos:"외야수",grade:2,height:"185cm",weight:"90kg",bt:"우투좌타"},
+      {num:53,name:"김민우",pos:"내야수",grade:2,height:"178cm",weight:"77kg",bt:"우투우타"},
+      {num:41,name:"김민율",pos:"투수",grade:2,height:"188cm",weight:"85kg",bt:"좌투좌타"},
+      {num:7,name:"김용휘",pos:"내야수",grade:3,height:"184cm",weight:"76kg",bt:"우투우타"},
+      {num:16,name:"김윤규",pos:"내야수",grade:3,height:"185cm",weight:"85kg",bt:"우투우타"},
+      {num:18,name:"김정현",pos:"투수",grade:3,height:"188cm",weight:"90kg",bt:"우투우타"},
+      {num:29,name:"김주원",pos:"투수",grade:2,height:"185cm",weight:"87kg",bt:"좌투좌타"},
+      {num:8,name:"마한결",pos:"내야수",grade:1,height:"175cm",weight:"72kg",bt:"우투우타"},
+      {num:28,name:"민병준",pos:"투수",grade:2,height:"188cm",weight:"90kg",bt:"우투우타"},
+      {num:20,name:"변규헌",pos:"포수",grade:2,height:"184cm",weight:"83kg",bt:"우투우타"},
+      {num:22,name:"변지석",pos:"투수",grade:3,height:"194cm",weight:"105kg",bt:"우투우타"},
+      {num:36,name:"서찬빈",pos:"내야수",grade:2,height:"186cm",weight:"88kg",bt:"우투좌타"},
+      {num:27,name:"서현우",pos:"외야수",grade:3,height:"184cm",weight:"87kg",bt:"우투우타"},
+      {num:21,name:"오지혁",pos:"투수",grade:3,height:"184cm",weight:"88kg",bt:"우투우타"},
+      {num:2,name:"유제민",pos:"포수",grade:3,height:"179cm",weight:"81kg",bt:"우투우타"},
+      {num:9,name:"이동훈",pos:"내야수",grade:1,height:"178cm",weight:"75kg",bt:"우투우타"},
+      {num:51,name:"이승범",pos:"외야수",grade:1,height:"185cm",weight:"75kg",bt:"우투좌타"},
+      {num:1,name:"이웅찬",pos:"외야수",grade:3,height:"180cm",weight:"77kg",bt:"우투우타"},
+      {num:19,name:"이유건",pos:"투수",grade:3,height:"185cm",weight:"84kg",bt:"우투우타"},
+      {num:31,name:"이준범",pos:"투수",grade:2,height:"191cm",weight:"96kg",bt:"우투우타"},
+      {num:26,name:"이지민",pos:"포수",grade:1,height:"182cm",weight:"84kg",bt:"우투우타"},
+      {num:15,name:"임호윤",pos:"투수",grade:3,height:"183cm",weight:"81kg",bt:"우투양타"},
+      {num:34,name:"주윤성",pos:"내야수",grade:2,height:"185cm",weight:"77kg",bt:"우투우타"},
+      {num:25,name:"허진호",pos:"포수",grade:2,height:"178cm",weight:"77kg",bt:"우투우타"},
+      {num:3,name:"홍찬의",pos:"내야수",grade:2,height:"-",weight:"-",bt:"-"}
+    ]
+  },
+  {
+    name:"신일고", region:"서울", manager:"하지호",
+    staff:[{name:"하지호",role:"감독"},{name:"김강석",role:"코치"},{name:"김정훈",role:"코치"},{name:"이호중",role:"코치"}],
+    players:[
+      {num:53,name:"권형욱",pos:"외야수",grade:2,height:"181cm",weight:"85kg",bt:"우투우타"},
+      {num:5,name:"김기현",pos:"내야수",grade:1,height:"175cm",weight:"65kg",bt:"우투우타"},
+      {num:4,name:"김시환",pos:"내야수",grade:1,height:"175cm",weight:"70kg",bt:"우투좌타"},
+      {num:11,name:"김종섭",pos:"투수",grade:3,height:"189cm",weight:"88kg",bt:"우투우타"},
+      {num:34,name:"류지호",pos:"투수",grade:2,height:"189cm",weight:"86kg",bt:"우투우타"},
+      {num:1,name:"문재웅",pos:"투수",grade:3,height:"188cm",weight:"95kg",bt:"우투우타"},
+      {num:25,name:"박규대",pos:"포수",grade:2,height:"175cm",weight:"78kg",bt:"우투우타"},
+      {num:8,name:"박성재",pos:"내야수",grade:1,height:"181cm",weight:"77kg",bt:"우투우타"},
+      {num:35,name:"박승후",pos:"투수",grade:2,height:"185cm",weight:"86kg",bt:"우투우타"},
+      {num:12,name:"변정현",pos:"투수",grade:1,height:"190cm",weight:"86kg",bt:"우투좌타"},
+      {num:20,name:"서현우",pos:"투수",grade:1,height:"177cm",weight:"68kg",bt:"우투좌타"},
+      {num:10,name:"송선욱",pos:"포수",grade:3,height:"177cm",weight:"85kg",bt:"우투우타"},
+      {num:9,name:"신결",pos:"외야수",grade:2,height:"181cm",weight:"76kg",bt:"좌투좌타"},
+      {num:6,name:"심규하",pos:"내야수",grade:2,height:"178cm",weight:"75kg",bt:"우투우타"},
+      {num:36,name:"오유범",pos:"내야수",grade:1,height:"172cm",weight:"67kg",bt:"우투좌타"},
+      {num:21,name:"이선규",pos:"투수",grade:3,height:"192cm",weight:"98kg",bt:"우투우타"},
+      {num:16,name:"이성찬",pos:"내야수",grade:3,height:"183cm",weight:"82kg",bt:"우투우타"},
+      {num:3,name:"이원준",pos:"내야수",grade:3,height:"185cm",weight:"85kg",bt:"우투좌타"},
+      {num:17,name:"이준영",pos:"투수",grade:3,height:"187cm",weight:"80kg",bt:"우투좌타"},
+      {num:37,name:"이지호",pos:"외야수",grade:1,height:"180cm",weight:"83kg",bt:"우투우타"},
+      {num:15,name:"이진우",pos:"투수",grade:1,height:"177cm",weight:"75kg",bt:"좌투좌타"},
+      {num:52,name:"이하람",pos:"외야수",grade:2,height:"183cm",weight:"72kg",bt:"우투우타"},
+      {num:27,name:"주현호",pos:"외야수",grade:1,height:"185cm",weight:"77kg",bt:"우투우타"},
+      {num:51,name:"차희석",pos:"외야수",grade:3,height:"178cm",weight:"70kg",bt:"우투좌타"},
+      {num:18,name:"최강혁",pos:"투수",grade:3,height:"189cm",weight:"95kg",bt:"우투우타"},
+      {num:7,name:"최어진",pos:"내야수",grade:3,height:"176cm",weight:"72kg",bt:"우투우타"},
+      {num:2,name:"홍서준",pos:"내야수",grade:2,height:"175cm",weight:"73kg",bt:"우투우타"},
+      {num:26,name:"홍윤택",pos:"투수",grade:2,height:"182cm",weight:"79kg",bt:"우투우타"},
+      {num:28,name:"홍정민",pos:"투수",grade:2,height:"177cm",weight:"75kg",bt:"좌투좌타"},
+      {num:19,name:"황주환",pos:"내야수",grade:1,height:"178cm",weight:"77kg",bt:"우투좌타"}
+    ]
+  },
+  {
+    name:"서울고", region:"서울", manager:"김동수",
+    staff:[{name:"김동수",role:"감독"},{name:"엄범석",role:"코치"},{name:"한규식",role:"코치"},{name:"한성구",role:"코치"}],
+    players:[
+      {num:1,name:"김명현",pos:"외야수",grade:3,height:"178cm",weight:"76kg",bt:"우투좌타"},
+      {num:3,name:"정시우",pos:"내야수",grade:2,height:"178cm",weight:"75kg",bt:"우투우타"},
+      {num:5,name:"신승원",pos:"내야수",grade:2,height:"178cm",weight:"75kg",bt:"우투좌타"},
+      {num:7,name:"김선빈",pos:"내야수",grade:2,height:"187cm",weight:"84kg",bt:"우투우타"},
+      {num:8,name:"권상혁",pos:"외야수",grade:3,height:"178cm",weight:"76kg",bt:"좌투좌타"},
+      {num:10,name:"서유현",pos:"투수",grade:3,height:"183cm",weight:"87kg",bt:"우투우타"},
+      {num:11,name:"김민진",pos:"투수",grade:3,height:"187cm",weight:"88kg",bt:"우투우타"},
+      {num:12,name:"김동윤",pos:"투수",grade:2,height:"183cm",weight:"80kg",bt:"우투우타"},
+      {num:14,name:"방영웅",pos:"투수",grade:2,height:"188cm",weight:"86kg",bt:"우투좌타"},
+      {num:15,name:"박경민",pos:"투수",grade:2,height:"185cm",weight:"80kg",bt:"좌투좌타"},
+      {num:17,name:"김준호",pos:"투수",grade:3,height:"185cm",weight:"86kg",bt:"우투우타"},
+      {num:18,name:"홍화철",pos:"투수",grade:2,height:"187cm",weight:"88kg",bt:"좌투좌타"},
+      {num:19,name:"박찬휘",pos:"투수",grade:2,height:"192cm",weight:"93kg",bt:"우투우타"},
+      {num:20,name:"송채윤",pos:"투수",grade:2,height:"186cm",weight:"90kg",bt:"우투우타"},
+      {num:21,name:"김동현",pos:"투수",grade:3,height:"185cm",weight:"87kg",bt:"우투우타"},
+      {num:22,name:"방지용",pos:"포수",grade:2,height:"177cm",weight:"81kg",bt:"우투우타"},
+      {num:24,name:"엄백호",pos:"투수",grade:1,height:"194cm",weight:"94kg",bt:"우투우타"},
+      {num:25,name:"박준성",pos:"포수",grade:3,height:"177cm",weight:"78kg",bt:"우투우타"},
+      {num:26,name:"이경수",pos:"투수",grade:2,height:"191cm",weight:"95kg",bt:"우투우타"},
+      {num:29,name:"이현우",pos:"투수",grade:2,height:"184cm",weight:"83kg",bt:"좌투좌타"},
+      {num:33,name:"박주빈",pos:"내야수",grade:2,height:"187cm",weight:"87kg",bt:"우투우타"},
+      {num:36,name:"박승민",pos:"외야수",grade:2,height:"182cm",weight:"83kg",bt:"우투좌타"},
+      {num:47,name:"유준상",pos:"내야수",grade:2,height:"184cm",weight:"88kg",bt:"좌투좌타"},
+      {num:51,name:"김정우",pos:"외야수",grade:3,height:"181cm",weight:"79kg",bt:"우투우타"},
+      {num:52,name:"김지우",pos:"내야수",grade:3,height:"185cm",weight:"86kg",bt:"우투우타"},
+      {num:53,name:"김태헌",pos:"외야수",grade:2,height:"184cm",weight:"88kg",bt:"좌투좌타"},
+      {num:56,name:"양기성",pos:"투수",grade:2,height:"191cm",weight:"90kg",bt:"좌투좌타"}
+    ]
+  },
+  {
+    name:"배재고", region:"서울", manager:"권오영",
+    staff:[{name:"권오영",role:"감독"},{name:"김성현",role:"코치"},{name:"이장환",role:"코치"},{name:"하준형",role:"코치"}],
+    players:[
+      {num:1,name:"엄태성",pos:"투수",grade:3,height:"192cm",weight:"95kg",bt:"우투우타"},
+      {num:2,name:"임태강",pos:"포수",grade:3,height:"183cm",weight:"90kg",bt:"우투우타"},
+      {num:3,name:"김하랑",pos:"외야수",grade:3,height:"176cm",weight:"75kg",bt:"우투좌타"},
+      {num:5,name:"박준혁",pos:"내야수",grade:3,height:"175cm",weight:"73kg",bt:"우투우타"},
+      {num:6,name:"임종호",pos:"내야수",grade:3,height:"180cm",weight:"77kg",bt:"우투우타"},
+      {num:7,name:"신준혁",pos:"내야수",grade:2,height:"180cm",weight:"79kg",bt:"우투좌타"},
+      {num:10,name:"오준혁",pos:"포수",grade:2,height:"180cm",weight:"85kg",bt:"우투우타"},
+      {num:11,name:"김시후",pos:"투수",grade:3,height:"190cm",weight:"80kg",bt:"좌투좌타"},
+      {num:12,name:"정유찬",pos:"투수",grade:3,height:"180cm",weight:"80kg",bt:"우투우타"},
+      {num:13,name:"이주빈",pos:"내야수",grade:2,height:"177cm",weight:"82kg",bt:"우투우타"},
+      {num:14,name:"고규원",pos:"투수",grade:1,height:"176cm",weight:"68kg",bt:"좌투좌타"},
+      {num:15,name:"고강욱",pos:"투수",grade:1,height:"186cm",weight:"90kg",bt:"우투우타"},
+      {num:16,name:"김유찬",pos:"내야수",grade:3,height:"185cm",weight:"85kg",bt:"우투우타"},
+      {num:17,name:"임서후",pos:"투수",grade:3,height:"183cm",weight:"85kg",bt:"우투우타"},
+      {num:18,name:"김지호",pos:"투수",grade:3,height:"183cm",weight:"88kg",bt:"우투우타"},
+      {num:19,name:"김진우",pos:"투수",grade:2,height:"177cm",weight:"76kg",bt:"우투우타"},
+      {num:20,name:"고도현",pos:"투수",grade:2,height:"183cm",weight:"82kg",bt:"좌투좌타"},
+      {num:21,name:"김태전",pos:"투수",grade:3,height:"183cm",weight:"90kg",bt:"우투우타"},
+      {num:27,name:"김보국",pos:"내야수",grade:2,height:"180cm",weight:"85kg",bt:"우투우타"},
+      {num:28,name:"이재우",pos:"외야수",grade:2,height:"178cm",weight:"72kg",bt:"우투좌타"},
+      {num:30,name:"허건호",pos:"투수",grade:2,height:"183cm",weight:"81kg",bt:"좌투좌타"},
+      {num:31,name:"김태호",pos:"투수",grade:2,height:"185cm",weight:"103kg",bt:"우투우타"},
+      {num:32,name:"전홍민",pos:"외야수",grade:3,height:"182cm",weight:"80kg",bt:"우투우타"},
+      {num:35,name:"고현석",pos:"외야수",grade:3,height:"183cm",weight:"90kg",bt:"우투우타"},
+      {num:47,name:"김시우",pos:"투수",grade:2,height:"186cm",weight:"86kg",bt:"좌투좌타"}
+    ]
+  },
+  {
+    name:"청원고", region:"서울", manager:"김수관",
+    staff:[{name:"김수관",role:"감독"},{name:"이민진",role:"코치"},{name:"이석만",role:"코치"}],
+    players:[
+      {num:1,name:"유승준",pos:"투수",grade:3,height:"185cm",weight:"82kg",bt:"우투우타"},
+      {num:3,name:"신해율",pos:"내야수",grade:1,height:"172cm",weight:"68kg",bt:"우투좌타"},
+      {num:6,name:"남혁",pos:"내야수",grade:3,height:"173cm",weight:"70kg",bt:"우투우타"},
+      {num:7,name:"한승현",pos:"내야수",grade:3,height:"180cm",weight:"80kg",bt:"우투우타"},
+      {num:8,name:"임도윤",pos:"내야수",grade:2,height:"180cm",weight:"78kg",bt:"우투우타"},
+      {num:10,name:"방성익",pos:"포수",grade:3,height:"184cm",weight:"93kg",bt:"우투우타"},
+      {num:11,name:"신형승",pos:"투수",grade:3,height:"183cm",weight:"80kg",bt:"좌투좌타"},
+      {num:14,name:"이산",pos:"외야수",grade:3,height:"185cm",weight:"85kg",bt:"우투좌타"},
+      {num:15,name:"김재훈",pos:"투수",grade:3,height:"187cm",weight:"92kg",bt:"좌투좌타"},
+      {num:16,name:"김우경",pos:"내야수",grade:3,height:"183cm",weight:"78kg",bt:"우투우타"},
+      {num:17,name:"장재원",pos:"외야수",grade:3,height:"178cm",weight:"74kg",bt:"우투우타"},
+      {num:18,name:"정우찬",pos:"투수",grade:3,height:"183cm",weight:"82kg",bt:"우투우타"},
+      {num:19,name:"방준오",pos:"투수",grade:2,height:"183cm",weight:"90kg",bt:"우투우타"},
+      {num:21,name:"여승재",pos:"투수",grade:3,height:"180cm",weight:"85kg",bt:"좌투좌타"},
+      {num:22,name:"권혁",pos:"포수",grade:2,height:"178cm",weight:"85kg",bt:"우투우타"},
+      {num:27,name:"박준영",pos:"외야수",grade:2,height:"183cm",weight:"83kg",bt:"우투우타"},
+      {num:29,name:"임준혁",pos:"투수",grade:3,height:"175cm",weight:"78kg",bt:"좌투좌타"},
+      {num:41,name:"김시환",pos:"투수",grade:3,height:"188cm",weight:"94kg",bt:"우투우타"},
+      {num:44,name:"주영륜",pos:"내야수",grade:2,height:"186cm",weight:"83kg",bt:"우투좌타"},
+      {num:45,name:"이지환",pos:"투수",grade:2,height:"184cm",weight:"87kg",bt:"우투우타"},
+      {num:55,name:"김겸",pos:"투수",grade:3,height:"180cm",weight:"77kg",bt:"우투우타"}
+    ]
+  },
+  {
+    name:"청담고", region:"경기", manager:"유호재",
+    staff:[{name:"유호재",role:"감독"},{name:"문성용",role:"코치"},{name:"이용민",role:"코치"},{name:"탁승모",role:"코치"}],
+    players:[
+      {num:61,name:"고마운",pos:"외야수",grade:1,height:"180cm",weight:"75kg",bt:"우투우타"},
+      {num:35,name:"김단우",pos:"투수",grade:3,height:"184cm",weight:"81kg",bt:"우투우타"},
+      {num:25,name:"김민찬",pos:"포수",grade:2,height:"172cm",weight:"92kg",bt:"우투우타"},
+      {num:2,name:"김민채",pos:"포수",grade:1,height:"178cm",weight:"75kg",bt:"우투우타"},
+      {num:11,name:"김상훈",pos:"투수",grade:3,height:"177cm",weight:"83kg",bt:"우투우타"},
+      {num:13,name:"김지훈",pos:"내야수",grade:2,height:"180cm",weight:"70kg",bt:"우투좌타"},
+      {num:50,name:"김한중",pos:"내야수",grade:1,height:"174cm",weight:"57kg",bt:"우투우타"},
+      {num:52,name:"김현기",pos:"내야수",grade:2,height:"182cm",weight:"80kg",bt:"우투우타"},
+      {num:28,name:"문석준",pos:"투수",grade:2,height:"182cm",weight:"85kg",bt:"우투우타"},
+      {num:1,name:"신준서",pos:"투수",grade:3,height:"180cm",weight:"85kg",bt:"우투우타"},
+      {num:3,name:"신희주",pos:"외야수",grade:3,height:"174cm",weight:"75kg",bt:"우투좌타"},
+      {num:34,name:"유주명",pos:"투수",grade:3,height:"185cm",weight:"88kg",bt:"우투우타"},
+      {num:54,name:"이가온",pos:"투수",grade:2,height:"183cm",weight:"90kg",bt:"우투우타"},
+      {num:10,name:"이상훈",pos:"내야수",grade:3,height:"180cm",weight:"82kg",bt:"우투우타"},
+      {num:6,name:"이원일",pos:"내야수",grade:2,height:"178cm",weight:"76kg",bt:"우투우타"},
+      {num:51,name:"이정록",pos:"외야수",grade:3,height:"175cm",weight:"61kg",bt:"우투좌타"},
+      {num:8,name:"이주승",pos:"외야수",grade:2,height:"175cm",weight:"73kg",bt:"좌투좌타"},
+      {num:16,name:"정민규",pos:"내야수",grade:3,height:"180cm",weight:"83kg",bt:"우투우타"},
+      {num:7,name:"천태혁",pos:"내야수",grade:3,height:"181cm",weight:"74kg",bt:"우투우타"},
+      {num:9,name:"최시후",pos:"외야수",grade:1,height:"176cm",weight:"57kg",bt:"우투좌타"},
+      {num:18,name:"홍진우",pos:"투수",grade:3,height:"183cm",weight:"95kg",bt:"우투좌타"},
+      {num:36,name:"황순호",pos:"투수",grade:2,height:"177cm",weight:"78kg",bt:"우투좌타"},
+      {num:24,name:"황은성",pos:"포수",grade:1,height:"173cm",weight:"73kg",bt:"우투양타"},
+      {num:27,name:"황준경",pos:"포수",grade:2,height:"178cm",weight:"86kg",bt:"우투우타"},
+      {num:12,name:"황지호",pos:"투수",grade:3,height:"174cm",weight:"67kg",bt:"우투우타"}
+    ]
+  },
+  {
+    name:"선린인터넷고", region:"서울", manager:"박덕희",
+    staff:[{name:"박덕희",role:"감독"},{name:"고창성",role:"코치"},{name:"맹준혁",role:"코치"},{name:"정수일",role:"코치"}],
+    players:[
+      {num:20,name:"김도우",pos:"내야수",grade:1,height:"176cm",weight:"85kg",bt:"우투우타"},
+      {num:8,name:"김동규",pos:"외야수",grade:2,height:"180cm",weight:"68kg",bt:"우투좌타"},
+      {num:17,name:"김명빈",pos:"외야수",grade:2,height:"182cm",weight:"88kg",bt:"우투좌타"},
+      {num:28,name:"김윤혁",pos:"투수",grade:3,height:"187cm",weight:"90kg",bt:"우투우타"},
+      {num:55,name:"김주호",pos:"투수",grade:3,height:"183cm",weight:"97kg",bt:"좌투좌타"},
+      {num:27,name:"김태양",pos:"포수",grade:2,height:"177cm",weight:"80kg",bt:"우투우타"},
+      {num:14,name:"김하윤",pos:"투수",grade:3,height:"188cm",weight:"87kg",bt:"우투우타"},
+      {num:3,name:"김현서",pos:"외야수",grade:2,height:"184cm",weight:"82kg",bt:"우투좌타"},
+      {num:16,name:"박선우",pos:"외야수",grade:3,height:"179cm",weight:"78kg",bt:"우투우타"},
+      {num:7,name:"박성빈",pos:"포수",grade:3,height:"180cm",weight:"85kg",bt:"우투우타"},
+      {num:52,name:"박수현",pos:"내야수",grade:3,height:"182cm",weight:"79kg",bt:"우투좌타"},
+      {num:23,name:"박승원",pos:"투수",grade:3,height:"185cm",weight:"92kg",bt:"우투좌타"},
+      {num:50,name:"송강",pos:"내야수",grade:1,height:"184cm",weight:"85kg",bt:"우투우타"},
+      {num:6,name:"신영준",pos:"내야수",grade:2,height:"175cm",weight:"68kg",bt:"우투좌타"},
+      {num:10,name:"안준서",pos:"내야수",grade:3,height:"186cm",weight:"88kg",bt:"우투우타"},
+      {num:35,name:"안준혁",pos:"투수",grade:2,height:"181cm",weight:"78kg",bt:"우투우타"},
+      {num:2,name:"양연종",pos:"포수",grade:1,height:"182cm",weight:"82kg",bt:"우투우타"},
+      {num:19,name:"오해성",pos:"투수",grade:2,height:"183cm",weight:"85kg",bt:"우투우타"},
+      {num:41,name:"이도경",pos:"투수",grade:2,height:"182cm",weight:"78kg",bt:"우투우타"},
+      {num:5,name:"이도하",pos:"내야수",grade:2,height:"178cm",weight:"70kg",bt:"우투우타"},
+      {num:13,name:"이석재",pos:"투수",grade:3,height:"183cm",weight:"86kg",bt:"우투우타"},
+      {num:45,name:"정시후",pos:"투수",grade:2,height:"173cm",weight:"72kg",bt:"우투우타"},
+      {num:54,name:"정원",pos:"투수",grade:3,height:"176cm",weight:"80kg",bt:"좌투좌타"},
+      {num:51,name:"조영서",pos:"외야수",grade:3,height:"180cm",weight:"78kg",bt:"우투좌타"},
+      {num:37,name:"조원빈",pos:"투수",grade:2,height:"180cm",weight:"70kg",bt:"우투우타"},
+      {num:9,name:"최수재",pos:"내야수",grade:2,height:"180cm",weight:"79kg",bt:"우투좌타"},
+      {num:1,name:"최주영",pos:"투수",grade:3,height:"182cm",weight:"87kg",bt:"우투우타"},
+      {num:12,name:"허태연",pos:"투수",grade:3,height:"182cm",weight:"82kg",bt:"우투우타"}
+    ]
+  },
+  {
+    name:"비봉고", region:"경기", manager:"신현철",
+    staff:[{name:"신현철",role:"감독"},{name:"전경일",role:"감독"},{name:"고재황",role:"코치"},{name:"장세목",role:"코치"},{name:"최현빈",role:"코치"}],
+    players:[
+      {num:1,name:"박진우",pos:"투수",grade:3,height:"188cm",weight:"89kg",bt:"우투우타"},
+      {num:2,name:"송민준",pos:"내야수",grade:2,height:"182cm",weight:"86kg",bt:"우투좌타"},
+      {num:3,name:"송지우",pos:"외야수",grade:2,height:"180cm",weight:"76kg",bt:"우투우타"},
+      {num:5,name:"김찬희",pos:"내야수",grade:2,height:"181cm",weight:"79kg",bt:"우투우타"},
+      {num:7,name:"최서윤",pos:"내야수",grade:3,height:"181cm",weight:"70kg",bt:"우투우타"},
+      {num:10,name:"남건욱",pos:"내야수",grade:3,height:"187cm",weight:"106kg",bt:"우투우타"},
+      {num:11,name:"곽민준",pos:"투수",grade:3,height:"171cm",weight:"83kg",bt:"우투우타"},
+      {num:13,name:"허웅",pos:"외야수",grade:3,height:"184cm",weight:"89kg",bt:"우투우타"},
+      {num:14,name:"김건우",pos:"투수",grade:2,height:"178cm",weight:"80kg",bt:"우투우타"},
+      {num:18,name:"최현우",pos:"투수",grade:3,height:"183cm",weight:"85kg",bt:"좌투좌타"},
+      {num:20,name:"방진영",pos:"투수",grade:2,height:"186cm",weight:"85kg",bt:"우투우타"},
+      {num:21,name:"최훈",pos:"투수",grade:3,height:"182cm",weight:"88kg",bt:"우투우타"},
+      {num:22,name:"곽해찬",pos:"포수",grade:2,height:"178cm",weight:"85kg",bt:"우투우타"},
+      {num:27,name:"박규정",pos:"외야수",grade:3,height:"180cm",weight:"79kg",bt:"우투우타"},
+      {num:29,name:"이주안",pos:"투수",grade:2,height:"175cm",weight:"81kg",bt:"좌투좌타"},
+      {num:43,name:"김승유",pos:"투수",grade:2,height:"177cm",weight:"80kg",bt:"우투우타"},
+      {num:53,name:"박도영",pos:"외야수",grade:3,height:"173cm",weight:"75kg",bt:"우투우타"}
+    ]
+  },
+  {
+    name:"소래고", region:"경기", manager:"김석인",
+    staff:[{name:"김석인",role:"감독"},{name:"방승재",role:"코치"},{name:"이상우",role:"코치"},{name:"조현",role:"코치"}],
+    players:[
+      {num:1,name:"배준석",pos:"투수",grade:3,height:"190cm",weight:"95kg",bt:"우투우타"},
+      {num:2,name:"이현웅",pos:"투수",grade:3,height:"178cm",weight:"74kg",bt:"우투우타"},
+      {num:3,name:"이시후",pos:"외야수",grade:2,height:"180cm",weight:"70kg",bt:"우투우타"},
+      {num:5,name:"이승필",pos:"내야수",grade:2,height:"175cm",weight:"70kg",bt:"우투우타"},
+      {num:6,name:"이현서",pos:"내야수",grade:3,height:"181cm",weight:"75kg",bt:"우투우타"},
+      {num:7,name:"박민서",pos:"내야수",grade:3,height:"179cm",weight:"72kg",bt:"우투우타"},
+      {num:11,name:"이준혁",pos:"투수",grade:3,height:"177cm",weight:"80kg",bt:"우투우타"},
+      {num:17,name:"김종혁",pos:"투수",grade:2,height:"185cm",weight:"90kg",bt:"우투우타"},
+      {num:18,name:"이호성",pos:"투수",grade:3,height:"192cm",weight:"100kg",bt:"우투우타"},
+      {num:22,name:"함도윤",pos:"포수",grade:3,height:"181cm",weight:"83kg",bt:"우투우타"},
+      {num:25,name:"홍준영",pos:"내야수",grade:3,height:"180cm",weight:"80kg",bt:"우투우타"},
+      {num:41,name:"장지원",pos:"투수",grade:3,height:"190cm",weight:"90kg",bt:"우투우타"},
+      {num:47,name:"김민영",pos:"외야수",grade:3,height:"181cm",weight:"75kg",bt:"우투우타"},
+      {num:51,name:"손우성",pos:"투수",grade:3,height:"183cm",weight:"77kg",bt:"우투우타"},
+      {num:52,name:"이주환",pos:"외야수",grade:3,height:"184cm",weight:"87kg",bt:"우투우타"}
+    ]
+  },
+  {
+    name:"야탑고", region:"경기", manager:"최경훈",
+    staff:[{name:"최경훈",role:"감독"},{name:"김용주",role:"코치"},{name:"백동훈",role:"코치"},{name:"정경운",role:"코치"}],
+    players:[
+      {num:1,name:"이원영",pos:"투수",grade:3,height:"186cm",weight:"86kg",bt:"우투우타"},
+      {num:6,name:"김재훈",pos:"내야수",grade:3,height:"173cm",weight:"73kg",bt:"우투좌타"},
+      {num:7,name:"김주혁",pos:"내야수",grade:3,height:"178cm",weight:"76kg",bt:"우투좌타"},
+      {num:10,name:"정준호",pos:"내야수",grade:3,height:"174cm",weight:"81kg",bt:"좌투좌타"},
+      {num:11,name:"이정우",pos:"투수",grade:3,height:"177cm",weight:"78kg",bt:"우투우타"},
+      {num:13,name:"백시온",pos:"내야수",grade:3,height:"177cm",weight:"77kg",bt:"우투우타"},
+      {num:15,name:"조연후",pos:"투수",grade:3,height:"180cm",weight:"78kg",bt:"좌투좌타"},
+      {num:18,name:"박시후",pos:"투수",grade:3,height:"182cm",weight:"85kg",bt:"우투우타"},
+      {num:42,name:"최민영",pos:"포수",grade:3,height:"184cm",weight:"90kg",bt:"우투우타"},
+      {num:50,name:"이준성",pos:"외야수",grade:2,height:"190cm",weight:"92kg",bt:"우투우타"},
+      {num:53,name:"박민준",pos:"외야수",grade:3,height:"174cm",weight:"73kg",bt:"우투좌타"},
+      {num:35,name:"김태양",pos:"투수",grade:2,height:"182cm",weight:"84kg",bt:"우투우타"},
+      {num:45,name:"이서율",pos:"투수",grade:2,height:"185cm",weight:"80kg",bt:"우투우타"},
+      {num:57,name:"강승호",pos:"외야수",grade:2,height:"178cm",weight:"80kg",bt:"우투우타"}
+    ]
+  },
+  {
+    name:"설악고", region:"강원", manager:"윤형국",
+    staff:[{name:"윤형국",role:"감독"},{name:"김문홍",role:"코치"},{name:"양정균",role:"코치"},{name:"이승진",role:"코치"}],
+    players:[
+      {num:1,name:"배근영",pos:"투수",grade:3,height:"185cm",weight:"93kg",bt:"우투우타"},
+      {num:5,name:"지이제",pos:"투수",grade:2,height:"182cm",weight:"76kg",bt:"우투우타"},
+      {num:7,name:"정지훈",pos:"외야수",grade:3,height:"186cm",weight:"80kg",bt:"우투우타"},
+      {num:10,name:"박예준",pos:"포수",grade:3,height:"178cm",weight:"80kg",bt:"우투우타"},
+      {num:11,name:"백성환",pos:"투수",grade:2,height:"186cm",weight:"85kg",bt:"우투우타"},
+      {num:17,name:"박석준",pos:"외야수",grade:3,height:"180cm",weight:"82kg",bt:"우투좌타"},
+      {num:18,name:"이규진",pos:"투수",grade:3,height:"185cm",weight:"90kg",bt:"우투우타"},
+      {num:21,name:"최민석",pos:"투수",grade:3,height:"180cm",weight:"85kg",bt:"좌투좌타"},
+      {num:27,name:"한동균",pos:"투수",grade:2,height:"184cm",weight:"90kg",bt:"우투우타"},
+      {num:33,name:"김세민",pos:"내야수",grade:3,height:"176cm",weight:"94kg",bt:"우투우타"},
+      {num:41,name:"민주홍",pos:"투수",grade:3,height:"181cm",weight:"90kg",bt:"우투우타"},
+      {num:45,name:"이범희",pos:"외야수",grade:2,height:"182cm",weight:"85kg",bt:"우투좌타"},
+      {num:47,name:"강민석",pos:"투수",grade:2,height:"189cm",weight:"96kg",bt:"우투우타"}
+    ]
+  },
+  {
+    name:"화순고", region:"전남", manager:"최길환",
+    staff:[{name:"최길환",role:"감독"},{name:"김주호",role:"코치"},{name:"양찬열",role:"코치"}],
+    players:[
+      {num:1,name:"김민영",pos:"투수",grade:3,height:"177cm",weight:"78kg",bt:"우투우타"},
+      {num:2,name:"손원호",pos:"포수",grade:2,height:"175cm",weight:"73kg",bt:"우투우타"},
+      {num:5,name:"김정현",pos:"내야수",grade:3,height:"183cm",weight:"73kg",bt:"우투우타"},
+      {num:7,name:"손민서",pos:"내야수",grade:3,height:"177cm",weight:"69kg",bt:"우투우타"},
+      {num:11,name:"김정민",pos:"투수",grade:2,height:"183cm",weight:"82kg",bt:"우투우타"},
+      {num:12,name:"서현진",pos:"투수",grade:3,height:"180cm",weight:"77kg",bt:"우투우타"},
+      {num:16,name:"전민후",pos:"투수",grade:3,height:"187cm",weight:"87kg",bt:"우투우타"},
+      {num:17,name:"오건영",pos:"투수",grade:3,height:"179cm",weight:"82kg",bt:"우투우타"},
+      {num:19,name:"조한이",pos:"투수",grade:2,height:"185cm",weight:"92kg",bt:"우투우타"},
+      {num:21,name:"김호용",pos:"투수",grade:2,height:"184cm",weight:"82kg",bt:"좌투좌타"},
+      {num:25,name:"김지헌",pos:"포수",grade:3,height:"175cm",weight:"92kg",bt:"우투우타"},
+      {num:29,name:"이강산",pos:"투수",grade:2,height:"177cm",weight:"60kg",bt:"좌투좌타"}
+    ]
+  },
+  {
+    name:"백송고", region:"경기", manager:"박종호",
+    staff:[{name:"박종호",role:"감독"},{name:"백두산",role:"코치"},{name:"서태웅",role:"코치"},{name:"양형진",role:"코치"}],
+    players:[
+      {num:1,name:"장노아",pos:"투수",grade:2,height:"182cm",weight:"80kg",bt:"우투우타"},
+      {num:2,name:"권한준",pos:"내야수",grade:3,height:"177cm",weight:"75kg",bt:"우투좌타"},
+      {num:6,name:"김태윤",pos:"내야수",grade:2,height:"178cm",weight:"73kg",bt:"우투좌타"},
+      {num:7,name:"김연수",pos:"내야수",grade:3,height:"180cm",weight:"80kg",bt:"우투좌타"},
+      {num:10,name:"용태익",pos:"투수",grade:3,height:"186cm",weight:"90kg",bt:"우투우타"},
+      {num:11,name:"주지훈",pos:"투수",grade:3,height:"184cm",weight:"86kg",bt:"좌투좌타"},
+      {num:13,name:"서성준",pos:"내야수",grade:2,height:"182cm",weight:"82kg",bt:"우투우타"},
+      {num:16,name:"전재홍",pos:"내야수",grade:3,height:"185cm",weight:"85kg",bt:"우투우타"},
+      {num:17,name:"선우상윤",pos:"내야수",grade:3,height:"183cm",weight:"86kg",bt:"우투우타"},
+      {num:18,name:"송민우",pos:"투수",grade:3,height:"185cm",weight:"83kg",bt:"우투좌타"},
+      {num:19,name:"노준서",pos:"투수",grade:2,height:"184cm",weight:"82kg",bt:"우투우타"},
+      {num:51,name:"김주헌",pos:"투수",grade:3,height:"184cm",weight:"95kg",bt:"우투우타"},
+      {num:55,name:"이현서",pos:"포수",grade:3,height:"178cm",weight:"78kg",bt:"우투좌타"}
+    ]
+  },
+  {
+    name:"포항제철고", region:"경북", manager:"김백만",
+    staff:[{name:"김백만",role:"감독"},{name:"박종윤",role:"코치"},{name:"이봉우",role:"코치"},{name:"황재규",role:"코치"}],
+    players:[
+      {num:1,name:"이재헌",pos:"투수",grade:3,height:"185cm",weight:"88kg",bt:"좌투좌타"},
+      {num:2,name:"노현우",pos:"외야수",grade:3,height:"176cm",weight:"73kg",bt:"우투좌타"},
+      {num:4,name:"김재현",pos:"내야수",grade:2,height:"175cm",weight:"72kg",bt:"우투우타"},
+      {num:5,name:"이규도",pos:"내야수",grade:3,height:"175cm",weight:"77kg",bt:"우투우타"},
+      {num:6,name:"진도현",pos:"내야수",grade:2,height:"179cm",weight:"79kg",bt:"우투좌타"},
+      {num:7,name:"신준협",pos:"내야수",grade:2,height:"175cm",weight:"82kg",bt:"우투우타"},
+      {num:10,name:"정인호",pos:"투수",grade:2,height:"181cm",weight:"87kg",bt:"우투우타"},
+      {num:11,name:"윤관우",pos:"투수",grade:2,height:"180cm",weight:"83kg",bt:"우투우타"},
+      {num:13,name:"임정훈",pos:"외야수",grade:2,height:"182cm",weight:"80kg",bt:"우투우타"},
+      {num:16,name:"윤재원",pos:"투수",grade:3,height:"183cm",weight:"78kg",bt:"우투우타"},
+      {num:20,name:"전준근",pos:"포수",grade:3,height:"176cm",weight:"82kg",bt:"우투우타"},
+      {num:34,name:"박상아",pos:"투수",grade:3,height:"183cm",weight:"90kg",bt:"좌투좌타"},
+      {num:40,name:"전형승",pos:"외야수",grade:3,height:"185cm",weight:"98kg",bt:"우투우타"}
+    ]
+  },
+  {
+    name:"충훈고", region:"경기", manager:"정회선",
+    staff:[{name:"정회선",role:"감독"},{name:"박성후",role:"코치"},{name:"윤형진",role:"코치"},{name:"장일현",role:"코치"}],
+    players:[
+      {num:1,name:"박수찬",pos:"투수",grade:3,height:"177cm",weight:"80kg",bt:"우투우타"},
+      {num:3,name:"김민후",pos:"외야수",grade:3,height:"178cm",weight:"77kg",bt:"우투좌타"},
+      {num:7,name:"박지원",pos:"외야수",grade:3,height:"180cm",weight:"78kg",bt:"좌투좌타"},
+      {num:8,name:"김준서",pos:"내야수",grade:3,height:"177cm",weight:"78kg",bt:"우투우타"},
+      {num:9,name:"이서진",pos:"투수",grade:3,height:"179cm",weight:"80kg",bt:"우투우타"},
+      {num:11,name:"안태욱",pos:"투수",grade:3,height:"188cm",weight:"80kg",bt:"우투우타"},
+      {num:16,name:"신재현",pos:"내야수",grade:3,height:"177cm",weight:"74kg",bt:"우투좌타"},
+      {num:18,name:"이현준",pos:"투수",grade:3,height:"188cm",weight:"95kg",bt:"우투우타"},
+      {num:21,name:"신유준",pos:"투수",grade:3,height:"178cm",weight:"78kg",bt:"우투우타"},
+      {num:29,name:"홍성원",pos:"투수",grade:2,height:"185cm",weight:"80kg",bt:"좌투좌타"},
+      {num:42,name:"이지훈",pos:"포수",grade:3,height:"183cm",weight:"90kg",bt:"우투우타"},
+      {num:44,name:"임준희",pos:"외야수",grade:3,height:"172cm",weight:"73kg",bt:"우투우타"},
+      {num:47,name:"박채환",pos:"내야수",grade:2,height:"180cm",weight:"90kg",bt:"좌투좌타"},
+      {num:48,name:"박현규",pos:"투수",grade:2,height:"186cm",weight:"80kg",bt:"좌투좌타"},
+      {num:51,name:"장영훈",pos:"투수",grade:3,height:"188cm",weight:"90kg",bt:"우투우타"},
+      {num:53,name:"이정후",pos:"내야수",grade:3,height:"183cm",weight:"85kg",bt:"우투우타"}
+    ]
+  },
+  {
+    name:"순천효천고BC", region:"전남", manager:"정진",
+    staff:[{name:"정진",role:"감독"},{name:"손민한",role:"코치"},{name:"양지훈",role:"코치"},{name:"황덕찬",role:"코치"}],
+    players:[
+      {num:1,name:"송희찬",pos:"투수",grade:3,height:"185cm",weight:"88kg",bt:"우투우타"},
+      {num:7,name:"정겸",pos:"외야수",grade:3,height:"180cm",weight:"78kg",bt:"좌투좌타"},
+      {num:9,name:"박태후",pos:"포수",grade:3,height:"178cm",weight:"95kg",bt:"우투우타"},
+      {num:10,name:"조주혁",pos:"내야수",grade:3,height:"180cm",weight:"75kg",bt:"우투우타"},
+      {num:11,name:"이승우",pos:"투수",grade:3,height:"188cm",weight:"85kg",bt:"우투우타"},
+      {num:12,name:"김하윤",pos:"투수",grade:3,height:"182cm",weight:"77kg",bt:"우투우타"},
+      {num:14,name:"조진혁",pos:"투수",grade:3,height:"183cm",weight:"90kg",bt:"좌투좌타"},
+      {num:16,name:"안승영",pos:"투수",grade:3,height:"187cm",weight:"90kg",bt:"우투우타"},
+      {num:18,name:"신비",pos:"투수",grade:3,height:"184cm",weight:"88kg",bt:"우투우타"},
+      {num:21,name:"김진형",pos:"투수",grade:3,height:"182cm",weight:"80kg",bt:"좌투좌타"},
+      {num:23,name:"홍민재",pos:"내야수",grade:3,height:"183cm",weight:"85kg",bt:"우투좌타"},
+      {num:47,name:"홍성훈",pos:"포수",grade:3,height:"182cm",weight:"87kg",bt:"우투우타"},
+      {num:53,name:"최지웅",pos:"외야수",grade:3,height:"180cm",weight:"85kg",bt:"좌투좌타"}
+    ]
+  }
+];
+
+// ========== APPLICATION LOGIC ==========
+let currentView = 'team';
+let sortField = 'team';
+let sortDir = 'asc';
+
+function getAllPlayers() {
+  const all = [];
+  teamsData.forEach(team => {
+    team.players.forEach(p => {
+      all.push({...p, team: team.name, region: team.region});
+    });
+  });
+  return all;
+}
+
+function updateStats() {
+  const players = getAllPlayers();
+  document.getElementById('totalTeams').textContent = allTeamsList.length;
+  document.getElementById('totalPlayers').textContent = players.length;
+  document.getElementById('totalPitchers').textContent = players.filter(p=>p.pos==='투수').length;
+  document.getElementById('totalCatchers').textContent = players.filter(p=>p.pos==='포수').length;
+  document.getElementById('totalInfielders').textContent = players.filter(p=>p.pos==='내야수').length;
+  document.getElementById('totalOutfielders').textContent = players.filter(p=>p.pos==='외야수').length;
+}
+
+function getFilters() {
+  return {
+    search: document.getElementById('searchInput').value.toLowerCase(),
+    region: document.getElementById('regionFilter').value,
+    pos: document.getElementById('posFilter').value,
+    grade: document.getElementById('gradeFilter').value
+  };
+}
+
+function matchesFilter(player, team, filters) {
+  if (filters.search && !player.name.includes(filters.search) && !team.name.toLowerCase().includes(filters.search) && !team.region.includes(filters.search)) return false;
+  if (filters.region && team.region !== filters.region) return false;
+  if (filters.pos && player.pos !== filters.pos) return false;
+  if (filters.grade && String(player.grade) !== filters.grade) return false;
+  return true;
+}
+
+function renderTeamView() {
+  const filters = getFilters();
+  let html = '';
+  teamsData.forEach((team, idx) => {
+    const filtered = team.players.filter(p => matchesFilter(p, team, filters));
+    if (filtered.length === 0 && (filters.search || filters.pos || filters.grade)) return;
+    if (filters.region && team.region !== filters.region) return;
+
+    html += `<div class="team-section">
+      <div class="team-header" onclick="toggleTeam(${idx})">
+        <div>
+          <h2>${team.name}</h2>
+        </div>
+        <div style="display:flex;align-items:center;gap:16px;">
+          <div class="meta">
+            <span>${team.region}</span>
+            <span>감독: ${team.manager}</span>
+            <span>선수 ${filtered.length}명</span>
+          </div>
+          <span class="toggle">&#9660;</span>
+        </div>
+      </div>
+      <div class="team-body" id="teamBody${idx}">
+        <div class="staff-list">`;
+    team.staff.forEach(s => {
+      html += `<span class="staff-badge ${s.role==='코치'?'coach':''}">${s.role}: ${s.name}</span>`;
+    });
+    html += `</div><table><thead><tr>
+      <th>등번호</th><th>성명</th><th>포지션</th><th>학년</th><th>신장</th><th>체중</th><th>투타</th>
+    </tr></thead><tbody>`;
+    filtered.forEach(p => {
+      const posClass = 'pos-' + (p.pos || '미지정');
+      html += `<tr>
+        <td>${p.num || '-'}</td>
+        <td><strong>${p.name}</strong></td>
+        <td><span class="pos-badge ${posClass}">${p.pos || '미지정'}</span></td>
+        <td><span class="grade-badge grade-${p.grade}">${p.grade}</span></td>
+        <td>${p.height || '-'}</td>
+        <td>${p.weight || '-'}</td>
+        <td>${p.bt || '-'}</td>
+      </tr>`;
+    });
+    html += '</tbody></table></div></div>';
+  });
+  document.getElementById('teamView').innerHTML = html || '<div class="team-section"><p style="padding:20px;text-align:center;color:#999;">검색 결과가 없습니다.</p></div>';
+}
+
+function renderPlayerView() {
+  const filters = getFilters();
+  let players = getAllPlayers().filter(p => {
+    if (filters.search && !p.name.includes(filters.search) && !p.team.toLowerCase().includes(filters.search) && !p.region.includes(filters.search)) return false;
+    if (filters.region && p.region !== filters.region) return false;
+    if (filters.pos && p.pos !== filters.pos) return false;
+    if (filters.grade && String(p.grade) !== filters.grade) return false;
+    return true;
+  });
+
+  players.sort((a, b) => {
+    let va, vb;
+    switch(sortField) {
+      case 'team': va = a.team; vb = b.team; break;
+      case 'region': va = a.region; vb = b.region; break;
+      case 'num': va = a.num||999; vb = b.num||999; return sortDir==='asc' ? va-vb : vb-va;
+      case 'name': va = a.name; vb = b.name; break;
+      case 'pos': va = a.pos||''; vb = b.pos||''; break;
+      case 'grade': return sortDir==='asc' ? a.grade-b.grade : b.grade-a.grade;
+      case 'height': va = parseInt(a.height)||0; vb = parseInt(b.height)||0; return sortDir==='asc' ? va-vb : vb-va;
+      case 'weight': va = parseInt(a.weight)||0; vb = parseInt(b.weight)||0; return sortDir==='asc' ? va-vb : vb-va;
+      default: va = a.name; vb = b.name;
+    }
+    if (typeof va === 'string') return sortDir==='asc' ? va.localeCompare(vb) : vb.localeCompare(va);
+    return 0;
+  });
+
+  let html = '';
+  players.forEach(p => {
+    const posClass = 'pos-' + (p.pos || '미지정');
+    html += `<tr>
+      <td>${p.team}</td>
+      <td>${p.region}</td>
+      <td>${p.num || '-'}</td>
+      <td><strong>${p.name}</strong></td>
+      <td><span class="pos-badge ${posClass}">${p.pos || '미지정'}</span></td>
+      <td><span class="grade-badge grade-${p.grade}">${p.grade}</span></td>
+      <td>${p.height || '-'}</td>
+      <td>${p.weight || '-'}</td>
+      <td>${p.bt || '-'}</td>
+    </tr>`;
+  });
+  document.getElementById('playerTableBody').innerHTML = html;
+}
+
+function renderAllTeams() {
+  const filters = getFilters();
+  let teams = allTeamsList.filter(t => {
+    if (filters.region && t.region !== filters.region) return false;
+    if (filters.search && !t.name.toLowerCase().includes(filters.search) && !t.manager.includes(filters.search) && !t.region.includes(filters.search)) return false;
+    return true;
+  });
+  let html = '';
+  teams.forEach((t, i) => {
+    const hasDetail = teamsData.find(td => td.name === t.name);
+    html += `<tr>
+      <td>${i+1}</td>
+      <td><strong>${t.name}</strong></td>
+      <td>${t.region}</td>
+      <td>${t.manager}</td>
+      <td>${t.players}</td>
+      <td>${hasDetail ? '<span style="color:green;font-weight:bold;">상세정보 있음</span>' :
+        `<a href="https://www.korea-baseball.com/info/team/team_player?club_idx=${t.idx}&season=2026&kind_cd=31&sports_club=F" target="_blank" style="color:#1a237e;">사이트에서 보기</a>`}</td>
+    </tr>`;
+  });
+  document.getElementById('allTeamsBody').innerHTML = html;
+}
+
+let activePosFilter = '전체';
+
+function showView(view) {
+  currentView = view;
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('teamView').style.display = view==='team' ? 'block' : 'none';
+  document.getElementById('positionView').style.display = view==='position' ? 'block' : 'none';
+  document.getElementById('playerView').style.display = view==='player' ? 'block' : 'none';
+  document.getElementById('allTeamsView').style.display = view==='allteams' ? 'block' : 'none';
+  document.getElementById('posFilterBtns').classList.toggle('visible', view==='position');
+  render();
+}
+
+function toggleTeam(idx) {
+  const body = document.getElementById('teamBody' + idx);
+  body.classList.toggle('collapsed');
+}
+
+function togglePosGroup(pos) {
+  const body = document.getElementById('posBody_' + pos);
+  body.classList.toggle('collapsed');
+}
+
+function filterByPos(pos) {
+  activePosFilter = pos;
+  document.querySelectorAll('.pos-btn').forEach(b => b.classList.remove('active'));
+  event.target.closest('.pos-btn').classList.add('active', pos === '전체' ? '전체' : pos);
+  renderPositionView();
+}
+
+function renderPositionView() {
+  const filters = getFilters();
+  const allPlayers = getAllPlayers().filter(p => {
+    if (filters.search && !p.name.includes(filters.search) && !p.team.toLowerCase().includes(filters.search) && !p.region.includes(filters.search)) return false;
+    if (filters.region && p.region !== filters.region) return false;
+    if (filters.grade && String(p.grade) !== filters.grade) return false;
+    return true;
+  });
+
+  const positions = ['투수','포수','내야수','외야수'];
+  const grouped = {};
+  positions.forEach(pos => { grouped[pos] = []; });
+  allPlayers.forEach(p => {
+    if (grouped[p.pos]) grouped[p.pos].push(p);
+  });
+
+  // Update button counts
+  document.getElementById('posBtnAll').textContent = allPlayers.filter(p=>positions.includes(p.pos)).length;
+  document.getElementById('posBtnP').textContent = grouped['투수'].length;
+  document.getElementById('posBtnC').textContent = grouped['포수'].length;
+  document.getElementById('posBtnIF').textContent = grouped['내야수'].length;
+  document.getElementById('posBtnOF').textContent = grouped['외야수'].length;
+
+  const showPositions = activePosFilter === '전체' ? positions : [activePosFilter];
+  const icons = {투수:'P', 포수:'C', 내야수:'IF', 외야수:'OF'};
+
+  let html = '<div class="pos-view-container">';
+  showPositions.forEach(pos => {
+    const players = grouped[pos];
+    if (!players || players.length === 0) return;
+
+    // Calculate stats
+    const avgHeight = players.filter(p=>p.height&&p.height!=='-').reduce((s,p)=>s+parseInt(p.height),0) / (players.filter(p=>p.height&&p.height!=='-').length || 1);
+    const avgWeight = players.filter(p=>p.weight&&p.weight!=='-').reduce((s,p)=>s+parseInt(p.weight),0) / (players.filter(p=>p.weight&&p.weight!=='-').length || 1);
+    const g1 = players.filter(p=>p.grade===1).length;
+    const g2 = players.filter(p=>p.grade===2).length;
+    const g3 = players.filter(p=>p.grade===3).length;
+    const leftHand = players.filter(p=>p.bt && p.bt.startsWith('좌투')).length;
+    const teamCount = new Set(players.map(p=>p.team)).size;
+
+    html += `<div class="pos-group">
+      <div class="pos-group-header pos-${pos}-border" onclick="togglePosGroup('${pos}')">
+        <div class="pos-icon ${pos}">${icons[pos]}</div>
+        <div>
+          <div class="pos-group-title">${pos}</div>
+          <div class="pos-group-count">${players.length}명 | ${teamCount}개 팀</div>
+        </div>
+        <span class="pos-group-toggle">&#9660;</span>
+      </div>
+      <div class="pos-group-body" id="posBody_${pos}">
+        <div class="pos-stats-row">
+          <div class="pos-stat-chip">평균 신장 <strong>${avgHeight.toFixed(1)}cm</strong></div>
+          <div class="pos-stat-chip">평균 체중 <strong>${avgWeight.toFixed(1)}kg</strong></div>
+          <div class="pos-stat-chip">1학년 <strong>${g1}명</strong></div>
+          <div class="pos-stat-chip">2학년 <strong>${g2}명</strong></div>
+          <div class="pos-stat-chip">3학년 <strong>${g3}명</strong></div>
+          ${pos === '투수' ? `<div class="pos-stat-chip">좌투 <strong>${leftHand}명</strong></div>` : ''}
+        </div>
+        <table>
+          <thead><tr>
+            <th>소속팀</th><th>지역</th><th>등번호</th><th>성명</th>
+            <th>학년</th><th>신장</th><th>체중</th><th>투타</th>
+          </tr></thead>
+          <tbody>`;
+    players.sort((a,b) => {
+      const hA = parseInt(a.height)||0, hB = parseInt(b.height)||0;
+      return hB - hA;
+    });
+    players.forEach(p => {
+      html += `<tr>
+        <td>${p.team}</td><td>${p.region}</td><td>${p.num||'-'}</td>
+        <td><strong>${p.name}</strong></td>
+        <td><span class="grade-badge grade-${p.grade}">${p.grade}</span></td>
+        <td>${p.height||'-'}</td><td>${p.weight||'-'}</td><td>${p.bt||'-'}</td>
+      </tr>`;
+    });
+    html += '</tbody></table></div></div>';
+  });
+  html += '</div>';
+  document.getElementById('positionView').innerHTML = html;
+}
+
+function sortPlayers(field) {
+  if (sortField === field) sortDir = sortDir==='asc' ? 'desc' : 'asc';
+  else { sortField = field; sortDir = 'asc'; }
+  renderPlayerView();
+}
+
+function render() {
+  if (currentView === 'team') renderTeamView();
+  else if (currentView === 'position') renderPositionView();
+  else if (currentView === 'player') renderPlayerView();
+  else renderAllTeams();
+}
+
+// Event listeners
+document.getElementById('searchInput').addEventListener('input', render);
+document.getElementById('regionFilter').addEventListener('change', render);
+document.getElementById('posFilter').addEventListener('change', render);
+document.getElementById('gradeFilter').addEventListener('change', render);
+
+// Init
+updateStats();
+render();
+</script>
+</body>
+</html>

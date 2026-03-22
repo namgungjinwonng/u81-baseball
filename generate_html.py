@@ -1,0 +1,587 @@
+# -*- coding: utf-8 -*-
+import json
+import sys
+import os
+from collections import Counter
+
+sys.stdout.reconfigure(encoding='utf-8')
+
+with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'u18_data.json'), 'r', encoding='utf-8') as f:
+    data = json.load(f)
+
+# Collect all players and stats
+all_players = []
+all_staff = []
+regions = set()
+positions = set()
+teams_info = []
+
+for team in data:
+    teams_info.append({
+        "name": team["team"],
+        "club_idx": team["club_idx"],
+        "region": team["region"],
+        "manager": team["manager"],
+        "player_count": team["player_count"],
+        "staff_count": len(team["staff"]),
+    })
+    regions.add(team["region"])
+    for p in team["players"]:
+        if not p.get("region"):
+            p["region"] = team["region"]
+        all_players.append(p)
+        positions.add(p["position"])
+    for s in team["staff"]:
+        s["team"] = team["team"]
+        s["team_idx"] = team["club_idx"]
+        s["region"] = team["region"]
+        all_staff.append(s)
+
+regions = sorted([r for r in regions if r])
+positions = sorted([p for p in positions if p])
+
+# Build JSON data for embedding
+players_json = json.dumps(all_players, ensure_ascii=False)
+staff_json = json.dumps(all_staff, ensure_ascii=False)
+teams_json = json.dumps(teams_info, ensure_ascii=False)
+
+total_players = len(all_players)
+total_teams = len(data)
+total_staff = len(all_staff)
+
+# Position counts
+pos_counts = Counter(p["position"] for p in all_players)
+
+html = f"""<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>U-18 대한야구소프트볼협회 선수 현황</title>
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#1a1a2e">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="U-18 야구">
+<link rel="apple-touch-icon" href="/icon-192.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<style>
+* {{ margin: 0; padding: 0; box-sizing: border-box; }}
+body {{ font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif; background: #f0f2f5; color: #1a1a2e; }}
+
+.header {{
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    color: white; padding: 30px 20px; text-align: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}}
+.header h1 {{ font-size: 28px; margin-bottom: 8px; letter-spacing: 2px; }}
+.header .subtitle {{ font-size: 14px; opacity: 0.8; }}
+
+.stats-bar {{
+    display: flex; justify-content: center; gap: 30px; padding: 20px;
+    background: white; border-bottom: 3px solid #e94560;
+    flex-wrap: wrap;
+}}
+.stat-item {{
+    text-align: center; min-width: 100px;
+}}
+.stat-num {{ font-size: 28px; font-weight: 700; color: #e94560; }}
+.stat-label {{ font-size: 12px; color: #666; margin-top: 2px; }}
+
+.container {{ max-width: 1400px; margin: 0 auto; padding: 20px; }}
+
+/* Filters */
+.filters {{
+    background: white; border-radius: 12px; padding: 20px; margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    display: flex; gap: 12px; flex-wrap: wrap; align-items: center;
+}}
+.filter-group {{ display: flex; align-items: center; gap: 6px; }}
+.filter-group label {{ font-size: 13px; font-weight: 600; color: #444; white-space: nowrap; }}
+.filter-group select, .filter-group input {{
+    padding: 8px 12px; border: 2px solid #e0e0e0; border-radius: 8px;
+    font-size: 13px; outline: none; transition: border 0.2s;
+}}
+.filter-group select:focus, .filter-group input:focus {{ border-color: #e94560; }}
+.filter-group input {{ width: 180px; }}
+.result-count {{ margin-left: auto; font-size: 13px; color: #888; font-weight: 600; }}
+
+/* Position filter buttons */
+.pos-filters {{
+    display: flex; gap: 8px; flex-wrap: wrap;
+}}
+.pos-btn {{
+    padding: 6px 16px; border-radius: 20px; border: 2px solid #e0e0e0;
+    background: white; cursor: pointer; font-size: 13px; font-weight: 600;
+    transition: all 0.2s; white-space: nowrap;
+}}
+.pos-btn:hover {{ border-color: #e94560; color: #e94560; }}
+.pos-btn.active {{ background: #e94560; color: white; border-color: #e94560; }}
+.pos-btn .count {{ font-size: 11px; opacity: 0.7; margin-left: 4px; }}
+
+/* Table */
+.table-wrap {{
+    background: white; border-radius: 12px; overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}}
+table {{
+    width: 100%; border-collapse: collapse; font-size: 13px;
+}}
+thead {{ background: #16213e; color: white; position: sticky; top: 52px; z-index: 50; }}
+th {{ padding: 12px 10px; text-align: left; font-weight: 600; cursor: pointer; white-space: nowrap; user-select: none; }}
+th:hover {{ background: #1a2744; }}
+th .sort-icon {{ margin-left: 4px; opacity: 0.5; font-size: 10px; }}
+td {{ padding: 10px; border-bottom: 1px solid #f0f0f0; }}
+tr:hover {{ background: #f8f9ff; }}
+tr:nth-child(even) {{ background: #fafafa; }}
+tr:nth-child(even):hover {{ background: #f0f1ff; }}
+
+.pos-badge {{
+    display: inline-block; padding: 3px 10px; border-radius: 12px;
+    font-size: 11px; font-weight: 700; color: white;
+}}
+.pos-투수 {{ background: #e94560; }}
+.pos-포수 {{ background: #0f3460; }}
+.pos-내야수 {{ background: #16a085; }}
+.pos-외야수 {{ background: #8e44ad; }}
+.pos-미지정 {{ background: #95a5a6; }}
+
+.grade-badge {{
+    display: inline-block; width: 24px; height: 24px; line-height: 24px;
+    border-radius: 50%; text-align: center; font-weight: 700; font-size: 12px; color: white;
+}}
+.grade-1 {{ background: #3498db; }}
+.grade-2 {{ background: #e67e22; }}
+.grade-3 {{ background: #e74c3c; }}
+
+.player-link {{
+    color: #1a1a2e; text-decoration: none; font-weight: 600;
+    transition: color 0.2s;
+}}
+.player-link:hover {{ color: #e94560; text-decoration: underline; }}
+
+/* Team cards */
+.team-grid {{
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+}}
+.team-card {{
+    background: white; border-radius: 12px; overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+}}
+.team-card:hover {{ transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.12); }}
+.team-card-header {{
+    background: linear-gradient(135deg, #16213e, #0f3460);
+    color: white; padding: 16px;
+}}
+.team-card-header h3 {{ font-size: 16px; margin-bottom: 4px; }}
+.team-card-header .region {{ font-size: 12px; opacity: 0.8; }}
+.team-card-body {{ padding: 16px; }}
+.team-card-body .info-row {{ display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 13px; }}
+.team-card-body .info-label {{ color: #888; }}
+.team-card-body .info-value {{ font-weight: 600; }}
+
+/* Team detail modal */
+.modal-overlay {{
+    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: flex-start;
+    padding: 40px 20px; overflow-y: auto;
+}}
+.modal-overlay.show {{ display: flex; }}
+.modal {{
+    background: white; border-radius: 16px; width: 100%; max-width: 1000px;
+    max-height: 85vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}}
+.modal-header {{
+    background: linear-gradient(135deg, #16213e, #0f3460);
+    color: white; padding: 24px; border-radius: 16px 16px 0 0;
+    display: flex; justify-content: space-between; align-items: center;
+    position: sticky; top: 0; z-index: 10;
+}}
+.modal-header h2 {{ font-size: 20px; }}
+.modal-close {{
+    width: 36px; height: 36px; border-radius: 50%; border: none;
+    background: rgba(255,255,255,0.2); color: white; font-size: 18px;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+}}
+.modal-close:hover {{ background: rgba(255,255,255,0.3); }}
+.modal-body {{ padding: 20px; }}
+
+.staff-section {{ margin-bottom: 20px; }}
+.staff-section h4 {{ color: #16213e; margin-bottom: 10px; font-size: 15px; }}
+.staff-list {{ display: flex; gap: 12px; flex-wrap: wrap; }}
+.staff-chip {{
+    padding: 6px 14px; background: #f0f2f5; border-radius: 20px;
+    font-size: 13px;
+}}
+.staff-chip .role {{ color: #888; margin-right: 6px; }}
+
+/* Responsive - Tablet */
+@media (max-width: 1024px) {{
+    .container {{ padding: 12px; }}
+    .stats-bar {{ gap: 16px; padding: 16px; }}
+    .stat-num {{ font-size: 24px; }}
+}}
+
+/* Responsive - Mobile */
+@media (max-width: 768px) {{
+    .header {{ padding: 20px 16px; }}
+    .header h1 {{ font-size: 18px; letter-spacing: 1px; }}
+    .header .subtitle {{ font-size: 11px; }}
+    .refresh-btn {{ padding: 8px 20px; font-size: 12px; }}
+    .stats-bar {{ gap: 8px; padding: 12px 8px; }}
+    .stat-item {{ min-width: 60px; }}
+    .stat-num {{ font-size: 18px; }}
+    .stat-label {{ font-size: 10px; }}
+    .nav-tabs {{ -webkit-overflow-scrolling: touch; }}
+    .nav-tab {{ padding: 10px 16px; font-size: 13px; }}
+    .container {{ padding: 10px; }}
+    .filters {{ flex-direction: column; padding: 14px; margin-bottom: 12px; gap: 10px; }}
+    .filter-group {{ width: 100%; }}
+    .filter-group select, .filter-group input {{ width: 100%; flex: 1; }}
+    .result-count {{ margin-left: 0; text-align: center; }}
+    .pos-filters {{ justify-content: center; }}
+    .pos-btn {{ padding: 5px 12px; font-size: 12px; }}
+
+    /* Mobile table: card layout */
+    .table-wrap {{ border-radius: 8px; overflow-x: auto; -webkit-overflow-scrolling: touch; }}
+    table {{ font-size: 12px; min-width: 600px; }}
+    td, th {{ padding: 8px 6px; }}
+    thead {{ position: static; }}
+
+    .team-grid {{ grid-template-columns: 1fr; gap: 10px; }}
+    .team-card-header {{ padding: 12px; }}
+    .team-card-body {{ padding: 12px; }}
+
+    .modal-overlay {{ padding: 10px; }}
+    .modal {{ max-height: 92vh; border-radius: 12px; }}
+    .modal-header {{ padding: 16px; border-radius: 12px 12px 0 0; }}
+    .modal-header h2 {{ font-size: 16px; }}
+    .modal-body {{ padding: 12px; }}
+    .modal-body table {{ min-width: 500px; }}
+
+    #pagination button {{ padding: 8px 10px !important; font-size: 13px; }}
+}}
+
+/* Responsive - Small mobile */
+@media (max-width: 400px) {{
+    .header h1 {{ font-size: 16px; }}
+    .stat-item {{ min-width: 50px; }}
+    .stat-num {{ font-size: 16px; }}
+    .pos-btn {{ padding: 4px 8px; font-size: 11px; }}
+    .nav-tab {{ padding: 10px 12px; font-size: 12px; }}
+}}
+
+/* Scrollbar */
+::-webkit-scrollbar {{ width: 8px; }}
+::-webkit-scrollbar-track {{ background: #f0f2f5; }}
+::-webkit-scrollbar-thumb {{ background: #bbb; border-radius: 4px; }}
+::-webkit-scrollbar-thumb:hover {{ background: #999; }}
+
+.loading {{ text-align: center; padding: 40px; color: #888; }}
+
+.search-btn {{
+    padding: 8px 20px; border: none; border-radius: 8px;
+    background: #e94560; color: white; font-size: 13px; font-weight: 700;
+    cursor: pointer; transition: background 0.2s; white-space: nowrap;
+}}
+.search-btn:hover {{ background: #d63050; }}
+.reset-btn {{ background: #666; }}
+.reset-btn:hover {{ background: #555; }}
+
+.refresh-btn {{
+    margin-top: 14px; padding: 10px 28px; border: 2px solid rgba(255,255,255,0.5);
+    background: rgba(255,255,255,0.1); color: white; border-radius: 25px;
+    font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.3s;
+    letter-spacing: 1px;
+}}
+.refresh-btn:hover {{ background: rgba(255,255,255,0.25); border-color: white; }}
+.refresh-btn:disabled {{ opacity: 0.5; cursor: not-allowed; }}
+.refresh-btn.spinning {{ animation: spin 1s linear infinite; }}
+@keyframes spin {{ 100% {{ transform: rotate(360deg); }} }}
+.refresh-status {{
+    margin-top: 8px; font-size: 13px; color: rgba(255,255,255,0.8);
+    min-height: 20px;
+}}
+</style>
+</head>
+<body>
+
+<div class="header">
+    <h1>U-18 대한야구소프트볼협회</h1>
+    <div class="subtitle">2026 시즌 18세 이하부 전체 선수 현황 | 데이터 출처: korea-baseball.com</div>
+    <button class="refresh-btn" onclick="refreshData()" id="refreshBtn">&#x21bb; 선수정보 갱신</button>
+    <div id="refreshStatus" class="refresh-status"></div>
+</div>
+
+<div class="stats-bar">
+    <div class="stat-item"><div class="stat-num">{total_teams}</div><div class="stat-label">팀</div></div>
+    <div class="stat-item"><div class="stat-num">{total_players:,}</div><div class="stat-label">선수</div></div>
+    <div class="stat-item"><div class="stat-num">{total_staff}</div><div class="stat-label">지도자</div></div>
+    <div class="stat-item"><div class="stat-num">{pos_counts.get('투수', 0):,}</div><div class="stat-label">투수</div></div>
+    <div class="stat-item"><div class="stat-num">{pos_counts.get('포수', 0)}</div><div class="stat-label">포수</div></div>
+    <div class="stat-item"><div class="stat-num">{pos_counts.get('내야수', 0)}</div><div class="stat-label">내야수</div></div>
+    <div class="stat-item"><div class="stat-num">{pos_counts.get('외야수', 0)}</div><div class="stat-label">외야수</div></div>
+</div>
+
+<div class="container">
+
+<!-- 팀별 보기 (메인) -->
+<div class="filters">
+    <div class="filter-group">
+        <label>지역</label>
+        <select id="teamRegionFilter" onchange="filterTeams()">
+            <option value="">전체</option>
+            {"".join(f'<option value="{r}">{r}</option>' for r in regions)}
+        </select>
+    </div>
+    <div class="filter-group">
+        <label>검색</label>
+        <select id="searchType">
+            <option value="name">이름</option>
+            <option value="team">팀명</option>
+            <option value="number">백넘버</option>
+        </select>
+    </div>
+    <div class="filter-group" style="flex:1;min-width:150px;">
+        <input type="text" id="searchInput" placeholder="검색어 입력" style="width:100%"
+            onkeydown="if(event.key==='Enter')doSearch()">
+    </div>
+    <button class="search-btn" onclick="doSearch()">검색</button>
+    <button class="search-btn reset-btn" onclick="resetSearch()">초기화</button>
+    <div class="result-count" id="teamCount"></div>
+</div>
+
+<!-- 검색 결과 영역 -->
+<div id="searchResults" style="display:none;">
+    <div class="filters" style="justify-content:space-between;align-items:center;">
+        <div class="result-count" id="searchResultCount" style="margin:0;font-size:15px;color:#1a1a2e;"></div>
+        <button class="search-btn reset-btn" onclick="resetSearch()">팀 목록으로 돌아가기</button>
+    </div>
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>소속</th>
+                    <th>번호</th>
+                    <th>선수명</th>
+                    <th>포지션</th>
+                    <th>학년</th>
+                    <th>신장/체중</th>
+                    <th>투타</th>
+                    <th>지역</th>
+                </tr>
+            </thead>
+            <tbody id="searchTableBody"></tbody>
+        </table>
+    </div>
+</div>
+
+<div class="team-grid" id="teamGrid"></div>
+
+</div>
+
+<!-- Team Detail Modal -->
+<div class="modal-overlay" id="teamModal" onclick="if(event.target===this)closeModal()">
+    <div class="modal">
+        <div class="modal-header">
+            <h2 id="modalTeamName"></h2>
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+        </div>
+        <div class="modal-body" id="modalBody"></div>
+    </div>
+</div>
+
+<script src="u18_app_data.js"></script>
+<script>
+
+function filterTeams() {{
+    const region = document.getElementById('teamRegionFilter').value;
+
+    const filtered = teamsInfo.filter(t => {{
+        if (region && t.region !== region) return false;
+        return true;
+    }});
+
+    document.getElementById('teamCount').textContent = `${{filtered.length}}개 팀`;
+
+    const grid = document.getElementById('teamGrid');
+    grid.innerHTML = filtered.map(t => `
+        <div class="team-card" onclick="showTeamDetail('${{t.name.replace(/'/g, "\\\\'")}}')">
+            <div class="team-card-header">
+                <h3>${{t.name}}</h3>
+                <div class="region">${{t.region}}</div>
+            </div>
+            <div class="team-card-body">
+                <div class="info-row"><span class="info-label">감독</span><span class="info-value">${{t.manager}}</span></div>
+                <div class="info-row"><span class="info-label">선수</span><span class="info-value">${{t.player_count}}명</span></div>
+                <div class="info-row"><span class="info-label">지도자</span><span class="info-value">${{t.staff_count}}명</span></div>
+            </div>
+        </div>
+    `).join('');
+}}
+
+function doSearch() {{
+    const type = document.getElementById('searchType').value;
+    const query = document.getElementById('searchInput').value.trim();
+    if (!query) return;
+
+    const q = query.toLowerCase();
+    let results = [];
+
+    if (type === 'name') {{
+        results = allPlayers.filter(p => p.name.toLowerCase().includes(q));
+    }} else if (type === 'team') {{
+        results = allPlayers.filter(p => p.team.toLowerCase().includes(q));
+    }} else if (type === 'number') {{
+        results = allPlayers.filter(p => p.number === query);
+    }}
+
+    // Show search results, hide team grid
+    document.getElementById('searchResults').style.display = 'block';
+    document.getElementById('teamGrid').style.display = 'none';
+    document.getElementById('searchResultCount').textContent =
+        `"${{query}}" 검색 결과: ${{results.length}}명`;
+
+    const tbody = document.getElementById('searchTableBody');
+    tbody.innerHTML = results.map(p => {{
+        const posClass = 'pos-' + (p.position || '미지정');
+        const gradeClass = 'grade-' + (p.grade || '');
+        return `<tr>
+            <td>${{p.team}}</td>
+            <td>${{p.number}}</td>
+            <td>${{playerLink(p.name, p.person_no)}}</td>
+            <td><span class="pos-badge ${{posClass}}">${{p.position || '미지정'}}</span></td>
+            <td><span class="grade-badge ${{gradeClass}}">${{p.grade || '-'}}</span></td>
+            <td>${{p.height_weight || '-'}}</td>
+            <td>${{p.throw_bat || '-'}}</td>
+            <td>${{p.region}}</td>
+        </tr>`;
+    }}).join('');
+}}
+
+function resetSearch() {{
+    document.getElementById('searchInput').value = '';
+    document.getElementById('searchResults').style.display = 'none';
+    document.getElementById('teamGrid').style.display = '';
+    filterTeams();
+}}
+
+function showTeamDetail(teamName) {{
+    const players = allPlayers.filter(p => p.team === teamName);
+    const staff = allStaff.filter(s => s.team === teamName);
+    const info = teamsInfo.find(t => t.name === teamName);
+
+    document.getElementById('modalTeamName').textContent = teamName + (info ? ` (${{info.region}})` : '');
+
+    // Position breakdown for this team
+    const posCounts = {{}};
+    players.forEach(p => {{ posCounts[p.position || '미지정'] = (posCounts[p.position || '미지정'] || 0) + 1; }});
+
+    let html = '';
+
+    // Staff section
+    if (staff.length) {{
+        html += `<div class="staff-section"><h4>지도자 (${{staff.length}}명)</h4><div class="staff-list">`;
+        staff.forEach(s => {{
+            html += `<div class="staff-chip"><span class="role">${{s.role}}</span>${{playerLink(s.name, s.person_no, 'T')}}</div>`;
+        }});
+        html += `</div></div>`;
+    }}
+
+    // Position summary
+    html += `<div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap">`;
+    for (const [pos, cnt] of Object.entries(posCounts).sort()) {{
+        html += `<div style="padding:6px 14px;background:#f0f2f5;border-radius:8px;font-size:13px"><span class="pos-badge pos-${{pos}}">${{pos}}</span> ${{cnt}}명</div>`;
+    }}
+    html += `</div>`;
+
+    // Players table
+    html += `<div class="table-wrap"><table><thead><tr>
+        <th>번호</th><th>선수명</th><th>포지션</th><th>학년</th><th>신장/체중</th><th>투타</th>
+    </tr></thead><tbody>`;
+
+    players.sort((a, b) => (parseInt(a.number) || 999) - (parseInt(b.number) || 999));
+    players.forEach(p => {{
+        const posClass = 'pos-' + (p.position || '미지정');
+        html += `<tr>
+            <td>${{p.number}}</td><td>${{playerLink(p.name, p.person_no)}}</td>
+            <td><span class="pos-badge ${{posClass}}">${{p.position || '미지정'}}</span></td>
+            <td><span class="grade-badge grade-${{p.grade}}">${{p.grade || '-'}}</span></td>
+            <td>${{p.height_weight || '-'}}</td><td>${{p.throw_bat || '-'}}</td>
+        </tr>`;
+    }});
+    html += `</tbody></table></div>`;
+
+    document.getElementById('modalBody').innerHTML = html;
+    document.getElementById('teamModal').classList.add('show');
+    document.body.style.overflow = 'hidden';
+}}
+
+function closeModal() {{
+    document.getElementById('teamModal').classList.remove('show');
+    document.body.style.overflow = '';
+}}
+
+// Keyboard shortcut: Escape to close modal
+document.addEventListener('keydown', e => {{ if (e.key === 'Escape') closeModal(); }});
+
+// Refresh data
+async function refreshData() {{
+    const btn = document.getElementById('refreshBtn');
+    const status = document.getElementById('refreshStatus');
+    btn.disabled = true;
+    btn.textContent = '⏳ 갱신 중...';
+    status.textContent = '데이터 수집 중... (약 30초 소요)';
+
+    try {{
+        const resp = await fetch('/refresh', {{ method: 'POST' }});
+        if (resp.ok) {{
+            const result = await resp.json();
+            status.textContent = `✅ 갱신 완료! ${{result.teams}}팀, ${{result.players}}명 — 3초 후 새로고침...`;
+            setTimeout(() => location.reload(), 3000);
+        }} else {{
+            throw new Error('서버 응답 오류');
+        }}
+    }} catch(e) {{
+        status.innerHTML = '⚠️ 갱신 서버 미실행. 터미널에서 <code style="background:rgba(0,0,0,0.3);padding:2px 6px;border-radius:4px">python u18_server.py</code> 실행 후 재시도';
+        btn.textContent = '↻ 선수정보 갱신';
+        btn.disabled = false;
+    }}
+}}
+
+// Player link builder
+function playerLink(name, personNo, gubun) {{
+    if (!personNo) return name;
+    const g = gubun || 'P';
+    return `<a class="player-link" href="https://www.korea-baseball.com/info/player/player_view?person_no=${{personNo}}&gubun=${{g}}" target="_blank">${{name}}</a>`;
+}}
+
+// Service Worker registration
+if ('serviceWorker' in navigator) {{
+    navigator.serviceWorker.register('/sw.js').catch(() => {{}});
+}}
+
+// Initial render
+filterTeams();
+</script>
+
+</body>
+</html>"""
+
+output_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'u18_players.html')
+with open(output_path, 'w', encoding='utf-8') as f:
+    f.write(html)
+
+# Write data as separate JS file
+data_js_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'u18_app_data.js')
+with open(data_js_path, 'w', encoding='utf-8') as f:
+    f.write(f"const allPlayers = {players_json};\n")
+    f.write(f"const allStaff = {staff_json};\n")
+    f.write(f"const teamsInfo = {teams_json};\n")
+
+print(f"HTML 생성 완료: {output_path}")
+print(f"데이터 JS 생성: {data_js_path}")
+print(f"총 {total_players:,}명 선수, {total_teams}개 팀, {total_staff}명 지도자")
