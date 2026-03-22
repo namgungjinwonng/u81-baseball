@@ -258,8 +258,8 @@ tr:nth-child(even):hover { background: #f0f1ff; }
 <div class="header">
     <h1>U-18 대한야구소프트볼협회</h1>
     <div class="subtitle">2026 시즌 18세 이하부 전체 선수 현황 | 데이터 출처: korea-baseball.com</div>
-    <div class="subtitle" style="margin-top:6px;font-size:12px;opacity:0.6;" id="updateDate">마지막 갱신: 2026-03-22 17:09</div>
-    <button class="refresh-btn" onclick="refreshData()" id="refreshBtn">&#x21bb; 선수정보 갱신</button>
+    <div class="subtitle" style="margin-top:6px;font-size:12px;opacity:0.6;" id="updateDate">마지막 갱신: 2026-03-22 17:13</div>
+    <button class="refresh-btn" onclick="refreshData()" id="refreshBtn" style="display:none;">&#x21bb; 선수정보 갱신</button>
     <div id="refreshStatus" class="refresh-status"></div>
 </div>
 
@@ -516,6 +516,11 @@ function playerLink(name, personNo, gubun) {
 // Service Worker registration
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('./sw.js').catch(() => {});
+}
+
+// Show refresh button only on localhost
+if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+    document.getElementById('refreshBtn').style.display = '';
 }
 
 // Initial render
