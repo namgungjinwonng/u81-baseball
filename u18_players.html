@@ -258,18 +258,19 @@ tr:nth-child(even):hover { background: #f0f1ff; }
 <div class="header">
     <h1>U-18 대한야구소프트볼협회</h1>
     <div class="subtitle">2026 시즌 18세 이하부 전체 선수 현황 | 데이터 출처: korea-baseball.com</div>
-    <button class="refresh-btn" onclick="refreshData()" id="refreshBtn">&#x21bb; 선수정보 갱신</button>
+    <div class="subtitle" style="margin-top:6px;font-size:12px;opacity:0.6;" id="updateDate">마지막 갱신: 2026-03-23 19:23</div>
+    <button class="refresh-btn" onclick="refreshData()" id="refreshBtn" style="display:none;">&#x21bb; 선수정보 갱신</button>
     <div id="refreshStatus" class="refresh-status"></div>
 </div>
 
 <div class="stats-bar">
     <div class="stat-item"><div class="stat-num">103</div><div class="stat-label">팀</div></div>
-    <div class="stat-item"><div class="stat-num">3,821</div><div class="stat-label">선수</div></div>
+    <div class="stat-item"><div class="stat-num">3,822</div><div class="stat-label">선수</div></div>
     <div class="stat-item"><div class="stat-num">367</div><div class="stat-label">지도자</div></div>
     <div class="stat-item"><div class="stat-num">1,163</div><div class="stat-label">투수</div></div>
     <div class="stat-item"><div class="stat-num">265</div><div class="stat-label">포수</div></div>
-    <div class="stat-item"><div class="stat-num">764</div><div class="stat-label">내야수</div></div>
-    <div class="stat-item"><div class="stat-num">593</div><div class="stat-label">외야수</div></div>
+    <div class="stat-item"><div class="stat-num">763</div><div class="stat-label">내야수</div></div>
+    <div class="stat-item"><div class="stat-num">594</div><div class="stat-label">외야수</div></div>
 </div>
 
 <div class="container">
@@ -478,12 +479,19 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal()
 async function refreshData() {
     const btn = document.getElementById('refreshBtn');
     const status = document.getElementById('refreshStatus');
+    const isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+
+    if (!isLocal) {
+        status.innerHTML = '📱 모바일/웹 버전은 자동 갱신이 불가합니다.<br>PC에서 아래 명령으로 갱신 후 재배포하세요:<br><code style="background:rgba(0,0,0,0.3);padding:3px 8px;border-radius:4px;font-size:12px;display:inline-block;margin-top:6px;">python update_and_deploy.py</code>';
+        return;
+    }
+
     btn.disabled = true;
     btn.textContent = '⏳ 갱신 중...';
     status.textContent = '데이터 수집 중... (약 30초 소요)';
 
     try {
-        const resp = await fetch('/refresh', { method: 'POST' });
+        const resp = await fetch(location.origin + '/refresh', { method: 'POST' });
         if (resp.ok) {
             const result = await resp.json();
             status.textContent = `✅ 갱신 완료! ${result.teams}팀, ${result.players}명 — 3초 후 새로고침...`;
@@ -508,6 +516,11 @@ function playerLink(name, personNo, gubun) {
 // Service Worker registration
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/sw.js').catch(() => {});
+}
+
+// Show refresh button only on local (localhost, 127.0.0.1, file://)
+if (location.hostname === 'localhost' || location.hostname === '127.0.0.1' || location.protocol === 'file:') {
+    document.getElementById('refreshBtn').style.display = '';
 }
 
 // Initial render

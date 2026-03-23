@@ -1287,7 +1287,7 @@
         "name": "강영은",
         "position": "내야수",
         "grade": "3",
-        "height_weight": "170cm/58kg",
+        "height_weight": "175cm/66kg",
         "throw_bat": "우투우타",
         "person_no": "201902001648",
         "team": "개성고",
@@ -4482,9 +4482,9 @@
         "type": "player",
         "number": "17",
         "name": "박보승",
-        "position": "내야수",
+        "position": "외야수",
         "grade": "3",
-        "height_weight": "182cm/80kg",
+        "height_weight": "183cm/80kg",
         "throw_bat": "좌투좌타",
         "person_no": "201804004096",
         "team": "경남고",
@@ -5289,6 +5289,19 @@
       {
         "type": "player",
         "number": "",
+        "name": "송재훈",
+        "position": "미지정",
+        "grade": "",
+        "height_weight": "",
+        "throw_bat": "",
+        "person_no": "201801002344",
+        "team": "경동고",
+        "team_idx": "153",
+        "region": "서울"
+      },
+      {
+        "type": "player",
+        "number": "",
         "name": "신석원",
         "position": "미지정",
         "grade": "1",
@@ -5755,7 +5768,7 @@
         "region": "서울"
       }
     ],
-    "player_count": 54
+    "player_count": 55
   },
   {
     "team": "경민IT고",
@@ -17376,7 +17389,7 @@
         "name": "김현우",
         "position": "투수",
         "grade": "3",
-        "height_weight": "173cm/90kg",
+        "height_weight": "176cm/88kg",
         "throw_bat": "좌투좌타",
         "person_no": "201602011773",
         "team": "마산고",
@@ -28389,7 +28402,7 @@
         "name": "강준영",
         "position": "투수",
         "grade": "3",
-        "height_weight": "189cm/93kg",
+        "height_weight": "191cm/93kg",
         "throw_bat": "우투우타",
         "person_no": "201708001376",
         "team": "서울자동차고",
@@ -40134,8 +40147,8 @@
         "name": "박강민",
         "position": "외야수",
         "grade": "2",
-        "height_weight": "185cm/71kg",
-        "throw_bat": "우투우타",
+        "height_weight": "187cm/79kg",
+        "throw_bat": "좌투좌타",
         "person_no": "201903001575",
         "team": "의성고",
         "team_idx": "1763",

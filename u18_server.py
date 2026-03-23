@@ -6,7 +6,7 @@ import os
 import subprocess
 import sys
 
-PORT = 8080
+PORT = 9090
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 if sys.stdout.encoding != 'utf-8':
@@ -40,6 +40,36 @@ class U18Handler(http.server.SimpleHTTPRequestHandler):
                 )
                 if result2.stdout:
                     print(result2.stdout)
+                if result2.returncode != 0:
+                    print(f"[경고] generate_html 오류: {result2.stderr}")
+                    raise Exception(result2.stderr or "generate failed")
+
+                # docs/ 폴더에도 복사 (모바일 배포용)
+                print("[갱신] docs/ 폴더 업데이트 중...")
+                docs_dir = os.path.join(BASE_DIR, 'docs')
+                if os.path.isdir(docs_dir):
+                    import shutil
+                    # index.html 복사 (경로를 상대경로로 변환)
+                    html_src = os.path.join(BASE_DIR, 'u18_players.html')
+                    if os.path.exists(html_src):
+                        with open(html_src, 'r', encoding='utf-8') as f:
+                            html = f.read()
+                        html = html.replace('href="/manifest.json"', 'href="./manifest.json"')
+                        html = html.replace('href="/icon-192.png"', 'href="./icon-192.png"')
+                        html = html.replace("register('/sw.js')", "register('./sw.js')")
+                        html = html.replace('src="u18_app_data.js"', 'src="./u18_app_data.js"')
+                        with open(os.path.join(docs_dir, 'index.html'), 'w', encoding='utf-8') as f:
+                            f.write(html)
+                    # JS 데이터 복사
+                    js_src = os.path.join(BASE_DIR, 'u18_app_data.js')
+                    if os.path.exists(js_src):
+                        shutil.copy2(js_src, os.path.join(docs_dir, 'u18_app_data.js'))
+                    # manifest, sw 복사
+                    for fname in ['manifest.json', 'sw.js']:
+                        src = os.path.join(BASE_DIR, fname)
+                        if os.path.exists(src):
+                            shutil.copy2(src, os.path.join(docs_dir, fname))
+                    print("[갱신] docs/ 폴더 업데이트 완료!")
 
                 with open(os.path.join(BASE_DIR, 'u18_data.json'), 'r', encoding='utf-8') as f:
                     data = json.load(f)

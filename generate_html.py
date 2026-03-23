@@ -49,6 +49,9 @@ total_players = len(all_players)
 total_teams = len(data)
 total_staff = len(all_staff)
 
+from datetime import datetime
+update_date = datetime.now().strftime('%Y-%m-%d %H:%M')
+
 # Position counts
 pos_counts = Counter(p["position"] for p in all_players)
 
@@ -305,6 +308,13 @@ tr:nth-child(even):hover {{ background: #f0f1ff; }}
     margin-top: 8px; font-size: 13px; color: rgba(255,255,255,0.8);
     min-height: 20px;
 }}
+.install-btn {{
+    margin-top: 10px; padding: 10px 28px; border: 2px solid #4CAF50;
+    background: #4CAF50; color: white; border-radius: 25px;
+    font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.3s;
+    letter-spacing: 1px; display: none;
+}}
+.install-btn:hover {{ background: #45a049; border-color: #45a049; }}
 </style>
 </head>
 <body>
@@ -312,7 +322,9 @@ tr:nth-child(even):hover {{ background: #f0f1ff; }}
 <div class="header">
     <h1>U-18 대한야구소프트볼협회</h1>
     <div class="subtitle">2026 시즌 18세 이하부 전체 선수 현황 | 데이터 출처: korea-baseball.com</div>
-    <button class="refresh-btn" onclick="refreshData()" id="refreshBtn">&#x21bb; 선수정보 갱신</button>
+    <div class="subtitle" style="margin-top:6px;font-size:12px;opacity:0.6;" id="updateDate">마지막 갱신: {update_date}</div>
+    <button class="refresh-btn" onclick="refreshData()" id="refreshBtn" style="display:none;">&#x21bb; 선수정보 갱신</button>
+    <button class="install-btn" id="installBtn" onclick="installApp()">&#x1F4F2; 앱 설치</button>
     <div id="refreshStatus" class="refresh-status"></div>
 </div>
 
@@ -428,6 +440,7 @@ function doSearch() {{
     const query = document.getElementById('searchInput').value.trim();
     if (!query) return;
 
+    const region = document.getElementById('teamRegionFilter').value;
     const q = query.toLowerCase();
     let results = [];
 
@@ -437,6 +450,10 @@ function doSearch() {{
         results = allPlayers.filter(p => p.team.toLowerCase().includes(q));
     }} else if (type === 'number') {{
         results = allPlayers.filter(p => p.number === query);
+    }}
+
+    if (region) {{
+        results = results.filter(p => p.region === region);
     }}
 
     // Show search results, hide team grid
@@ -532,12 +549,19 @@ document.addEventListener('keydown', e => {{ if (e.key === 'Escape') closeModal(
 async function refreshData() {{
     const btn = document.getElementById('refreshBtn');
     const status = document.getElementById('refreshStatus');
+    const isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+
+    if (!isLocal) {{
+        status.innerHTML = '📱 모바일/웹 버전은 자동 갱신이 불가합니다.<br>PC에서 아래 명령으로 갱신 후 재배포하세요:<br><code style="background:rgba(0,0,0,0.3);padding:3px 8px;border-radius:4px;font-size:12px;display:inline-block;margin-top:6px;">python update_and_deploy.py</code>';
+        return;
+    }}
+
     btn.disabled = true;
     btn.textContent = '⏳ 갱신 중...';
     status.textContent = '데이터 수집 중... (약 30초 소요)';
 
     try {{
-        const resp = await fetch('/refresh', {{ method: 'POST' }});
+        const resp = await fetch(location.origin + '/refresh', {{ method: 'POST' }});
         if (resp.ok) {{
             const result = await resp.json();
             status.textContent = `✅ 갱신 완료! ${{result.teams}}팀, ${{result.players}}명 — 3초 후 새로고침...`;
@@ -562,6 +586,36 @@ function playerLink(name, personNo, gubun) {{
 // Service Worker registration
 if ('serviceWorker' in navigator) {{
     navigator.serviceWorker.register('/sw.js').catch(() => {{}});
+}}
+
+// Show refresh button only on local (localhost, 127.0.0.1, file://)
+if (location.hostname === 'localhost' || location.hostname === '127.0.0.1' || location.protocol === 'file:') {{
+    document.getElementById('refreshBtn').style.display = '';
+}}
+
+// PWA Install prompt
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', function(e) {{
+    e.preventDefault();
+    deferredPrompt = e;
+    document.getElementById('installBtn').style.display = '';
+}});
+
+function installApp() {{
+    if (deferredPrompt) {{
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then(function(choice) {{
+            if (choice.outcome === 'accepted') {{
+                document.getElementById('installBtn').style.display = 'none';
+            }}
+            deferredPrompt = null;
+        }});
+    }}
+}}
+
+// Hide install button if already installed (standalone mode)
+if (window.matchMedia('(display-mode: standalone)').matches || navigator.standalone) {{
+    document.getElementById('installBtn').style.display = 'none';
 }}
 
 // Initial render
