@@ -1,10 +1,10 @@
-const CACHE_NAME = 'u18-baseball-v1';
+const CACHE_NAME = 'u18-baseball-v2';
 const ASSETS = [
-  '/u18_players.html',
-  '/u18_app_data.js',
-  '/manifest.json',
-  '/icon-192.png',
-  '/icon-512.png'
+  './',
+  './u18_app_data.js',
+  './manifest.json',
+  './icon-192.png',
+  './icon-512.png'
 ];
 
 // Install: cache core assets
