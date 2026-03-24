@@ -1543,7 +1543,7 @@
       },
       {
         "type": "player",
-        "number": "19",
+        "number": "41",
         "name": "이대규",
         "position": "투수",
         "grade": "2",
@@ -7265,7 +7265,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "34",
         "name": "유형찬",
         "position": "미지정",
         "grade": "1",
@@ -7502,7 +7502,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "7",
         "name": "김동영",
         "position": "미지정",
         "grade": "3",
@@ -7580,7 +7580,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "14",
         "name": "김준우",
         "position": "미지정",
         "grade": "1",
@@ -7593,7 +7593,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "47",
         "name": "김찬주",
         "position": "미지정",
         "grade": "1",
@@ -7619,7 +7619,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "35",
         "name": "김택현",
         "position": "미지정",
         "grade": "1",
@@ -7645,7 +7645,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "8",
         "name": "박명균",
         "position": "미지정",
         "grade": "2",
@@ -7814,7 +7814,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "27",
         "name": "오승덕",
         "position": "미지정",
         "grade": "2",
@@ -7944,7 +7944,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "41",
         "name": "최지율",
         "position": "미지정",
         "grade": "1",
@@ -10375,7 +10375,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "29",
         "name": "이태윤",
         "position": "미지정",
         "grade": "3",
@@ -18477,7 +18477,7 @@
     "players": [
       {
         "type": "player",
-        "number": "",
+        "number": "25",
         "name": "고광운",
         "position": "미지정",
         "grade": "1",
@@ -18490,7 +18490,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "14",
         "name": "김병준",
         "position": "미지정",
         "grade": "3",
@@ -18503,7 +18503,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "16",
         "name": "김영준",
         "position": "미지정",
         "grade": "2",
@@ -18516,7 +18516,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "8",
         "name": "김온유",
         "position": "미지정",
         "grade": "2",
@@ -18542,7 +18542,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "15",
         "name": "김현민",
         "position": "미지정",
         "grade": "2",
@@ -18555,7 +18555,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "33",
         "name": "문건호",
         "position": "미지정",
         "grade": "2",
@@ -18568,7 +18568,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "30",
         "name": "박건욱",
         "position": "미지정",
         "grade": "3",
@@ -18594,7 +18594,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "8",
         "name": "배상효",
         "position": "미지정",
         "grade": "2",
@@ -18646,7 +18646,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "13",
         "name": "원선호",
         "position": "미지정",
         "grade": "2",
@@ -18659,7 +18659,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "20",
         "name": "유준재",
         "position": "미지정",
         "grade": "1",
@@ -18672,7 +18672,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "23",
         "name": "이경률",
         "position": "미지정",
         "grade": "3",
@@ -18685,7 +18685,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "5",
         "name": "이민규",
         "position": "미지정",
         "grade": "2",
@@ -18698,7 +18698,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "4",
         "name": "이주언",
         "position": "미지정",
         "grade": "1",
@@ -18711,7 +18711,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "2",
         "name": "장윤성",
         "position": "미지정",
         "grade": "3",
@@ -18724,7 +18724,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "35",
         "name": "장종찬",
         "position": "미지정",
         "grade": "3",
@@ -25771,7 +25771,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "14",
         "name": "김이안",
         "position": "미지정",
         "grade": "2",
@@ -28168,7 +28168,7 @@
       },
       {
         "type": "player",
-        "number": "27",
+        "number": "",
         "name": "김이준",
         "position": "미지정",
         "grade": "1",
@@ -32969,7 +32969,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "46",
         "name": "한건희",
         "position": "미지정",
         "grade": "2",
@@ -33082,7 +33082,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "39",
         "name": "김건호",
         "position": "미지정",
         "grade": "1",
@@ -33186,7 +33186,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "9",
         "name": "문주찬",
         "position": "미지정",
         "grade": "1",
@@ -33225,7 +33225,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "32",
         "name": "박범찬",
         "position": "미지정",
         "grade": "1",
@@ -33537,7 +33537,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "20",
         "name": "최지건",
         "position": "미지정",
         "grade": "1",
@@ -40442,7 +40442,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "3",
         "name": "임시윤",
         "position": "미지정",
         "grade": "1",
@@ -40507,7 +40507,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "26",
         "name": "허민준",
         "position": "미지정",
         "grade": "1",
@@ -40680,6 +40680,19 @@
       },
       {
         "type": "player",
+        "number": "",
+        "name": "윤소찬",
+        "position": "미지정",
+        "grade": "2",
+        "height_weight": "",
+        "throw_bat": "",
+        "person_no": "202603021386",
+        "team": "의왕BC(U-18)",
+        "team_idx": "1683",
+        "region": "경기"
+      },
+      {
+        "type": "player",
         "number": "58",
         "name": "이승헌",
         "position": "내야수",
@@ -40771,7 +40784,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "25",
         "name": "정은우",
         "position": "외야수",
         "grade": "2",
@@ -40835,7 +40848,7 @@
         "region": "경기"
       }
     ],
-    "player_count": 22
+    "player_count": 23
   },
   {
     "team": "인상고",
@@ -41959,7 +41972,7 @@
         "name": "박영규",
         "position": "투수",
         "grade": "3",
-        "height_weight": "177cm/70kg",
+        "height_weight": "182cm/85kg",
         "throw_bat": "좌투좌타",
         "person_no": "201802006000",
         "team": "인천고",
@@ -43588,7 +43601,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "59",
         "name": "김성래",
         "position": "미지정",
         "grade": "2",
@@ -44098,7 +44111,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "40",
         "name": "김현우",
         "position": "미지정",
         "grade": "1",
@@ -44163,7 +44176,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "33",
         "name": "박세훈",
         "position": "미지정",
         "grade": "1",
@@ -45056,7 +45069,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "6",
         "name": "이승윤",
         "position": "미지정",
         "grade": "3",
@@ -45186,7 +45199,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "5",
         "name": "정기문",
         "position": "미지정",
         "grade": "3",
@@ -45290,7 +45303,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "47",
         "name": "최용재",
         "position": "미지정",
         "grade": "3",
@@ -45303,7 +45316,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "3",
         "name": "최은석",
         "position": "미지정",
         "grade": "2",
@@ -47985,7 +47998,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "14",
         "name": "지승빈",
         "position": "미지정",
         "grade": "1",
@@ -48794,7 +48807,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "48",
         "name": "천승원",
         "position": "미지정",
         "grade": "2",
@@ -48894,7 +48907,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "16",
         "name": "강인규",
         "position": "미지정",
         "grade": "3",
@@ -49232,7 +49245,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "6",
         "name": "이호정",
         "position": "미지정",
         "grade": "1",
@@ -49393,6 +49406,12 @@
         "name": "김영도",
         "role": "코치",
         "person_no": "202601T01321"
+      },
+      {
+        "type": "staff",
+        "name": "김혁민",
+        "role": "코치",
+        "person_no": "202301T00956"
       },
       {
         "type": "staff",
@@ -49989,7 +50008,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "13",
         "name": "정서호",
         "position": "미지정",
         "grade": "1",
@@ -51281,7 +51300,7 @@
         "name": "이우진",
         "position": "투수",
         "grade": "3",
-        "height_weight": "182cm/95kg",
+        "height_weight": "187cm/92kg",
         "throw_bat": "우투우타",
         "person_no": "201903006870",
         "team": "한광BC(U-18)",

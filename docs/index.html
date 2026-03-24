@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>U-18 대한야구소프트볼협회 선수 현황</title>
+<title>KBSA U-18 선수 검색</title>
 <link rel="manifest" href="./manifest.json">
 <meta name="theme-color" content="#1a1a2e">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -22,6 +22,7 @@ body { font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif; backgrou
 }
 .header h1 { font-size: 28px; margin-bottom: 8px; letter-spacing: 2px; }
 .header .subtitle { font-size: 14px; opacity: 0.8; }
+.header .update-info { font-size: 12px; }
 
 .stats-bar {
     display: flex; justify-content: center; gap: 30px; padding: 20px;
@@ -73,11 +74,11 @@ body { font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif; backgrou
 table {
     width: 100%; border-collapse: collapse; font-size: 13px;
 }
-thead { background: #16213e; color: white; position: sticky; top: 52px; z-index: 50; }
-th { padding: 12px 10px; text-align: left; font-weight: 600; cursor: pointer; white-space: nowrap; user-select: none; }
+thead { background: #16213e; color: white; }
+th { padding: 10px 6px; text-align: center; font-weight: 600; cursor: pointer; white-space: nowrap; user-select: none; }
 th:hover { background: #1a2744; }
 th .sort-icon { margin-left: 4px; opacity: 0.5; font-size: 10px; }
-td { padding: 10px; border-bottom: 1px solid #f0f0f0; }
+td { padding: 8px 6px; border-bottom: 1px solid #f0f0f0; text-align: center; }
 tr:hover { background: #f8f9ff; }
 tr:nth-child(even) { background: #fafafa; }
 tr:nth-child(even):hover { background: #f0f1ff; }
@@ -108,8 +109,8 @@ tr:nth-child(even):hover { background: #f0f1ff; }
 
 /* Team cards */
 .team-grid {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 16px;
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
 }
 .team-card {
     background: white; border-radius: 12px; overflow: hidden;
@@ -120,12 +121,12 @@ tr:nth-child(even):hover { background: #f0f1ff; }
 .team-card:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.12); }
 .team-card-header {
     background: linear-gradient(135deg, #16213e, #0f3460);
-    color: white; padding: 16px;
+    color: white; padding: 10px 12px;
 }
-.team-card-header h3 { font-size: 16px; margin-bottom: 4px; }
-.team-card-header .region { font-size: 12px; opacity: 0.8; }
-.team-card-body { padding: 16px; }
-.team-card-body .info-row { display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 13px; }
+.team-card-header h3 { font-size: 14px; margin-bottom: 2px; }
+.team-card-header .region { font-size: 11px; opacity: 0.8; }
+.team-card-body { padding: 10px 12px; }
+.team-card-body .info-row { display: flex; justify-content: space-between; margin-bottom: 3px; font-size: 12px; }
 .team-card-body .info-label { color: #888; }
 .team-card-body .info-value { font-weight: 600; }
 
@@ -137,7 +138,7 @@ tr:nth-child(even):hover { background: #f0f1ff; }
 }
 .modal-overlay.show { display: flex; }
 .modal {
-    background: white; border-radius: 16px; width: 100%; max-width: 1000px;
+    background: white; border-radius: 16px; width: 100%; max-width: 600px;
     max-height: 85vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,0.3);
 }
 .modal-header {
@@ -176,6 +177,7 @@ tr:nth-child(even):hover { background: #f0f1ff; }
     .header { padding: 20px 16px; }
     .header h1 { font-size: 18px; letter-spacing: 1px; }
     .header .subtitle { font-size: 11px; }
+    .header .update-info { font-size: 9px; }
     .refresh-btn { padding: 8px 20px; font-size: 12px; }
     .stats-bar { gap: 8px; padding: 12px 8px; }
     .stat-item { min-width: 60px; }
@@ -197,9 +199,11 @@ tr:nth-child(even):hover { background: #f0f1ff; }
     td, th { padding: 8px 6px; }
     thead { position: static; }
 
-    .team-grid { grid-template-columns: 1fr; gap: 10px; }
-    .team-card-header { padding: 12px; }
-    .team-card-body { padding: 12px; }
+    .team-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .team-card-header { padding: 8px 10px; }
+    .team-card-header h3 { font-size: 13px; }
+    .team-card-body { padding: 8px 10px; }
+    .team-card-body .info-row { font-size: 11px; margin-bottom: 2px; }
 
     .modal-overlay { padding: 10px; }
     .modal { max-height: 92vh; border-radius: 12px; }
@@ -263,9 +267,11 @@ tr:nth-child(even):hover { background: #f0f1ff; }
 <body>
 
 <div class="header">
-    <h1>U-18 대한야구소프트볼협회</h1>
-    <div class="subtitle">2026 시즌 18세 이하부 전체 선수 현황 | 데이터 출처: korea-baseball.com</div>
-    <div class="subtitle" style="margin-top:6px;font-size:12px;opacity:0.6;" id="updateDate">마지막 갱신: 2026-03-25 05:19</div>
+    <h1>KBSA U-18 선수 검색</h1>
+    <div class="subtitle">2026 시즌 18세 이하부 전체 선수 현황</div>
+    <div class="subtitle" style="margin-top:4px;">출처: 대한야구소프트볼협회 (korea-baseball.com)</div>
+    <div class="subtitle update-info" style="margin-top:6px;opacity:0.6;" id="updateDate">마지막 갱신: 2026-03-25 07:02</div>
+    <div class="subtitle update-info" style="margin-top:4px;opacity:0.6;">본 앱은 비상업적 목적으로 운영되며, 모든 데이터 권한은 대한야구소프트볼협회에 있습니다.</div>
     <button class="refresh-btn" onclick="refreshData()" id="refreshBtn" style="display:none;">&#x21bb; 선수정보 갱신</button>
     <button class="install-btn" id="installBtn" onclick="installApp()">&#x1F4F2; 앱 설치</button>
     <div id="refreshStatus" class="refresh-status"></div>
@@ -279,6 +285,7 @@ tr:nth-child(even):hover { background: #f0f1ff; }
     <div class="stat-item"><div class="stat-num">265</div><div class="stat-label">포수</div></div>
     <div class="stat-item"><div class="stat-num">763</div><div class="stat-label">내야수</div></div>
     <div class="stat-item"><div class="stat-num">594</div><div class="stat-label">외야수</div></div>
+    <div class="stat-item"><div class="stat-num">1038</div><div class="stat-label">미지정</div></div>
 </div>
 
 <div class="container">
@@ -295,8 +302,8 @@ tr:nth-child(even):hover { background: #f0f1ff; }
     <div class="filter-group">
         <label>검색</label>
         <select id="searchType">
-            <option value="name">이름</option>
             <option value="team">팀명</option>
+            <option value="name">이름</option>
             <option value="number">백넘버</option>
         </select>
     </div>
@@ -385,12 +392,37 @@ function doSearch() {
 
     const region = document.getElementById('teamRegionFilter').value;
     const q = query.toLowerCase();
-    let results = [];
 
+    // 팀명 검색: 팀 카드만 필터링
+    if (type === 'team') {
+        document.getElementById('searchResults').style.display = 'none';
+        document.getElementById('teamGrid').style.display = '';
+        let filtered = teamsInfo.filter(t => t.name.toLowerCase().includes(q));
+        if (region) {
+            filtered = filtered.filter(t => t.region === region);
+        }
+        document.getElementById('teamCount').textContent = `"${query}" 검색 결과: ${filtered.length}개 팀`;
+        const grid = document.getElementById('teamGrid');
+        grid.innerHTML = filtered.map(t => `
+            <div class="team-card" onclick="showTeamDetail('${t.name.replace(/'/g, "\\'")}')">
+                <div class="team-card-header">
+                    <h3>${t.name}</h3>
+                    <div class="region">${t.region}</div>
+                </div>
+                <div class="team-card-body">
+                    <div class="info-row"><span class="info-label">감독</span><span class="info-value">${t.manager}</span></div>
+                    <div class="info-row"><span class="info-label">선수</span><span class="info-value">${t.player_count}명</span></div>
+                    <div class="info-row"><span class="info-label">지도자</span><span class="info-value">${t.staff_count}명</span></div>
+                </div>
+            </div>
+        `).join('');
+        return;
+    }
+
+    // 이름/백넘버 검색: 선수 테이블 표시
+    let results = [];
     if (type === 'name') {
         results = allPlayers.filter(p => p.name.toLowerCase().includes(q));
-    } else if (type === 'team') {
-        results = allPlayers.filter(p => p.team.toLowerCase().includes(q));
     } else if (type === 'number') {
         results = allPlayers.filter(p => p.number === query);
     }
@@ -399,7 +431,6 @@ function doSearch() {
         results = results.filter(p => p.region === region);
     }
 
-    // Show search results, hide team grid
     document.getElementById('searchResults').style.display = 'block';
     document.getElementById('teamGrid').style.display = 'none';
     document.getElementById('searchResultCount').textContent =
@@ -429,16 +460,22 @@ function resetSearch() {
     filterTeams();
 }
 
+// Modal filter state
+let modalPlayers = [];
+let modalFilterPos = '';
+let modalFilterGrade = '';
+
+function getPos(p) { return p.position || '미지정'; }
+function getGrade(p) { return p.grade || '미지정'; }
+
 function showTeamDetail(teamName) {
-    const players = allPlayers.filter(p => p.team === teamName);
+    modalPlayers = allPlayers.filter(p => p.team === teamName);
+    modalFilterPos = '';
+    modalFilterGrade = '';
     const staff = allStaff.filter(s => s.team === teamName);
     const info = teamsInfo.find(t => t.name === teamName);
 
     document.getElementById('modalTeamName').textContent = teamName + (info ? ` (${info.region})` : '');
-
-    // Position breakdown for this team
-    const posCounts = {};
-    players.forEach(p => { posCounts[p.position || '미지정'] = (posCounts[p.position || '미지정'] || 0) + 1; });
 
     let html = '';
 
@@ -451,33 +488,104 @@ function showTeamDetail(teamName) {
         html += `</div></div>`;
     }
 
-    // Position summary
-    html += `<div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap">`;
+    // Position summary (clickable)
+    const posCounts = {};
+    modalPlayers.forEach(p => { const k = getPos(p); posCounts[k] = (posCounts[k] || 0) + 1; });
+    html += `<div id="modalPosFilter" style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap">`;
     for (const [pos, cnt] of Object.entries(posCounts).sort()) {
-        html += `<div style="padding:6px 14px;background:#f0f2f5;border-radius:8px;font-size:13px"><span class="pos-badge pos-${pos}">${pos}</span> ${cnt}명</div>`;
+        html += `<div class="pos-filter-btn" data-pos="${pos}" onclick="toggleModalPos('${pos}')" style="padding:5px 12px;background:#f0f2f5;border-radius:8px;font-size:12px;cursor:pointer;transition:all 0.2s;border:2px solid transparent"><span class="pos-badge pos-${pos}">${pos}</span> ${cnt}명</div>`;
     }
     html += `</div>`;
+
+    // Grade summary (clickable)
+    const gradeCounts = {};
+    modalPlayers.forEach(p => { const g = getGrade(p); gradeCounts[g] = (gradeCounts[g] || 0) + 1; });
+    html += `<div id="modalGradeFilter" style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap">`;
+    for (const [grade, cnt] of Object.entries(gradeCounts).sort()) {
+        const gc = grade !== '미지정' ? 'grade-' + grade : '';
+        const label = grade !== '미지정' ? grade + '학년' : '미지정';
+        html += `<div class="grade-filter-btn" data-grade="${grade}" onclick="toggleModalGrade('${grade}')" style="padding:5px 12px;background:#f0f2f5;border-radius:8px;font-size:12px;cursor:pointer;transition:all 0.2s;border:2px solid transparent"><span class="grade-badge ${gc}" style="display:inline-block;margin-right:4px">${grade !== '미지정' ? grade : '-'}</span>${label} ${cnt}명</div>`;
+    }
+    html += `<div onclick="resetModalFilter()" style="padding:5px 12px;background:#666;color:white;border-radius:8px;font-size:12px;cursor:pointer">초기화</div>`;
+    html += `</div>`;
+
+    // Filter status
+    html += `<div id="modalFilterStatus" style="font-size:12px;color:#888;margin-bottom:10px;display:none"></div>`;
 
     // Players table
     html += `<div class="table-wrap"><table><thead><tr>
         <th>번호</th><th>선수명</th><th>포지션</th><th>학년</th><th>신장/체중</th><th>투타</th>
-    </tr></thead><tbody>`;
-
-    players.sort((a, b) => (parseInt(a.number) || 999) - (parseInt(b.number) || 999));
-    players.forEach(p => {
-        const posClass = 'pos-' + (p.position || '미지정');
-        html += `<tr>
-            <td>${p.number}</td><td>${playerLink(p.name, p.person_no)}</td>
-            <td><span class="pos-badge ${posClass}">${p.position || '미지정'}</span></td>
-            <td><span class="grade-badge grade-${p.grade}">${p.grade || '-'}</span></td>
-            <td>${p.height_weight || '-'}</td><td>${p.throw_bat || '-'}</td>
-        </tr>`;
-    });
-    html += `</tbody></table></div>`;
+    </tr></thead><tbody id="modalTableBody"></tbody></table></div>`;
 
     document.getElementById('modalBody').innerHTML = html;
+    renderModalTable();
     document.getElementById('teamModal').classList.add('show');
     document.body.style.overflow = 'hidden';
+}
+
+function toggleModalPos(pos) {
+    modalFilterPos = (modalFilterPos === pos) ? '' : pos;
+    renderModalTable();
+}
+
+function toggleModalGrade(grade) {
+    modalFilterGrade = (modalFilterGrade === grade) ? '' : grade;
+    renderModalTable();
+}
+
+function resetModalFilter() {
+    modalFilterPos = '';
+    modalFilterGrade = '';
+    renderModalTable();
+}
+
+function renderModalTable() {
+    let filtered = [...modalPlayers];
+    if (modalFilterPos) {
+        filtered = filtered.filter(p => getPos(p) === modalFilterPos);
+    }
+    if (modalFilterGrade) {
+        filtered = filtered.filter(p => getGrade(p) === modalFilterGrade);
+    }
+    filtered.sort((a, b) => (parseInt(a.number) || 999) - (parseInt(b.number) || 999));
+
+    // Update button styles
+    document.querySelectorAll('.pos-filter-btn').forEach(el => {
+        el.style.borderColor = (el.dataset.pos === modalFilterPos) ? '#e94560' : 'transparent';
+        el.style.background = (el.dataset.pos === modalFilterPos) ? '#fff0f2' : '#f0f2f5';
+    });
+    document.querySelectorAll('.grade-filter-btn').forEach(el => {
+        el.style.borderColor = (el.dataset.grade === modalFilterGrade) ? '#3498db' : 'transparent';
+        el.style.background = (el.dataset.grade === modalFilterGrade) ? '#eaf4fd' : '#f0f2f5';
+    });
+
+    // Filter status - always show count
+    const statusEl = document.getElementById('modalFilterStatus');
+    if (modalFilterPos || modalFilterGrade) {
+        const parts = [];
+        if (modalFilterPos) parts.push(modalFilterPos);
+        if (modalFilterGrade) parts.push(modalFilterGrade !== '미지정' ? modalFilterGrade + '학년' : '미지정');
+        statusEl.textContent = `필터: ${parts.join(' + ')} — ${filtered.length}명`;
+        statusEl.style.display = '';
+    } else {
+        statusEl.textContent = `전체: ${filtered.length}명`;
+        statusEl.style.display = '';
+    }
+
+    // Render table with row numbers
+    const rows = [];
+    for (let i = 0; i < filtered.length; i++) {
+        const p = filtered[i];
+        const pos = getPos(p);
+        const grade = getGrade(p);
+        rows.push(`<tr>
+            <td>${p.number}</td><td>${playerLink(p.name, p.person_no)}</td>
+            <td><span class="pos-badge pos-${pos}">${pos}</span></td>
+            <td><span class="grade-badge ${grade !== '미지정' ? 'grade-' + grade : ''}">${grade !== '미지정' ? grade : '-'}</span></td>
+            <td>${p.height_weight || '-'}</td><td>${p.throw_bat || '-'}</td>
+        </tr>`);
+    }
+    document.getElementById('modalTableBody').innerHTML = rows.join('');
 }
 
 function closeModal() {

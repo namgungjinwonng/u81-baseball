@@ -15,7 +15,7 @@ git add docs/
 echo.
 
 echo [2/3] 커밋 중...
-for /f "tokens=1-2 delims= " %%a in ('python -c "from datetime import datetime; print(datetime.now().strftime('%%Y-%%m-%%d %%H:%%M'))"') do set DT=%%a %%b
+set DT=%date:~0,4%-%date:~5,2%-%date:~8,2% %time:~0,2%:%time:~3,2%
 git commit -m "데이터 갱신: %DT%"
 if %ERRORLEVEL% neq 0 (
     echo.
@@ -40,7 +40,7 @@ if %ERRORLEVEL% neq 0 (
 echo.
 echo ==================================================
 echo   배포 완료!
-echo   1~2분 후 반영됩니다.
+echo   1-2분 후 반영됩니다.
 echo   https://namgungjinwonng.github.io/u81-baseball/
 echo ==================================================
 echo.
