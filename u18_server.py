@@ -25,7 +25,7 @@ class U18Handler(http.server.SimpleHTTPRequestHandler):
                 result = subprocess.run(
                     [sys.executable, os.path.join(BASE_DIR, 'fetch_u18_rosters.py')],
                     capture_output=True, text=True, timeout=300,
-                    cwd=BASE_DIR
+                    cwd=BASE_DIR, encoding='utf-8'
                 )
                 if result.stdout:
                     print(result.stdout)
@@ -36,7 +36,7 @@ class U18Handler(http.server.SimpleHTTPRequestHandler):
                 result2 = subprocess.run(
                     [sys.executable, os.path.join(BASE_DIR, 'generate_html.py')],
                     capture_output=True, text=True, timeout=60,
-                    cwd=BASE_DIR
+                    cwd=BASE_DIR, encoding='utf-8'
                 )
                 if result2.stdout:
                     print(result2.stdout)
