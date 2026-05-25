@@ -64,11 +64,10 @@ class U18Handler(http.server.SimpleHTTPRequestHandler):
                     js_src = os.path.join(BASE_DIR, 'u18_app_data.js')
                     if os.path.exists(js_src):
                         shutil.copy2(js_src, os.path.join(docs_dir, 'u18_app_data.js'))
-                    # manifest, sw 복사
-                    for fname in ['manifest.json', 'sw.js']:
-                        src = os.path.join(BASE_DIR, fname)
-                        if os.path.exists(src):
-                            shutil.copy2(src, os.path.join(docs_dir, fname))
+                    # sw.js 복사 (manifest.json은 docs/에 별도 관리)
+                    sw_src = os.path.join(BASE_DIR, 'sw.js')
+                    if os.path.exists(sw_src):
+                        shutil.copy2(sw_src, os.path.join(docs_dir, 'sw.js'))
                     print("[갱신] docs/ 폴더 업데이트 완료!")
 
                 with open(os.path.join(BASE_DIR, 'u18_data.json'), 'r', encoding='utf-8') as f:

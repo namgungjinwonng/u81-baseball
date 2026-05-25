@@ -16,6 +16,12 @@
         "name": "안태영",
         "role": "코치",
         "person_no": "202501T00453"
+      },
+      {
+        "type": "staff",
+        "name": "오승준",
+        "role": "코치",
+        "person_no": "201201T00472"
       }
     ],
     "players": [
@@ -2657,7 +2663,7 @@
         "name": "안승연",
         "position": "외야수",
         "grade": "3",
-        "height_weight": "186cm/95kg",
+        "height_weight": "183cm/85kg",
         "throw_bat": "우투우타",
         "person_no": "201803007823",
         "team": "경기고",
@@ -2977,6 +2983,18 @@
         "name": "최덕현",
         "role": "감독",
         "person_no": "201803T00124"
+      },
+      {
+        "type": "staff",
+        "name": "김재균",
+        "role": "코치",
+        "person_no": "202501T01162"
+      },
+      {
+        "type": "staff",
+        "name": "양종민",
+        "role": "코치",
+        "person_no": "202302T01607"
       },
       {
         "type": "staff",
@@ -4038,10 +4056,10 @@
         "type": "player",
         "number": "5",
         "name": "윤정후",
-        "position": "미지정",
+        "position": "외야수",
         "grade": "2",
-        "height_weight": "",
-        "throw_bat": "",
+        "height_weight": "184cm/85kg",
+        "throw_bat": "우투좌타",
         "person_no": "201708001119",
         "team": "경기항공고",
         "team_idx": "916",
@@ -4666,7 +4684,7 @@
         "name": "안우석",
         "position": "내야수",
         "grade": "3",
-        "height_weight": "171cm/71kg",
+        "height_weight": "174cm/71kg",
         "throw_bat": "우투좌타",
         "person_no": "201702005369",
         "team": "경남고",
@@ -4926,7 +4944,7 @@
         "name": "차유주",
         "position": "내야수",
         "grade": "3",
-        "height_weight": "183cm/84kg",
+        "height_weight": "185cm/83kg",
         "throw_bat": "좌투좌타",
         "person_no": "201607000671",
         "team": "경남고",
@@ -5106,7 +5124,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "44",
         "name": "김담",
         "position": "미지정",
         "grade": "1",
@@ -5119,7 +5137,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "2",
         "name": "김대한",
         "position": "미지정",
         "grade": "1",
@@ -5132,7 +5150,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "14",
         "name": "김민성",
         "position": "미지정",
         "grade": "2",
@@ -5210,7 +5228,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "36",
         "name": "김준건",
         "position": "미지정",
         "grade": "1",
@@ -5236,7 +5254,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "13",
         "name": "김태훈",
         "position": "미지정",
         "grade": "2",
@@ -5496,7 +5514,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "55",
         "name": "이도경",
         "position": "미지정",
         "grade": "1",
@@ -5587,7 +5605,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "28",
         "name": "정명윤",
         "position": "미지정",
         "grade": "2",
@@ -5626,7 +5644,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "4",
         "name": "정승우",
         "position": "미지정",
         "grade": "1",
@@ -5652,7 +5670,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "61",
         "name": "한성민",
         "position": "미지정",
         "grade": "2",
@@ -5928,6 +5946,19 @@
       },
       {
         "type": "player",
+        "number": "",
+        "name": "김태준",
+        "position": "미지정",
+        "grade": "1",
+        "height_weight": "",
+        "throw_bat": "",
+        "person_no": "202604004825",
+        "team": "경민IT고",
+        "team_idx": "1453",
+        "region": "경기"
+      },
+      {
+        "type": "player",
         "number": "21",
         "name": "문시우",
         "position": "투수",
@@ -6148,7 +6179,7 @@
         "region": "경기"
       }
     ],
-    "player_count": 27
+    "player_count": 28
   },
   {
     "team": "경북고",
@@ -6262,19 +6293,6 @@
         "height_weight": "184cm/85kg",
         "throw_bat": "우투우타",
         "person_no": "201702005460",
-        "team": "경북고",
-        "team_idx": "185",
-        "region": "대구"
-      },
-      {
-        "type": "player",
-        "number": "2",
-        "name": "김도현",
-        "position": "투수",
-        "grade": "3",
-        "height_weight": "184cm/85kg",
-        "throw_bat": "우투우타",
-        "person_no": "1300033986",
         "team": "경북고",
         "team_idx": "185",
         "region": "대구"
@@ -7021,7 +7039,7 @@
         "region": "대구"
       }
     ],
-    "player_count": 64
+    "player_count": 63
   },
   {
     "team": "경주고",
@@ -7386,7 +7404,7 @@
         "name": "채지훈",
         "position": "투수",
         "grade": "1",
-        "height_weight": "170cm/72kg",
+        "height_weight": "182cm/67kg",
         "throw_bat": "우투우타",
         "person_no": "202010003563",
         "team": "경주고",
@@ -9371,18 +9389,6 @@
       },
       {
         "type": "staff",
-        "name": "김다원",
-        "role": "코치",
-        "person_no": "202303T02944"
-      },
-      {
-        "type": "staff",
-        "name": "박진태",
-        "role": "코치",
-        "person_no": "202501T00820"
-      },
-      {
-        "type": "staff",
         "name": "최효명",
         "role": "코치",
         "person_no": "202501T00817"
@@ -9625,8 +9631,8 @@
       },
       {
         "type": "player",
-        "number": "",
-        "name": "손승현",
+        "number": "51",
+        "name": "손준범",
         "position": "미지정",
         "grade": "2",
         "height_weight": "",
@@ -10037,7 +10043,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "45",
         "name": "김영웅",
         "position": "미지정",
         "grade": "2",
@@ -10115,7 +10121,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "18",
         "name": "김태승",
         "position": "미지정",
         "grade": "3",
@@ -10453,7 +10459,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "17",
         "name": "정다운",
         "position": "미지정",
         "grade": "3",
@@ -10762,6 +10768,19 @@
       },
       {
         "type": "player",
+        "number": "",
+        "name": "정준우",
+        "position": "미지정",
+        "grade": "2",
+        "height_weight": "",
+        "throw_bat": "",
+        "person_no": "202501005357",
+        "team": "금남고",
+        "team_idx": "1699",
+        "region": "경남"
+      },
+      {
+        "type": "player",
         "number": "16",
         "name": "정찬영",
         "position": "투수",
@@ -10839,7 +10858,7 @@
         "region": "경남"
       }
     ],
-    "player_count": 21
+    "player_count": 22
   },
   {
     "team": "김포과학기술고",
@@ -11978,7 +11997,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "9",
         "name": "김민현",
         "position": "미지정",
         "grade": "2",
@@ -12082,7 +12101,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "2",
         "name": "박승찬",
         "position": "미지정",
         "grade": "2",
@@ -12160,7 +12179,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "53",
         "name": "손홍률",
         "position": "미지정",
         "grade": "3",
@@ -12225,7 +12244,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "46",
         "name": "윤주영",
         "position": "미지정",
         "grade": "1",
@@ -12563,7 +12582,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "54",
         "name": "최영민",
         "position": "미지정",
         "grade": "1",
@@ -12723,6 +12742,19 @@
       },
       {
         "type": "player",
+        "number": "",
+        "name": "김서준",
+        "position": "미지정",
+        "grade": "1",
+        "height_weight": "",
+        "throw_bat": "",
+        "person_no": "202603017169",
+        "team": "대구북구SC(U-18)",
+        "team_idx": "1667",
+        "region": "대구"
+      },
+      {
+        "type": "player",
         "number": "7",
         "name": "김승준",
         "position": "내야수",
@@ -12730,6 +12762,19 @@
         "height_weight": "185cm/75kg",
         "throw_bat": "우투우타",
         "person_no": "202004000928",
+        "team": "대구북구SC(U-18)",
+        "team_idx": "1667",
+        "region": "대구"
+      },
+      {
+        "type": "player",
+        "number": "",
+        "name": "김이산",
+        "position": "미지정",
+        "grade": "1",
+        "height_weight": "",
+        "throw_bat": "",
+        "person_no": "202604009685",
         "team": "대구북구SC(U-18)",
         "team_idx": "1667",
         "region": "대구"
@@ -12814,6 +12859,19 @@
       },
       {
         "type": "player",
+        "number": "",
+        "name": "안도현",
+        "position": "미지정",
+        "grade": "1",
+        "height_weight": "",
+        "throw_bat": "",
+        "person_no": "202604002366",
+        "team": "대구북구SC(U-18)",
+        "team_idx": "1667",
+        "region": "대구"
+      },
+      {
+        "type": "player",
         "number": "9",
         "name": "우현서",
         "position": "투수",
@@ -12860,6 +12918,19 @@
         "height_weight": "182cm/90kg",
         "throw_bat": "우투우타",
         "person_no": "202601015724",
+        "team": "대구북구SC(U-18)",
+        "team_idx": "1667",
+        "region": "대구"
+      },
+      {
+        "type": "player",
+        "number": "",
+        "name": "이현준",
+        "position": "미지정",
+        "grade": "3",
+        "height_weight": "",
+        "throw_bat": "",
+        "person_no": "202603032857",
         "team": "대구북구SC(U-18)",
         "team_idx": "1667",
         "region": "대구"
@@ -12930,7 +13001,7 @@
         "region": "대구"
       }
     ],
-    "player_count": 21
+    "player_count": 25
   },
   {
     "team": "대구상원고",
@@ -13301,7 +13372,7 @@
         "name": "박건민",
         "position": "내야수",
         "grade": "2",
-        "height_weight": "182cm/92kg",
+        "height_weight": "182cm/94kg",
         "throw_bat": "우투우타",
         "person_no": "202003000624",
         "team": "대구상원고",
@@ -14541,7 +14612,7 @@
         "name": "김동현",
         "position": "내야수",
         "grade": "2",
-        "height_weight": "179cm/63kg",
+        "height_weight": "181cm/68kg",
         "throw_bat": "우투우타",
         "person_no": "202003000315",
         "team": "대전제일고",
@@ -15591,6 +15662,12 @@
         "name": "김병효",
         "role": "코치",
         "person_no": "200502T00192"
+      },
+      {
+        "type": "staff",
+        "name": "조성원",
+        "role": "코치",
+        "person_no": "202604T01017"
       }
     ],
     "players": [
@@ -15843,7 +15920,7 @@
       },
       {
         "type": "player",
-        "number": "38",
+        "number": "39",
         "name": "전우주",
         "position": "투수",
         "grade": "2",
@@ -16518,9 +16595,9 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "30",
         "name": "김강민",
-        "position": "미지정",
+        "position": "투수",
         "grade": "1",
         "height_weight": "",
         "throw_bat": "",
@@ -16531,9 +16608,9 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "35",
         "name": "김규민",
-        "position": "미지정",
+        "position": "투수",
         "grade": "1",
         "height_weight": "",
         "throw_bat": "",
@@ -16544,9 +16621,9 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "45",
         "name": "김동준",
-        "position": "미지정",
+        "position": "투수",
         "grade": "2",
         "height_weight": "",
         "throw_bat": "",
@@ -16609,9 +16686,9 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "15",
         "name": "김주형",
-        "position": "미지정",
+        "position": "투수",
         "grade": "2",
         "height_weight": "",
         "throw_bat": "",
@@ -16635,9 +16712,9 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "28",
         "name": "김태우",
-        "position": "미지정",
+        "position": "포수",
         "grade": "1",
         "height_weight": "",
         "throw_bat": "",
@@ -16661,9 +16738,9 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "41",
         "name": "박리호",
-        "position": "미지정",
+        "position": "투수",
         "grade": "1",
         "height_weight": "",
         "throw_bat": "",
@@ -16674,9 +16751,9 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "20",
         "name": "박현서",
-        "position": "미지정",
+        "position": "투수",
         "grade": "2",
         "height_weight": "",
         "throw_bat": "",
@@ -16700,9 +16777,9 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "33",
         "name": "성시원",
-        "position": "미지정",
+        "position": "투수",
         "grade": "1",
         "height_weight": "",
         "throw_bat": "",
@@ -16765,9 +16842,9 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "34",
         "name": "양경필",
-        "position": "미지정",
+        "position": "내야수",
         "grade": "1",
         "height_weight": "",
         "throw_bat": "",
@@ -16843,9 +16920,9 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "52",
         "name": "유준휘",
-        "position": "미지정",
+        "position": "내야수",
         "grade": "2",
         "height_weight": "",
         "throw_bat": "",
@@ -16973,9 +17050,9 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "19",
         "name": "장우진",
-        "position": "미지정",
+        "position": "투수",
         "grade": "2",
         "height_weight": "",
         "throw_bat": "",
@@ -16999,9 +17076,9 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "36",
         "name": "전우진",
-        "position": "미지정",
+        "position": "내야수",
         "grade": "1",
         "height_weight": "",
         "throw_bat": "",
@@ -17064,9 +17141,9 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "40",
         "name": "진석현",
-        "position": "미지정",
+        "position": "포수",
         "grade": "1",
         "height_weight": "",
         "throw_bat": "",
@@ -17077,9 +17154,9 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "14",
         "name": "최서원",
-        "position": "미지정",
+        "position": "내야수",
         "grade": "1",
         "height_weight": "",
         "throw_bat": "",
@@ -17103,9 +17180,9 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "27",
         "name": "최환희",
-        "position": "미지정",
+        "position": "포수",
         "grade": "1",
         "height_weight": "",
         "throw_bat": "",
@@ -17116,9 +17193,9 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "4",
         "name": "한대형",
-        "position": "미지정",
+        "position": "외야수",
         "grade": "3",
         "height_weight": "",
         "throw_bat": "",
@@ -17775,7 +17852,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "19",
         "name": "천제영",
         "position": "미지정",
         "grade": "2",
@@ -17888,7 +17965,7 @@
     "players": [
       {
         "type": "player",
-        "number": "",
+        "number": "9",
         "name": "강도현",
         "position": "미지정",
         "grade": "1",
@@ -17927,7 +18004,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "22",
         "name": "김도훈",
         "position": "미지정",
         "grade": "1",
@@ -18187,7 +18264,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "15",
         "name": "이승수",
         "position": "미지정",
         "grade": "1",
@@ -18317,7 +18394,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "58",
         "name": "정재민",
         "position": "미지정",
         "grade": "2",
@@ -18447,7 +18524,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "11",
         "name": "한승현",
         "position": "미지정",
         "grade": "2",
@@ -18516,7 +18593,7 @@
       },
       {
         "type": "player",
-        "number": "8",
+        "number": "51",
         "name": "김온유",
         "position": "미지정",
         "grade": "2",
@@ -18529,7 +18606,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "5",
         "name": "김재현",
         "position": "미지정",
         "grade": "1",
@@ -18545,7 +18622,7 @@
         "number": "15",
         "name": "김현민",
         "position": "미지정",
-        "grade": "2",
+        "grade": "3",
         "height_weight": "",
         "throw_bat": "",
         "person_no": "202510009144",
@@ -18711,7 +18788,7 @@
       },
       {
         "type": "player",
-        "number": "2",
+        "number": "6",
         "name": "장윤성",
         "position": "미지정",
         "grade": "3",
@@ -19006,7 +19083,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "3",
         "name": "노진표",
         "position": "미지정",
         "grade": "2",
@@ -19058,7 +19135,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "20",
         "name": "박준혁",
         "position": "미지정",
         "grade": "2",
@@ -19253,7 +19330,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "41",
         "name": "조성록",
         "position": "미지정",
         "grade": "2",
@@ -19680,7 +19757,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "32",
         "name": "김동현",
         "position": "미지정",
         "grade": "2",
@@ -20361,6 +20438,12 @@
         "name": "김성현",
         "role": "코치",
         "person_no": "201507T00402"
+      },
+      {
+        "type": "staff",
+        "name": "신우승",
+        "role": "코치",
+        "person_no": "201802T00018"
       },
       {
         "type": "staff",
@@ -23044,6 +23127,19 @@
       },
       {
         "type": "player",
+        "number": "",
+        "name": "김규현",
+        "position": "미지정",
+        "grade": "1",
+        "height_weight": "",
+        "throw_bat": "",
+        "person_no": "201901001835",
+        "team": "부원고야구단",
+        "team_idx": "1900",
+        "region": "경기"
+      },
+      {
+        "type": "player",
         "number": "13",
         "name": "김도영",
         "position": "투수",
@@ -23135,6 +23231,19 @@
       },
       {
         "type": "player",
+        "number": "",
+        "name": "박준우",
+        "position": "미지정",
+        "grade": "1",
+        "height_weight": "",
+        "throw_bat": "",
+        "person_no": "202209006567",
+        "team": "부원고야구단",
+        "team_idx": "1900",
+        "region": "경기"
+      },
+      {
+        "type": "player",
         "number": "0",
         "name": "석주영",
         "position": "투수",
@@ -23168,6 +23277,19 @@
         "height_weight": "",
         "throw_bat": "",
         "person_no": "201802005769",
+        "team": "부원고야구단",
+        "team_idx": "1900",
+        "region": "경기"
+      },
+      {
+        "type": "player",
+        "number": "",
+        "name": "오시언",
+        "position": "미지정",
+        "grade": "1",
+        "height_weight": "",
+        "throw_bat": "",
+        "person_no": "202102002696",
         "team": "부원고야구단",
         "team_idx": "1900",
         "region": "경기"
@@ -23330,6 +23452,19 @@
       },
       {
         "type": "player",
+        "number": "",
+        "name": "황주엽",
+        "position": "미지정",
+        "grade": "2",
+        "height_weight": "",
+        "throw_bat": "",
+        "person_no": "201803000874",
+        "team": "부원고야구단",
+        "team_idx": "1900",
+        "region": "경기"
+      },
+      {
+        "type": "player",
         "number": "18",
         "name": "황현우",
         "position": "투수",
@@ -23342,7 +23477,7 @@
         "region": "경기"
       }
     ],
-    "player_count": 26
+    "player_count": 30
   },
   {
     "team": "북일고",
@@ -23521,7 +23656,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "7",
         "name": "김태환",
         "position": "미지정",
         "grade": "3",
@@ -23874,12 +24009,6 @@
       },
       {
         "type": "staff",
-        "name": "전경일",
-        "role": "감독",
-        "person_no": "201106T00379"
-      },
-      {
-        "type": "staff",
         "name": "고재황",
         "role": "코치",
         "person_no": "201901T00528"
@@ -24017,9 +24146,9 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "47",
         "name": "김형준",
-        "position": "미지정",
+        "position": "투수",
         "grade": "1",
         "height_weight": "",
         "throw_bat": "",
@@ -24082,9 +24211,9 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "40",
         "name": "박태건",
-        "position": "미지정",
+        "position": "투수",
         "grade": "1",
         "height_weight": "",
         "throw_bat": "",
@@ -24199,9 +24328,9 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "49",
         "name": "유하랑",
-        "position": "미지정",
+        "position": "투수",
         "grade": "1",
         "height_weight": "",
         "throw_bat": "",
@@ -24212,9 +24341,9 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "31",
         "name": "이윤서",
-        "position": "미지정",
+        "position": "투수",
         "grade": "1",
         "height_weight": "",
         "throw_bat": "",
@@ -24225,9 +24354,9 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "37",
         "name": "이제우",
-        "position": "미지정",
+        "position": "투수",
         "grade": "1",
         "height_weight": "",
         "throw_bat": "",
@@ -24251,9 +24380,9 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "42",
         "name": "이진호",
-        "position": "미지정",
+        "position": "투수",
         "grade": "1",
         "height_weight": "",
         "throw_bat": "",
@@ -24290,9 +24419,9 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "49",
         "name": "장지혁",
-        "position": "미지정",
+        "position": "투수",
         "grade": "2",
         "height_weight": "",
         "throw_bat": "",
@@ -24316,9 +24445,9 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "39",
         "name": "정승우",
-        "position": "미지정",
+        "position": "투수",
         "grade": "1",
         "height_weight": "",
         "throw_bat": "",
@@ -25297,6 +25426,19 @@
       },
       {
         "type": "player",
+        "number": "13",
+        "name": "정연우",
+        "position": "미지정",
+        "grade": "1",
+        "height_weight": "",
+        "throw_bat": "",
+        "person_no": "202005000426",
+        "team": "상우고야구단",
+        "team_idx": "1899",
+        "region": "경기"
+      },
+      {
+        "type": "player",
         "number": "5",
         "name": "정지원",
         "position": "외야수",
@@ -25387,7 +25529,7 @@
         "region": "경기"
       }
     ],
-    "player_count": 27
+    "player_count": 28
   },
   {
     "team": "서울HG야구단(U-18)",
@@ -26161,7 +26303,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "1",
         "name": "홍수호",
         "position": "미지정",
         "grade": "3",
@@ -26192,6 +26334,12 @@
         "name": "엄범석",
         "role": "코치",
         "person_no": "200802T00217"
+      },
+      {
+        "type": "staff",
+        "name": "이종석",
+        "role": "코치",
+        "person_no": "202604T00383"
       },
       {
         "type": "staff",
@@ -26316,7 +26464,7 @@
         "number": "7",
         "name": "김선빈",
         "position": "내야수",
-        "grade": "2",
+        "grade": "3",
         "height_weight": "187cm/84kg",
         "throw_bat": "우투우타",
         "person_no": "201702001145",
@@ -27664,7 +27812,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "23",
         "name": "노규민",
         "position": "미지정",
         "grade": "2",
@@ -27716,7 +27864,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "19",
         "name": "손태준",
         "position": "미지정",
         "grade": "1",
@@ -27859,7 +28007,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "9",
         "name": "이재우",
         "position": "미지정",
         "grade": "1",
@@ -27976,7 +28124,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "12",
         "name": "정준형",
         "position": "미지정",
         "grade": "1",
@@ -27989,7 +28137,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "41",
         "name": "조석희",
         "position": "미지정",
         "grade": "2",
@@ -28168,7 +28316,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "27",
         "name": "김이준",
         "position": "미지정",
         "grade": "1",
@@ -28541,6 +28689,19 @@
       },
       {
         "type": "player",
+        "number": "9",
+        "name": "송예성",
+        "position": "미지정",
+        "grade": "1",
+        "height_weight": "",
+        "throw_bat": "",
+        "person_no": "202002003081",
+        "team": "서울자동차고",
+        "team_idx": "1451",
+        "region": "서울"
+      },
+      {
+        "type": "player",
         "number": "42",
         "name": "양민준",
         "position": "외야수",
@@ -28761,7 +28922,7 @@
         "region": "서울"
       }
     ],
-    "player_count": 29
+    "player_count": 30
   },
   {
     "team": "서울컨벤션고",
@@ -28888,7 +29049,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "41",
         "name": "김민서",
         "position": "미지정",
         "grade": "1",
@@ -29057,7 +29218,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "24",
         "name": "박승현",
         "position": "미지정",
         "grade": "1",
@@ -29187,7 +29348,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "37",
         "name": "엄지후",
         "position": "미지정",
         "grade": "1",
@@ -29421,7 +29582,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "35",
         "name": "최시혁",
         "position": "미지정",
         "grade": "1",
@@ -29560,7 +29721,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "46",
         "name": "권지우",
         "position": "미지정",
         "grade": "1",
@@ -29872,7 +30033,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "30",
         "name": "왕인",
         "position": "미지정",
         "grade": "1",
@@ -29937,7 +30098,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "15",
         "name": "이성재",
         "position": "미지정",
         "grade": "2",
@@ -29950,7 +30111,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "32",
         "name": "이정후",
         "position": "미지정",
         "grade": "1",
@@ -29976,7 +30137,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "18",
         "name": "정우성",
         "position": "미지정",
         "grade": "2",
@@ -30041,7 +30202,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "11",
         "name": "조한결",
         "position": "미지정",
         "grade": "3",
@@ -31222,7 +31383,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "10",
         "name": "전우진",
         "position": "미지정",
         "grade": "2",
@@ -31235,7 +31396,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "60",
         "name": "전태호",
         "position": "미지정",
         "grade": "2",
@@ -31484,7 +31645,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "53",
         "name": "김승훈",
         "position": "미지정",
         "grade": "1",
@@ -31575,7 +31736,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "12",
         "name": "박상민",
         "position": "미지정",
         "grade": "2",
@@ -32128,7 +32289,7 @@
         "name": "박시후",
         "position": "투수",
         "grade": "2",
-        "height_weight": "171cm/68kg",
+        "height_weight": "173cm/65kg",
         "throw_bat": "우투우타",
         "person_no": "202407000934",
         "team": "세명컴퓨터고야구단",
@@ -32605,7 +32766,7 @@
         "name": "송준우",
         "position": "내야수",
         "grade": "3",
-        "height_weight": "185cm/83kg",
+        "height_weight": "186cm/86kg",
         "throw_bat": "우투우타",
         "person_no": "201809000842",
         "team": "세원고",
@@ -32680,7 +32841,7 @@
       {
         "type": "player",
         "number": "12",
-        "name": "전재윤",
+        "name": "전은호",
         "position": "투수",
         "grade": "2",
         "height_weight": "174cm/68kg",
@@ -32969,6 +33130,19 @@
       },
       {
         "type": "player",
+        "number": "",
+        "name": "최권율",
+        "position": "미지정",
+        "grade": "2",
+        "height_weight": "",
+        "throw_bat": "",
+        "person_no": "202102002493",
+        "team": "세종BC(U-18)",
+        "team_idx": "1854",
+        "region": "세종"
+      },
+      {
+        "type": "player",
         "number": "46",
         "name": "한건희",
         "position": "미지정",
@@ -33020,7 +33194,7 @@
         "region": "세종"
       }
     ],
-    "player_count": 19
+    "player_count": 20
   },
   {
     "team": "소래고",
@@ -33329,7 +33503,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "26",
         "name": "이민준",
         "position": "미지정",
         "grade": "1",
@@ -35095,12 +35269,12 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "51",
         "name": "김선우",
-        "position": "미지정",
+        "position": "투수",
         "grade": "1",
-        "height_weight": "",
-        "throw_bat": "",
+        "height_weight": "179cm/75kg",
+        "throw_bat": "좌투좌타",
         "person_no": "202001000291",
         "team": "신흥고",
         "team_idx": "586",
@@ -35721,13 +35895,13 @@
     "team": "안산공업고",
     "club_idx": "184",
     "region": "경기",
-    "manager": "송원국",
+    "manager": "하성진",
     "staff": [
       {
         "type": "staff",
-        "name": "송원국",
+        "name": "하성진",
         "role": "감독",
-        "person_no": "201702T02403"
+        "person_no": "201404T00759"
       },
       {
         "type": "staff",
@@ -35740,12 +35914,6 @@
         "name": "이지원",
         "role": "코치",
         "person_no": "202401T00701"
-      },
-      {
-        "type": "staff",
-        "name": "하성진",
-        "role": "코치",
-        "person_no": "201404T00759"
       }
     ],
     "players": [
@@ -35855,19 +36023,6 @@
       },
       {
         "type": "player",
-        "number": "5",
-        "name": "김지후",
-        "position": "내야수",
-        "grade": "3",
-        "height_weight": "182cm/83kg",
-        "throw_bat": "우투우타",
-        "person_no": "201809000430",
-        "team": "안산공업고",
-        "team_idx": "184",
-        "region": "경기"
-      },
-      {
-        "type": "player",
         "number": "22",
         "name": "김지후",
         "position": "포수",
@@ -35875,6 +36030,19 @@
         "height_weight": "182cm/77kg",
         "throw_bat": "우투우타",
         "person_no": "202102000174",
+        "team": "안산공업고",
+        "team_idx": "184",
+        "region": "경기"
+      },
+      {
+        "type": "player",
+        "number": "5",
+        "name": "김지후",
+        "position": "내야수",
+        "grade": "3",
+        "height_weight": "182cm/83kg",
+        "throw_bat": "우투우타",
+        "person_no": "201809000430",
         "team": "안산공업고",
         "team_idx": "184",
         "region": "경기"
@@ -35937,7 +36105,7 @@
         "name": "류호산",
         "position": "외야수",
         "grade": "3",
-        "height_weight": "173cm/82kg",
+        "height_weight": "177cm/82kg",
         "throw_bat": "좌투좌타",
         "person_no": "201801000252",
         "team": "안산공업고",
@@ -36067,7 +36235,7 @@
         "name": "안정혁",
         "position": "내야수",
         "grade": "3",
-        "height_weight": "174cm/67kg",
+        "height_weight": "176cm/72kg",
         "throw_bat": "우투좌타",
         "person_no": "201903000366",
         "team": "안산공업고",
@@ -36170,7 +36338,7 @@
         "number": "",
         "name": "이지윤",
         "position": "미지정",
-        "grade": "1",
+        "grade": "2",
         "height_weight": "",
         "throw_bat": "",
         "person_no": "201806001387",
@@ -36295,6 +36463,12 @@
         "name": "김민기",
         "role": "코치",
         "person_no": "201705T00272"
+      },
+      {
+        "type": "staff",
+        "name": "이병우",
+        "role": "코치",
+        "person_no": "200503T04500"
       }
     ],
     "players": [
@@ -36599,7 +36773,7 @@
         "name": "강준혁",
         "position": "투수",
         "grade": "3",
-        "height_weight": "158cm/87kg",
+        "height_weight": "185cm/87kg",
         "throw_bat": "좌투좌타",
         "person_no": "201802003144",
         "team": "야탑고",
@@ -37024,7 +37198,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "33",
         "name": "주유찬",
         "position": "미지정",
         "grade": "1",
@@ -37100,6 +37274,12 @@
         "name": "서주원",
         "role": "코치",
         "person_no": "202505T00509"
+      },
+      {
+        "type": "staff",
+        "name": "이재근",
+        "role": "코치",
+        "person_no": "202103T04537"
       },
       {
         "type": "staff",
@@ -37462,7 +37642,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "11",
         "name": "조해든",
         "position": "미지정",
         "grade": "3",
@@ -37900,7 +38080,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "22",
         "name": "이윤겸",
         "position": "미지정",
         "grade": "2",
@@ -37952,7 +38132,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "53",
         "name": "이현우",
         "position": "미지정",
         "grade": "2",
@@ -37991,7 +38171,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "36",
         "name": "전민준",
         "position": "미지정",
         "grade": "1",
@@ -38196,7 +38376,7 @@
     "players": [
       {
         "type": "player",
-        "number": "",
+        "number": "16",
         "name": "강찬",
         "position": "미지정",
         "grade": "2",
@@ -38365,7 +38545,7 @@
       },
       {
         "type": "player",
-        "number": "39",
+        "number": "2",
         "name": "서승현",
         "position": "미지정",
         "grade": "1",
@@ -38398,6 +38578,32 @@
         "height_weight": "",
         "throw_bat": "",
         "person_no": "202203000264",
+        "team": "울산BC(U-18)",
+        "team_idx": "1878",
+        "region": "울산"
+      },
+      {
+        "type": "player",
+        "number": "6",
+        "name": "윤승환",
+        "position": "미지정",
+        "grade": "1",
+        "height_weight": "",
+        "throw_bat": "",
+        "person_no": "202102000669",
+        "team": "울산BC(U-18)",
+        "team_idx": "1878",
+        "region": "울산"
+      },
+      {
+        "type": "player",
+        "number": "",
+        "name": "장인혁",
+        "position": "미지정",
+        "grade": "2",
+        "height_weight": "",
+        "throw_bat": "",
+        "person_no": "201902006480",
         "team": "울산BC(U-18)",
         "team_idx": "1878",
         "region": "울산"
@@ -38466,9 +38672,22 @@
         "team": "울산BC(U-18)",
         "team_idx": "1878",
         "region": "울산"
+      },
+      {
+        "type": "player",
+        "number": "26",
+        "name": "황부루",
+        "position": "미지정",
+        "grade": "1",
+        "height_weight": "",
+        "throw_bat": "",
+        "person_no": "202301002347",
+        "team": "울산BC(U-18)",
+        "team_idx": "1878",
+        "region": "울산"
       }
     ],
-    "player_count": 21
+    "player_count": 24
   },
   {
     "team": "원주고",
@@ -39634,7 +39853,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "2",
         "name": "손예준",
         "position": "미지정",
         "grade": "1",
@@ -40052,7 +40271,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "23",
         "name": "김민승",
         "position": "미지정",
         "grade": "1",
@@ -40273,7 +40492,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "57",
         "name": "안지후",
         "position": "미지정",
         "grade": "1",
@@ -40563,6 +40782,19 @@
       },
       {
         "type": "player",
+        "number": "55",
+        "name": "강현수",
+        "position": "미지정",
+        "grade": "3",
+        "height_weight": "",
+        "throw_bat": "",
+        "person_no": "202001001042",
+        "team": "의왕BC(U-18)",
+        "team_idx": "1683",
+        "region": "경기"
+      },
+      {
+        "type": "player",
         "number": "27",
         "name": "권혁준",
         "position": "포수",
@@ -40797,7 +41029,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "1",
         "name": "조민혁",
         "position": "내야수",
         "grade": "3",
@@ -40848,7 +41080,7 @@
         "region": "경기"
       }
     ],
-    "player_count": 23
+    "player_count": 24
   },
   {
     "team": "인상고",
@@ -42033,7 +42265,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "41",
         "name": "손예담",
         "position": "미지정",
         "grade": "1",
@@ -43321,7 +43553,7 @@
         "type": "player",
         "number": "19",
         "name": "이진우",
-        "position": "내야수",
+        "position": "투수",
         "grade": "2",
         "height_weight": "182cm/70kg",
         "throw_bat": "우투우타",
@@ -43336,7 +43568,7 @@
         "name": "이창빈",
         "position": "내야수",
         "grade": "1",
-        "height_weight": "178cm/85kg",
+        "height_weight": "178cm/78kg",
         "throw_bat": "우투좌타",
         "person_no": "201904000735",
         "team": "장충고",
@@ -43514,7 +43746,7 @@
       },
       {
         "type": "player",
-        "number": "15",
+        "number": "32",
         "name": "한선우",
         "position": "투수",
         "grade": "1",
@@ -44098,7 +44330,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "23",
         "name": "김찬우",
         "position": "미지정",
         "grade": "1",
@@ -44280,7 +44512,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "27",
         "name": "송민재",
         "position": "미지정",
         "grade": "2",
@@ -45488,6 +45720,19 @@
       },
       {
         "type": "player",
+        "number": "2",
+        "name": "김도현",
+        "position": "미지정",
+        "grade": "2",
+        "height_weight": "",
+        "throw_bat": "",
+        "person_no": "202001001783",
+        "team": "제주고",
+        "team_idx": "379",
+        "region": "제주"
+      },
+      {
+        "type": "player",
         "number": "31",
         "name": "김민찬",
         "position": "미지정",
@@ -45696,6 +45941,19 @@
       },
       {
         "type": "player",
+        "number": "22",
+        "name": "최혜성",
+        "position": "미지정",
+        "grade": "2",
+        "height_weight": "",
+        "throw_bat": "",
+        "person_no": "201902001519",
+        "team": "제주고",
+        "team_idx": "379",
+        "region": "제주"
+      },
+      {
+        "type": "player",
         "number": "33",
         "name": "한송강",
         "position": "외야수",
@@ -45708,7 +45966,7 @@
         "region": "제주"
       }
     ],
-    "player_count": 21
+    "player_count": 23
   },
   {
     "team": "중앙고",
@@ -47478,7 +47736,7 @@
     "players": [
       {
         "type": "player",
-        "number": "",
+        "number": "49",
         "name": "KIM LEO WOOBIN",
         "position": "미지정",
         "grade": "1",
@@ -47647,7 +47905,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "26",
         "name": "김표건",
         "position": "미지정",
         "grade": "1",
@@ -48313,7 +48571,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "51",
         "name": "김태우",
         "position": "미지정",
         "grade": "2",
@@ -48435,7 +48693,7 @@
         "position": "포수",
         "grade": "3",
         "height_weight": "184cm/93kg",
-        "throw_bat": "우투우타",
+        "throw_bat": "우투좌타",
         "person_no": "202002000041",
         "team": "청원고",
         "team_idx": "187",
@@ -48716,7 +48974,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "39",
         "name": "전세현",
         "position": "미지정",
         "grade": "2",
@@ -48820,7 +49078,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "31",
         "name": "최준우",
         "position": "미지정",
         "grade": "1",
@@ -49403,6 +49661,12 @@
       },
       {
         "type": "staff",
+        "name": "김성현",
+        "role": "코치",
+        "person_no": "201507T00402"
+      },
+      {
+        "type": "staff",
         "name": "김영도",
         "role": "코치",
         "person_no": "202601T01321"
@@ -49418,6 +49682,12 @@
         "name": "남경호",
         "role": "코치",
         "person_no": "202301T00581"
+      },
+      {
+        "type": "staff",
+        "name": "박성빈",
+        "role": "코치",
+        "person_no": "202002T04539"
       }
     ],
     "players": [
@@ -49583,7 +49853,7 @@
         "name": "김현우",
         "position": "포수",
         "grade": "3",
-        "height_weight": "182cm/79kg",
+        "height_weight": "183cm/81kg",
         "throw_bat": "우투우타",
         "person_no": "201802007160",
         "team": "충암고",
@@ -49869,8 +50139,8 @@
         "name": "오유찬",
         "position": "내야수",
         "grade": "2",
-        "height_weight": "177cm/76kg",
-        "throw_bat": "우투좌타",
+        "height_weight": "177cm/78kg",
+        "throw_bat": "우투우타",
         "person_no": "202001000836",
         "team": "충암고",
         "team_idx": "181",
@@ -49930,7 +50200,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "8",
         "name": "이하랑",
         "position": "미지정",
         "grade": "1",
@@ -49947,7 +50217,7 @@
         "name": "장근우",
         "position": "포수",
         "grade": "2",
-        "height_weight": "181cm/87kg",
+        "height_weight": "184cm/87kg",
         "throw_bat": "우투우타",
         "person_no": "201903007273",
         "team": "충암고",
@@ -50871,6 +51141,19 @@
       },
       {
         "type": "player",
+        "number": "",
+        "name": "신준환",
+        "position": "미지정",
+        "grade": "2",
+        "height_weight": "",
+        "throw_bat": "",
+        "person_no": "202002003678",
+        "team": "포항제철고",
+        "team_idx": "537",
+        "region": "경북"
+      },
+      {
+        "type": "player",
         "number": "11",
         "name": "윤관우",
         "position": "투수",
@@ -51027,6 +51310,19 @@
       },
       {
         "type": "player",
+        "number": "",
+        "name": "진서호",
+        "position": "미지정",
+        "grade": "2",
+        "height_weight": "",
+        "throw_bat": "",
+        "person_no": "202301003223",
+        "team": "포항제철고",
+        "team_idx": "537",
+        "region": "경북"
+      },
+      {
+        "type": "player",
         "number": "38",
         "name": "최수환",
         "position": "투수",
@@ -51091,7 +51387,7 @@
         "region": "경북"
       }
     ],
-    "player_count": 29
+    "player_count": 31
   },
   {
     "team": "한광BC(U-18)",
@@ -51233,10 +51529,10 @@
         "type": "player",
         "number": "1",
         "name": "오하민",
-        "position": "미지정",
+        "position": "투수",
         "grade": "3",
-        "height_weight": "",
-        "throw_bat": "",
+        "height_weight": "190cm/100kg",
+        "throw_bat": "우투우타",
         "person_no": "201802004895",
         "team": "한광BC(U-18)",
         "team_idx": "1637",
@@ -51501,6 +51797,19 @@
       },
       {
         "type": "player",
+        "number": "8",
+        "name": "김준영",
+        "position": "미지정",
+        "grade": "1",
+        "height_weight": "",
+        "throw_bat": "",
+        "person_no": "202603022429",
+        "team": "한국마사고BC",
+        "team_idx": "1694",
+        "region": "전북"
+      },
+      {
+        "type": "player",
         "number": "2",
         "name": "김태린",
         "position": "내야수",
@@ -51534,6 +51843,19 @@
         "height_weight": "182cm/84kg",
         "throw_bat": "우투우타",
         "person_no": "202206010076",
+        "team": "한국마사고BC",
+        "team_idx": "1694",
+        "region": "전북"
+      },
+      {
+        "type": "player",
+        "number": "",
+        "name": "유현석",
+        "position": "미지정",
+        "grade": "1",
+        "height_weight": "",
+        "throw_bat": "",
+        "person_no": "202603028715",
         "team": "한국마사고BC",
         "team_idx": "1694",
         "region": "전북"
@@ -51682,7 +52004,7 @@
         "region": "전북"
       }
     ],
-    "player_count": 21
+    "player_count": 23
   },
   {
     "team": "화성동탄B(U-18)",
@@ -51733,6 +52055,19 @@
         "height_weight": "170cm/56kg",
         "throw_bat": "우투우타",
         "person_no": "202502018744",
+        "team": "화성동탄B(U-18)",
+        "team_idx": "1546",
+        "region": "경기"
+      },
+      {
+        "type": "player",
+        "number": "34",
+        "name": "김위호",
+        "position": "미지정",
+        "grade": "1",
+        "height_weight": "",
+        "throw_bat": "",
+        "person_no": "202604012654",
         "team": "화성동탄B(U-18)",
         "team_idx": "1546",
         "region": "경기"
@@ -51843,7 +52178,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "14",
         "name": "안종현",
         "position": "미지정",
         "grade": "1",
@@ -51921,6 +52256,19 @@
       },
       {
         "type": "player",
+        "number": "4",
+        "name": "이정원",
+        "position": "미지정",
+        "grade": "1",
+        "height_weight": "",
+        "throw_bat": "",
+        "person_no": "202604001137",
+        "team": "화성동탄B(U-18)",
+        "team_idx": "1546",
+        "region": "경기"
+      },
+      {
+        "type": "player",
         "number": "5",
         "name": "이지원",
         "position": "외야수",
@@ -51941,6 +52289,19 @@
         "height_weight": "180cm/82kg",
         "throw_bat": "우투우타",
         "person_no": "202202004197",
+        "team": "화성동탄B(U-18)",
+        "team_idx": "1546",
+        "region": "경기"
+      },
+      {
+        "type": "player",
+        "number": "22",
+        "name": "임규민",
+        "position": "미지정",
+        "grade": "1",
+        "height_weight": "",
+        "throw_bat": "",
+        "person_no": "202605000466",
         "team": "화성동탄B(U-18)",
         "team_idx": "1546",
         "region": "경기"
@@ -52024,7 +52385,7 @@
         "region": "경기"
       }
     ],
-    "player_count": 25
+    "player_count": 28
   },
   {
     "team": "화순고",
@@ -52635,7 +52996,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "48",
         "name": "김윤건",
         "position": "미지정",
         "grade": "1",
