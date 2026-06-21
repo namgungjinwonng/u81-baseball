@@ -193,7 +193,7 @@ body { font-family: 'Montserrat','Malgun Gothic','Apple SD Gothic Neo',sans-seri
   .header h1 { font-size: 18px; letter-spacing: 1px; }
   .header .subtitle { font-size: 11px; }
   .header .update-info { font-size: 9px; }
-  .refresh-spacer { height: 88px; }
+  .refresh-spacer { height: 82px; }
   .container { padding: 10px; }
   .cal-grid { grid-auto-rows: 40px; }
   .cal-day { font-size: 13px; }
