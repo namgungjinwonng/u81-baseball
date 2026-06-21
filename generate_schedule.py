@@ -113,7 +113,7 @@ body { font-family: 'Montserrat','Malgun Gothic','Apple SD Gothic Neo',sans-seri
 .tab.active { color: #fff; border-bottom-color: #BA0C2F; }
 .tab:hover { color: #fff; }
 
-.viewbar { background: #fff; border-bottom: 4px solid #BA0C2F; padding: 38px 12px; display: flex; justify-content: center; gap: 8px; align-items: center; }
+.viewbar { background: #fff; border-bottom: 4px solid #BA0C2F; padding: 32px 12px 16px; display: flex; justify-content: center; gap: 8px; align-items: center; }
 .view-btn { padding: 8px 22px; border: 2px solid #002D62; border-radius: 2px; background: #fff; color: #002D62; font-size: 13px; font-weight: 700; cursor: pointer; }
 .view-btn.active { background: #002D62; color: #fff; }
 
