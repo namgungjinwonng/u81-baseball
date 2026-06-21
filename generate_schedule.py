@@ -112,6 +112,13 @@ body { font-family: 'Montserrat','Malgun Gothic','Apple SD Gothic Neo',sans-seri
     background: transparent; border: none; border-bottom: 4px solid transparent; cursor: pointer; text-decoration: none; }
 .tab.active { color: #fff; border-bottom-color: #BA0C2F; }
 .tab:hover { color: #fff; }
+.reload-btn {
+    margin-top: 10px; padding: 8px 22px; border: 2px solid rgba(255,255,255,0.5);
+    background: rgba(255,255,255,0.1); color: white; border-radius: 25px;
+    font-size: 12px; font-weight: 700; cursor: pointer; transition: all 0.3s;
+    letter-spacing: 1px;
+}
+.reload-btn:hover { background: rgba(255,255,255,0.25); border-color: white; }
 
 .viewbar-spacer { height: 20px; }
 .viewbar { background: #fff; border-bottom: 4px solid #BA0C2F; padding: 34px 12px; display: flex; justify-content: center; gap: 8px; align-items: center; }
@@ -215,6 +222,7 @@ body { font-family: 'Montserrat','Malgun Gothic','Apple SD Gothic Neo',sans-seri
   <div class="subtitle" style="margin-top:4px">출처: 대한야구소프트볼협회 (korea-baseball.com)</div>
   <div class="subtitle update-info" style="margin-top:6px">마지막 갱신: __UPDATED__</div>
   <div class="subtitle update-info" style="margin-top:4px">본 앱은 비상업적 목적으로 운영되며, 모든 데이터 권한은 대한야구소프트볼협회에 있습니다.</div>
+  <button class="reload-btn" onclick="reloadPage()">&#x21bb; 새로고침</button>
   <div class="refresh-spacer"></div>
   <div class="tabs">
     <a class="tab" href="u18_players.html">선수 현황</a>
@@ -395,6 +403,20 @@ function setView(v){
   fillRegions();
   doSchoolSearch();
 })();
+
+async function reloadPage() {
+  try {
+    if (navigator.serviceWorker) {
+      const regs = await navigator.serviceWorker.getRegistrations();
+      for (const r of regs) await r.update();
+    }
+    if (window.caches) {
+      const ks = await caches.keys();
+      for (const k of ks) await caches.delete(k);
+    }
+  } catch (e) {}
+  location.reload();
+}
 
 if ('serviceWorker' in navigator) { navigator.serviceWorker.register('/sw.js').catch(()=>{}); }
 </script>
