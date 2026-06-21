@@ -150,7 +150,7 @@ def main():
     collect_pass(idxs, 12)
 
     # 누락분 재시도 (일시적 타임아웃 방지)
-    for attempt in range(1, 4):
+    for attempt in range(1, 11):
         missing = [g for g in idxs if g not in games_by_idx]
         if not missing:
             break
