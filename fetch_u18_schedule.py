@@ -12,7 +12,9 @@ import re
 import os
 import sys
 import concurrent.futures
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
+
+KST = timezone(timedelta(hours=9))
 
 sys.stdout.reconfigure(encoding='utf-8')
 
@@ -121,7 +123,7 @@ def parse_box_score(game_idx):
 
 
 def main():
-    year = datetime.now().year
+    year = datetime.now(KST).year
     months = list(range(1, 13))
     print(f"=== U-18 {year}시즌 일정/결과 수집 ===\n")
     print(f"[1/2] {year}년 월별 game_idx 수집 중...")
@@ -165,7 +167,7 @@ def main():
 
     out = {
         "year": year,
-        "updated": datetime.now().strftime("%Y-%m-%d %H:%M"),
+        "updated": datetime.now(KST).strftime("%Y-%m-%d %H:%M"),
         "games": games,
     }
     path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "u18_schedule.json")

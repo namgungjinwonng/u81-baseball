@@ -204,73 +204,84 @@ def parse_player_li(li, team_name, club_idx, region):
 
 
 def fetch_team_roster(team):
-    """Fetch roster for a single team."""
+    """Fetch roster for a single team. 실패 시 예외를 던져 재시도 대상이 됨."""
     club_idx = team["club_idx"]
     team_name = team["name"]
 
-    try:
-        resp = session.get(TEAM_PLAYER_URL, params={
-            "club_idx": club_idx,
-            "season": 2026,
-            "kind_cd": 31,
-        }, timeout=15)
-        resp.encoding = "utf-8"
-        soup = BeautifulSoup(resp.text, "html.parser")
+    resp = session.get(TEAM_PLAYER_URL, params={
+        "club_idx": club_idx,
+        "season": 2026,
+        "kind_cd": 31,
+    }, timeout=15)
+    resp.encoding = "utf-8"
+    soup = BeautifulSoup(resp.text, "html.parser")
 
-        players = []
-        staff = []
+    players = []
+    staff = []
 
-        team_list_ul = soup.find("ul", class_="team_list")
-        if team_list_ul:
-            lis = team_list_ul.find_all("li", recursive=False)
-            for li in lis:
-                result = parse_player_li(li, team_name, club_idx, team["region"])
-                if result:
-                    if result["type"] == "staff":
-                        staff.append(result)
-                    else:
-                        players.append(result)
+    team_list_ul = soup.find("ul", class_="team_list")
+    if team_list_ul:
+        lis = team_list_ul.find_all("li", recursive=False)
+        for li in lis:
+            result = parse_player_li(li, team_name, club_idx, team["region"])
+            if result:
+                if result["type"] == "staff":
+                    staff.append(result)
+                else:
+                    players.append(result)
 
-        return {
-            "team": team_name,
-            "club_idx": club_idx,
-            "region": team["region"],
-            "manager": team["manager"],
-            "staff": staff,
-            "players": players,
-            "player_count": len(players),
-        }
-    except Exception as e:
-        print(f"    Error fetching {team_name}: {e}")
-        return {
-            "team": team_name,
-            "club_idx": club_idx,
-            "region": team["region"],
-            "manager": team["manager"],
-            "staff": [],
-            "players": [],
-            "player_count": 0,
-            "error": str(e),
-        }
+    return {
+        "team": team_name,
+        "club_idx": club_idx,
+        "region": team["region"],
+        "manager": team["manager"],
+        "staff": staff,
+        "players": players,
+        "player_count": len(players),
+    }
 
 
 def fetch_all_rosters(teams):
-    """Fetch rosters for all teams with concurrent requests."""
-    results = []
+    """Fetch rosters for all teams with concurrent requests + 누락 재시도."""
     total = len(teams)
+    by_idx = {}
 
-    with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
-        future_to_team = {executor.submit(fetch_team_roster, team): team for team in teams}
+    def do_pass(team_list, workers):
+        with concurrent.futures.ThreadPoolExecutor(max_workers=workers) as executor:
+            futs = {executor.submit(fetch_team_roster, t): t for t in team_list}
+            for future in concurrent.futures.as_completed(futs):
+                t = futs[future]
+                try:
+                    r = future.result()
+                    # 완전히 비어있으면(선수0+지도자0) 일시 실패로 보고 재시도 대상
+                    if r["player_count"] > 0 or len(r["staff"]) > 0:
+                        by_idx[t["club_idx"]] = r
+                        print(f"  [{len(by_idx)}/{total}] {r['team']}: {r['player_count']}명")
+                except Exception as e:
+                    print(f"    실패(재시도예정): {t['name']} - {e}")
 
-        for i, future in enumerate(concurrent.futures.as_completed(future_to_team)):
-            team = future_to_team[future]
-            try:
-                result = future.result()
-                results.append(result)
-                print(f"  [{i+1}/{total}] {result['team']}: {result['player_count']}명")
-            except Exception as e:
-                print(f"  [{i+1}/{total}] {team['name']}: ERROR - {e}")
+    # 1차
+    do_pass(teams, 8)
+    # 누락 재시도 (최대 3회)
+    for attempt in range(1, 4):
+        missing = [t for t in teams if t["club_idx"] not in by_idx]
+        if not missing:
+            break
+        print(f"  [재시도 {attempt}] 누락 {len(missing)}개 팀 다시 수집...")
+        time.sleep(1.5)
+        do_pass(missing, 4)
 
+    # 최종 누락은 빈 항목으로라도 유지(구조 보존) + 경고
+    for t in teams:
+        if t["club_idx"] not in by_idx:
+            print(f"  [경고] 최종 누락: {t['name']}")
+            by_idx[t["club_idx"]] = {
+                "team": t["name"], "club_idx": t["club_idx"],
+                "region": t["region"], "manager": t["manager"],
+                "staff": [], "players": [], "player_count": 0, "error": "failed",
+            }
+
+    results = list(by_idx.values())
     results.sort(key=lambda x: x["team"])
     return results
 

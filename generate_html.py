@@ -49,8 +49,9 @@ total_players = len(all_players)
 total_teams = len(data)
 total_staff = len(all_staff)
 
-from datetime import datetime
-update_date = datetime.now().strftime('%Y-%m-%d %H:%M')
+from datetime import datetime, timezone, timedelta
+KST = timezone(timedelta(hours=9))
+update_date = datetime.now(KST).strftime('%Y-%m-%d %H:%M')
 
 # Position counts
 pos_counts = Counter(p["position"] for p in all_players)
