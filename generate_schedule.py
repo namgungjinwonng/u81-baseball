@@ -113,7 +113,7 @@ body { font-family: 'Montserrat','Malgun Gothic','Apple SD Gothic Neo',sans-seri
 .tab.active { color: #fff; border-bottom-color: #BA0C2F; }
 .tab:hover { color: #fff; }
 
-.viewbar-spacer { background: #002D62; height: 20px; }
+.viewbar-spacer { height: 20px; }
 .viewbar { background: #fff; border-bottom: 4px solid #BA0C2F; padding: 34px 12px; display: flex; justify-content: center; gap: 8px; align-items: center; }
 .view-btn { padding: 8px 22px; border: 2px solid #002D62; border-radius: 2px; background: #fff; color: #002D62; font-size: 13px; font-weight: 700; cursor: pointer; }
 .view-btn.active { background: #002D62; color: #fff; }
@@ -220,9 +220,9 @@ body { font-family: 'Montserrat','Malgun Gothic','Apple SD Gothic Neo',sans-seri
     <a class="tab" href="u18_players.html">선수 현황</a>
     <a class="tab active" href="u18_schedule.html">경기 일정</a>
   </div>
+  <div class="viewbar-spacer"></div>
 </div>
 
-<div class="viewbar-spacer"></div>
 <div class="viewbar">
   <button class="view-btn active" id="vbMonth" onclick="setView('month')">월별 일정</button>
   <button class="view-btn" id="vbTeam" onclick="setView('team')">학교별</button>
