@@ -1,0 +1,52 @@
+name: U18 데이터 자동 갱신
+
+on:
+  schedule:
+    # 시간은 UTC 기준 (KST = UTC + 9). 아래는 한국시간으로 환산해 둔 것.
+    # 토·일: 09·12·15·21시 KST  →  00·03·06·12 UTC
+    - cron: "0 0 * * 0,6"   # 토일 09:00 KST
+    - cron: "0 3 * * 0,6"   # 토일 12:00 KST
+    - cron: "0 6 * * 0,6"   # 토일 15:00 KST
+    - cron: "0 12 * * 0,6"  # 토일 21:00 KST
+    # 월~금: 09·15·21시 KST  →  00·06·12 UTC
+    - cron: "0 0 * * 1-5"   # 평일 09:00 KST
+    - cron: "0 6 * * 1-5"   # 평일 15:00 KST
+    - cron: "0 12 * * 1-5"  # 평일 21:00 KST
+  workflow_dispatch: {}   # GitHub에서 수동 실행도 가능
+
+permissions:
+  contents: write
+
+concurrency:
+  group: u18-update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 체크아웃
+        uses: actions/checkout@v4
+
+      - name: 파이썬 설정
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: 의존성 설치
+        run: pip install -r requirements.txt
+
+      - name: 데이터 수집 + 빌드
+        run: python build_all.py
+
+      - name: 변경분 커밋 & 푸시
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/ u18_data.json u18_schedule.json u18_players.html u18_schedule.html u18_app_data.js u18_schedule_data.js
+          if git diff --staged --quiet; then
+            echo "변경사항 없음 - 커밋 생략"
+          else
+            git commit -m "자동 데이터 갱신 ($(date -u +'%Y-%m-%d %H:%M UTC'))"
+            git push
+          fi
