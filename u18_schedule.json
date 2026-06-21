@@ -1,6 +1,6 @@
 {
   "year": 2026,
-  "updated": "2026-06-21 23:38",
+  "updated": "2026-06-22 05:57",
   "games": [
     {
       "game_idx": "36897",
@@ -111,24 +111,6 @@
       }
     },
     {
-      "game_idx": "36946",
-      "date": "2026-03-07",
-      "time": "09:30",
-      "venue": "곤지암 팀업캠퍼스 제1구장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "소래고",
-        "result": "패",
-        "score": 1
-      },
-      "home": {
-        "name": "유신고",
-        "result": "승",
-        "score": 8
-      }
-    },
-    {
       "game_idx": "36940",
       "date": "2026-03-07",
       "time": "09:30",
@@ -144,6 +126,24 @@
         "name": "동산고",
         "result": "승",
         "score": 6
+      }
+    },
+    {
+      "game_idx": "36946",
+      "date": "2026-03-07",
+      "time": "09:30",
+      "venue": "곤지암 팀업캠퍼스 제1구장",
+      "round": "리그전",
+      "status": "완료",
+      "away": {
+        "name": "소래고",
+        "result": "패",
+        "score": 1
+      },
+      "home": {
+        "name": "유신고",
+        "result": "승",
+        "score": 8
       }
     },
     {
@@ -291,24 +291,6 @@
       }
     },
     {
-      "game_idx": "36947",
-      "date": "2026-03-07",
-      "time": "12:00",
-      "venue": "곤지암 팀업캠퍼스 제1구장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "상우고야구단",
-        "result": "패",
-        "score": 3
-      },
-      "home": {
-        "name": "야탑고",
-        "result": "승",
-        "score": 13
-      }
-    },
-    {
       "game_idx": "36941",
       "date": "2026-03-07",
       "time": "12:00",
@@ -324,6 +306,24 @@
         "name": "율곡고야구단",
         "result": "패",
         "score": 3
+      }
+    },
+    {
+      "game_idx": "36947",
+      "date": "2026-03-07",
+      "time": "12:00",
+      "venue": "곤지암 팀업캠퍼스 제1구장",
+      "round": "리그전",
+      "status": "완료",
+      "away": {
+        "name": "상우고야구단",
+        "result": "패",
+        "score": 3
+      },
+      "home": {
+        "name": "야탑고",
+        "result": "승",
+        "score": 13
       }
     },
     {
@@ -525,24 +525,6 @@
       }
     },
     {
-      "game_idx": "36906",
-      "date": "2026-03-08",
-      "time": "09:30",
-      "venue": "함평 전남야구장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "광주제일고",
-        "result": "승",
-        "score": 9
-      },
-      "home": {
-        "name": "화순고",
-        "result": "패",
-        "score": 2
-      }
-    },
-    {
       "game_idx": "36900",
       "date": "2026-03-08",
       "time": "09:30",
@@ -558,6 +540,24 @@
         "name": "공주고",
         "result": "승",
         "score": 6
+      }
+    },
+    {
+      "game_idx": "36906",
+      "date": "2026-03-08",
+      "time": "09:30",
+      "venue": "함평 전남야구장",
+      "round": "리그전",
+      "status": "완료",
+      "away": {
+        "name": "광주제일고",
+        "result": "승",
+        "score": 9
+      },
+      "home": {
+        "name": "화순고",
+        "result": "패",
+        "score": 2
       }
     },
     {
@@ -777,24 +777,6 @@
       }
     },
     {
-      "game_idx": "36944",
-      "date": "2026-03-08",
-      "time": "12:00",
-      "venue": "송도LNG 종합스포츠타운 야구장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "동산고",
-        "result": "패",
-        "score": 1
-      },
-      "home": {
-        "name": "율곡고야구단",
-        "result": "승",
-        "score": 3
-      }
-    },
-    {
       "game_idx": "36935",
       "date": "2026-03-08",
       "time": "12:00",
@@ -810,6 +792,24 @@
         "name": "부경고",
         "result": "승",
         "score": 5
+      }
+    },
+    {
+      "game_idx": "36944",
+      "date": "2026-03-08",
+      "time": "12:00",
+      "venue": "송도LNG 종합스포츠타운 야구장",
+      "round": "리그전",
+      "status": "완료",
+      "away": {
+        "name": "동산고",
+        "result": "패",
+        "score": 1
+      },
+      "home": {
+        "name": "율곡고야구단",
+        "result": "승",
+        "score": 3
       }
     },
     {
@@ -939,24 +939,6 @@
       }
     },
     {
-      "game_idx": "36945",
-      "date": "2026-03-08",
-      "time": "14:30",
-      "venue": "송도LNG 종합스포츠타운 야구장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "제물포고",
-        "result": "패",
-        "score": 1
-      },
-      "home": {
-        "name": "인천고",
-        "result": "승",
-        "score": 2
-      }
-    },
-    {
       "game_idx": "36936",
       "date": "2026-03-08",
       "time": "14:30",
@@ -972,6 +954,24 @@
         "name": "울산BC(U-18)",
         "result": "패",
         "score": 0
+      }
+    },
+    {
+      "game_idx": "36945",
+      "date": "2026-03-08",
+      "time": "14:30",
+      "venue": "송도LNG 종합스포츠타운 야구장",
+      "round": "리그전",
+      "status": "완료",
+      "away": {
+        "name": "제물포고",
+        "result": "패",
+        "score": 1
+      },
+      "home": {
+        "name": "인천고",
+        "result": "승",
+        "score": 2
       }
     },
     {
@@ -2379,24 +2379,6 @@
       }
     },
     {
-      "game_idx": "37055",
-      "date": "2026-03-21",
-      "time": "09:30",
-      "venue": "무등경기장 야구장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "광주동성고",
-        "result": "승",
-        "score": 6
-      },
-      "home": {
-        "name": "순천효천고BC",
-        "result": "패",
-        "score": 1
-      }
-    },
-    {
       "game_idx": "37058",
       "date": "2026-03-21",
       "time": "09:30",
@@ -2412,6 +2394,24 @@
         "name": "대전제일고",
         "result": "패",
         "score": 5
+      }
+    },
+    {
+      "game_idx": "37055",
+      "date": "2026-03-21",
+      "time": "09:30",
+      "venue": "무등경기장 야구장",
+      "round": "리그전",
+      "status": "완료",
+      "away": {
+        "name": "광주동성고",
+        "result": "승",
+        "score": 6
+      },
+      "home": {
+        "name": "순천효천고BC",
+        "result": "패",
+        "score": 1
       }
     },
     {
@@ -4197,24 +4197,6 @@
       }
     },
     {
-      "game_idx": "37366",
-      "date": "2026-03-31",
-      "time": "09:30",
-      "venue": "가곡야구장",
-      "round": "2회전",
-      "status": "완료",
-      "away": {
-        "name": "장충고",
-        "result": "승",
-        "score": 9
-      },
-      "home": {
-        "name": "세원고",
-        "result": "패",
-        "score": 6
-      }
-    },
-    {
       "game_idx": "37365",
       "date": "2026-03-31",
       "time": "09:30",
@@ -4230,6 +4212,24 @@
         "name": "경기상업고",
         "result": "승",
         "score": 7
+      }
+    },
+    {
+      "game_idx": "37366",
+      "date": "2026-03-31",
+      "time": "09:30",
+      "venue": "가곡야구장",
+      "round": "2회전",
+      "status": "완료",
+      "away": {
+        "name": "장충고",
+        "result": "승",
+        "score": 9
+      },
+      "home": {
+        "name": "세원고",
+        "result": "패",
+        "score": 6
       }
     },
     {
@@ -8139,24 +8139,6 @@
       }
     },
     {
-      "game_idx": "37774",
-      "date": "2026-05-08",
-      "time": "12:00",
-      "venue": "신월 야구공원",
-      "round": "2회전",
-      "status": "완료",
-      "away": {
-        "name": "경남고",
-        "result": "승",
-        "score": 11
-      },
-      "home": {
-        "name": "경주고",
-        "result": "패",
-        "score": 4
-      }
-    },
-    {
       "game_idx": "37773",
       "date": "2026-05-08",
       "time": "12:00",
@@ -8172,6 +8154,24 @@
         "name": "유신고",
         "result": "승",
         "score": 5
+      }
+    },
+    {
+      "game_idx": "37774",
+      "date": "2026-05-08",
+      "time": "12:00",
+      "venue": "신월 야구공원",
+      "round": "2회전",
+      "status": "완료",
+      "away": {
+        "name": "경남고",
+        "result": "승",
+        "score": 11
+      },
+      "home": {
+        "name": "경주고",
+        "result": "패",
+        "score": 4
       }
     },
     {
@@ -9903,60 +9903,6 @@
       }
     },
     {
-      "game_idx": "37996",
-      "date": "2026-05-30",
-      "time": "09:30",
-      "venue": "선샤인 밀양스포츠파크 주경기장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "밀양BC(U-18)",
-        "result": "패",
-        "score": 3
-      },
-      "home": {
-        "name": "창원공고야구단",
-        "result": "승",
-        "score": 9
-      }
-    },
-    {
-      "game_idx": "38002",
-      "date": "2026-05-30",
-      "time": "09:30",
-      "venue": "대구시민운동장 야구장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "도개고",
-        "result": "패",
-        "score": 3
-      },
-      "home": {
-        "name": "경주고",
-        "result": "승",
-        "score": 5
-      }
-    },
-    {
-      "game_idx": "38008",
-      "date": "2026-05-30",
-      "time": "09:30",
-      "venue": "기장 현대차 드림 볼파크",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "경남고",
-        "result": "승",
-        "score": 7
-      },
-      "home": {
-        "name": "부경고",
-        "result": "패",
-        "score": 0
-      }
-    },
-    {
       "game_idx": "37974",
       "date": "2026-05-30",
       "time": "10:30",
@@ -10137,60 +10083,6 @@
       }
     },
     {
-      "game_idx": "37997",
-      "date": "2026-05-30",
-      "time": "12:00",
-      "venue": "선샤인 밀양스포츠파크 주경기장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "마산고",
-        "result": "승",
-        "score": 11
-      },
-      "home": {
-        "name": "김해고",
-        "result": "패",
-        "score": 10
-      }
-    },
-    {
-      "game_idx": "38003",
-      "date": "2026-05-30",
-      "time": "12:00",
-      "venue": "대구시민운동장 야구장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "포항제철고",
-        "result": "패",
-        "score": 5
-      },
-      "home": {
-        "name": "경북고",
-        "result": "승",
-        "score": 6
-      }
-    },
-    {
-      "game_idx": "38009",
-      "date": "2026-05-30",
-      "time": "12:00",
-      "venue": "기장 현대차 드림 볼파크",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "부산공업고",
-        "result": "패",
-        "score": 0
-      },
-      "home": {
-        "name": "부산고",
-        "result": "승",
-        "score": 10
-      }
-    },
-    {
       "game_idx": "37975",
       "date": "2026-05-30",
       "time": "13:00",
@@ -10353,78 +10245,6 @@
       }
     },
     {
-      "game_idx": "37998",
-      "date": "2026-05-30",
-      "time": "14:30",
-      "venue": "선샤인 밀양스포츠파크 주경기장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "야로고BC",
-        "result": "패",
-        "score": 2
-      },
-      "home": {
-        "name": "물금고",
-        "result": "승",
-        "score": 5
-      }
-    },
-    {
-      "game_idx": "38004",
-      "date": "2026-05-30",
-      "time": "14:30",
-      "venue": "대구시민운동장 야구장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "대구상원고",
-        "result": "승",
-        "score": 1
-      },
-      "home": {
-        "name": "대구고",
-        "result": "패",
-        "score": 0
-      }
-    },
-    {
-      "game_idx": "38010",
-      "date": "2026-05-30",
-      "time": "14:30",
-      "venue": "기장 현대차 드림 볼파크",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "제주고",
-        "result": "승",
-        "score": 5
-      },
-      "home": {
-        "name": "개성고",
-        "result": "패",
-        "score": 4
-      }
-    },
-    {
-      "game_idx": "38014",
-      "date": "2026-05-30",
-      "time": "14:30",
-      "venue": "함평 전남야구장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "광주제일고",
-        "result": "패",
-        "score": 8
-      },
-      "home": {
-        "name": "광남고BC",
-        "result": "승",
-        "score": 9
-      }
-    },
-    {
       "game_idx": "37943",
       "date": "2026-05-31",
       "time": "09:30",
@@ -10566,60 +10386,6 @@
         "name": "제물포고",
         "result": "승",
         "score": 7
-      }
-    },
-    {
-      "game_idx": "37999",
-      "date": "2026-05-31",
-      "time": "09:30",
-      "venue": "선샤인 밀양스포츠파크 주경기장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "거제BC(U-18)",
-        "result": "패",
-        "score": 0
-      },
-      "home": {
-        "name": "마산용마고",
-        "result": "승",
-        "score": 6
-      }
-    },
-    {
-      "game_idx": "38005",
-      "date": "2026-05-31",
-      "time": "09:30",
-      "venue": "대구시민운동장 야구장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "의성고",
-        "result": "승",
-        "score": 29
-      },
-      "home": {
-        "name": "대구북구SC(U-18)",
-        "result": "패",
-        "score": 2
-      }
-    },
-    {
-      "game_idx": "38011",
-      "date": "2026-05-31",
-      "time": "09:30",
-      "venue": "기장 현대차 드림 볼파크",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "울산BC(U-18)",
-        "result": "패",
-        "score": 0
-      },
-      "home": {
-        "name": "부산공업고",
-        "result": "승",
-        "score": 2
       }
     },
     {
@@ -10785,60 +10551,6 @@
       }
     },
     {
-      "game_idx": "38000",
-      "date": "2026-05-31",
-      "time": "12:00",
-      "venue": "선샤인 밀양스포츠파크 주경기장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "금남고",
-        "result": "패",
-        "score": 10
-      },
-      "home": {
-        "name": "창원공고야구단",
-        "result": "승",
-        "score": 14
-      }
-    },
-    {
-      "game_idx": "38006",
-      "date": "2026-05-31",
-      "time": "12:00",
-      "venue": "대구시민운동장 야구장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "예일메디텍고",
-        "result": "패",
-        "score": 4
-      },
-      "home": {
-        "name": "경주고",
-        "result": "승",
-        "score": 5
-      }
-    },
-    {
-      "game_idx": "38012",
-      "date": "2026-05-31",
-      "time": "12:00",
-      "venue": "기장 현대차 드림 볼파크",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "부경고",
-        "result": "승",
-        "score": 7
-      },
-      "home": {
-        "name": "제주고",
-        "result": "패",
-        "score": 0
-      }
-    },
-    {
       "game_idx": "37977",
       "date": "2026-05-31",
       "time": "13:00",
@@ -10983,816 +10695,6 @@
       }
     },
     {
-      "game_idx": "38001",
-      "date": "2026-05-31",
-      "time": "14:30",
-      "venue": "선샤인 밀양스포츠파크 주경기장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "김해고",
-        "result": "승",
-        "score": 11
-      },
-      "home": {
-        "name": "야로고BC",
-        "result": "패",
-        "score": 2
-      }
-    },
-    {
-      "game_idx": "38007",
-      "date": "2026-05-31",
-      "time": "14:30",
-      "venue": "대구시민운동장 야구장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "경북고",
-        "result": "패",
-        "score": 2
-      },
-      "home": {
-        "name": "대구상원고",
-        "result": "승",
-        "score": 3
-      }
-    },
-    {
-      "game_idx": "38013",
-      "date": "2026-05-31",
-      "time": "14:30",
-      "venue": "기장 현대차 드림 볼파크",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "개성고",
-        "result": "패",
-        "score": 0
-      },
-      "home": {
-        "name": "경남고",
-        "result": "승",
-        "score": 1
-      }
-    },
-    {
-      "game_idx": "38043",
-      "date": "2026-05-31",
-      "time": "14:30",
-      "venue": "송도LNG 종합스포츠타운 야구장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "진영고",
-        "result": "패",
-        "score": 2
-      },
-      "home": {
-        "name": "인천고",
-        "result": "승",
-        "score": 12
-      }
-    },
-    {
-      "game_idx": "38104",
-      "date": "2026-06-06",
-      "time": "09:30",
-      "venue": "신월 야구공원",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "서울컨벤션고",
-        "result": "승",
-        "score": 13
-      },
-      "home": {
-        "name": "덕수고",
-        "result": "패",
-        "score": 10
-      }
-    },
-    {
-      "game_idx": "38107",
-      "date": "2026-06-06",
-      "time": "09:30",
-      "venue": "목동야구장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "휘문고",
-        "result": "패",
-        "score": 3
-      },
-      "home": {
-        "name": "경기상업고",
-        "result": "승",
-        "score": 6
-      }
-    },
-    {
-      "game_idx": "38113",
-      "date": "2026-06-06",
-      "time": "09:30",
-      "venue": "청주종합경기장 야구장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "청주고",
-        "result": "패",
-        "score": 4
-      },
-      "home": {
-        "name": "세광고",
-        "result": "승",
-        "score": 5
-      }
-    },
-    {
-      "game_idx": "38116",
-      "date": "2026-06-06",
-      "time": "09:30",
-      "venue": "함평 전남야구장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "순천효천고BC",
-        "result": "승",
-        "score": 7
-      },
-      "home": {
-        "name": "화순고",
-        "result": "패",
-        "score": 6
-      }
-    },
-    {
-      "game_idx": "38105",
-      "date": "2026-06-06",
-      "time": "12:00",
-      "venue": "신월 야구공원",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "선린인터넷고",
-        "result": "패",
-        "score": 1
-      },
-      "home": {
-        "name": "충암고",
-        "result": "승",
-        "score": 9
-      }
-    },
-    {
-      "game_idx": "38108",
-      "date": "2026-06-06",
-      "time": "12:00",
-      "venue": "목동야구장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "서울아이티고BC",
-        "result": "패",
-        "score": 0
-      },
-      "home": {
-        "name": "서울자동차고",
-        "result": "승",
-        "score": 28
-      }
-    },
-    {
-      "game_idx": "38114",
-      "date": "2026-06-06",
-      "time": "12:00",
-      "venue": "청주종합경기장 야구장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "북일고",
-        "result": "패",
-        "score": 2
-      },
-      "home": {
-        "name": "공주고",
-        "result": "승",
-        "score": 9
-      }
-    },
-    {
-      "game_idx": "38117",
-      "date": "2026-06-06",
-      "time": "12:00",
-      "venue": "함평 전남야구장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "광남고BC",
-        "result": "승",
-        "score": 11
-      },
-      "home": {
-        "name": "광주동성고",
-        "result": "패",
-        "score": 2
-      }
-    },
-    {
-      "game_idx": "38106",
-      "date": "2026-06-06",
-      "time": "14:30",
-      "venue": "신월 야구공원",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "배명고",
-        "result": "패",
-        "score": 1
-      },
-      "home": {
-        "name": "성남고",
-        "result": "승",
-        "score": 4
-      }
-    },
-    {
-      "game_idx": "38109",
-      "date": "2026-06-06",
-      "time": "14:30",
-      "venue": "목동야구장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "서울동산고",
-        "result": "승",
-        "score": 15
-      },
-      "home": {
-        "name": "한광BC(U-18)",
-        "result": "패",
-        "score": 1
-      }
-    },
-    {
-      "game_idx": "38115",
-      "date": "2026-06-06",
-      "time": "14:30",
-      "venue": "청주종합경기장 야구장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "아산BC(U-18)",
-        "result": "패",
-        "score": 1
-      },
-      "home": {
-        "name": "세종BC(U-18)",
-        "result": "승",
-        "score": 7
-      }
-    },
-    {
-      "game_idx": "38118",
-      "date": "2026-06-06",
-      "time": "14:30",
-      "venue": "함평 전남야구장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "광주제일고",
-        "result": "패",
-        "score": 2
-      },
-      "home": {
-        "name": "광주진흥고",
-        "result": "승",
-        "score": 6
-      }
-    },
-    {
-      "game_idx": "38110",
-      "date": "2026-06-07",
-      "time": "09:30",
-      "venue": "목동야구장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "중앙고",
-        "result": "승",
-        "score": 17
-      },
-      "home": {
-        "name": "서울HG야구단(U-18)",
-        "result": "패",
-        "score": 0
-      }
-    },
-    {
-      "game_idx": "38111",
-      "date": "2026-06-07",
-      "time": "12:00",
-      "venue": "목동야구장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "경기고",
-        "result": "패",
-        "score": 2
-      },
-      "home": {
-        "name": "우신고",
-        "result": "승",
-        "score": 3
-      }
-    },
-    {
-      "game_idx": "38112",
-      "date": "2026-06-07",
-      "time": "14:30",
-      "venue": "목동야구장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "서울HK야구단(U-18)",
-        "result": "패",
-        "score": 2
-      },
-      "home": {
-        "name": "청원고",
-        "result": "승",
-        "score": 8
-      }
-    },
-    {
-      "game_idx": "38337",
-      "date": "2026-06-13",
-      "time": "09:30",
-      "venue": "포항야구장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "대구상원고",
-        "result": "패",
-        "score": 3
-      },
-      "home": {
-        "name": "포항제철고",
-        "result": "승",
-        "score": 4
-      }
-    },
-    {
-      "game_idx": "38343",
-      "date": "2026-06-13",
-      "time": "09:30",
-      "venue": "기장 현대차 드림 볼파크",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "제주고",
-        "result": "패",
-        "score": 1
-      },
-      "home": {
-        "name": "부산공업고",
-        "result": "승",
-        "score": 8
-      }
-    },
-    {
-      "game_idx": "38338",
-      "date": "2026-06-13",
-      "time": "12:00",
-      "venue": "포항야구장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "경북고",
-        "result": "승",
-        "score": 8
-      },
-      "home": {
-        "name": "경주고",
-        "result": "패",
-        "score": 5
-      }
-    },
-    {
-      "game_idx": "38344",
-      "date": "2026-06-13",
-      "time": "12:00",
-      "venue": "기장 현대차 드림 볼파크",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "개성고",
-        "result": "패",
-        "score": 2
-      },
-      "home": {
-        "name": "부산고",
-        "result": "승",
-        "score": 7
-      }
-    },
-    {
-      "game_idx": "38333",
-      "date": "2026-06-13",
-      "time": "14:30",
-      "venue": "선샤인 밀양스포츠파크 주경기장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "창원공고야구단",
-        "result": "승",
-        "score": 8
-      },
-      "home": {
-        "name": "거제BC(U-18)",
-        "result": "패",
-        "score": 1
-      }
-    },
-    {
-      "game_idx": "38339",
-      "date": "2026-06-13",
-      "time": "14:30",
-      "venue": "포항야구장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "도개고",
-        "result": "패",
-        "score": 1
-      },
-      "home": {
-        "name": "대구고",
-        "result": "승",
-        "score": 3
-      }
-    },
-    {
-      "game_idx": "38345",
-      "date": "2026-06-13",
-      "time": "14:30",
-      "venue": "기장 현대차 드림 볼파크",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "부경고",
-        "result": "승",
-        "score": 11
-      },
-      "home": {
-        "name": "울산BC(U-18)",
-        "result": "패",
-        "score": 0
-      }
-    },
-    {
-      "game_idx": "38334",
-      "date": "2026-06-14",
-      "time": "09:30",
-      "venue": "선샤인 밀양스포츠파크 주경기장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "마산고",
-        "result": "패",
-        "score": 4
-      },
-      "home": {
-        "name": "마산용마고",
-        "result": "승",
-        "score": 5
-      }
-    },
-    {
-      "game_idx": "38340",
-      "date": "2026-06-14",
-      "time": "09:30",
-      "venue": "포항야구장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "예일메디텍고",
-        "result": "패",
-        "score": 3
-      },
-      "home": {
-        "name": "경북고",
-        "result": "승",
-        "score": 10
-      }
-    },
-    {
-      "game_idx": "38346",
-      "date": "2026-06-14",
-      "time": "09:30",
-      "venue": "기장 현대차 드림 볼파크",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "부산고",
-        "result": "승",
-        "score": 7
-      },
-      "home": {
-        "name": "경남고",
-        "result": "패",
-        "score": 0
-      }
-    },
-    {
-      "game_idx": "38335",
-      "date": "2026-06-14",
-      "time": "12:00",
-      "venue": "선샤인 밀양스포츠파크 주경기장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "금남고",
-        "result": "패",
-        "score": 3
-      },
-      "home": {
-        "name": "물금고",
-        "result": "승",
-        "score": 10
-      }
-    },
-    {
-      "game_idx": "38341",
-      "date": "2026-06-14",
-      "time": "12:00",
-      "venue": "포항야구장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "대구북구SC(U-18)",
-        "result": "패",
-        "score": 0
-      },
-      "home": {
-        "name": "대구상원고",
-        "result": "승",
-        "score": 20
-      }
-    },
-    {
-      "game_idx": "38347",
-      "date": "2026-06-14",
-      "time": "12:00",
-      "venue": "기장 현대차 드림 볼파크",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "울산BC(U-18)",
-        "result": "승",
-        "score": 4
-      },
-      "home": {
-        "name": "제주고",
-        "result": "패",
-        "score": 2
-      }
-    },
-    {
-      "game_idx": "38336",
-      "date": "2026-06-14",
-      "time": "14:30",
-      "venue": "선샤인 밀양스포츠파크 주경기장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "거제BC(U-18)",
-        "result": "승",
-        "score": 8
-      },
-      "home": {
-        "name": "밀양BC(U-18)",
-        "result": "패",
-        "score": 0
-      }
-    },
-    {
-      "game_idx": "38342",
-      "date": "2026-06-14",
-      "time": "14:30",
-      "venue": "포항야구장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "경주고",
-        "result": "패",
-        "score": 3
-      },
-      "home": {
-        "name": "의성고",
-        "result": "승",
-        "score": 4
-      }
-    },
-    {
-      "game_idx": "38348",
-      "date": "2026-06-14",
-      "time": "14:30",
-      "venue": "기장 현대차 드림 볼파크",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "부산공업고",
-        "result": "패",
-        "score": 6
-      },
-      "home": {
-        "name": "부경고",
-        "result": "승",
-        "score": 8
-      }
-    },
-    {
-      "game_idx": "38487",
-      "date": "2026-06-20",
-      "time": "09:30",
-      "venue": "신월 야구공원",
-      "round": "리그전",
-      "status": "취소",
-      "away": {
-        "name": "선린인터넷고",
-        "result": "",
-        "score": null
-      },
-      "home": {
-        "name": "성남고",
-        "result": "",
-        "score": null
-      }
-    },
-    {
-      "game_idx": "38493",
-      "date": "2026-06-20",
-      "time": "09:30",
-      "venue": "목동야구장",
-      "round": "리그전",
-      "status": "취소",
-      "away": {
-        "name": "서울아이티고BC",
-        "result": "",
-        "score": null
-      },
-      "home": {
-        "name": "한광BC(U-18)",
-        "result": "",
-        "score": null
-      }
-    },
-    {
-      "game_idx": "38499",
-      "date": "2026-06-20",
-      "time": "09:30",
-      "venue": "구의 야구공원",
-      "round": "리그전",
-      "status": "취소",
-      "away": {
-        "name": "서울HG야구단(U-18)",
-        "result": "",
-        "score": null
-      },
-      "home": {
-        "name": "청원고",
-        "result": "",
-        "score": null
-      }
-    },
-    {
-      "game_idx": "38502",
-      "date": "2026-06-20",
-      "time": "09:30",
-      "venue": "청주종합경기장 야구장",
-      "round": "리그전",
-      "status": "취소",
-      "away": {
-        "name": "청주고",
-        "result": "",
-        "score": null
-      },
-      "home": {
-        "name": "공주고",
-        "result": "",
-        "score": null
-      }
-    },
-    {
-      "game_idx": "38505",
-      "date": "2026-06-20",
-      "time": "09:30",
-      "venue": "군산월명야구장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "대전고",
-        "result": "패",
-        "score": 2
-      },
-      "home": {
-        "name": "군산상일고",
-        "result": "승",
-        "score": 7
-      }
-    },
-    {
-      "game_idx": "38510",
-      "date": "2026-06-20",
-      "time": "09:30",
-      "venue": "개군야구장",
-      "round": "리그전",
-      "status": "취소",
-      "away": {
-        "name": "소래고",
-        "result": "",
-        "score": null
-      },
-      "home": {
-        "name": "화성동탄B(U-18)",
-        "result": "",
-        "score": null
-      }
-    },
-    {
-      "game_idx": "38516",
-      "date": "2026-06-20",
-      "time": "09:30",
-      "venue": "곤지암 팀업캠퍼스 제1구장",
-      "round": "리그전",
-      "status": "취소",
-      "away": {
-        "name": "세원고",
-        "result": "",
-        "score": null
-      },
-      "home": {
-        "name": "경민IT고",
-        "result": "",
-        "score": null
-      }
-    },
-    {
-      "game_idx": "38522",
-      "date": "2026-06-20",
-      "time": "09:30",
-      "venue": "이천종합운동장 꿈의구장",
-      "round": "리그전",
-      "status": "취소",
-      "away": {
-        "name": "인천고",
-        "result": "",
-        "score": null
-      },
-      "home": {
-        "name": "동산고",
-        "result": "",
-        "score": null
-      }
-    },
-    {
-      "game_idx": "38525",
-      "date": "2026-06-20",
-      "time": "09:30",
-      "venue": "선샤인 밀양스포츠파크 주경기장",
-      "round": "리그전",
-      "status": "취소",
-      "away": {
-        "name": "김해고",
-        "result": "",
-        "score": null
-      },
-      "home": {
-        "name": "물금고",
-        "result": "",
-        "score": null
-      }
-    },
-    {
-      "game_idx": "38528",
-      "date": "2026-06-20",
-      "time": "09:30",
-      "venue": "대구시민운동장 야구장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "포항제철고",
-        "result": "승",
-        "score": 31
-      },
-      "home": {
-        "name": "대구북구SC(U-18)",
-        "result": "패",
-        "score": 0
-      }
-    },
-    {
       "game_idx": "38558",
       "date": "2026-06-20",
       "time": "09:30",
@@ -11844,186 +10746,6 @@
         "name": "강원고",
         "result": "",
         "score": null
-      }
-    },
-    {
-      "game_idx": "38488",
-      "date": "2026-06-20",
-      "time": "12:00",
-      "venue": "신월 야구공원",
-      "round": "리그전",
-      "status": "취소",
-      "away": {
-        "name": "덕수고",
-        "result": "",
-        "score": null
-      },
-      "home": {
-        "name": "배명고",
-        "result": "",
-        "score": null
-      }
-    },
-    {
-      "game_idx": "38494",
-      "date": "2026-06-20",
-      "time": "12:00",
-      "venue": "목동야구장",
-      "round": "리그전",
-      "status": "취소",
-      "away": {
-        "name": "경기상업고",
-        "result": "",
-        "score": null
-      },
-      "home": {
-        "name": "서울동산고",
-        "result": "",
-        "score": null
-      }
-    },
-    {
-      "game_idx": "38500",
-      "date": "2026-06-20",
-      "time": "12:00",
-      "venue": "구의 야구공원",
-      "round": "리그전",
-      "status": "취소",
-      "away": {
-        "name": "서울HK야구단(U-18)",
-        "result": "",
-        "score": null
-      },
-      "home": {
-        "name": "서울고",
-        "result": "",
-        "score": null
-      }
-    },
-    {
-      "game_idx": "38503",
-      "date": "2026-06-20",
-      "time": "12:00",
-      "venue": "청주종합경기장 야구장",
-      "round": "리그전",
-      "status": "취소",
-      "away": {
-        "name": "천안CSBC(U-18)",
-        "result": "",
-        "score": null
-      },
-      "home": {
-        "name": "세종BC(U-18)",
-        "result": "",
-        "score": null
-      }
-    },
-    {
-      "game_idx": "38506",
-      "date": "2026-06-20",
-      "time": "12:00",
-      "venue": "군산월명야구장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "대전제일고",
-        "result": "패",
-        "score": 2
-      },
-      "home": {
-        "name": "전북인공지능고",
-        "result": "승",
-        "score": 4
-      }
-    },
-    {
-      "game_idx": "38511",
-      "date": "2026-06-20",
-      "time": "12:00",
-      "venue": "개군야구장",
-      "round": "리그전",
-      "status": "취소",
-      "away": {
-        "name": "상우고야구단",
-        "result": "",
-        "score": null
-      },
-      "home": {
-        "name": "안산공업고",
-        "result": "",
-        "score": null
-      }
-    },
-    {
-      "game_idx": "38517",
-      "date": "2026-06-20",
-      "time": "12:00",
-      "venue": "곤지암 팀업캠퍼스 제1구장",
-      "round": "리그전",
-      "status": "취소",
-      "away": {
-        "name": "신흥고",
-        "result": "",
-        "score": null
-      },
-      "home": {
-        "name": "충훈고",
-        "result": "",
-        "score": null
-      }
-    },
-    {
-      "game_idx": "38523",
-      "date": "2026-06-20",
-      "time": "12:00",
-      "venue": "이천종합운동장 꿈의구장",
-      "round": "리그전",
-      "status": "취소",
-      "away": {
-        "name": "인창고",
-        "result": "",
-        "score": null
-      },
-      "home": {
-        "name": "의왕BC(U-18)",
-        "result": "",
-        "score": null
-      }
-    },
-    {
-      "game_idx": "38526",
-      "date": "2026-06-20",
-      "time": "12:00",
-      "venue": "선샤인 밀양스포츠파크 주경기장",
-      "round": "리그전",
-      "status": "취소",
-      "away": {
-        "name": "야로고BC",
-        "result": "",
-        "score": null
-      },
-      "home": {
-        "name": "밀양BC(U-18)",
-        "result": "",
-        "score": null
-      }
-    },
-    {
-      "game_idx": "38529",
-      "date": "2026-06-20",
-      "time": "12:00",
-      "venue": "대구시민운동장 야구장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "예일메디텍고",
-        "result": "패",
-        "score": 3
-      },
-      "home": {
-        "name": "대구고",
-        "result": "승",
-        "score": 4
       }
     },
     {
@@ -12081,186 +10803,6 @@
       }
     },
     {
-      "game_idx": "38489",
-      "date": "2026-06-20",
-      "time": "14:30",
-      "venue": "신월 야구공원",
-      "round": "리그전",
-      "status": "취소",
-      "away": {
-        "name": "충암고",
-        "result": "",
-        "score": null
-      },
-      "home": {
-        "name": "서울컨벤션고",
-        "result": "",
-        "score": null
-      }
-    },
-    {
-      "game_idx": "38495",
-      "date": "2026-06-20",
-      "time": "14:30",
-      "venue": "목동야구장",
-      "round": "리그전",
-      "status": "취소",
-      "away": {
-        "name": "서울자동차고",
-        "result": "",
-        "score": null
-      },
-      "home": {
-        "name": "휘문고",
-        "result": "",
-        "score": null
-      }
-    },
-    {
-      "game_idx": "38501",
-      "date": "2026-06-20",
-      "time": "14:30",
-      "venue": "구의 야구공원",
-      "round": "리그전",
-      "status": "취소",
-      "away": {
-        "name": "우신고",
-        "result": "",
-        "score": null
-      },
-      "home": {
-        "name": "GD챌린저스BC(U-18)",
-        "result": "",
-        "score": null
-      }
-    },
-    {
-      "game_idx": "38504",
-      "date": "2026-06-20",
-      "time": "14:30",
-      "venue": "청주종합경기장 야구장",
-      "round": "리그전",
-      "status": "취소",
-      "away": {
-        "name": "북일고",
-        "result": "",
-        "score": null
-      },
-      "home": {
-        "name": "세광고",
-        "result": "",
-        "score": null
-      }
-    },
-    {
-      "game_idx": "38507",
-      "date": "2026-06-20",
-      "time": "14:30",
-      "venue": "군산월명야구장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "한국마사고BC",
-        "result": "패",
-        "score": 2
-      },
-      "home": {
-        "name": "인상고",
-        "result": "승",
-        "score": 11
-      }
-    },
-    {
-      "game_idx": "38512",
-      "date": "2026-06-20",
-      "time": "14:30",
-      "venue": "개군야구장",
-      "round": "리그전",
-      "status": "취소",
-      "away": {
-        "name": "청담고",
-        "result": "",
-        "score": null
-      },
-      "home": {
-        "name": "야탑고",
-        "result": "",
-        "score": null
-      }
-    },
-    {
-      "game_idx": "38518",
-      "date": "2026-06-20",
-      "time": "14:30",
-      "venue": "곤지암 팀업캠퍼스 제1구장",
-      "round": "리그전",
-      "status": "취소",
-      "away": {
-        "name": "비봉고",
-        "result": "",
-        "score": null
-      },
-      "home": {
-        "name": "율곡고야구단",
-        "result": "",
-        "score": null
-      }
-    },
-    {
-      "game_idx": "38524",
-      "date": "2026-06-20",
-      "time": "14:30",
-      "venue": "이천종합운동장 꿈의구장",
-      "round": "리그전",
-      "status": "취소",
-      "away": {
-        "name": "제물포고",
-        "result": "",
-        "score": null
-      },
-      "home": {
-        "name": "진영고",
-        "result": "",
-        "score": null
-      }
-    },
-    {
-      "game_idx": "38527",
-      "date": "2026-06-20",
-      "time": "14:30",
-      "venue": "선샤인 밀양스포츠파크 주경기장",
-      "round": "리그전",
-      "status": "취소",
-      "away": {
-        "name": "창원공고야구단",
-        "result": "",
-        "score": null
-      },
-      "home": {
-        "name": "마산고",
-        "result": "",
-        "score": null
-      }
-    },
-    {
-      "game_idx": "38530",
-      "date": "2026-06-20",
-      "time": "14:30",
-      "venue": "대구시민운동장 야구장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "의성고",
-        "result": "승",
-        "score": 11
-      },
-      "home": {
-        "name": "도개고",
-        "result": "패",
-        "score": 0
-      }
-    },
-    {
       "game_idx": "38560",
       "date": "2026-06-20",
       "time": "14:30",
@@ -12294,96 +10836,6 @@
         "name": "부산공업고",
         "result": "승",
         "score": 3
-      }
-    },
-    {
-      "game_idx": "38490",
-      "date": "2026-06-21",
-      "time": "09:30",
-      "venue": "신월 야구공원",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "서울디자인고",
-        "result": "승",
-        "score": 5
-      },
-      "home": {
-        "name": "배명고",
-        "result": "패",
-        "score": 2
-      }
-    },
-    {
-      "game_idx": "38496",
-      "date": "2026-06-21",
-      "time": "09:30",
-      "venue": "목동야구장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "세명컴퓨터고야구단",
-        "result": "승",
-        "score": 3
-      },
-      "home": {
-        "name": "서울동산고",
-        "result": "패",
-        "score": 2
-      }
-    },
-    {
-      "game_idx": "38513",
-      "date": "2026-06-21",
-      "time": "09:30",
-      "venue": "개군야구장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "경기항공고",
-        "result": "승",
-        "score": 9
-      },
-      "home": {
-        "name": "안산공업고",
-        "result": "패",
-        "score": 2
-      }
-    },
-    {
-      "game_idx": "38519",
-      "date": "2026-06-21",
-      "time": "09:30",
-      "venue": "곤지암 팀업캠퍼스 제2구장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "라온고",
-        "result": "승",
-        "score": 4
-      },
-      "home": {
-        "name": "충훈고",
-        "result": "패",
-        "score": 3
-      }
-    },
-    {
-      "game_idx": "38531",
-      "date": "2026-06-21",
-      "time": "09:30",
-      "venue": "포항야구장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "경북고",
-        "result": "승",
-        "score": 8
-      },
-      "home": {
-        "name": "대구고",
-        "result": "패",
-        "score": 6
       }
     },
     {
@@ -12456,78 +10908,6 @@
         "name": "강원고",
         "result": "패",
         "score": 1
-      }
-    },
-    {
-      "game_idx": "38491",
-      "date": "2026-06-21",
-      "time": "12:00",
-      "venue": "신월 야구공원",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "배재고",
-        "result": "패",
-        "score": 2
-      },
-      "home": {
-        "name": "서울컨벤션고",
-        "result": "승",
-        "score": 6
-      }
-    },
-    {
-      "game_idx": "38497",
-      "date": "2026-06-21",
-      "time": "12:00",
-      "venue": "목동야구장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "경동고",
-        "result": "승",
-        "score": 4
-      },
-      "home": {
-        "name": "휘문고",
-        "result": "패",
-        "score": 2
-      }
-    },
-    {
-      "game_idx": "38514",
-      "date": "2026-06-21",
-      "time": "12:00",
-      "venue": "개군야구장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "장안고",
-        "result": "승",
-        "score": 3
-      },
-      "home": {
-        "name": "야탑고",
-        "result": "패",
-        "score": 1
-      }
-    },
-    {
-      "game_idx": "38520",
-      "date": "2026-06-21",
-      "time": "12:00",
-      "venue": "곤지암 팀업캠퍼스 제2구장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "수원야구단(U-18)",
-        "result": "패",
-        "score": 8
-      },
-      "home": {
-        "name": "율곡고야구단",
-        "result": "승",
-        "score": 11
       }
     },
     {
@@ -12618,78 +10998,6 @@
         "name": "강릉고",
         "result": "승",
         "score": 7
-      }
-    },
-    {
-      "game_idx": "38492",
-      "date": "2026-06-21",
-      "time": "14:30",
-      "venue": "신월 야구공원",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "장충고",
-        "result": "승",
-        "score": 5
-      },
-      "home": {
-        "name": "선린인터넷고",
-        "result": "패",
-        "score": 4
-      }
-    },
-    {
-      "game_idx": "38498",
-      "date": "2026-06-21",
-      "time": "14:30",
-      "venue": "목동야구장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "신일고",
-        "result": "승",
-        "score": 12
-      },
-      "home": {
-        "name": "서울아이티고BC",
-        "result": "패",
-        "score": 0
-      }
-    },
-    {
-      "game_idx": "38515",
-      "date": "2026-06-21",
-      "time": "14:30",
-      "venue": "개군야구장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "백송고",
-        "result": "패",
-        "score": 0
-      },
-      "home": {
-        "name": "소래고",
-        "result": "승",
-        "score": 3
-      }
-    },
-    {
-      "game_idx": "38521",
-      "date": "2026-06-21",
-      "time": "14:30",
-      "venue": "곤지암 팀업캠퍼스 제2구장",
-      "round": "리그전",
-      "status": "완료",
-      "away": {
-        "name": "부원고야구단",
-        "result": "승",
-        "score": 2
-      },
-      "home": {
-        "name": "세원고",
-        "result": "패",
-        "score": 1
       }
     },
     {
