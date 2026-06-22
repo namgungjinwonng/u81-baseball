@@ -58,6 +58,9 @@ def parse_box_score(game_idx):
     """box_score 한 경기 파싱."""
     try:
         r = session.get(BOX_URL, params={"game_idx": game_idx}, timeout=20)
+        if r.status_code != 200:
+            print(f"    box_score {game_idx} HTTP {r.status_code}")
+            return None
         r.encoding = "utf-8"
         soup = BeautifulSoup(r.text, "html.parser")
 
@@ -146,17 +149,19 @@ def main():
                 if done % 50 == 0:
                     print(f"  {len(games_by_idx)}/{total} ...")
 
-    # 1차 수집
-    collect_pass(idxs, 12)
+    # 1차 수집 (동시성 과다 요청은 차단 유발 → 6 worker)
+    collect_pass(idxs, 6)
 
-    # 누락분 재시도 (일시적 타임아웃 방지)
+    # 누락분 재시도 (일시적 타임아웃/차단 방지: 지수 백오프 + 후반 순차)
     for attempt in range(1, 11):
         missing = [g for g in idxs if g not in games_by_idx]
         if not missing:
             break
-        print(f"  [재시도 {attempt}] 누락 {len(missing)}건 다시 수집...")
-        time.sleep(5)
-        collect_pass(missing, 4)
+        wait = min(5 * (2 ** (attempt - 1)), 40)   # 5,10,20,40,40... 초
+        workers = 1 if attempt >= 5 else 4          # 후반엔 1개씩 순차
+        print(f"  [재시도 {attempt}] 누락 {len(missing)}건, {wait}초 대기 후 재수집 (worker={workers})...")
+        time.sleep(wait)
+        collect_pass(missing, workers)
 
     missing = [g for g in idxs if g not in games_by_idx]
     if missing:

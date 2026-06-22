@@ -7,6 +7,10 @@ import concurrent.futures
 import os
 import sys
 import re
+from datetime import datetime, timezone, timedelta
+
+KST = timezone(timedelta(hours=9))
+SEASON = datetime.now(KST).year  # 실행 시점의 올해 연도 (일정 수집과 동일 기준)
 
 sys.stdout.reconfigure(encoding='utf-8')
 
@@ -210,7 +214,7 @@ def fetch_team_roster(team):
 
     resp = session.get(TEAM_PLAYER_URL, params={
         "club_idx": club_idx,
-        "season": 2026,
+        "season": SEASON,
         "kind_cd": 31,
     }, timeout=15)
     resp.encoding = "utf-8"
