@@ -1,4 +1,4 @@
-name: U18 일정 증분 갱신
+name: 3. U18 일정 변경사항 업데이트
 
 on:
   schedule:

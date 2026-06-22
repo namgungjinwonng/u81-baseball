@@ -1,4 +1,4 @@
-name: U18 선수 갱신 (선수만)
+name: 2. U18 선수 업데이트
 
 on:
   schedule:
