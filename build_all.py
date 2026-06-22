@@ -39,7 +39,36 @@ def write_docs(name, content):
         f.write(content)
 
 
-def main():
+def copy_to_docs(fname):
+    shutil.copy2(os.path.join(BASE_DIR, fname), os.path.join(BASE_DIR, "docs", fname))
+
+
+def reflect_schedule():
+    """일정 페이지/데이터를 docs/에 반영."""
+    schedule = fix_paths(read("u18_schedule.html"))
+    write_docs("u18_schedule.html", schedule)
+    copy_to_docs("u18_schedule_data.js")
+
+
+def reflect_players():
+    """선수 페이지/데이터를 docs/에 반영 (index.html 겸용)."""
+    players = fix_paths(read("u18_players.html"))
+    write_docs("index.html", players)
+    write_docs("u18_players.html", players)
+    copy_to_docs("u18_app_data.js")
+
+
+def ensure_static():
+    """sw.js 갱신 + manifest/아이콘이 docs에 없으면(최초) 한 번 채움."""
+    copy_to_docs("sw.js")
+    docs = os.path.join(BASE_DIR, "docs")
+    for fname in ("manifest.json", "icon-192.png", "icon-512.png"):
+        dst = os.path.join(docs, fname)
+        if not os.path.exists(dst) and os.path.exists(os.path.join(BASE_DIR, fname)):
+            shutil.copy2(os.path.join(BASE_DIR, fname), dst)
+
+
+def build_full():
     print("=== U-18 전체 빌드 시작 ===")
     # 1) 데이터 수집 (선수 -> 일정 순서: 일정 정규화가 선수목록 사용)
     run("fetch_u18_rosters.py")
@@ -47,28 +76,30 @@ def main():
     # 2) HTML 생성
     run("generate_html.py")
     run("generate_schedule.py")
-
     # 3) docs/ 반영
-    docs = os.path.join(BASE_DIR, "docs")
-    os.makedirs(docs, exist_ok=True)
+    os.makedirs(os.path.join(BASE_DIR, "docs"), exist_ok=True)
+    reflect_players()
+    reflect_schedule()
+    ensure_static()
+    print("\n=== 빌드 완료: docs/ 반영됨 (전체) ===")
 
-    players = fix_paths(read("u18_players.html"))
-    write_docs("index.html", players)
-    write_docs("u18_players.html", players)
 
-    schedule = fix_paths(read("u18_schedule.html"))
-    write_docs("u18_schedule.html", schedule)
+def build_schedule_only():
+    print("=== U-18 일정 전용 빌드 시작 ===")
+    # 일정만 수집 (팀-지역 매핑은 저장소의 기존 u18_data.json 재사용)
+    run("fetch_u18_schedule.py")
+    run("generate_schedule.py")
+    # docs/ 반영: 일정 파일만
+    os.makedirs(os.path.join(BASE_DIR, "docs"), exist_ok=True)
+    reflect_schedule()
+    print("\n=== 빌드 완료: docs/ 반영됨 (일정만) ===")
 
-    for fname in ("u18_app_data.js", "u18_schedule_data.js", "sw.js"):
-        shutil.copy2(os.path.join(BASE_DIR, fname), os.path.join(docs, fname))
 
-    # manifest / 아이콘이 docs에 없으면(최초) 한 번 채워줌
-    for fname in ("manifest.json", "icon-192.png", "icon-512.png"):
-        dst = os.path.join(docs, fname)
-        if not os.path.exists(dst) and os.path.exists(os.path.join(BASE_DIR, fname)):
-            shutil.copy2(os.path.join(BASE_DIR, fname), dst)
-
-    print("\n=== 빌드 완료: docs/ 반영됨 ===")
+def main():
+    if "--schedule-only" in sys.argv:
+        build_schedule_only()
+    else:
+        build_full()
 
 
 if __name__ == "__main__":

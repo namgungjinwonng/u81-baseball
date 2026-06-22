@@ -1,21 +1,24 @@
-name: U18 데이터 자동 갱신 (전체)
+name: U18 일정 자동 갱신 (일정만)
 
 on:
   schedule:
     # 시간은 UTC 기준 (KST = UTC + 9). 정각 혼잡을 피해 17분으로 설정.
-    # 전체(선수+일정) 빌드는 하루 1회만. 나머지 시간대는 update_schedule.yml(일정만)이 담당.
-    - cron: "17 0 * * *"   # 매일 09:17 KST
+    # 09시대는 전체 빌드(update.yml)가 담당. 여기서는 일정만 자주 갱신.
+    - cron: "17 3 * * 0,6"   # 토일 12:17 KST
+    - cron: "17 6 * * *"     # 매일 15:17 KST
+    - cron: "17 12 * * *"    # 매일 21:17 KST
   workflow_dispatch: {}   # GitHub에서 수동 실행도 가능
 
 permissions:
   contents: write
 
+# update.yml과 같은 그룹 → 두 워크플로우가 동시에 돌지 않고 순차 대기 (push 충돌 방지)
 concurrency:
   group: u18-update
   cancel-in-progress: false
 
 jobs:
-  update:
+  update-schedule:
     runs-on: ubuntu-latest
     steps:
       - name: 체크아웃
@@ -29,17 +32,17 @@ jobs:
       - name: 의존성 설치
         run: pip install -r requirements.txt
 
-      - name: 데이터 수집 + 빌드
-        run: python build_all.py
+      - name: 일정 수집 + 빌드 (일정만)
+        run: python build_all.py --schedule-only
 
       - name: 변경분 커밋 & 푸시
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add docs/ u18_data.json u18_schedule.json u18_players.html u18_schedule.html u18_app_data.js u18_schedule_data.js
+          git add docs/u18_schedule.html docs/u18_schedule_data.js u18_schedule.json u18_schedule.html u18_schedule_data.js
           if git diff --staged --quiet; then
             echo "변경사항 없음 - 커밋 생략"
           else
-            git commit -m "자동 데이터 갱신 ($(TZ='Asia/Seoul' date +'%Y-%m-%d %H:%M KST'))"
+            git commit -m "자동 일정 갱신 ($(TZ='Asia/Seoul' date +'%Y-%m-%d %H:%M KST'))"
             git push
           fi
