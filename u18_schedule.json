@@ -1,6 +1,6 @@
 {
   "year": 2026,
-  "updated": "2026-06-22 12:58",
+  "updated": "2026-06-22 17:22",
   "games": [
     {
       "game_idx": "36897",
@@ -14171,19 +14171,19 @@
     {
       "game_idx": "38657",
       "date": "2026-06-22",
-      "time": "18:30",
+      "time": "17:30",
       "venue": "목동야구장",
       "round": "리그전",
-      "status": "예정",
+      "status": "완료",
       "away": {
         "name": "경기상업고",
-        "result": "",
-        "score": null
+        "result": "무",
+        "score": 0
       },
       "home": {
         "name": "서울동산고",
-        "result": "",
-        "score": null
+        "result": "무",
+        "score": 0
       }
     },
     {
