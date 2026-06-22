@@ -32,25 +32,53 @@ session.headers.update(HEADERS)
 
 
 def collect_game_idxs(year, months):
-    """월별 calendar에서 모든 game_idx 수집 (중복 제거)."""
+    """월별 calendar에서 모든 game_idx 수집 (중복 제거). 실패한 달은 재시도."""
     idxs = set()
+
+    def fetch_month(m):
+        """한 달 calendar 조회 → idxs에 추가, 발견 수 반환. 실패 시 예외."""
+        r = session.get(CAL_URL, params={"month": m, "year": year, "kind_cd": KIND_CD}, timeout=20)
+        if r.status_code != 200:
+            raise Exception(f"HTTP {r.status_code}")
+        r.encoding = "utf-8"
+        soup = BeautifulSoup(r.text, "html.parser")
+        found = 0
+        for a in soup.select("a[href*='box_score']"):
+            href = a.get("href", "")
+            if "game_idx=" in href:
+                gid = href.split("game_idx=")[1].split("&")[0]
+                if gid.isdigit():
+                    idxs.add(gid)
+                    found += 1
+        return found
+
+    # 1차 수집 (실패한 달만 모아 재시도 대상)
+    failed = []
     for m in months:
         try:
-            r = session.get(CAL_URL, params={"month": m, "year": year, "kind_cd": KIND_CD}, timeout=20)
-            r.encoding = "utf-8"
-            soup = BeautifulSoup(r.text, "html.parser")
-            found = 0
-            for a in soup.select("a[href*='box_score']"):
-                href = a.get("href", "")
-                if "game_idx=" in href:
-                    gid = href.split("game_idx=")[1].split("&")[0]
-                    if gid.isdigit():
-                        idxs.add(gid)
-                        found += 1
-            print(f"  {year}.{m:02d}월: game_idx {found}개")
-            time.sleep(0.2)
+            print(f"  {year}.{m:02d}월: game_idx {fetch_month(m)}개")
         except Exception as e:
-            print(f"  {year}.{m:02d}월 수집 실패: {e}")
+            print(f"  {year}.{m:02d}월 수집 실패(재시도예정): {e}")
+            failed.append(m)
+        time.sleep(0.2)
+
+    # 실패한 달 재시도 (box_score 수집과 동일한 지수 백오프)
+    for attempt in range(1, 11):
+        if not failed:
+            break
+        retry, failed = failed, []
+        wait = min(5 * (2 ** (attempt - 1)), 40)   # 5,10,20,40,40... 초
+        print(f"  [calendar 재시도 {attempt}] {len(retry)}개월, {wait}초 대기 후 재조회...")
+        time.sleep(wait)
+        for m in retry:
+            try:
+                print(f"  {year}.{m:02d}월: game_idx {fetch_month(m)}개 (재시도 성공)")
+            except Exception as e:
+                print(f"  {year}.{m:02d}월 재시도 실패: {e}")
+                failed.append(m)
+
+    if failed:
+        print(f"  [경고] calendar 최종 실패 월: {sorted(failed)}")
     return sorted(idxs, key=int)
 
 
