@@ -155,7 +155,7 @@ def main():
         if not missing:
             break
         print(f"  [재시도 {attempt}] 누락 {len(missing)}건 다시 수집...")
-        time.sleep(1.5)
+        time.sleep(5)
         collect_pass(missing, 4)
 
     missing = [g for g in idxs if g not in games_by_idx]
