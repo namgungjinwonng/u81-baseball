@@ -198,15 +198,17 @@ def main():
 
 
 def main_incremental():
-    """증분 수집: 완료 경기는 보존하고, 예정 경기 + 신규(누락 포함) 경기만 재수집해 병합.
+    """증분 수집: 오래된 완료 경기는 보존하고, 예정 + 신규(누락) + 최근 3일치 경기를 재수집해 병합.
 
-    - 완료(status=완료)/취소 경기: 다시 긁지 않고 그대로 유지
     - 예정 경기: 재수집 (경기 후 완료/취소로 전환 반영)
     - 신규 game_idx: 전체 연도 calendar 스캔으로 찾음 → 전체 빌드 누락분도 자가복구
+    - 최근 3일치(오늘·어제·그제): 상태와 무관하게 전부 재조회 → 경기 중 0-0 등으로
+      잘못 완료된 결과를 같은 기간 내에 교정 (KST 기준)
+    - 그 이전 완료/취소 경기: 다시 긁지 않고 그대로 유지
     """
     now = datetime.now(KST)
     year = now.year
-    print(f"=== U-18 {year}시즌 증분 수집 (완료 보존 / 예정·신규만) ===\n")
+    print(f"=== U-18 {year}시즌 증분 수집 (예정 + 신규/누락 + 최근 3일) ===\n")
 
     # 기존 전체 일정 필요 (없으면 전체 수집으로 대체)
     if not os.path.exists(SCHEDULE_PATH):
@@ -220,12 +222,15 @@ def main_incremental():
     base_year = existing.get("year", year)
 
     # 재수집 대상: (1) 기존 예정 경기 (2) calendar 전체 연도 스캔 중 JSON에 없는 신규/누락 idx
+    #            (3) 최근 3일치(오늘·어제·그제) 경기 — 상태 무관 전부 재조회(완료 오인 교정)
     pending_idx = {g["game_idx"] for g in existing_games if g.get("status") == "예정"}
+    recent_days = {(now - timedelta(days=k)).strftime("%Y-%m-%d") for k in range(3)}
+    recent_idx = {g["game_idx"] for g in existing_games if g.get("date") in recent_days}
     print(f"[1/2] {year}년 전체 calendar 스캔 (신규/누락 game_idx 탐지)...")
     all_idx = set(collect_game_idxs(year, list(range(1, 13))))
     new_idx = all_idx - existing_idx
-    candidates = sorted(pending_idx | new_idx, key=int)
-    print(f"  대상 {len(candidates)}건 (예정 {len(pending_idx)} + 신규/누락 {len(new_idx)})\n")
+    candidates = sorted(pending_idx | new_idx | recent_idx, key=int)
+    print(f"  대상 {len(candidates)}건 (예정 {len(pending_idx)} + 신규/누락 {len(new_idx)} + 최근3일 {len(recent_idx)})\n")
 
     if not candidates:
         print("재수집할 경기가 없습니다. (변경 없음)")
@@ -246,7 +251,7 @@ def main_incremental():
 
     done_cnt = sum(1 for g in games if g["status"] == "완료")
     print(f"\n=== 완료 (증분 갱신) ===")
-    print(f"재수집: {len(fetched)}건 (예정 갱신 + 신규/누락 복구)")
+    print(f"재수집: {len(fetched)}건 (예정 + 신규/누락 + 최근 3일)")
     print(f"전체 경기: {len(games)} (완료 {done_cnt} / 예정 {len(games)-done_cnt})")
     print(f"저장: {SCHEDULE_PATH}")
 
