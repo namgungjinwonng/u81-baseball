@@ -1,6 +1,6 @@
 {
   "year": 2026,
-  "updated": "2026-06-23 05:58",
+  "updated": "2026-06-23 08:08",
   "games": [
     {
       "game_idx": "36897",
@@ -14177,12 +14177,12 @@
       "status": "완료",
       "away": {
         "name": "경기상업고",
-        "result": "무",
-        "score": 0
+        "result": "승",
+        "score": 8
       },
       "home": {
         "name": "서울동산고",
-        "result": "무",
+        "result": "패",
         "score": 0
       }
     },
