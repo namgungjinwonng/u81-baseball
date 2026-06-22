@@ -125,15 +125,11 @@ def parse_box_score(game_idx):
         return None
 
 
-def main():
-    year = datetime.now(KST).year
-    months = list(range(1, 13))
-    print(f"=== U-18 {year}시즌 일정/결과 수집 ===\n")
-    print(f"[1/2] {year}년 월별 game_idx 수집 중...")
-    idxs = collect_game_idxs(year, months)
-    print(f"  총 {len(idxs)}경기 발견\n")
+SCHEDULE_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "u18_schedule.json")
 
-    print(f"[2/2] 경기 상세 수집 중... (구장/시간 포함)")
+
+def collect_games(idxs):
+    """주어진 game_idx 목록을 병렬+재시도로 파싱해 {idx: game} 반환."""
     total = len(idxs)
     games_by_idx = {}
 
@@ -166,25 +162,95 @@ def main():
     missing = [g for g in idxs if g not in games_by_idx]
     if missing:
         print(f"  [경고] 최종 누락 {len(missing)}건: {missing[:20]}")
+    return games_by_idx
 
-    games = list(games_by_idx.values())
-    games.sort(key=lambda g: (g["date"] or "9999", g["time"] or ""))
 
+def save_schedule(year, games):
+    """games 리스트를 정렬해 u18_schedule.json에 저장."""
+    games = sorted(games, key=lambda g: (g["date"] or "9999", g["time"] or ""))
     out = {
         "year": year,
         "updated": datetime.now(KST).strftime("%Y-%m-%d %H:%M"),
         "games": games,
     }
-    path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "u18_schedule.json")
-    with open(path, "w", encoding="utf-8") as f:
+    with open(SCHEDULE_PATH, "w", encoding="utf-8") as f:
         json.dump(out, f, ensure_ascii=False, indent=2)
+    return games
+
+
+def main():
+    year = datetime.now(KST).year
+    months = list(range(1, 13))
+    print(f"=== U-18 {year}시즌 일정/결과 수집 ===\n")
+    print(f"[1/2] {year}년 월별 game_idx 수집 중...")
+    idxs = collect_game_idxs(year, months)
+    print(f"  총 {len(idxs)}경기 발견\n")
+
+    print(f"[2/2] 경기 상세 수집 중... (구장/시간 포함)")
+    games_by_idx = collect_games(idxs)
+    games = save_schedule(year, list(games_by_idx.values()))
 
     done_cnt = sum(1 for g in games if g["status"] == "완료")
     print(f"\n=== 완료 ===")
     print(f"연도: {year}")
     print(f"총 경기: {len(games)} (완료 {done_cnt} / 예정 {len(games)-done_cnt})")
-    print(f"저장: {path}")
+    print(f"저장: {SCHEDULE_PATH}")
+
+
+def main_today():
+    """오늘 날짜 경기만 재수집해 기존 u18_schedule.json에 병합 (라이브 점수 갱신용)."""
+    now = datetime.now(KST)
+    year = now.year
+    today = now.strftime("%Y-%m-%d")
+    print(f"=== U-18 오늘({today}) 일정만 재수집 ===\n")
+
+    # 기존 전체 일정 필요 (없으면 전체 수집으로 대체)
+    if not os.path.exists(SCHEDULE_PATH):
+        print("기존 u18_schedule.json 없음 → 전체 수집으로 대체합니다.")
+        main()
+        return
+    with open(SCHEDULE_PATH, "r", encoding="utf-8") as f:
+        existing = json.load(f)
+    existing_games = existing.get("games", [])
+    existing_idx = {g["game_idx"] for g in existing_games}
+    base_year = existing.get("year", year)
+
+    # 재수집 대상: (1) 기존 JSON에서 날짜가 오늘인 경기 (2) 이번 달 calendar의 신규 game_idx
+    today_idx = {g["game_idx"] for g in existing_games if g.get("date") == today}
+    print(f"[1/2] 이번 달({now.month}월) calendar에서 신규 game_idx 확인...")
+    month_idx = set(collect_game_idxs(year, [now.month]))
+    new_idx = month_idx - existing_idx
+    candidates = sorted(today_idx | new_idx, key=int)
+    print(f"  대상 {len(candidates)}건 (오늘 기존 {len(today_idx)} + 신규 {len(new_idx)})\n")
+
+    if not candidates:
+        print("재수집할 오늘 경기가 없습니다. (변경 없음)")
+        return
+
+    print(f"[2/2] 대상 경기 상세 수집 중...")
+    fetched = collect_games(candidates)
+    # 오늘 날짜인 것만 반영 (신규 idx 중 오늘이 아닌 건 제외)
+    today_fetched = {idx: g for idx, g in fetched.items() if g.get("date") == today}
+    print(f"  오늘 경기 {len(today_fetched)}건 확인")
+
+    if not today_fetched:
+        print("갱신할 오늘 경기 데이터가 없습니다. (변경 없음)")
+        return
+
+    # 병합: game_idx 기준 덮어쓰기/추가, 나머지 날짜는 그대로 유지
+    merged = {g["game_idx"]: g for g in existing_games}
+    merged.update(today_fetched)
+    games = save_schedule(base_year, list(merged.values()))
+
+    done_cnt = sum(1 for g in games if g["status"] == "완료")
+    print(f"\n=== 완료 (오늘만 갱신) ===")
+    print(f"오늘 갱신: {len(today_fetched)}건")
+    print(f"전체 경기: {len(games)} (완료 {done_cnt} / 예정 {len(games)-done_cnt})")
+    print(f"저장: {SCHEDULE_PATH}")
 
 
 if __name__ == "__main__":
-    main()
+    if "--today" in sys.argv:
+        main_today()
+    else:
+        main()

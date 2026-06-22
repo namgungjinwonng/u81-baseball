@@ -14,9 +14,9 @@ if sys.stdout.encoding != "utf-8":
     sys.stdout.reconfigure(encoding="utf-8")
 
 
-def run(script):
-    print(f"\n>>> {script} 실행")
-    subprocess.run([sys.executable, os.path.join(BASE_DIR, script)],
+def run(script, *args):
+    print(f"\n>>> {script} {' '.join(args)} 실행".rstrip())
+    subprocess.run([sys.executable, os.path.join(BASE_DIR, script), *args],
                    check=True, cwd=BASE_DIR)
 
 
@@ -95,8 +95,21 @@ def build_schedule_only():
     print("\n=== 빌드 완료: docs/ 반영됨 (일정만) ===")
 
 
+def build_today():
+    print("=== U-18 오늘 일정만 빌드 시작 ===")
+    # 오늘 경기만 재수집해 기존 일정에 병합 (전체 시즌 데이터 보존)
+    run("fetch_u18_schedule.py", "--today")
+    run("generate_schedule.py")
+    # docs/ 반영: 일정 파일만
+    os.makedirs(os.path.join(BASE_DIR, "docs"), exist_ok=True)
+    reflect_schedule()
+    print("\n=== 빌드 완료: docs/ 반영됨 (오늘만) ===")
+
+
 def main():
-    if "--schedule-only" in sys.argv:
+    if "--today" in sys.argv:
+        build_today()
+    elif "--schedule-only" in sys.argv:
         build_schedule_only()
     else:
         build_full()
