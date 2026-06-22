@@ -406,14 +406,13 @@ function setView(v){
 
 async function reloadPage() {
   try {
-    if (navigator.serviceWorker) {
-      const regs = await navigator.serviceWorker.getRegistrations();
-      for (const r of regs) await r.update();
-    }
     if (window.caches) {
       const ks = await caches.keys();
       for (const k of ks) await caches.delete(k);
     }
+    // HTTP 캐시까지 우회해 최신 데이터 파일을 강제로 다시 받음
+    await Promise.all(['u18_schedule_data.js', 'u18_schedule.html'].map(
+      u => fetch(u, {cache: 'reload'}).catch(() => {})));
   } catch (e) {}
   location.reload();
 }
