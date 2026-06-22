@@ -1,11 +1,11 @@
-name: U18 일정 자동 갱신 (일정만)
+name: U18 일정 증분 갱신
 
 on:
   schedule:
     # 시간은 UTC 기준 (KST = UTC + 9). 정각 혼잡을 피해 17분으로 설정.
-    # 09시대는 전체 빌드(update.yml)가 담당. 여기서는 일정만 자주 갱신.
-    - cron: "17 3 * * 0,6"   # 토일 12:17 KST
-    - cron: "17 6 * * *"     # 매일 15:17 KST
+    # 완료 경기는 보존하고 예정·신규(누락 포함)만 재수집하는 증분 갱신.
+    - cron: "17 3 * * *"     # 매일 12:17 KST
+    - cron: "17 9 * * *"     # 매일 18:17 KST
     - cron: "17 12 * * *"    # 매일 21:17 KST
   workflow_dispatch: {}   # GitHub에서 수동 실행도 가능
 
@@ -32,8 +32,8 @@ jobs:
       - name: 의존성 설치
         run: pip install -r requirements.txt
 
-      - name: 일정 수집 + 빌드 (일정만)
-        run: python build_all.py --schedule-only
+      - name: 일정 증분 수집 + 빌드
+        run: python build_all.py --incremental
 
       - name: 변경분 커밋 & 푸시
         run: |
@@ -43,6 +43,6 @@ jobs:
           if git diff --staged --quiet; then
             echo "변경사항 없음 - 커밋 생략"
           else
-            git commit -m "자동 일정 갱신 ($(TZ='Asia/Seoul' date +'%Y-%m-%d %H:%M KST'))"
+            git commit -m "일정 증분 갱신 ($(TZ='Asia/Seoul' date +'%Y-%m-%d %H:%M KST'))"
             git push
           fi

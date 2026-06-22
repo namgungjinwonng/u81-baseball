@@ -197,12 +197,16 @@ def main():
     print(f"저장: {SCHEDULE_PATH}")
 
 
-def main_today():
-    """오늘 날짜 경기만 재수집해 기존 u18_schedule.json에 병합 (라이브 점수 갱신용)."""
+def main_incremental():
+    """증분 수집: 완료 경기는 보존하고, 예정 경기 + 신규(누락 포함) 경기만 재수집해 병합.
+
+    - 완료(status=완료)/취소 경기: 다시 긁지 않고 그대로 유지
+    - 예정 경기: 재수집 (경기 후 완료/취소로 전환 반영)
+    - 신규 game_idx: 전체 연도 calendar 스캔으로 찾음 → 전체 빌드 누락분도 자가복구
+    """
     now = datetime.now(KST)
     year = now.year
-    today = now.strftime("%Y-%m-%d")
-    print(f"=== U-18 오늘({today}) 일정만 재수집 ===\n")
+    print(f"=== U-18 {year}시즌 증분 수집 (완료 보존 / 예정·신규만) ===\n")
 
     # 기존 전체 일정 필요 (없으면 전체 수집으로 대체)
     if not os.path.exists(SCHEDULE_PATH):
@@ -215,42 +219,40 @@ def main_today():
     existing_idx = {g["game_idx"] for g in existing_games}
     base_year = existing.get("year", year)
 
-    # 재수집 대상: (1) 기존 JSON에서 날짜가 오늘인 경기 (2) 이번 달 calendar의 신규 game_idx
-    today_idx = {g["game_idx"] for g in existing_games if g.get("date") == today}
-    print(f"[1/2] 이번 달({now.month}월) calendar에서 신규 game_idx 확인...")
-    month_idx = set(collect_game_idxs(year, [now.month]))
-    new_idx = month_idx - existing_idx
-    candidates = sorted(today_idx | new_idx, key=int)
-    print(f"  대상 {len(candidates)}건 (오늘 기존 {len(today_idx)} + 신규 {len(new_idx)})\n")
+    # 재수집 대상: (1) 기존 예정 경기 (2) calendar 전체 연도 스캔 중 JSON에 없는 신규/누락 idx
+    pending_idx = {g["game_idx"] for g in existing_games if g.get("status") == "예정"}
+    print(f"[1/2] {year}년 전체 calendar 스캔 (신규/누락 game_idx 탐지)...")
+    all_idx = set(collect_game_idxs(year, list(range(1, 13))))
+    new_idx = all_idx - existing_idx
+    candidates = sorted(pending_idx | new_idx, key=int)
+    print(f"  대상 {len(candidates)}건 (예정 {len(pending_idx)} + 신규/누락 {len(new_idx)})\n")
 
     if not candidates:
-        print("재수집할 오늘 경기가 없습니다. (변경 없음)")
+        print("재수집할 경기가 없습니다. (변경 없음)")
         return
 
     print(f"[2/2] 대상 경기 상세 수집 중...")
     fetched = collect_games(candidates)
-    # 오늘 날짜인 것만 반영 (신규 idx 중 오늘이 아닌 건 제외)
-    today_fetched = {idx: g for idx, g in fetched.items() if g.get("date") == today}
-    print(f"  오늘 경기 {len(today_fetched)}건 확인")
+    print(f"  {len(fetched)}건 수집 완료")
 
-    if not today_fetched:
-        print("갱신할 오늘 경기 데이터가 없습니다. (변경 없음)")
+    if not fetched:
+        print("갱신할 경기 데이터가 없습니다. (변경 없음)")
         return
 
-    # 병합: game_idx 기준 덮어쓰기/추가, 나머지 날짜는 그대로 유지
+    # 병합: game_idx 기준 덮어쓰기/추가, 완료/취소 등 나머지는 그대로 유지
     merged = {g["game_idx"]: g for g in existing_games}
-    merged.update(today_fetched)
+    merged.update(fetched)
     games = save_schedule(base_year, list(merged.values()))
 
     done_cnt = sum(1 for g in games if g["status"] == "완료")
-    print(f"\n=== 완료 (오늘만 갱신) ===")
-    print(f"오늘 갱신: {len(today_fetched)}건")
+    print(f"\n=== 완료 (증분 갱신) ===")
+    print(f"재수집: {len(fetched)}건 (예정 갱신 + 신규/누락 복구)")
     print(f"전체 경기: {len(games)} (완료 {done_cnt} / 예정 {len(games)-done_cnt})")
     print(f"저장: {SCHEDULE_PATH}")
 
 
 if __name__ == "__main__":
-    if "--today" in sys.argv:
-        main_today()
+    if "--incremental" in sys.argv:
+        main_incremental()
     else:
         main()

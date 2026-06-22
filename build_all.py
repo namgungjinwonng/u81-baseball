@@ -84,31 +84,43 @@ def build_full():
     print("\n=== 빌드 완료: docs/ 반영됨 (전체) ===")
 
 
+def build_rosters_only():
+    print("=== U-18 선수 전용 빌드 시작 ===")
+    # 선수만 수집 → 선수 페이지 생성/반영 (일정은 건드리지 않음)
+    run("fetch_u18_rosters.py")
+    run("generate_html.py")
+    os.makedirs(os.path.join(BASE_DIR, "docs"), exist_ok=True)
+    reflect_players()
+    print("\n=== 빌드 완료: docs/ 반영됨 (선수만) ===")
+
+
 def build_schedule_only():
     print("=== U-18 일정 전용 빌드 시작 ===")
-    # 일정만 수집 (팀-지역 매핑은 저장소의 기존 u18_data.json 재사용)
+    # 일정 전체 수집 (팀-지역 매핑은 저장소의 기존 u18_data.json 재사용)
     run("fetch_u18_schedule.py")
     run("generate_schedule.py")
     # docs/ 반영: 일정 파일만
     os.makedirs(os.path.join(BASE_DIR, "docs"), exist_ok=True)
     reflect_schedule()
-    print("\n=== 빌드 완료: docs/ 반영됨 (일정만) ===")
+    print("\n=== 빌드 완료: docs/ 반영됨 (일정 전체) ===")
 
 
-def build_today():
-    print("=== U-18 오늘 일정만 빌드 시작 ===")
-    # 오늘 경기만 재수집해 기존 일정에 병합 (전체 시즌 데이터 보존)
-    run("fetch_u18_schedule.py", "--today")
+def build_incremental():
+    print("=== U-18 일정 증분 빌드 시작 ===")
+    # 완료 경기는 보존, 예정·신규(누락 포함)만 재수집해 병합
+    run("fetch_u18_schedule.py", "--incremental")
     run("generate_schedule.py")
     # docs/ 반영: 일정 파일만
     os.makedirs(os.path.join(BASE_DIR, "docs"), exist_ok=True)
     reflect_schedule()
-    print("\n=== 빌드 완료: docs/ 반영됨 (오늘만) ===")
+    print("\n=== 빌드 완료: docs/ 반영됨 (일정 증분) ===")
 
 
 def main():
-    if "--today" in sys.argv:
-        build_today()
+    if "--rosters-only" in sys.argv:
+        build_rosters_only()
+    elif "--incremental" in sys.argv:
+        build_incremental()
     elif "--schedule-only" in sys.argv:
         build_schedule_only()
     else:

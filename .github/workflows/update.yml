@@ -1,11 +1,7 @@
-name: U18 데이터 자동 갱신 (전체)
+name: U18 전체 갱신 (수동)
 
 on:
-  schedule:
-    # 시간은 UTC 기준 (KST = UTC + 9). 정각 혼잡을 피해 17분으로 설정.
-    # 전체(선수+일정) 빌드는 하루 1회만. 나머지 시간대는 update_schedule.yml(일정만)이 담당.
-    - cron: "17 0 * * *"   # 매일 09:17 KST
-  workflow_dispatch: {}   # GitHub에서 수동 실행도 가능
+  workflow_dispatch: {}   # 수동 실행 전용. 완료 경기 정정까지 포함한 전체 재수집용.
 
 permissions:
   contents: write
