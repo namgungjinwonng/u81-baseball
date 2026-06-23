@@ -360,9 +360,14 @@ tbody tr:nth-child(even):hover {{ background: #fdeef1; }}
     letter-spacing: 1px; display: none;
 }}
 .install-btn:hover {{ background: #45a049; border-color: #45a049; }}
+.inapp-banner {{ display: none; background: #FFF7E6; border-bottom: 2px solid #E0902B; color: #6B4E11; padding: 11px 14px; font-size: 13px; font-weight: 700; text-align: center; line-height: 1.5; }}
+.inapp-banner button {{ margin-top: 7px; padding: 8px 18px; border: none; border-radius: 20px; background: #002D62; color: #fff; font-size: 13px; font-weight: 700; cursor: pointer; }}
+.inapp-banner button:hover {{ background: #BA0C2F; }}
 </style>
 </head>
 <body>
+
+<div id="inappBanner" class="inapp-banner"></div>
 
 <div class="header">
     <h1>KBSA U-18 PLAYERS</h1>
@@ -830,6 +835,26 @@ function installApp() {{
 if (window.matchMedia('(display-mode: standalone)').matches || navigator.standalone) {{
     document.getElementById('installBtn').style.display = 'none';
 }}
+
+// 인앱 브라우저(카카오톡 등) 감지 → 외부 브라우저 열기 안내
+function openExternalBrowser(){{
+  var ua = navigator.userAgent || '', href = location.href;
+  if (/KAKAOTALK/i.test(ua)) {{ location.href = 'kakaotalk://web/openExternal?url=' + encodeURIComponent(href); return; }}
+  if (/Android/i.test(ua)) {{ location.href = 'intent://' + href.replace(/^https?:\\/\\//,'') + '#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=' + encodeURIComponent(href) + ';end'; return; }}
+}}
+(function(){{
+  var ua = navigator.userAgent || '';
+  var isKakao = /KAKAOTALK/i.test(ua);
+  var isInApp = isKakao || /Instagram|FBAN|FBAV|FB_IAB|Line\\/|NAVER/i.test(ua);
+  if (!isInApp) return;
+  var isAndroid = /Android/i.test(ua);
+  var banner = document.getElementById('inappBanner');
+  if (!banner) return;
+  var btn = (isKakao || isAndroid) ? '<button onclick="openExternalBrowser()">' + (isKakao ? '기본 브라우저로 열기' : 'Chrome으로 열기') + '</button>' : '';
+  var guide = (isKakao || isAndroid) ? '아래 버튼으로 다른 브라우저에서 열어 설치하세요.' : '우측 메뉴 → Safari로 열어 설치하세요.';
+  banner.innerHTML = '<div>📲 카카오톡 등 인앱 브라우저에서는 앱 설치가 안 됩니다. ' + guide + '</div>' + btn;
+  banner.style.display = 'block';
+}})();
 
 // Initial render
 filterTeams();
