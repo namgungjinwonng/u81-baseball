@@ -624,13 +624,12 @@ function renderStandings(c, box){
 }
 function renderBracket(c, box){
   const rf=document.getElementById('roundFilter').value;
+  const _t=new Date(); _t.setHours(0,0,0,0); const T0=_t.getTime();
+  const dist=d=> d ? Math.abs((new Date(d+'T00:00:00').getTime()-T0)/86400000) : 1e9;
   const list=GAMES.filter(g=>g.title===c && (!rf || g.round===rf)).sort((x,y)=>{
     const rr=roundRank(x.round)-roundRank(y.round); if(rr) return rr;
-    const fx=(x.status==='예정')?0:1, fy=(y.status==='예정')?0:1;   // 0=미완료(예정,위), 1=완료·취소(아래)
-    if(fx!==fy) return fx-fy;
-    const kx=x.date+(x.time||''), ky=y.date+(y.time||'');
-    return fx===0 ? kx.localeCompare(ky)    // 예정: 오름차순(가까운 순)
-                  : ky.localeCompare(kx);   // 완료·취소: 내림차순(최신순)
+    const dd=dist(x.date)-dist(y.date); if(dd) return dd;             // 오늘과 가까운 날짜부터
+    return (x.date+(x.time||'')).localeCompare(y.date+(y.time||''));  // 같은 날짜 → 시간 오름차순
   });
   let html=`<div class="stand-title">${compLabel(c)}</div>`;
   if(!list.length){ box.innerHTML=html+'<div class="empty">경기가 없습니다.</div>'; return; }
