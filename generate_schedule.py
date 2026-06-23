@@ -397,14 +397,16 @@ function openDateModal(ds){
   openModal();
 }
 
-function openTeamModal(name){
-  const list=GAMES.filter(g=>g.away.name===name||g.home.name===name)
-                  .sort((x,y)=>(y.date+(y.time||'')).localeCompare(x.date+(x.time||'')));
+function openTeamModal(name, compTitle){
+  let list=GAMES.filter(g=>g.away.name===name||g.home.name===name);
+  if(compTitle) list=list.filter(g=>g.title===compTitle);  // 특정 리그만
+  list=list.sort((x,y)=>(y.date+(y.time||'')).localeCompare(x.date+(x.time||'')));
   let w=0,l=0,d=0,played=0;
   list.forEach(g=>{ if(g.status!=='완료')return; played++; const me=g.away.name===name?g.away:g.home;
     if(me.result==='승')w++; else if(me.result==='패')l++; else if(me.result==='무')d++; });
   const reg=TR[name]||'';
-  document.getElementById('modalTitle').innerHTML=`${name} ${regBadge(reg)}`;
+  const sub=compTitle?`<div style="font-size:11px;font-weight:600;opacity:0.8;margin-top:3px">${shortTitle(compTitle)}</div>`:'';
+  document.getElementById('modalTitle').innerHTML=`<div>${name} ${regBadge(reg)}</div>${sub}`;
   let html=`<div class="record-summary">
      <div class="rec"><div class="num" style="color:#002D62">${played}</div><div class="lbl">경기</div></div>
      <div class="rec"><div class="num" style="color:#1A7A4C">${w}</div><div class="lbl">승</div></div>
@@ -565,23 +567,44 @@ function compStandings(title){
   }
   return res;
 }
+let curComp='';
+// 순위표(리그)에서 학교 클릭 → 해당 리그 경기만 모달
+function openCompTeam(name){ openTeamModal(name, curComp); }
+// 토너먼트 라운드 정렬 우선순위 (작을수록 상위: 결승 먼저)
+const ROUND_RANK={'결승전':1,'결승':1,'준결승전':2,'준결승':2,'4강전':2,'8강전':3,'8강':3,'16강전':4,'16강':4,'32강전':5,'32강':5,'64강전':6,'2회전':7,'1회전':8,'예선전':9,'예선':9,'리그전':9};
+function roundRank(r){ const k=(r||'').trim(); return (ROUND_RANK[k]!=null)?ROUND_RANK[k]:50; }
+
 function onCompChange(){
   const c=document.getElementById('compFilter').value;
+  curComp=c;
   const box=document.getElementById('standingsView');
-  if(!c){ box.innerHTML='<div class="empty">위에서 시합을 선택하면 순위가 표시됩니다.</div>'; return; }
+  if(!c){ box.innerHTML='<div class="empty">위에서 시합을 선택하면 순위·경기가 표시됩니다.</div>'; return; }
+  if(isLeague(c)) renderStandings(c, box); else renderBracket(c, box);
+}
+function renderStandings(c, box){
   const arr=compStandings(c);
   const hasD=arr.some(r=>r.d>0);
   let html=`<div class="stand-title">${c}</div>`;
   html+='<div class="stand-note">순위: 승점(승 2 · 무 1 · 패 0) → 승자승 → 동률 팀 간 실점 → 득점</div>';
   if(!arr.length){ box.innerHTML=html+'<div class="empty">완료된 경기가 없습니다.</div>'; return; }
-  html+='<div class="stand-wrap"><table class="stand"><thead><tr><th>순위</th><th>학교</th><th>경기</th><th>승</th><th>패</th>'+(hasD?'<th>무</th>':'')+'<th>승점</th><th>득점</th><th>실점</th></tr></thead><tbody>';
+  html+='<div class="stand-wrap"><table class="stand"><thead><tr><th>순위</th><th>학교</th><th>경기</th><th>승</th><th>패</th>'+(hasD?'<th>무</th>':'')+'<th>승점</th><th>실점</th><th>득점</th></tr></thead><tbody>';
   arr.forEach((r,i)=>{
-    html+=`<tr onclick="openTeamModal('${r.name.replace(/'/g,"\\'")}')">
+    html+=`<tr onclick="openCompTeam('${r.name.replace(/'/g,"\\'")}')">
       <td class="rk">${i+1}</td><td class="snm">${r.name}</td><td>${r.played}</td>
       <td class="wv">${r.w}</td><td class="lv">${r.l}</td>${hasD?`<td>${r.d}</td>`:''}
-      <td class="pv">${r.pts}</td><td>${r.rf}</td><td>${r.ra}</td></tr>`;
+      <td class="pv">${r.pts}</td><td>${r.ra}</td><td>${r.rf}</td></tr>`;
   });
   html+='</tbody></table></div>';
+  html+='<div class="stand-note">※ 조별 편성학교는 각 학교별 1게임이 편성되어야 반영됩니다.</div>';
+  box.innerHTML=html;
+}
+function renderBracket(c, box){
+  const list=GAMES.filter(g=>g.title===c)
+    .sort((x,y)=> (roundRank(x.round)-roundRank(y.round)) || ((x.date+(x.time||'')).localeCompare(y.date+(y.time||''))));
+  let html=`<div class="stand-title">${c}</div>`;
+  if(!list.length){ box.innerHTML=html+'<div class="empty">경기가 없습니다.</div>'; return; }
+  let lastR=null;
+  list.forEach(g=>{ const r=g.round||'기타'; if(r!==lastR){ html+=`<div class="date-group">${r}</div>`; lastR=r; } html+=gameCard(g, true); });
   box.innerHTML=html;
 }
 
