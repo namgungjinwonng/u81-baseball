@@ -239,6 +239,10 @@ table.stand .lv { color: #C8102E; font-weight: 800; }
 .record-summary .rec .num { font-size: 22px; font-weight: 800; }
 .record-summary .rec .lbl { font-size: 11px; font-weight: 700; color: #888; margin-top: 2px; }
 .date-group { font-size: 13px; font-weight: 800; color: #BA0C2F; margin: 14px 0 8px; border-left: 4px solid #BA0C2F; padding-left: 8px; }
+/* 전국대회 대진: 라운드(상위) → 편성일(하위) 2단계 구분 */
+.round-group { font-size: 13px; font-weight: 800; color: #fff; background: #002D62; border-radius: 2px; padding: 7px 10px; margin: 16px 0 8px; }
+.round-group:first-of-type { margin-top: 4px; }
+.bracket-date { font-size: 12px; font-weight: 800; color: #BA0C2F; margin: 10px 0 6px; border-left: 4px solid #BA0C2F; padding-left: 8px; }
 .date-group:first-child { margin-top: 0; }
 .empty { text-align: center; color: #888; padding: 30px 0; font-size: 14px; }
 
@@ -624,8 +628,15 @@ function renderBracket(c, box){
     .sort((x,y)=> (roundRank(x.round)-roundRank(y.round)) || ((x.date+(x.time||'')).localeCompare(y.date+(y.time||''))));
   let html=`<div class="stand-title">${compLabel(c)}</div>`;
   if(!list.length){ box.innerHTML=html+'<div class="empty">경기가 없습니다.</div>'; return; }
-  let lastR=null;
-  list.forEach(g=>{ const r=g.round||'기타'; if(r!==lastR){ html+=`<div class="date-group">${r}</div>`; lastR=r; } html+=gameCard(g, true); });
+  // 라운드(결승→예선) → 그 안에서 편성일(날짜)별로 다시 구분
+  let lastR=null, lastD=null;
+  list.forEach(g=>{
+    const r=g.round||'기타';
+    if(r!==lastR){ html+=`<div class="round-group">${r}</div>`; lastR=r; lastD=null; }
+    const d=g.date||'';
+    if(d!==lastD){ html+=`<div class="bracket-date">${d?fmtDateHeader(d):'일정 미정'}</div>`; lastD=d; }
+    html+=gameCard(g, true);
+  });
   box.innerHTML=html;
 }
 
