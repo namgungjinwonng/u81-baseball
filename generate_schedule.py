@@ -624,8 +624,14 @@ function renderStandings(c, box){
 }
 function renderBracket(c, box){
   const rf=document.getElementById('roundFilter').value;
-  const list=GAMES.filter(g=>g.title===c && (!rf || g.round===rf))
-    .sort((x,y)=> (roundRank(x.round)-roundRank(y.round)) || ((y.date+(y.time||'')).localeCompare(x.date+(x.time||''))));  // 라운드 안에서는 최신 날짜부터
+  const list=GAMES.filter(g=>g.title===c && (!rf || g.round===rf)).sort((x,y)=>{
+    const rr=roundRank(x.round)-roundRank(y.round); if(rr) return rr;
+    const fx=(x.status==='예정')?0:1, fy=(y.status==='예정')?0:1;   // 0=미완료(예정,위), 1=완료·취소(아래)
+    if(fx!==fy) return fx-fy;
+    const kx=x.date+(x.time||''), ky=y.date+(y.time||'');
+    return fx===0 ? kx.localeCompare(ky)    // 예정: 오름차순(가까운 순)
+                  : ky.localeCompare(kx);   // 완료·취소: 내림차순(최신순)
+  });
   let html=`<div class="stand-title">${compLabel(c)}</div>`;
   if(!list.length){ box.innerHTML=html+'<div class="empty">경기가 없습니다.</div>'; return; }
   // 라운드(결승→예선) → 그 안에서 편성일(날짜)별로 다시 구분
