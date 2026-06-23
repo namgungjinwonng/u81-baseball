@@ -300,6 +300,19 @@ tbody tr:nth-child(even):hover {{ background: #fdeef1; }}
     .modal-body th:nth-child(5), .modal-body td:nth-child(5) {{ width: 22%; }}
     .modal-body th:nth-child(6), .modal-body td:nth-child(6) {{ width: 18%; }}
 
+    /* 검색 결과 테이블: 가로 스크롤 없이 한 화면 (모달과 동일 방식) */
+    #searchResults .table-wrap {{ overflow-x: hidden; }}
+    #searchTable {{ min-width: 0; font-size: 11px; table-layout: fixed; }}
+    #searchTable td, #searchTable th {{ padding: 7px 2px; white-space: normal; word-break: keep-all; }}
+    #searchTable .pos-badge {{ padding: 3px 5px; font-size: 10px; }}
+    #searchTable th:nth-child(1), #searchTable td:nth-child(1) {{ width: 16%; }}
+    #searchTable th:nth-child(2), #searchTable td:nth-child(2) {{ width: 9%; }}
+    #searchTable th:nth-child(3), #searchTable td:nth-child(3) {{ width: 17%; }}
+    #searchTable th:nth-child(4), #searchTable td:nth-child(4) {{ width: 15%; }}
+    #searchTable th:nth-child(5), #searchTable td:nth-child(5) {{ width: 9%; }}
+    #searchTable th:nth-child(6), #searchTable td:nth-child(6) {{ width: 22%; }}
+    #searchTable th:nth-child(7), #searchTable td:nth-child(7) {{ width: 12%; }}
+
     #pagination button {{ padding: 8px 10px !important; font-size: 13px; }}
 }}
 
@@ -433,7 +446,7 @@ tbody tr:nth-child(even):hover {{ background: #fdeef1; }}
         <button class="search-btn reset-btn" onclick="resetSearch()">팀 목록으로 돌아가기</button>
     </div>
     <div class="table-wrap">
-        <table>
+        <table id="searchTable">
             <thead>
                 <tr>
                     <th>소속</th>
@@ -443,7 +456,6 @@ tbody tr:nth-child(even):hover {{ background: #fdeef1; }}
                     <th>학년</th>
                     <th>신장/체중</th>
                     <th>투타</th>
-                    <th>지역</th>
                 </tr>
             </thead>
             <tbody id="searchTableBody"></tbody>
@@ -577,7 +589,6 @@ function doSearch() {{
             <td><span class="grade-badge ${{gradeClass}}">${{p.grade || '-'}}</span></td>
             <td>${{p.height_weight || '-'}}</td>
             <td>${{p.throw_bat || '-'}}</td>
-            <td>${{p.region}}</td>
         </tr>`;
     }}).join('');
 }}
