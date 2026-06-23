@@ -1,6 +1,6 @@
 {
   "year": 2026,
-  "updated": "2026-06-23 10:20",
+  "updated": "2026-06-23 11:24",
   "games": [
     {
       "game_idx": "36897",
@@ -14985,7 +14985,7 @@
       "away": {
         "name": "소래고",
         "result": "승",
-        "score": 17
+        "score": 34
       },
       "home": {
         "name": "화성동탄B(U-18)",
@@ -15022,13 +15022,13 @@
       "status": "완료",
       "away": {
         "name": "세원고",
-        "result": "승",
+        "result": "패",
         "score": 4
       },
       "home": {
         "name": "경민IT고",
-        "result": "패",
-        "score": 0
+        "result": "승",
+        "score": 5
       }
     },
     {
@@ -15057,16 +15057,16 @@
       "time": "12:00",
       "venue": "화성트윈파크 2구장",
       "round": "리그전",
-      "status": "예정",
+      "status": "완료",
       "away": {
         "name": "신흥고",
-        "result": "",
-        "score": null
+        "result": "무",
+        "score": 0
       },
       "home": {
         "name": "충훈고",
-        "result": "",
-        "score": null
+        "result": "무",
+        "score": 0
       }
     },
     {
