@@ -625,7 +625,7 @@ function renderStandings(c, box){
 function renderBracket(c, box){
   const rf=document.getElementById('roundFilter').value;
   const list=GAMES.filter(g=>g.title===c && (!rf || g.round===rf))
-    .sort((x,y)=> (roundRank(x.round)-roundRank(y.round)) || ((x.date+(x.time||'')).localeCompare(y.date+(y.time||''))));
+    .sort((x,y)=> (roundRank(x.round)-roundRank(y.round)) || ((y.date+(y.time||'')).localeCompare(x.date+(x.time||''))));  // 라운드 안에서는 최신 날짜부터
   let html=`<div class="stand-title">${compLabel(c)}</div>`;
   if(!list.length){ box.innerHTML=html+'<div class="empty">경기가 없습니다.</div>'; return; }
   // 라운드(결승→예선) → 그 안에서 편성일(날짜)별로 다시 구분
