@@ -183,7 +183,9 @@ body { font-family: 'Montserrat','Malgun Gothic','Apple SD Gothic Neo',sans-seri
 .comp-filters #compFilter { width: 100%; padding: 10px 12px; border: 2px solid #cdd3da; border-radius: 2px; font-size: 14px; font-weight: 700; color: #002D62; }
 
 /* 시합별 순위표 */
-.stand-title { font-size: 13px; font-weight: 800; color: #002D62; margin: 2px 0 10px; line-height: 1.4; }
+.stand-title { font-size: 13px; font-weight: 800; color: #002D62; margin: 2px 0 4px; line-height: 1.4; }
+.stand-note { font-size: 11px; color: #888; margin: 0 0 10px; line-height: 1.4; }
+table.stand .pv { font-weight: 800; color: #002D62; }
 .stand-wrap { background: #fff; border: 2px solid #002D62; border-radius: 2px; overflow: hidden; }
 table.stand { width: 100%; border-collapse: collapse; font-size: 13px; }
 table.stand thead { background: #002D62; color: #fff; }
@@ -505,22 +507,63 @@ function fillCompOptions(){
     opts.map(o=>`<option value="${o.v.replace(/"/g,'&quot;')}">${o.label}</option>`).join('');
   onCompChange();
 }
+// 경기 한 건에서 팀 me의 승/패/무 ('w'/'l'/'d') 판정 (result 우선, 없으면 점수)
+function outcome(me, opp){
+  if(me.result==='승') return 'w';
+  if(me.result==='패') return 'l';
+  if(me.result==='무') return 'd';
+  if(me.score!=null && opp.score!=null){
+    if(me.score>opp.score) return 'w';
+    if(me.score<opp.score) return 'l';
+    return 'd';
+  }
+  return null;
+}
 function compStandings(title){
-  const rec={};
-  GAMES.forEach(g=>{
-    if(g.title!==title || g.status!=='완료') return;
-    ['away','home'].forEach(s=>{ const me=g[s]; if(!me.name) return;
-      if(!rec[me.name]) rec[me.name]={name:me.name,played:0,w:0,l:0,d:0};
-      rec[me.name].played++;
-      if(me.result==='승') rec[me.name].w++;
-      else if(me.result==='패') rec[me.name].l++;
-      else if(me.result==='무') rec[me.name].d++;
-    });
+  const games=GAMES.filter(g=>g.title===title && g.status==='완료');
+  const T={};
+  function ensure(n){ if(!T[n]) T[n]={name:n,played:0,w:0,l:0,d:0,rf:0,ra:0,pts:0}; return T[n]; }
+  games.forEach(g=>{
+    const a=g.away,h=g.home; if(!a.name||!h.name) return;
+    const oa=outcome(a,h), oh=outcome(h,a); if(!oa||!oh) return;
+    const ta=ensure(a.name), th=ensure(h.name);
+    ta.played++; th.played++;
+    if(oa==='w')ta.w++; else if(oa==='l')ta.l++; else ta.d++;
+    if(oh==='w')th.w++; else if(oh==='l')th.l++; else th.d++;
+    if(a.score!=null && h.score!=null){ ta.rf+=a.score; ta.ra+=h.score; th.rf+=h.score; th.ra+=a.score; }
   });
-  const arr=Object.values(rec);
-  arr.forEach(r=>{ r.pct=(r.w+r.l)? r.w/(r.w+r.l):0; });
-  arr.sort((a,b)=> b.pct-a.pct || b.w-a.w || a.l-b.l || a.name.localeCompare(b.name,'ko'));
-  return arr;
+  const arr=Object.values(T);
+  arr.forEach(t=>{ t.pts=t.w*2+t.d; });   // 승점: 승2 / 무1 / 패0
+
+  // 동률(승점) 팀들 간 미니리그 집계 (승자승 → 실점 → 득점)
+  function mini(group){
+    const set=new Set(group.map(t=>t.name)), m={};
+    group.forEach(t=>m[t.name]={pts:0,ra:0,rf:0});
+    games.forEach(g=>{
+      const a=g.away,h=g.home; if(!set.has(a.name)||!set.has(h.name)) return;
+      const oa=outcome(a,h), oh=outcome(h,a); if(!oa||!oh) return;
+      if(oa==='w')m[a.name].pts+=2; else if(oa==='d')m[a.name].pts++;
+      if(oh==='w')m[h.name].pts+=2; else if(oh==='d')m[h.name].pts++;
+      if(a.score!=null && h.score!=null){ m[a.name].rf+=a.score; m[a.name].ra+=h.score; m[h.name].rf+=h.score; m[h.name].ra+=a.score; }
+    });
+    return m;
+  }
+  arr.sort((a,b)=> b.pts-a.pts || a.name.localeCompare(b.name,'ko'));
+  const res=[]; let i=0;
+  while(i<arr.length){
+    let j=i; while(j<arr.length && arr[j].pts===arr[i].pts) j++;
+    const group=arr.slice(i,j);
+    if(group.length>1){
+      const m=mini(group);
+      group.sort((a,b)=>
+        (m[b.name].pts-m[a.name].pts) ||   // 2순위: 승자승(동률 팀 간 승점)
+        (m[a.name].ra-m[b.name].ra) ||     // 3순위: 동률 팀 간 실점 적은 순
+        (m[b.name].rf-m[a.name].rf) ||     // 4순위: 동률 팀 간 득점 많은 순
+        a.name.localeCompare(b.name,'ko'));
+    }
+    group.forEach(t=>res.push(t)); i=j;
+  }
+  return res;
 }
 function onCompChange(){
   const c=document.getElementById('compFilter').value;
@@ -529,13 +572,14 @@ function onCompChange(){
   const arr=compStandings(c);
   const hasD=arr.some(r=>r.d>0);
   let html=`<div class="stand-title">${c}</div>`;
+  html+='<div class="stand-note">순위: 승점(승 2 · 무 1 · 패 0) → 승자승 → 동률 팀 간 실점 → 득점</div>';
   if(!arr.length){ box.innerHTML=html+'<div class="empty">완료된 경기가 없습니다.</div>'; return; }
-  html+='<div class="stand-wrap"><table class="stand"><thead><tr><th>순위</th><th>학교</th><th>경기</th><th>승</th><th>패</th>'+(hasD?'<th>무</th>':'')+'<th>승률</th></tr></thead><tbody>';
+  html+='<div class="stand-wrap"><table class="stand"><thead><tr><th>순위</th><th>학교</th><th>경기</th><th>승</th><th>패</th>'+(hasD?'<th>무</th>':'')+'<th>승점</th></tr></thead><tbody>';
   arr.forEach((r,i)=>{
     html+=`<tr onclick="openTeamModal('${r.name.replace(/'/g,"\\'")}')">
       <td class="rk">${i+1}</td><td class="snm">${r.name}</td><td>${r.played}</td>
       <td class="wv">${r.w}</td><td class="lv">${r.l}</td>${hasD?`<td>${r.d}</td>`:''}
-      <td>${r.pct.toFixed(3)}</td></tr>`;
+      <td class="pv">${r.pts}</td></tr>`;
   });
   html+='</tbody></table></div>';
   box.innerHTML=html;
