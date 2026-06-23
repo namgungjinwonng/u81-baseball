@@ -1,6 +1,6 @@
 {
   "year": 2026,
-  "updated": "2026-06-23 09:57",
+  "updated": "2026-06-23 10:20",
   "games": [
     {
       "game_idx": "36897",
@@ -14985,7 +14985,7 @@
       "away": {
         "name": "소래고",
         "result": "승",
-        "score": 11
+        "score": 17
       },
       "home": {
         "name": "화성동탄B(U-18)",
@@ -15023,7 +15023,7 @@
       "away": {
         "name": "세원고",
         "result": "승",
-        "score": 2
+        "score": 4
       },
       "home": {
         "name": "경민IT고",
