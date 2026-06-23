@@ -187,15 +187,15 @@ body { font-family: 'Montserrat','Malgun Gothic','Apple SD Gothic Neo',sans-seri
 .stand-note { font-size: 11px; color: #888; margin: 0 0 10px; line-height: 1.4; }
 table.stand .pv { font-weight: 800; color: #002D62; }
 .stand-wrap { background: #fff; border: 2px solid #002D62; border-radius: 2px; overflow: hidden; }
-table.stand { width: 100%; border-collapse: collapse; font-size: 13px; }
+table.stand { width: 100%; border-collapse: collapse; font-size: 12px; }
 table.stand thead { background: #002D62; color: #fff; }
-table.stand th { padding: 9px 4px; font-weight: 700; white-space: nowrap; }
-table.stand td { padding: 9px 4px; text-align: center; border-bottom: 1px solid #eee; }
+table.stand th { padding: 8px 3px; font-weight: 700; white-space: nowrap; }
+table.stand td { padding: 8px 3px; text-align: center; border-bottom: 1px solid #eee; }
 table.stand tbody tr { cursor: pointer; }
 table.stand tbody tr:nth-child(even) { background: #fafafa; }
 table.stand tbody tr:hover { background: #fdeef1; box-shadow: inset 3px 0 0 #BA0C2F; }
-table.stand .rk { font-weight: 800; color: #002D62; width: 38px; }
-table.stand .snm { text-align: left; font-weight: 700; color: #002D62; padding-left: 10px; }
+table.stand .rk { font-weight: 800; color: #002D62; width: 30px; }
+table.stand .snm { text-align: left; font-weight: 700; color: #002D62; padding-left: 8px; word-break: keep-all; }
 table.stand .wv { color: #1A7A4C; font-weight: 800; }
 table.stand .lv { color: #C8102E; font-weight: 800; }
 
@@ -574,12 +574,12 @@ function onCompChange(){
   let html=`<div class="stand-title">${c}</div>`;
   html+='<div class="stand-note">순위: 승점(승 2 · 무 1 · 패 0) → 승자승 → 동률 팀 간 실점 → 득점</div>';
   if(!arr.length){ box.innerHTML=html+'<div class="empty">완료된 경기가 없습니다.</div>'; return; }
-  html+='<div class="stand-wrap"><table class="stand"><thead><tr><th>순위</th><th>학교</th><th>경기</th><th>승</th><th>패</th>'+(hasD?'<th>무</th>':'')+'<th>승점</th></tr></thead><tbody>';
+  html+='<div class="stand-wrap"><table class="stand"><thead><tr><th>순위</th><th>학교</th><th>경기</th><th>승</th><th>패</th>'+(hasD?'<th>무</th>':'')+'<th>승점</th><th>득점</th><th>실점</th></tr></thead><tbody>';
   arr.forEach((r,i)=>{
     html+=`<tr onclick="openTeamModal('${r.name.replace(/'/g,"\\'")}')">
       <td class="rk">${i+1}</td><td class="snm">${r.name}</td><td>${r.played}</td>
       <td class="wv">${r.w}</td><td class="lv">${r.l}</td>${hasD?`<td>${r.d}</td>`:''}
-      <td class="pv">${r.pts}</td></tr>`;
+      <td class="pv">${r.pts}</td><td>${r.rf}</td><td>${r.ra}</td></tr>`;
   });
   html+='</tbody></table></div>';
   box.innerHTML=html;
