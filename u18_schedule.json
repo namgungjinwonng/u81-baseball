@@ -1,6 +1,6 @@
 {
   "year": 2026,
-  "updated": "2026-06-23 15:59",
+  "updated": "2026-06-23 17:03",
   "games": [
     {
       "game_idx": "36897",
@@ -15098,13 +15098,13 @@
       "status": "완료",
       "away": {
         "name": "청담고",
-        "result": "승",
-        "score": 3
+        "result": "무",
+        "score": 4
       },
       "home": {
         "name": "야탑고",
-        "result": "패",
-        "score": 0
+        "result": "무",
+        "score": 4
       }
     },
     {
@@ -15118,12 +15118,12 @@
       "away": {
         "name": "비봉고",
         "result": "패",
-        "score": 4
+        "score": 5
       },
       "home": {
         "name": "율곡고야구단",
         "result": "승",
-        "score": 5
+        "score": 9
       }
     },
     {
@@ -15133,16 +15133,16 @@
       "time": "14:30",
       "venue": "이천종합운동장 꿈의구장",
       "round": "리그전",
-      "status": "예정",
+      "status": "완료",
       "away": {
         "name": "제물포고",
-        "result": "",
-        "score": null
+        "result": "패",
+        "score": 0
       },
       "home": {
         "name": "진영고",
-        "result": "",
-        "score": null
+        "result": "승",
+        "score": 1
       }
     },
     {
@@ -15155,13 +15155,13 @@
       "status": "완료",
       "away": {
         "name": "선린인터넷고",
-        "result": "무",
-        "score": 0
+        "result": "승",
+        "score": 13
       },
       "home": {
         "name": "성남고",
-        "result": "무",
-        "score": 0
+        "result": "패",
+        "score": 2
       }
     },
     {
