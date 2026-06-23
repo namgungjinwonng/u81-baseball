@@ -1,6 +1,6 @@
 {
   "year": 2026,
-  "updated": "2026-06-23 11:24",
+  "updated": "2026-06-23 12:09",
   "games": [
     {
       "game_idx": "36897",
@@ -15003,13 +15003,13 @@
       "status": "완료",
       "away": {
         "name": "인천고",
-        "result": "패",
-        "score": 1
+        "result": "무",
+        "score": 4
       },
       "home": {
         "name": "동산고",
-        "result": "승",
-        "score": 2
+        "result": "무",
+        "score": 4
       }
     },
     {
@@ -15038,16 +15038,16 @@
       "time": "12:00",
       "venue": "화성히어로즈 베이스볼파크",
       "round": "리그전",
-      "status": "예정",
+      "status": "완료",
       "away": {
         "name": "상우고야구단",
-        "result": "",
-        "score": null
+        "result": "승",
+        "score": 2
       },
       "home": {
         "name": "안산공업고",
-        "result": "",
-        "score": null
+        "result": "패",
+        "score": 1
       }
     },
     {
@@ -15060,13 +15060,13 @@
       "status": "완료",
       "away": {
         "name": "신흥고",
-        "result": "무",
+        "result": "패",
         "score": 0
       },
       "home": {
         "name": "충훈고",
-        "result": "무",
-        "score": 0
+        "result": "승",
+        "score": 1
       }
     },
     {
