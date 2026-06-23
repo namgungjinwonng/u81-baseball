@@ -174,6 +174,14 @@ body { font-family: 'Montserrat','Malgun Gothic','Apple SD Gothic Neo',sans-seri
 .team-card-body .rc .n { font-size: 18px; font-weight: 800; }
 .team-card-body .rc .l { font-size: 10px; color: #888; font-weight: 700; }
 
+/* 시합별 단계 선택 */
+.comp-filters { flex-direction: column; align-items: stretch; gap: 10px; }
+.comp-filters .seg { display: flex; }
+.comp-filters .seg-btn { flex: 1; padding: 9px 0; border: 2px solid #002D62; background: #fff; color: #002D62; font-size: 13px; font-weight: 700; cursor: pointer; }
+.comp-filters .seg-btn:not(:first-child) { border-left: none; }
+.comp-filters .seg-btn.active { background: #002D62; color: #fff; }
+.comp-filters #compFilter { width: 100%; padding: 10px 12px; border: 2px solid #cdd3da; border-radius: 2px; font-size: 14px; font-weight: 700; color: #002D62; }
+
 /* 시합별 순위표 */
 .stand-title { font-size: 13px; font-weight: 800; color: #002D62; margin: 2px 0 10px; line-height: 1.4; }
 .stand-wrap { background: #fff; border: 2px solid #002D62; border-radius: 2px; overflow: hidden; }
@@ -303,9 +311,16 @@ table.stand .lv { color: #C8102E; font-weight: 800; }
   </div>
 
   <div id="compView" style="display:none">
-    <div class="filters">
-      <label>시합</label>
-      <select id="compFilter" onchange="onCompChange()" style="flex:1;min-width:160px"></select>
+    <div class="filters comp-filters">
+      <div class="seg" id="compTypeSeg">
+        <button class="seg-btn active" data-type="league" onclick="setCompType('league')">주말리그</button>
+        <button class="seg-btn" data-type="cup" onclick="setCompType('cup')">전국대회</button>
+      </div>
+      <div class="seg" id="phaseSeg">
+        <button class="seg-btn" data-phase="전반기" onclick="setPhase('전반기')">전반기</button>
+        <button class="seg-btn active" data-phase="후반기" onclick="setPhase('후반기')">후반기</button>
+      </div>
+      <select id="compFilter" onchange="onCompChange()"></select>
     </div>
     <div id="standingsView"></div>
   </div>
@@ -455,10 +470,40 @@ function clearSchool(){ document.getElementById('teamSearch').value=''; document
 
 /* ===== 시합별 (대회 순위) ===== */
 const comps=[...new Set(GAMES.map(g=>g.title).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'ko'));
-function fillComps(){
+// 주말리그 = 제목에 '주말리그 전반기/후반기' 포함 / 전국대회 = 그 외
+function isLeague(t){ return /주말리그\s*(전반기|후반기)/.test(t||''); }
+function leaguePhase(t){ const m=(t||'').match(/주말리그\s*(전반기|후반기)/); return m?m[1]:''; }
+function leagueRegion(t){ const m=(t||'').match(/\(([^)]+)\)\s*$/); return m?m[1]:(t||''); }
+const leagueComps=comps.filter(isLeague);
+const cupComps=comps.filter(c=>!isLeague(c)).sort((a,b)=>a.localeCompare(b,'ko'));
+let compType='league', compPhase='후반기';
+
+function setCompType(type){
+  compType=type;
+  document.querySelectorAll('#compTypeSeg .seg-btn').forEach(b=>b.classList.toggle('active', b.dataset.type===type));
+  document.getElementById('phaseSeg').style.display=(type==='league')?'':'none';
+  fillCompOptions();
+}
+function setPhase(p){
+  compPhase=p;
+  document.querySelectorAll('#phaseSeg .seg-btn').forEach(b=>b.classList.toggle('active', b.dataset.phase===p));
+  fillCompOptions();
+}
+function fillCompOptions(){
   const sel=document.getElementById('compFilter');
-  sel.innerHTML='<option value="">시합을 선택하세요</option>'+
-    comps.map(c=>`<option value="${c.replace(/"/g,'&quot;')}">${shortTitle(c)}</option>`).join('');
+  let opts, ph;
+  if(compType==='league'){
+    opts=leagueComps.filter(c=>leaguePhase(c)===compPhase)
+      .map(c=>({v:c, label:leagueRegion(c)}))
+      .sort((a,b)=>a.label.localeCompare(b.label,'ko'));
+    ph='권역 선택';
+  } else {
+    opts=cupComps.map(c=>({v:c, label:shortTitle(c)}));
+    ph='대회 선택';
+  }
+  sel.innerHTML='<option value="">'+ph+'</option>'+
+    opts.map(o=>`<option value="${o.v.replace(/"/g,'&quot;')}">${o.label}</option>`).join('');
+  onCompChange();
 }
 function compStandings(title){
   const rec={};
@@ -513,8 +558,7 @@ function setView(v){
   renderCalendar();
   fillRegions();
   doSchoolSearch();
-  fillComps();
-  onCompChange();
+  setCompType('league');
 })();
 
 async function reloadPage() {
