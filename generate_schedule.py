@@ -180,7 +180,7 @@ body { font-family: 'Montserrat','Malgun Gothic','Apple SD Gothic Neo',sans-seri
 .comp-filters .seg-btn { flex: 1; padding: 9px 0; border: 2px solid #002D62; background: #fff; color: #002D62; font-size: 13px; font-weight: 700; cursor: pointer; }
 .comp-filters .seg-btn:not(:first-child) { border-left: none; }
 .comp-filters .seg-btn.active { background: #002D62; color: #fff; }
-.comp-filters #compFilter { width: 100%; padding: 10px 12px; border: 2px solid #cdd3da; border-radius: 2px; font-size: 14px; font-weight: 700; color: #002D62; }
+.comp-filters #compFilter, .comp-filters #roundFilter { width: 100%; padding: 10px 12px; border: 2px solid #cdd3da; border-radius: 2px; font-size: 14px; font-weight: 700; color: #002D62; }
 
 /* 시합별 순위표 */
 .stand-title { font-size: 13px; font-weight: 800; color: #002D62; margin: 2px 0 4px; line-height: 1.4; }
@@ -323,6 +323,7 @@ table.stand .lv { color: #C8102E; font-weight: 800; }
         <button class="seg-btn active" data-phase="후반기" onclick="setPhase('후반기')">후반기</button>
       </div>
       <select id="compFilter" onchange="onCompChange()"></select>
+      <select id="roundFilter" onchange="onRoundChange()" style="display:none"></select>
     </div>
     <div id="standingsView"></div>
   </div>
@@ -574,12 +575,27 @@ function openCompTeam(name){ openTeamModal(name, curComp); }
 const ROUND_RANK={'결승전':1,'결승':1,'준결승전':2,'준결승':2,'4강전':2,'8강전':3,'8강':3,'16강전':4,'16강':4,'32강전':5,'32강':5,'64강전':6,'2회전':7,'1회전':8,'예선전':9,'예선':9,'리그전':9};
 function roundRank(r){ const k=(r||'').trim(); return (ROUND_RANK[k]!=null)?ROUND_RANK[k]:50; }
 
+function fillRoundFilter(title){
+  const rf=document.getElementById('roundFilter');
+  if(!title || isLeague(title)){ rf.style.display='none'; rf.innerHTML=''; return; }
+  // 옵션 순서: 예선전 → 결승전 (roundRank 내림차순)
+  const rounds=[...new Set(GAMES.filter(g=>g.title===title).map(g=>g.round).filter(Boolean))]
+    .sort((a,b)=> roundRank(b)-roundRank(a));
+  rf.innerHTML='<option value="">전체</option>'+rounds.map(r=>`<option value="${r}">${r}</option>`).join('');
+  rf.style.display='';
+}
+function onRoundChange(){
+  const c=document.getElementById('compFilter').value;
+  if(c && !isLeague(c)) renderBracket(c, document.getElementById('standingsView'));
+}
 function onCompChange(){
   const c=document.getElementById('compFilter').value;
   curComp=c;
   const box=document.getElementById('standingsView');
-  if(!c){ box.innerHTML='<div class="empty">위에서 시합을 선택하면 순위·경기가 표시됩니다.</div>'; return; }
-  if(isLeague(c)) renderStandings(c, box); else renderBracket(c, box);
+  if(!c){ document.getElementById('roundFilter').style.display='none';
+    box.innerHTML='<div class="empty">위에서 시합을 선택하면 순위·경기가 표시됩니다.</div>'; return; }
+  if(isLeague(c)){ document.getElementById('roundFilter').style.display='none'; renderStandings(c, box); }
+  else { fillRoundFilter(c); renderBracket(c, box); }
 }
 function renderStandings(c, box){
   const arr=compStandings(c);
@@ -599,7 +615,8 @@ function renderStandings(c, box){
   box.innerHTML=html;
 }
 function renderBracket(c, box){
-  const list=GAMES.filter(g=>g.title===c)
+  const rf=document.getElementById('roundFilter').value;
+  const list=GAMES.filter(g=>g.title===c && (!rf || g.round===rf))
     .sort((x,y)=> (roundRank(x.round)-roundRank(y.round)) || ((x.date+(x.time||'')).localeCompare(y.date+(y.time||''))));
   let html=`<div class="stand-title">${c}</div>`;
   if(!list.length){ box.innerHTML=html+'<div class="empty">경기가 없습니다.</div>'; return; }
