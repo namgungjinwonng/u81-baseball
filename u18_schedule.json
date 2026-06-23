@@ -1,6 +1,6 @@
 {
   "year": 2026,
-  "updated": "2026-06-23 15:03",
+  "updated": "2026-06-23 15:59",
   "games": [
     {
       "game_idx": "36897",
@@ -15080,7 +15080,7 @@
       "away": {
         "name": "인창고",
         "result": "승",
-        "score": 6
+        "score": 9
       },
       "home": {
         "name": "의왕BC(U-18)",
@@ -15099,7 +15099,7 @@
       "away": {
         "name": "청담고",
         "result": "승",
-        "score": 2
+        "score": 3
       },
       "home": {
         "name": "야탑고",
@@ -15117,13 +15117,13 @@
       "status": "완료",
       "away": {
         "name": "비봉고",
-        "result": "무",
-        "score": 0
+        "result": "패",
+        "score": 4
       },
       "home": {
         "name": "율곡고야구단",
-        "result": "무",
-        "score": 0
+        "result": "승",
+        "score": 5
       }
     },
     {
@@ -15152,16 +15152,16 @@
       "time": "16:00",
       "venue": "목동야구장",
       "round": "리그전",
-      "status": "예정",
+      "status": "완료",
       "away": {
         "name": "선린인터넷고",
-        "result": "",
-        "score": null
+        "result": "무",
+        "score": 0
       },
       "home": {
         "name": "성남고",
-        "result": "",
-        "score": null
+        "result": "무",
+        "score": 0
       }
     },
     {
@@ -15501,7 +15501,7 @@
         "score": null
       },
       "home": {
-        "name": "상우고",
+        "name": "상우고야구단",
         "result": "",
         "score": null
       }
