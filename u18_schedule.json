@@ -1,6 +1,6 @@
 {
   "year": 2026,
-  "updated": "2026-06-23 09:52",
+  "updated": "2026-06-23 09:57",
   "games": [
     {
       "game_idx": "36897",
@@ -15003,13 +15003,13 @@
       "status": "완료",
       "away": {
         "name": "인천고",
-        "result": "승",
+        "result": "패",
         "score": 1
       },
       "home": {
         "name": "동산고",
-        "result": "패",
-        "score": 0
+        "result": "승",
+        "score": 2
       }
     },
     {
