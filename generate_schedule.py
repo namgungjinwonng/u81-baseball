@@ -166,17 +166,28 @@ body { font-family: 'Montserrat','Malgun Gothic','Apple SD Gothic Neo',sans-seri
 .team-card-body .rc .l { font-size: 10px; color: #888; font-weight: 700; }
 
 /* 경기 카드 */
-.game { background: #fff; border: 2px solid #002D62; border-radius: 2px; padding: 10px 12px; margin-bottom: 8px; cursor: pointer; transition: border-color 0.15s; }
+.game { background: #fff; border: 2px solid #002D62; border-radius: 2px; padding: 12px 13px; margin-bottom: 8px; cursor: pointer; transition: border-color 0.15s; }
 .game:hover { border-color: #BA0C2F; }
-.game .teamrow { display: flex; justify-content: space-between; align-items: center; font-size: 14px; margin-bottom: 4px; }
-.game .teamrow.win .tname { font-weight: 800; color: #002D62; }
-.game .teamrow .tname { font-weight: 600; }
-.game .teamrow .tscore { font-weight: 800; font-size: 15px; }
-.game .teamrow.win .tscore { color: #002D62; }
-.game .teamrow.lose .tscore { color: #888; }
-.game .meta { font-size: 11px; color: #888; margin-top: 6px; display: flex; justify-content: space-between; gap: 8px; border-top: 1px solid #eee; padding-top: 6px; }
+/* 상단: 대회명 + 단계 칩 */
+.game .gc-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 12px; }
+.game .comp { font-size: 11.5px; font-weight: 700; color: #002D62; line-height: 1.35; }
+.game .stage { font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: 2px; white-space: nowrap; flex-shrink: 0; }
+.game .stage.league { background: #EEF1F4; color: #44586B; }
+.game .stage.cup { background: #FBE9EC; color: #A8344B; }
+.game .stage.sched { background: #EEF1F4; color: #9AA0A6; }
+/* 점수 한 줄: 학교명 점수 승 : 패 점수 학교명 */
+.game .score-line { display: flex; justify-content: center; align-items: center; gap: 14px; flex-wrap: wrap; }
+.game .side { display: flex; align-items: center; gap: 10px; }
+.game .side .nm { font-size: 16px; font-weight: 600; letter-spacing: 0.5px; }
+.game .side .sc { font-size: 20px; font-weight: 800; }
+.game .side.win .nm { font-weight: 800; color: #002D62; }
+.game .side.win .sc { color: #002D62; }
+.game .side.lose .nm { color: #777; }
+.game .side.lose .sc { color: #999; }
+.game .colon { font-size: 18px; font-weight: 800; color: #BA0C2F; }
+.game .meta { font-size: 11px; color: #888; margin-top: 12px; display: flex; justify-content: space-between; gap: 8px; border-top: 1px solid #eee; padding-top: 7px; }
 .game .meta .rec-link { color: #BA0C2F; font-weight: 700; white-space: nowrap; }
-.rbadge { display: inline-block; font-size: 10px; font-weight: 700; color: #fff; padding: 1px 6px; border-radius: 2px; margin-left: 6px; vertical-align: 1px; }
+.rbadge { display: inline-block; font-size: 10px; font-weight: 700; color: #fff; padding: 1px 6px; border-radius: 2px; vertical-align: 1px; }
 .r-win { background: #1A7A4C; } .r-lose { background: #C8102E; } .r-draw { background: #9AA0A6; } .r-sched { background: #9AA0A6; } .r-cancel { background: #5C6B7A; }
 
 /* 모달 (선수 현황창과 동일) */
@@ -289,16 +300,30 @@ function regBadge(reg){ if(!reg) return ''; const c=regionColors[reg]||['#E8ECF0
 function openGame(idx){ window.open(BOX_URL+idx,'_blank'); }
 function fmtDateHeader(d){ const dt=new Date(d+'T00:00:00'); return `${dt.getMonth()+1}/${dt.getDate()} (${WD[dt.getDay()]})`; }
 function rb(r){ if(r==='승')return '<span class="rbadge r-win">승</span>'; if(r==='패')return '<span class="rbadge r-lose">패</span>'; if(r==='무')return '<span class="rbadge r-draw">무</span>'; return ''; }
+// 카드용 짧은 대회명: 맨 앞 연도만 제거 (청룡기·황금사자기 등 이름은 유지)
+function shortTitle(t){ return (t||'').replace(/^\s*\d{4}\s*/, '').trim(); }
+// 단계 칩 색: 토너먼트(결승/강 등)=cup, 리그/예선=league
+function stageCls(rnd){ return /결승|준결|[0-9]+강|왕중왕|플레이오프|토너/.test(rnd||'') ? 'cup' : 'league'; }
 function gameCard(g){
   const a=g.away,h=g.home;
-  const sched=g.status==='예정'?'<span class="rbadge r-sched">예정</span> ':(g.status==='취소'?'<span class="rbadge r-cancel">취소</span> ':'');
   const aWin=a.result==='승',hWin=h.result==='승';
+  const aCls=aWin?'win':(g.status==='완료'?'lose':''), hCls=hWin?'win':(g.status==='완료'?'lose':'');
   const aScore=a.score===null?'-':a.score,hScore=h.score===null?'-':h.score;
-  const metaLeft=[g.round,g.time,g.venue].filter(Boolean).join(' · ');
+  const comp=g.title?`<span class="comp">${shortTitle(g.title)}</span>`:'<span class="comp"></span>';
+  let stage='';
+  if(g.round) stage=`<span class="stage ${stageCls(g.round)}">${g.round}</span>`;
+  else if(g.status==='예정') stage='<span class="stage sched">예정</span>';
+  else if(g.status==='취소') stage='<span class="stage cup">취소</span>';
+  const sched=g.status==='예정'?'예정 · ':(g.status==='취소'?'취소 · ':'');
+  const metaLeft=sched+[g.time,g.venue].filter(Boolean).join(' · ');
   return `<div class="game" onclick="openGame('${g.game_idx}')">
-    <div class="teamrow ${aWin?'win':(g.status==='완료'?'lose':'')}"><span class="tname">${a.name} ${rb(a.result)}</span><span class="tscore">${aScore}</span></div>
-    <div class="teamrow ${hWin?'win':(g.status==='완료'?'lose':'')}"><span class="tname">${h.name} ${rb(h.result)}</span><span class="tscore">${hScore}</span></div>
-    <div class="meta"><span>${sched}${metaLeft}</span><span class="rec-link">기록 ›</span></div>
+    <div class="gc-top">${comp}${stage}</div>
+    <div class="score-line">
+      <span class="side ${aCls}"><span class="nm">${a.name}</span><span class="sc">${aScore}</span>${rb(a.result)}</span>
+      <span class="colon">:</span>
+      <span class="side ${hCls}">${rb(h.result)}<span class="sc">${hScore}</span><span class="nm">${h.name}</span></span>
+    </div>
+    <div class="meta"><span>${metaLeft}</span><span class="rec-link">기록 ›</span></div>
   </div>`;
 }
 
@@ -308,9 +333,13 @@ function closeModal(){ document.getElementById('schedModal').classList.remove('s
 document.addEventListener('keydown', e=>{ if(e.key==='Escape')closeModal(); });
 
 function openDateModal(ds){
-  const list=GAMES.filter(g=>g.date===ds).sort((x,y)=>(x.time||'').localeCompare(y.time||''));
+  // 대회(전체이름)별로 묶고, 그 안에서 시간순
+  const list=GAMES.filter(g=>g.date===ds).sort((x,y)=>
+    ((x.title||'').localeCompare(y.title||''))||((x.time||'').localeCompare(y.time||'')));
   document.getElementById('modalTitle').innerHTML=`${fmtDateHeader(ds)} <span style="font-size:13px;opacity:0.8">${list.length}경기</span>`;
-  document.getElementById('modalBody').innerHTML=list.length?list.map(gameCard).join(''):'<div class="empty">경기가 없습니다.</div>';
+  let html='', lastT=null;
+  list.forEach(g=>{ const t=g.title||'기타'; if(t!==lastT){ html+=`<div class="date-group">${t}</div>`; lastT=t; } html+=gameCard(g); });
+  document.getElementById('modalBody').innerHTML=list.length?html:'<div class="empty">경기가 없습니다.</div>';
   openModal();
 }
 

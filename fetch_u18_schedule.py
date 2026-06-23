@@ -92,6 +92,14 @@ def parse_box_score(game_idx):
         r.encoding = "utf-8"
         soup = BeautifulSoup(r.text, "html.parser")
 
+        # 대회명(시합 전체이름): <dl class="game_name"><dt>2026 ... 주말리그 후반기(서울권B)</dt>
+        title = ""
+        gname = soup.find("dl", class_="game_name")
+        if gname:
+            gdt = gname.find("dt")
+            if gdt:
+                title = re.sub(r"\s+", " ", gdt.get_text(" ", strip=True)).strip()
+
         # 날짜/시간/구장/라운드: "2026.05.02 09:30 / 목동야구장 / 예선전"
         date = time_ = venue = rnd = ""
         for dd in soup.find_all("dd"):
@@ -140,6 +148,7 @@ def parse_box_score(game_idx):
 
         return {
             "game_idx": game_idx,
+            "title": title,      # 대회명(시합 전체이름)
             "date": date,
             "time": time_,
             "venue": venue,
