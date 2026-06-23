@@ -1,6 +1,6 @@
 {
   "year": 2026,
-  "updated": "2026-06-23 21:18",
+  "updated": "2026-06-23 22:26",
   "games": [
     {
       "game_idx": "36897",
@@ -15175,12 +15175,12 @@
       "away": {
         "name": "서울자동차고",
         "result": "패",
-        "score": 2
+        "score": 3
       },
       "home": {
         "name": "휘문고",
         "result": "승",
-        "score": 6
+        "score": 8
       }
     },
     {
