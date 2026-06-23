@@ -460,7 +460,7 @@ if ('serviceWorker' in navigator) { navigator.serviceWorker.register('/sw.js').c
 let deferredPrompt;
 window.addEventListener('beforeinstallprompt', function(e){
   e.preventDefault(); deferredPrompt = e;
-  document.getElementById('installBtn').style.display = '';
+  document.getElementById('installBtn').style.display = 'inline-block';
 });
 function installApp(){
   if (!deferredPrompt) return;

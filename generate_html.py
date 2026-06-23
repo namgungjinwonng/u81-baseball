@@ -798,7 +798,7 @@ let deferredPrompt;
 window.addEventListener('beforeinstallprompt', function(e) {{
     e.preventDefault();
     deferredPrompt = e;
-    document.getElementById('installBtn').style.display = '';
+    document.getElementById('installBtn').style.display = 'inline-block';
 }});
 
 async function reloadPage() {{
