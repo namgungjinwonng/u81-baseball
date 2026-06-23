@@ -479,6 +479,10 @@ const comps=[...new Set(GAMES.map(g=>g.title).filter(Boolean))].sort((a,b)=>a.lo
 function isLeague(t){ return /주말리그\s*(전반기|후반기)/.test(t||''); }
 function leaguePhase(t){ const m=(t||'').match(/주말리그\s*(전반기|후반기)/); return m?m[1]:''; }
 function leagueRegion(t){ const m=(t||'').match(/\(([^)]+)\)\s*$/); return m?m[1]:(t||''); }
+// 전국대회 짧은 표기: 핵심 대회명은 유지, 장황한 수식어 제거
+function cupLabel(t){ return (t||'').replace(/^\s*\d{4}\s*/,'').replace(/\s*겸\s*주말리그\s*왕중왕전/,'').replace(/전국고교야구선수권대회/,'').replace(/전국고교야구대회/,'').replace(/\s+/g,' ').trim(); }
+// 화면 제목용: 리그=연도만 제거, 전국대회=cupLabel
+function compLabel(t){ return isLeague(t) ? shortTitle(t) : cupLabel(t); }
 const leagueComps=comps.filter(isLeague);
 const cupComps=comps.filter(c=>!isLeague(c)).sort((a,b)=>a.localeCompare(b,'ko'));
 let compType='league', compPhase='후반기';
@@ -503,7 +507,7 @@ function fillCompOptions(){
       .sort((a,b)=>a.label.localeCompare(b.label,'ko'));
     ph='권역 선택';
   } else {
-    opts=cupComps.map(c=>({v:c, label:shortTitle(c)}));
+    opts=cupComps.map(c=>({v:c, label:cupLabel(c)}));
     ph='대회 선택';
   }
   sel.innerHTML='<option value="">'+ph+'</option>'+
@@ -600,7 +604,7 @@ function onCompChange(){
 function renderStandings(c, box){
   const arr=compStandings(c);
   const hasD=arr.some(r=>r.d>0);
-  let html=`<div class="stand-title">${c}</div>`;
+  let html=`<div class="stand-title">${compLabel(c)}</div>`;
   html+='<div class="stand-note">순위: 승점(승 2 · 무 1 · 패 0) → 승자승 → 동률 팀 간 실점 → 득점</div>';
   if(!arr.length){ box.innerHTML=html+'<div class="empty">완료된 경기가 없습니다.</div>'; return; }
   html+='<div class="stand-wrap"><table class="stand"><thead><tr><th>순위</th><th>학교</th><th>경기</th><th>승</th><th>패</th>'+(hasD?'<th>무</th>':'')+'<th>승점</th><th>실점</th><th>득점</th></tr></thead><tbody>';
@@ -618,7 +622,7 @@ function renderBracket(c, box){
   const rf=document.getElementById('roundFilter').value;
   const list=GAMES.filter(g=>g.title===c && (!rf || g.round===rf))
     .sort((x,y)=> (roundRank(x.round)-roundRank(y.round)) || ((x.date+(x.time||'')).localeCompare(y.date+(y.time||''))));
-  let html=`<div class="stand-title">${c}</div>`;
+  let html=`<div class="stand-title">${compLabel(c)}</div>`;
   if(!list.length){ box.innerHTML=html+'<div class="empty">경기가 없습니다.</div>'; return; }
   let lastR=null;
   list.forEach(g=>{ const r=g.round||'기타'; if(r!==lastR){ html+=`<div class="date-group">${r}</div>`; lastR=r; } html+=gameCard(g, true); });
