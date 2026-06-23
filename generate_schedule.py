@@ -174,6 +174,21 @@ body { font-family: 'Montserrat','Malgun Gothic','Apple SD Gothic Neo',sans-seri
 .team-card-body .rc .n { font-size: 18px; font-weight: 800; }
 .team-card-body .rc .l { font-size: 10px; color: #888; font-weight: 700; }
 
+/* 시합별 순위표 */
+.stand-title { font-size: 13px; font-weight: 800; color: #002D62; margin: 2px 0 10px; line-height: 1.4; }
+.stand-wrap { background: #fff; border: 2px solid #002D62; border-radius: 2px; overflow: hidden; }
+table.stand { width: 100%; border-collapse: collapse; font-size: 13px; }
+table.stand thead { background: #002D62; color: #fff; }
+table.stand th { padding: 9px 4px; font-weight: 700; white-space: nowrap; }
+table.stand td { padding: 9px 4px; text-align: center; border-bottom: 1px solid #eee; }
+table.stand tbody tr { cursor: pointer; }
+table.stand tbody tr:nth-child(even) { background: #fafafa; }
+table.stand tbody tr:hover { background: #fdeef1; box-shadow: inset 3px 0 0 #BA0C2F; }
+table.stand .rk { font-weight: 800; color: #002D62; width: 38px; }
+table.stand .snm { text-align: left; font-weight: 700; color: #002D62; padding-left: 10px; }
+table.stand .wv { color: #1A7A4C; font-weight: 800; }
+table.stand .lv { color: #C8102E; font-weight: 800; }
+
 /* 경기 카드 */
 .game { background: #fff; border: 2px solid #002D62; border-radius: 2px; padding: 12px 13px; margin-bottom: 8px; cursor: pointer; transition: border-color 0.15s; }
 .game:hover { border-color: #BA0C2F; }
@@ -256,7 +271,8 @@ body { font-family: 'Montserrat','Malgun Gothic','Apple SD Gothic Neo',sans-seri
 
 <div class="viewbar">
   <button class="view-btn active" id="vbMonth" onclick="setView('month')">월별 일정</button>
-  <button class="view-btn" id="vbTeam" onclick="setView('team')">학교별</button>
+  <button class="view-btn" id="vbTeam" onclick="setView('team')">학교</button>
+  <button class="view-btn" id="vbComp" onclick="setView('comp')">시합</button>
 </div>
 
 <div class="container">
@@ -284,6 +300,14 @@ body { font-family: 'Montserrat','Malgun Gothic','Apple SD Gothic Neo',sans-seri
       <div class="result-count" id="schoolCount"></div>
     </div>
     <div class="team-grid" id="teamGrid"></div>
+  </div>
+
+  <div id="compView" style="display:none">
+    <div class="filters">
+      <label>시합</label>
+      <select id="compFilter" onchange="onCompChange()" style="flex:1;min-width:160px"></select>
+    </div>
+    <div id="standingsView"></div>
   </div>
 </div>
 
@@ -429,11 +453,56 @@ function doSchoolSearch(){
 }
 function clearSchool(){ document.getElementById('teamSearch').value=''; document.getElementById('regionFilter').value=''; doSchoolSearch(); }
 
+/* ===== 시합별 (대회 순위) ===== */
+const comps=[...new Set(GAMES.map(g=>g.title).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'ko'));
+function fillComps(){
+  const sel=document.getElementById('compFilter');
+  sel.innerHTML='<option value="">시합을 선택하세요</option>'+
+    comps.map(c=>`<option value="${c.replace(/"/g,'&quot;')}">${shortTitle(c)}</option>`).join('');
+}
+function compStandings(title){
+  const rec={};
+  GAMES.forEach(g=>{
+    if(g.title!==title || g.status!=='완료') return;
+    ['away','home'].forEach(s=>{ const me=g[s]; if(!me.name) return;
+      if(!rec[me.name]) rec[me.name]={name:me.name,played:0,w:0,l:0,d:0};
+      rec[me.name].played++;
+      if(me.result==='승') rec[me.name].w++;
+      else if(me.result==='패') rec[me.name].l++;
+      else if(me.result==='무') rec[me.name].d++;
+    });
+  });
+  const arr=Object.values(rec);
+  arr.forEach(r=>{ r.pct=(r.w+r.l)? r.w/(r.w+r.l):0; });
+  arr.sort((a,b)=> b.pct-a.pct || b.w-a.w || a.l-b.l || a.name.localeCompare(b.name,'ko'));
+  return arr;
+}
+function onCompChange(){
+  const c=document.getElementById('compFilter').value;
+  const box=document.getElementById('standingsView');
+  if(!c){ box.innerHTML='<div class="empty">위에서 시합을 선택하면 순위가 표시됩니다.</div>'; return; }
+  const arr=compStandings(c);
+  const hasD=arr.some(r=>r.d>0);
+  let html=`<div class="stand-title">${c}</div>`;
+  if(!arr.length){ box.innerHTML=html+'<div class="empty">완료된 경기가 없습니다.</div>'; return; }
+  html+='<div class="stand-wrap"><table class="stand"><thead><tr><th>순위</th><th>학교</th><th>경기</th><th>승</th><th>패</th>'+(hasD?'<th>무</th>':'')+'<th>승률</th></tr></thead><tbody>';
+  arr.forEach((r,i)=>{
+    html+=`<tr onclick="openTeamModal('${r.name.replace(/'/g,"\\'")}')">
+      <td class="rk">${i+1}</td><td class="snm">${r.name}</td><td>${r.played}</td>
+      <td class="wv">${r.w}</td><td class="lv">${r.l}</td>${hasD?`<td>${r.d}</td>`:''}
+      <td>${r.pct.toFixed(3)}</td></tr>`;
+  });
+  html+='</tbody></table></div>';
+  box.innerHTML=html;
+}
+
 function setView(v){
   document.getElementById('monthView').style.display=v==='month'?'':'none';
   document.getElementById('teamView').style.display=v==='team'?'':'none';
+  document.getElementById('compView').style.display=v==='comp'?'':'none';
   document.getElementById('vbMonth').classList.toggle('active',v==='month');
   document.getElementById('vbTeam').classList.toggle('active',v==='team');
+  document.getElementById('vbComp').classList.toggle('active',v==='comp');
 }
 
 (function init(){
@@ -444,6 +513,8 @@ function setView(v){
   renderCalendar();
   fillRegions();
   doSchoolSearch();
+  fillComps();
+  onCompChange();
 })();
 
 async function reloadPage() {
