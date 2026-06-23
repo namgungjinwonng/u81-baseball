@@ -119,6 +119,12 @@ body { font-family: 'Montserrat','Malgun Gothic','Apple SD Gothic Neo',sans-seri
     letter-spacing: 1px;
 }
 .reload-btn:hover { background: rgba(255,255,255,0.25); border-color: white; }
+.install-btn {
+    display: none; margin-top: 10px; padding: 10px 28px; border: 2px solid #4CAF50;
+    background: #4CAF50; color: white; border-radius: 25px;
+    font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.3s; letter-spacing: 1px;
+}
+.install-btn:hover { background: #45a049; border-color: #45a049; }
 
 .viewbar-spacer { height: 20px; }
 .viewbar { background: #fff; border-bottom: 4px solid #BA0C2F; padding: 34px 12px; display: flex; justify-content: center; gap: 8px; align-items: center; }
@@ -234,6 +240,7 @@ body { font-family: 'Montserrat','Malgun Gothic','Apple SD Gothic Neo',sans-seri
   <div class="subtitle update-info" style="margin-top:6px">마지막 갱신: __UPDATED__</div>
   <div class="subtitle update-info" style="margin-top:4px">본 앱은 비상업적 목적으로 운영되며, 모든 데이터 권한은 대한야구소프트볼협회에 있습니다.</div>
   <button class="reload-btn" onclick="reloadPage()">&#x21bb; 새로고침</button>
+  <button class="install-btn" id="installBtn" onclick="installApp()">&#x1F4F2; 앱 설치</button>
   <div class="refresh-spacer"></div>
   <div class="tabs">
     <a class="tab" href="u18_players.html">선수 현황</a>
@@ -448,6 +455,25 @@ async function reloadPage() {
 }
 
 if ('serviceWorker' in navigator) { navigator.serviceWorker.register('/sw.js').catch(()=>{}); }
+
+// PWA 설치 버튼: 설치 가능할 때만 노출, 이미 설치(standalone)면 숨김
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', function(e){
+  e.preventDefault(); deferredPrompt = e;
+  document.getElementById('installBtn').style.display = '';
+});
+function installApp(){
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt();
+  deferredPrompt.userChoice.then(function(c){
+    if (c.outcome === 'accepted') document.getElementById('installBtn').style.display = 'none';
+    deferredPrompt = null;
+  });
+}
+window.addEventListener('appinstalled', function(){ document.getElementById('installBtn').style.display = 'none'; });
+if (window.matchMedia('(display-mode: standalone)').matches || navigator.standalone) {
+  document.getElementById('installBtn').style.display = 'none';
+}
 </script>
 </body>
 </html>"""

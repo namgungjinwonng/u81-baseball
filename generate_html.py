@@ -371,8 +371,8 @@ tbody tr:nth-child(even):hover {{ background: #fdeef1; }}
     <div class="subtitle update-info" style="margin-top:6px;opacity:0.6;" id="updateDate">마지막 갱신: {update_date}</div>
     <div class="subtitle update-info" style="margin-top:4px;opacity:0.6;">본 앱은 비상업적 목적으로 운영되며, 모든 데이터 권한은 대한야구소프트볼협회에 있습니다.</div>
     <button class="refresh-btn" onclick="refreshData()" id="refreshBtn" style="display:none;">&#x21bb; 선수정보 갱신</button>
-    <button class="install-btn" id="installBtn" onclick="installApp()">&#x1F4F2; 앱 설치</button>
     <button class="reload-btn" onclick="reloadPage()">&#x21bb; 새로고침</button>
+    <button class="install-btn" id="installBtn" onclick="installApp()">&#x1F4F2; 앱 설치</button>
     <div id="refreshStatus" class="refresh-status"></div>
     <div class="tabs">
         <a class="tab active" href="u18_players.html">선수 현황</a>
