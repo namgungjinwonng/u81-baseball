@@ -1,6 +1,6 @@
 {
   "year": 2026,
-  "updated": "2026-06-23 14:02",
+  "updated": "2026-06-23 15:03",
   "games": [
     {
       "game_idx": "36897",
@@ -15041,13 +15041,13 @@
       "status": "완료",
       "away": {
         "name": "상우고야구단",
-        "result": "무",
+        "result": "패",
         "score": 5
       },
       "home": {
         "name": "안산공업고",
-        "result": "무",
-        "score": 5
+        "result": "승",
+        "score": 6
       }
     },
     {
@@ -15061,12 +15061,12 @@
       "away": {
         "name": "신흥고",
         "result": "승",
-        "score": 3
+        "score": 6
       },
       "home": {
         "name": "충훈고",
         "result": "패",
-        "score": 2
+        "score": 3
       }
     },
     {
@@ -15076,16 +15076,16 @@
       "time": "12:00",
       "venue": "이천종합운동장 꿈의구장",
       "round": "리그전",
-      "status": "예정",
+      "status": "완료",
       "away": {
         "name": "인창고",
-        "result": "",
-        "score": null
+        "result": "승",
+        "score": 6
       },
       "home": {
         "name": "의왕BC(U-18)",
-        "result": "",
-        "score": null
+        "result": "패",
+        "score": 0
       }
     },
     {
@@ -15095,16 +15095,16 @@
       "time": "14:30",
       "venue": "화성히어로즈 베이스볼파크",
       "round": "리그전",
-      "status": "예정",
+      "status": "완료",
       "away": {
         "name": "청담고",
-        "result": "",
-        "score": null
+        "result": "승",
+        "score": 2
       },
       "home": {
         "name": "야탑고",
-        "result": "",
-        "score": null
+        "result": "패",
+        "score": 0
       }
     },
     {
