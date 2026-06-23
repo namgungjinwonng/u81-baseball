@@ -304,12 +304,13 @@ function rb(r){ if(r==='승')return '<span class="rbadge r-win">승</span>'; if(
 function shortTitle(t){ return (t||'').replace(/^\s*\d{4}\s*/, '').trim(); }
 // 단계 칩 색: 토너먼트(결승/강 등)=cup, 리그/예선=league
 function stageCls(rnd){ return /결승|준결|[0-9]+강|왕중왕|플레이오프|토너/.test(rnd||'') ? 'cup' : 'league'; }
-function gameCard(g){
+function gameCard(g, hideComp){
   const a=g.away,h=g.home;
   const aWin=a.result==='승',hWin=h.result==='승';
   const aCls=aWin?'win':(g.status==='완료'?'lose':''), hCls=hWin?'win':(g.status==='완료'?'lose':'');
   const aScore=a.score===null?'-':a.score,hScore=h.score===null?'-':h.score;
-  const comp=g.title?`<span class="comp">${shortTitle(g.title)}</span>`:'<span class="comp"></span>';
+  // hideComp: 모달이 이미 대회명으로 그룹핑된 경우 카드 내 중복 대회명 제거 (단계 칩은 유지)
+  const comp=(!hideComp && g.title)?`<span class="comp">${shortTitle(g.title)}</span>`:'<span class="comp"></span>';
   let stage='';
   if(g.round) stage=`<span class="stage ${stageCls(g.round)}">${g.round}</span>`;
   else if(g.status==='예정') stage='<span class="stage sched">예정</span>';
@@ -338,7 +339,7 @@ function openDateModal(ds){
     ((x.title||'').localeCompare(y.title||''))||((x.time||'').localeCompare(y.time||'')));
   document.getElementById('modalTitle').innerHTML=`${fmtDateHeader(ds)} <span style="font-size:13px;opacity:0.8">${list.length}경기</span>`;
   let html='', lastT=null;
-  list.forEach(g=>{ const t=g.title||'기타'; if(t!==lastT){ html+=`<div class="date-group">${t}</div>`; lastT=t; } html+=gameCard(g); });
+  list.forEach(g=>{ const t=g.title||'기타'; if(t!==lastT){ html+=`<div class="date-group">${t}</div>`; lastT=t; } html+=gameCard(g, true); });
   document.getElementById('modalBody').innerHTML=list.length?html:'<div class="empty">경기가 없습니다.</div>';
   openModal();
 }
