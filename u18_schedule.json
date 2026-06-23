@@ -1,6 +1,6 @@
 {
   "year": 2026,
-  "updated": "2026-06-23 17:03",
+  "updated": "2026-06-23 18:30",
   "games": [
     {
       "game_idx": "36897",
@@ -15098,13 +15098,13 @@
       "status": "완료",
       "away": {
         "name": "청담고",
-        "result": "무",
-        "score": 4
+        "result": "승",
+        "score": 9
       },
       "home": {
         "name": "야탑고",
-        "result": "무",
-        "score": 4
+        "result": "패",
+        "score": 7
       }
     },
     {
@@ -15118,7 +15118,7 @@
       "away": {
         "name": "비봉고",
         "result": "패",
-        "score": 5
+        "score": 7
       },
       "home": {
         "name": "율곡고야구단",
@@ -15136,13 +15136,13 @@
       "status": "완료",
       "away": {
         "name": "제물포고",
-        "result": "패",
-        "score": 0
+        "result": "승",
+        "score": 6
       },
       "home": {
         "name": "진영고",
-        "result": "승",
-        "score": 1
+        "result": "패",
+        "score": 2
       }
     },
     {
@@ -15156,12 +15156,12 @@
       "away": {
         "name": "선린인터넷고",
         "result": "승",
-        "score": 13
+        "score": 14
       },
       "home": {
         "name": "성남고",
         "result": "패",
-        "score": 2
+        "score": 3
       }
     },
     {
@@ -15171,16 +15171,16 @@
       "time": "18:30",
       "venue": "목동야구장",
       "round": "리그전",
-      "status": "예정",
+      "status": "완료",
       "away": {
         "name": "서울자동차고",
-        "result": "",
-        "score": null
+        "result": "무",
+        "score": 0
       },
       "home": {
         "name": "휘문고",
-        "result": "",
-        "score": null
+        "result": "무",
+        "score": 0
       }
     },
     {
