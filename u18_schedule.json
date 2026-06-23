@@ -1,6 +1,6 @@
 {
   "year": 2026,
-  "updated": "2026-06-23 18:30",
+  "updated": "2026-06-23 21:16",
   "games": [
     {
       "game_idx": "36897",
@@ -15161,7 +15161,7 @@
       "home": {
         "name": "성남고",
         "result": "패",
-        "score": 3
+        "score": 4
       }
     },
     {
@@ -15174,13 +15174,13 @@
       "status": "완료",
       "away": {
         "name": "서울자동차고",
-        "result": "무",
-        "score": 0
+        "result": "패",
+        "score": 2
       },
       "home": {
         "name": "휘문고",
-        "result": "무",
-        "score": 0
+        "result": "승",
+        "score": 6
       }
     },
     {
