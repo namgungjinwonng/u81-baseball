@@ -1,6 +1,6 @@
 {
   "year": 2026,
-  "updated": "2026-06-24 08:02",
+  "updated": "2026-06-24 15:57",
   "games": [
     {
       "game_idx": "36897",
@@ -15190,16 +15190,16 @@
       "time": "16:00",
       "venue": "목동야구장",
       "round": "리그전",
-      "status": "예정",
+      "status": "완료",
       "away": {
         "name": "덕수고",
-        "result": "",
-        "score": null
+        "result": "무",
+        "score": 0
       },
       "home": {
         "name": "배명고",
-        "result": "",
-        "score": null
+        "result": "무",
+        "score": 0
       }
     },
     {
