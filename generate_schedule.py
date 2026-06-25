@@ -567,9 +567,9 @@ function compStandings(title){
     if(group.length>1){
       const m=mini(group);
       group.sort((a,b)=>
-        (m[b.name].pts-m[a.name].pts) ||   // 2순위: 승자승(동률 팀 간 승점)
-        (m[a.name].ra-m[b.name].ra) ||     // 3순위: 동률 팀 간 실점 적은 순
-        (m[b.name].rf-m[a.name].rf) ||     // 4순위: 동률 팀 간 득점 많은 순
+        (m[b.name].pts-m[a.name].pts) ||   // 2순위: 승자승(맞대결 승점) - 이긴 팀이 득실 무관 우위
+        (a.ra-b.ra) ||                     // 3순위: 전체 실점 적은 순 (맞대결 없을 때)
+        (b.rf-a.rf) ||                     // 4순위: 전체 득점 많은 순
         a.name.localeCompare(b.name,'ko'));
     }
     group.forEach(t=>res.push(t)); i=j;
@@ -609,7 +609,7 @@ function renderStandings(c, box){
   const arr=compStandings(c);
   const hasD=arr.some(r=>r.d>0);
   let html=`<div class="stand-title">${compLabel(c)}</div>`;
-  html+='<div class="stand-note">순위: 승점(승 2 · 무 1 · 패 0) → 승자승 → 동률 팀 간 실점 → 득점</div>';
+  html+='<div class="stand-note">순위: 승점(승 2 · 무 1 · 패 0) → 승자승(맞대결) → 전체 실점 → 전체 득점</div>';
   if(!arr.length){ box.innerHTML=html+'<div class="empty">완료된 경기가 없습니다.</div>'; return; }
   html+='<div class="stand-wrap"><table class="stand"><thead><tr><th>순위</th><th>학교</th><th>경기</th><th>승</th><th>패</th>'+(hasD?'<th>무</th>':'')+'<th>승점</th><th>실점</th><th>득점</th></tr></thead><tbody>';
   arr.forEach((r,i)=>{
