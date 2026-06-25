@@ -47627,7 +47627,7 @@
     "players": [
       {
         "type": "player",
-        "number": "",
+        "number": "16",
         "name": "김민찬",
         "position": "내야수",
         "grade": "2",
@@ -47757,7 +47757,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "11",
         "name": "신현승",
         "position": "투수",
         "grade": "2",
@@ -47770,7 +47770,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "6",
         "name": "여민준",
         "position": "미지정",
         "grade": "1",
@@ -47796,7 +47796,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "36",
         "name": "이상형",
         "position": "투수",
         "grade": "3",
@@ -47822,7 +47822,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "33",
         "name": "임주환",
         "position": "외야수",
         "grade": "1",
