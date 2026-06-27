@@ -1,6 +1,6 @@
 {
   "year": 2026,
-  "updated": "2026-06-27 14:20",
+  "updated": "2026-06-27 15:13",
   "games": [
     {
       "game_idx": "36897",
@@ -15256,7 +15256,7 @@
       "home": {
         "name": "청원고",
         "result": "승",
-        "score": 5
+        "score": 9
       }
     },
     {
@@ -15285,16 +15285,16 @@
       "time": "14:30",
       "venue": "목동야구장",
       "round": "1회전",
-      "status": "예정",
+      "status": "완료",
       "away": {
         "name": "중앙고",
-        "result": "",
-        "score": null
+        "result": "무",
+        "score": 0
       },
       "home": {
         "name": "부산공업고",
-        "result": "",
-        "score": null
+        "result": "무",
+        "score": 0
       }
     },
     {
@@ -15308,7 +15308,7 @@
       "away": {
         "name": "야로고BC",
         "result": "승",
-        "score": 6
+        "score": 8
       },
       "home": {
         "name": "충훈고",
