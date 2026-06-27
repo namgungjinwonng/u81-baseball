@@ -1,6 +1,6 @@
 {
   "year": 2026,
-  "updated": "2026-06-27 10:13",
+  "updated": "2026-06-27 11:40",
   "games": [
     {
       "game_idx": "36897",
@@ -15213,12 +15213,12 @@
       "away": {
         "name": "천안CSBC(U-18)",
         "result": "패",
-        "score": 0
+        "score": 1
       },
       "home": {
         "name": "야탑고",
         "result": "승",
-        "score": 1
+        "score": 2
       }
     },
     {
@@ -15232,7 +15232,7 @@
       "away": {
         "name": "개성고",
         "result": "승",
-        "score": 6
+        "score": 15
       },
       "home": {
         "name": "전북인공지능고",
@@ -15247,16 +15247,16 @@
       "time": "12:00",
       "venue": "목동야구장",
       "round": "1회전",
-      "status": "예정",
+      "status": "완료",
       "away": {
         "name": "창원공고야구단",
-        "result": "",
-        "score": null
+        "result": "무",
+        "score": 0
       },
       "home": {
         "name": "청원고",
-        "result": "",
-        "score": null
+        "result": "무",
+        "score": 0
       }
     },
     {
@@ -15266,16 +15266,16 @@
       "time": "12:00",
       "venue": "신월 야구공원",
       "round": "1회전",
-      "status": "예정",
+      "status": "완료",
       "away": {
         "name": "세종BC(U-18)",
-        "result": "",
-        "score": null
+        "result": "무",
+        "score": 0
       },
       "home": {
         "name": "성남고",
-        "result": "",
-        "score": null
+        "result": "무",
+        "score": 0
       }
     },
     {
