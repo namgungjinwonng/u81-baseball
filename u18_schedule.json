@@ -1,6 +1,6 @@
 {
   "year": 2026,
-  "updated": "2026-06-27 19:12",
+  "updated": "2026-06-27 19:42",
   "games": [
     {
       "game_idx": "36897",
@@ -15288,12 +15288,12 @@
       "status": "완료",
       "away": {
         "name": "중앙고",
-        "result": "무",
-        "score": 10
+        "result": "승",
+        "score": 11
       },
       "home": {
         "name": "부산공업고",
-        "result": "무",
+        "result": "패",
         "score": 10
       }
     },
