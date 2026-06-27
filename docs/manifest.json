@@ -1,7 +1,7 @@
 {
-  "name": "U-18 대한야구소프트볼협회 선수 현황",
-  "short_name": "U-18 야구",
-  "description": "2026 시즌 18세 이하부 전체 선수 현황",
+  "name": "U-18 Roster",
+  "short_name": "U-18 Roster",
+  "description": "U-18 야구 선수·일정 뷰어",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

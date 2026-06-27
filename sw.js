@@ -1,4 +1,4 @@
-const CACHE_NAME = 'u18-baseball-v4';
+const CACHE_NAME = 'u18-baseball-v5';
 const ASSETS = [
   './',
   './u18_players.html',

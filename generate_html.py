@@ -66,7 +66,7 @@ html = f"""<!DOCTYPE html>
 <meta name="theme-color" content="#1a1a2e">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="U-18 야구">
+<meta name="apple-mobile-web-app-title" content="U-18 Roster">
 <link rel="apple-touch-icon" href="/icon-192.png">
 <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
 <style>
@@ -376,9 +376,70 @@ tbody tr:nth-child(even):hover {{ background: #fdeef1; }}
 .inapp-banner {{ display: none; background: #FFF7E6; border-bottom: 2px solid #E0902B; color: #6B4E11; padding: 11px 14px; font-size: 13px; font-weight: 700; text-align: center; line-height: 1.5; }}
 .inapp-banner button {{ margin-top: 7px; padding: 8px 18px; border: none; border-radius: 20px; background: #002D62; color: #fff; font-size: 13px; font-weight: 700; cursor: pointer; }}
 .inapp-banner button:hover {{ background: #BA0C2F; }}
+
+#app-splash[hidden] {{ display: none !important; }}
+#app-splash {{
+    position: fixed; inset: 0; background: #1a1a2e;
+    z-index: 100000; display: flex; align-items: center; justify-content: center;
+    transition: opacity .4s ease;
+}}
+#app-splash img {{
+    width: 60vmin; max-width: 280px; height: auto;
+    animation: splash-pulse 1.6s ease-in-out infinite;
+}}
+@keyframes splash-pulse {{
+    0%, 100% {{ opacity: 1; transform: scale(1); }}
+    50% {{ opacity: 0.85; transform: scale(0.97); }}
+}}
+#app-splash.hidden {{ opacity: 0; pointer-events: none; }}
 </style>
 </head>
 <body>
+
+<div id="app-splash" hidden><img src="./icon-512.png" alt=""></div>
+<script>
+(function(){{
+  var STANDALONE = matchMedia('(display-mode: standalone)').matches
+                   || navigator.standalone === true;
+  if (!STANDALONE) return;
+  var splash = document.getElementById('app-splash');
+  splash.hidden = false;
+  var SESSION_KEY = 'u18_session_refreshed_v1';
+  var RELOAD_KEY = 'u18_just_reloaded_v1';
+  var isFirst = !sessionStorage.getItem(SESSION_KEY);
+  if (!isFirst) {{
+    if (sessionStorage.getItem(RELOAD_KEY)) {{
+      sessionStorage.removeItem(RELOAD_KEY);
+      setTimeout(function() {{
+        splash.classList.add('hidden');
+        setTimeout(function() {{ splash.remove(); }}, 350);
+      }}, 500);
+    }} else {{
+      splash.remove();
+    }}
+    return;
+  }}
+  sessionStorage.setItem(SESSION_KEY, '1');
+  var start = Date.now();
+  (async function() {{
+    try {{
+      if (window.caches) {{
+        var keys = await caches.keys();
+        await Promise.all(keys.map(function(k) {{ return caches.delete(k); }}));
+      }}
+      await Promise.all([
+        'u18_app_data.js','u18_players.html',
+        'u18_schedule_data.js','u18_schedule.html'
+      ].map(function(u) {{ return fetch(u, {{cache: 'reload'}}).catch(function(){{}}); }}));
+    }} catch(e) {{}}
+    var wait = Math.max(0, 2000 - (Date.now() - start));
+    setTimeout(function() {{
+      sessionStorage.setItem(RELOAD_KEY, '1');
+      location.reload();
+    }}, wait);
+  }})();
+}})();
+</script>
 
 <div id="inappBanner" class="inapp-banner"></div>
 
