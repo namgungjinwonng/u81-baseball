@@ -1,6 +1,6 @@
 {
   "year": 2026,
-  "updated": "2026-06-28 10:03",
+  "updated": "2026-06-28 12:13",
   "games": [
     {
       "game_idx": "36897",
@@ -15326,13 +15326,13 @@
       "status": "완료",
       "away": {
         "name": "광주동성고",
-        "result": "무",
-        "score": 0
+        "result": "패",
+        "score": 3
       },
       "home": {
         "name": "배명고",
-        "result": "무",
-        "score": 0
+        "result": "승",
+        "score": 6
       }
     },
     {
@@ -15346,12 +15346,12 @@
       "away": {
         "name": "라온고",
         "result": "패",
-        "score": 0
+        "score": 2
       },
       "home": {
         "name": "인창고",
         "result": "승",
-        "score": 1
+        "score": 3
       }
     },
     {
@@ -15361,16 +15361,16 @@
       "time": "12:00",
       "venue": "목동야구장",
       "round": "1회전",
-      "status": "예정",
+      "status": "완료",
       "away": {
         "name": "상동고",
-        "result": "",
-        "score": null
+        "result": "무",
+        "score": 0
       },
       "home": {
         "name": "진영고",
-        "result": "",
-        "score": null
+        "result": "무",
+        "score": 0
       }
     },
     {
@@ -15380,16 +15380,16 @@
       "time": "12:00",
       "venue": "신월 야구공원",
       "round": "1회전",
-      "status": "예정",
+      "status": "완료",
       "away": {
         "name": "신일고",
-        "result": "",
-        "score": null
+        "result": "승",
+        "score": 7
       },
       "home": {
         "name": "서울HG야구단(U-18)",
-        "result": "",
-        "score": null
+        "result": "패",
+        "score": 0
       }
     },
     {
