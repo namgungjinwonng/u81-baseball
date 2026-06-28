@@ -1,6 +1,6 @@
 {
   "year": 2026,
-  "updated": "2026-06-28 16:56",
+  "updated": "2026-06-28 17:26",
   "games": [
     {
       "game_idx": "36897",
@@ -15402,12 +15402,12 @@
       "status": "완료",
       "away": {
         "name": "청담고",
-        "result": "무",
-        "score": 0
+        "result": "승",
+        "score": 1
       },
       "home": {
         "name": "서울고",
-        "result": "무",
+        "result": "패",
         "score": 0
       }
     },
@@ -15427,7 +15427,7 @@
       "home": {
         "name": "유신고",
         "result": "승",
-        "score": 3
+        "score": 4
       }
     },
     {
