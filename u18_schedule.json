@@ -1,6 +1,6 @@
 {
   "year": 2026,
-  "updated": "2026-06-28 20:17",
+  "updated": "2026-06-28 23:15",
   "games": [
     {
       "game_idx": "36897",
@@ -15678,6 +15678,25 @@
       }
     },
     {
+      "game_idx": "38752",
+      "title": "제81회 청룡기 전국고교야구선수권대회 겸 주말리그 왕중왕전",
+      "date": "2026-07-01",
+      "time": "09:30",
+      "venue": "신월 야구공원",
+      "round": "2회전",
+      "status": "예정",
+      "away": {
+        "name": "청원고",
+        "result": "",
+        "score": null
+      },
+      "home": {
+        "name": "중앙고",
+        "result": "",
+        "score": null
+      }
+    },
+    {
       "game_idx": "38255",
       "title": "제81회 청룡기 전국고교야구선수권대회 겸 주말리그 왕중왕전",
       "date": "2026-07-01",
@@ -15692,6 +15711,120 @@
       },
       "home": {
         "name": "수원야구단(U-18)",
+        "result": "",
+        "score": null
+      }
+    },
+    {
+      "game_idx": "38753",
+      "title": "제81회 청룡기 전국고교야구선수권대회 겸 주말리그 왕중왕전",
+      "date": "2026-07-01",
+      "time": "12:00",
+      "venue": "신월 야구공원",
+      "round": "2회전",
+      "status": "예정",
+      "away": {
+        "name": "개성고",
+        "result": "",
+        "score": null
+      },
+      "home": {
+        "name": "성남고",
+        "result": "",
+        "score": null
+      }
+    },
+    {
+      "game_idx": "38754",
+      "title": "제81회 청룡기 전국고교야구선수권대회 겸 주말리그 왕중왕전",
+      "date": "2026-07-01",
+      "time": "14:30",
+      "venue": "신월 야구공원",
+      "round": "2회전",
+      "status": "예정",
+      "away": {
+        "name": "야로고BC",
+        "result": "",
+        "score": null
+      },
+      "home": {
+        "name": "배명고",
+        "result": "",
+        "score": null
+      }
+    },
+    {
+      "game_idx": "38751",
+      "title": "제81회 청룡기 전국고교야구선수권대회 겸 주말리그 왕중왕전",
+      "date": "2026-07-01",
+      "time": "14:30",
+      "venue": "목동야구장",
+      "round": "2회전",
+      "status": "예정",
+      "away": {
+        "name": "밀양BC(U-18)",
+        "result": "",
+        "score": null
+      },
+      "home": {
+        "name": "야탑고",
+        "result": "",
+        "score": null
+      }
+    },
+    {
+      "game_idx": "38755",
+      "title": "제81회 청룡기 전국고교야구선수권대회 겸 주말리그 왕중왕전",
+      "date": "2026-07-02",
+      "time": "09:30",
+      "venue": "목동야구장",
+      "round": "2회전",
+      "status": "예정",
+      "away": {
+        "name": "세광고",
+        "result": "",
+        "score": null
+      },
+      "home": {
+        "name": "상동고",
+        "result": "",
+        "score": null
+      }
+    },
+    {
+      "game_idx": "38756",
+      "title": "제81회 청룡기 전국고교야구선수권대회 겸 주말리그 왕중왕전",
+      "date": "2026-07-02",
+      "time": "12:00",
+      "venue": "목동야구장",
+      "round": "2회전",
+      "status": "예정",
+      "away": {
+        "name": "청담고",
+        "result": "",
+        "score": null
+      },
+      "home": {
+        "name": "인창고",
+        "result": "",
+        "score": null
+      }
+    },
+    {
+      "game_idx": "38757",
+      "title": "제81회 청룡기 전국고교야구선수권대회 겸 주말리그 왕중왕전",
+      "date": "2026-07-02",
+      "time": "14:30",
+      "venue": "목동야구장",
+      "round": "2회전",
+      "status": "예정",
+      "away": {
+        "name": "신일고",
+        "result": "",
+        "score": null
+      },
+      "home": {
+        "name": "강릉고",
         "result": "",
         "score": null
       }
