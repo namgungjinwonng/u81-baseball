@@ -1,6 +1,6 @@
 {
   "year": 2026,
-  "updated": "2026-06-29 13:14",
+  "updated": "2026-06-29 13:44",
   "games": [
     {
       "game_idx": "36897",
@@ -15498,7 +15498,7 @@
       "away": {
         "name": "포항제철고",
         "result": "패",
-        "score": 1
+        "score": 2
       },
       "home": {
         "name": "상우고야구단",
@@ -15513,16 +15513,16 @@
       "time": "14:30",
       "venue": "목동야구장",
       "round": "1회전",
-      "status": "예정",
+      "status": "완료",
       "away": {
         "name": "한국마사고BC",
-        "result": "",
-        "score": null
+        "result": "무",
+        "score": 0
       },
       "home": {
         "name": "서울동산고",
-        "result": "",
-        "score": null
+        "result": "무",
+        "score": 0
       }
     },
     {
