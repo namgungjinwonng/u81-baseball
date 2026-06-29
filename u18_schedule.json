@@ -1,6 +1,6 @@
 {
   "year": 2026,
-  "updated": "2026-06-29 15:45",
+  "updated": "2026-06-29 16:15",
   "games": [
     {
       "game_idx": "36897",
@@ -15516,13 +15516,13 @@
       "status": "완료",
       "away": {
         "name": "한국마사고BC",
-        "result": "무",
+        "result": "패",
         "score": 0
       },
       "home": {
         "name": "서울동산고",
-        "result": "무",
-        "score": 0
+        "result": "승",
+        "score": 3
       }
     },
     {
@@ -15541,7 +15541,7 @@
       "home": {
         "name": "제물포고",
         "result": "승",
-        "score": 9
+        "score": 15
       }
     },
     {
