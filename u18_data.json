@@ -12741,12 +12741,12 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "19",
         "name": "권시헌",
         "position": "미지정",
         "grade": "1",
         "height_weight": "",
-        "throw_bat": "",
+        "throw_bat": "우투우타",
         "person_no": "202601013543",
         "team": "대구북구SC(U-18)",
         "team_idx": "1667",
@@ -12845,7 +12845,7 @@
       },
       {
         "type": "player",
-        "number": "23",
+        "number": "28",
         "name": "박재윤",
         "position": "외야수",
         "grade": "1",
@@ -12962,7 +12962,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "7",
         "name": "이현준",
         "position": "내야수",
         "grade": "3",
@@ -13014,12 +13014,12 @@
       },
       {
         "type": "player",
-        "number": "21",
+        "number": "17",
         "name": "최인서",
         "position": "투수",
         "grade": "3",
         "height_weight": "181cm / 85kg",
-        "throw_bat": "",
+        "throw_bat": "우투우타",
         "person_no": "202004000938",
         "team": "대구북구SC(U-18)",
         "team_idx": "1667",
@@ -45526,7 +45526,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "13",
         "name": "이장환",
         "position": "포수",
         "grade": "3",
@@ -51203,7 +51203,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "4",
         "name": "김재현",
         "position": "내야수",
         "grade": "2",
@@ -51229,7 +51229,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "36",
         "name": "김지후",
         "position": "내야수",
         "grade": "3",
@@ -51268,7 +51268,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "8",
         "name": "박나겸",
         "position": "내야수",
         "grade": "2",
@@ -51320,7 +51320,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "7",
         "name": "신준협",
         "position": "내야수",
         "grade": "2",
@@ -51346,7 +51346,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "11",
         "name": "윤관우",
         "position": "투수",
         "grade": "2",
