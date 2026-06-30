@@ -1,6 +1,6 @@
 {
   "year": 2026,
-  "updated": "2026-06-30 22:00",
+  "updated": "2026-06-30 23:43",
   "games": [
     {
       "game_idx": "36897",
@@ -15901,6 +15901,63 @@
       },
       "home": {
         "name": "제물포고",
+        "result": "",
+        "score": null
+      }
+    },
+    {
+      "game_idx": "38764",
+      "title": "제81회 청룡기 전국고교야구선수권대회 겸 주말리그 왕중왕전",
+      "date": "2026-07-03",
+      "time": "09:30",
+      "venue": "신월 야구공원",
+      "round": "2회전",
+      "status": "예정",
+      "away": {
+        "name": "공주고",
+        "result": "",
+        "score": null
+      },
+      "home": {
+        "name": "경북고",
+        "result": "",
+        "score": null
+      }
+    },
+    {
+      "game_idx": "38762",
+      "title": "제81회 청룡기 전국고교야구선수권대회 겸 주말리그 왕중왕전",
+      "date": "2026-07-03",
+      "time": "12:00",
+      "venue": "목동야구장",
+      "round": "2회전",
+      "status": "예정",
+      "away": {
+        "name": "우신고",
+        "result": "",
+        "score": null
+      },
+      "home": {
+        "name": "거제BC(U-18)",
+        "result": "",
+        "score": null
+      }
+    },
+    {
+      "game_idx": "38763",
+      "title": "제81회 청룡기 전국고교야구선수권대회 겸 주말리그 왕중왕전",
+      "date": "2026-07-03",
+      "time": "14:30",
+      "venue": "목동야구장",
+      "round": "2회전",
+      "status": "예정",
+      "away": {
+        "name": "부경고",
+        "result": "",
+        "score": null
+      },
+      "home": {
+        "name": "대구고",
         "result": "",
         "score": null
       }
