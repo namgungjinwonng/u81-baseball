@@ -1,6 +1,6 @@
 {
   "year": 2026,
-  "updated": "2026-06-30 11:28",
+  "updated": "2026-06-30 11:58",
   "games": [
     {
       "game_idx": "36897",
@@ -15573,12 +15573,12 @@
       "status": "완료",
       "away": {
         "name": "부원고야구단",
-        "result": "패",
-        "score": 2
+        "result": "무",
+        "score": 4
       },
       "home": {
         "name": "공주고",
-        "result": "승",
+        "result": "무",
         "score": 4
       }
     },
