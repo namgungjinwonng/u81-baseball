@@ -12832,7 +12832,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "6",
         "name": "박강모",
         "position": "내야수",
         "grade": "1",
@@ -40288,7 +40288,7 @@
     "players": [
       {
         "type": "player",
-        "number": "",
+        "number": "28",
         "name": "강민석",
         "position": "투수",
         "grade": "2",
@@ -40301,7 +40301,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "7",
         "name": "권기윤",
         "position": "내야수",
         "grade": "3",
@@ -40392,7 +40392,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "34",
         "name": "김민승",
         "position": "포수",
         "grade": "3",
@@ -40431,7 +40431,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "8",
         "name": "김시헌",
         "position": "내야수",
         "grade": "3",
@@ -40626,7 +40626,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "5",
         "name": "유예찬",
         "position": "내야수",
         "grade": "3",
@@ -40678,7 +40678,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "50",
         "name": "이민찬",
         "position": "포수",
         "grade": "3",
@@ -40782,7 +40782,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "1",
         "name": "장석현",
         "position": "외야수",
         "grade": "3",
