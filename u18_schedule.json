@@ -1,6 +1,6 @@
 {
   "year": 2026,
-  "updated": "2026-06-30 17:00",
+  "updated": "2026-06-30 17:30",
   "games": [
     {
       "game_idx": "36897",
@@ -15649,12 +15649,12 @@
       "status": "완료",
       "away": {
         "name": "전주고",
-        "result": "무",
-        "score": 0
+        "result": "승",
+        "score": 1
       },
       "home": {
         "name": "부산고",
-        "result": "무",
+        "result": "패",
         "score": 0
       }
     },
