@@ -1,6 +1,6 @@
 {
   "year": 2026,
-  "updated": "2026-06-30 10:28",
+  "updated": "2026-06-30 10:58",
   "games": [
     {
       "game_idx": "36897",
@@ -15573,12 +15573,12 @@
       "status": "완료",
       "away": {
         "name": "부원고야구단",
-        "result": "무",
-        "score": 0
+        "result": "승",
+        "score": 2
       },
       "home": {
         "name": "공주고",
-        "result": "무",
+        "result": "패",
         "score": 0
       }
     },
@@ -15608,16 +15608,16 @@
       "time": "12:00",
       "venue": "신월 야구공원",
       "round": "1회전",
-      "status": "예정",
+      "status": "완료",
       "away": {
         "name": "대전고",
-        "result": "",
-        "score": null
+        "result": "무",
+        "score": 0
       },
       "home": {
         "name": "경북고",
-        "result": "",
-        "score": null
+        "result": "무",
+        "score": 0
       }
     },
     {
