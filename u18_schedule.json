@@ -1,6 +1,6 @@
 {
   "year": 2026,
-  "updated": "2026-06-30 11:58",
+  "updated": "2026-06-30 12:28",
   "games": [
     {
       "game_idx": "36897",
@@ -15554,12 +15554,12 @@
       "status": "완료",
       "away": {
         "name": "우신고",
-        "result": "패",
-        "score": 1
+        "result": "승",
+        "score": 9
       },
       "home": {
         "name": "의성고",
-        "result": "승",
+        "result": "패",
         "score": 5
       }
     },
@@ -15573,13 +15573,13 @@
       "status": "완료",
       "away": {
         "name": "부원고야구단",
-        "result": "무",
+        "result": "패",
         "score": 4
       },
       "home": {
         "name": "공주고",
-        "result": "무",
-        "score": 4
+        "result": "승",
+        "score": 5
       }
     },
     {
