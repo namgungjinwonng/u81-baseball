@@ -6897,7 +6897,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "15",
         "name": "전재형",
         "position": "투수",
         "grade": "2",
@@ -11970,7 +11970,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "16",
         "name": "강정겸",
         "position": "외야수",
         "grade": "3",
@@ -12269,12 +12269,12 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "5",
         "name": "윤선준",
         "position": "미지정",
         "grade": "1",
         "height_weight": "175cm / 72kg",
-        "throw_bat": "",
+        "throw_bat": "우투우타",
         "person_no": "201906002158",
         "team": "대구고",
         "team_idx": "180",
@@ -12308,7 +12308,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "50",
         "name": "이건희",
         "position": "내야수",
         "grade": "3",
@@ -12399,7 +12399,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "39",
         "name": "장성호",
         "position": "포수",
         "grade": "1",
@@ -12425,7 +12425,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "18",
         "name": "전종현",
         "position": "투수",
         "grade": "3",
@@ -12633,7 +12633,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "12",
         "name": "최진우",
         "position": "외야수",
         "grade": "2",
@@ -12685,7 +12685,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "33",
         "name": "황준우",
         "position": "외야수",
         "grade": "2",
@@ -16136,12 +16136,12 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "30",
         "name": "김재민",
         "position": "미지정",
         "grade": "1",
         "height_weight": "179cm / 70kg",
-        "throw_bat": "",
+        "throw_bat": "우투우타",
         "person_no": "202101000650",
         "team": "동산고",
         "team_idx": "161",
@@ -16188,7 +16188,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "17",
         "name": "노대경",
         "position": "외야수",
         "grade": "3",
@@ -16253,12 +16253,12 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "4",
         "name": "박준서",
         "position": "외야수",
         "grade": "1",
         "height_weight": "180cm / 75kg",
-        "throw_bat": "",
+        "throw_bat": "우투우타",
         "person_no": "202102002160",
         "team": "동산고",
         "team_idx": "161",
@@ -16292,12 +16292,12 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "31",
         "name": "신하진",
         "position": "외야수",
         "grade": "3",
         "height_weight": "175cm / 73kg",
-        "throw_bat": "",
+        "throw_bat": "우투우타",
         "person_no": "201903003783",
         "team": "동산고",
         "team_idx": "161",
@@ -16513,7 +16513,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "45",
         "name": "조성현",
         "position": "투수",
         "grade": "2",
@@ -20486,12 +20486,6 @@
       },
       {
         "type": "staff",
-        "name": "김성현",
-        "role": "코치",
-        "person_no": "201507T00402"
-      },
-      {
-        "type": "staff",
         "name": "신우승",
         "role": "코치",
         "person_no": "201802T00018"
@@ -21557,7 +21551,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "50",
         "name": "김태영",
         "position": "투수",
         "grade": "1",
@@ -21570,12 +21564,12 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "7",
         "name": "김효준",
         "position": "내야수",
         "grade": "1",
         "height_weight": "173cm / 61kg",
-        "throw_bat": "",
+        "throw_bat": "우투우타",
         "person_no": "202105000042",
         "team": "부경고",
         "team_idx": "182",
@@ -21687,7 +21681,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "10",
         "name": "윤희수",
         "position": "외야수",
         "grade": "1",
@@ -21817,7 +21811,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "40",
         "name": "조현준",
         "position": "외야수",
         "grade": "1",
@@ -31682,7 +31676,7 @@
     "players": [
       {
         "type": "player",
-        "number": "",
+        "number": "18",
         "name": "곽은혁",
         "position": "투수",
         "grade": "3",
@@ -31929,12 +31923,12 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "20",
         "name": "서지호",
         "position": "내야수",
         "grade": "1",
         "height_weight": "173cm / 88kg",
-        "throw_bat": "",
+        "throw_bat": "우투우타",
         "person_no": "202103001215",
         "team": "세광고",
         "team_idx": "138",
@@ -32150,7 +32144,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "4",
         "name": "이택연",
         "position": "투수",
         "grade": "1",
@@ -32280,7 +32274,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "5",
         "name": "황동민",
         "position": "내야수",
         "grade": "3",
@@ -45032,7 +45026,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "44",
         "name": "김민성",
         "position": "투수",
         "grade": "2",
