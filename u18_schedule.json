@@ -1,6 +1,6 @@
 {
   "year": 2026,
-  "updated": "2026-07-01 15:17",
+  "updated": "2026-07-01 15:48",
   "games": [
     {
       "game_idx": "36897",
@@ -15706,12 +15706,12 @@
       "status": "완료",
       "away": {
         "name": "서울디자인고",
-        "result": "무",
-        "score": 6
+        "result": "승",
+        "score": 8
       },
       "home": {
         "name": "수원야구단(U-18)",
-        "result": "무",
+        "result": "패",
         "score": 6
       }
     },
@@ -15731,7 +15731,7 @@
       "home": {
         "name": "성남고",
         "result": "패",
-        "score": 1
+        "score": 4
       }
     },
     {
