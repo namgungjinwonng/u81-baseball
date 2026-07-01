@@ -1,6 +1,6 @@
 {
   "year": 2026,
-  "updated": "2026-07-02 00:11",
+  "updated": "2026-07-02 08:09",
   "games": [
     {
       "game_idx": "36897",
@@ -15855,16 +15855,16 @@
       "time": "12:00",
       "venue": "신월 야구공원",
       "round": "2회전",
-      "status": "예정",
+      "status": "완료",
       "away": {
         "name": "순천효천고BC",
-        "result": "",
-        "score": null
+        "result": "승",
+        "score": 9
       },
       "home": {
         "name": "배재고",
-        "result": "",
-        "score": null
+        "result": "패",
+        "score": 0
       }
     },
     {
