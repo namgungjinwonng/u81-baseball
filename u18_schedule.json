@@ -1,6 +1,6 @@
 {
   "year": 2026,
-  "updated": "2026-07-01 12:47",
+  "updated": "2026-07-01 13:17",
   "games": [
     {
       "game_idx": "36897",
@@ -15725,13 +15725,13 @@
       "status": "완료",
       "away": {
         "name": "개성고",
-        "result": "무",
+        "result": "패",
         "score": 0
       },
       "home": {
         "name": "성남고",
-        "result": "무",
-        "score": 0
+        "result": "승",
+        "score": 1
       }
     },
     {
