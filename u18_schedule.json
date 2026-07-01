@@ -1,6 +1,6 @@
 {
   "year": 2026,
-  "updated": "2026-07-01 11:46",
+  "updated": "2026-07-01 12:17",
   "games": [
     {
       "game_idx": "36897",
@@ -15669,12 +15669,12 @@
       "away": {
         "name": "동산고",
         "result": "패",
-        "score": 3
+        "score": 4
       },
       "home": {
         "name": "강원고",
         "result": "승",
-        "score": 6
+        "score": 11
       }
     },
     {
@@ -15687,13 +15687,13 @@
       "status": "완료",
       "away": {
         "name": "청원고",
-        "result": "무",
+        "result": "패",
         "score": 2
       },
       "home": {
         "name": "중앙고",
-        "result": "무",
-        "score": 2
+        "result": "승",
+        "score": 3
       }
     },
     {
