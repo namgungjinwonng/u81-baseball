@@ -1,6 +1,6 @@
 {
   "year": 2026,
-  "updated": "2026-07-01 14:47",
+  "updated": "2026-07-01 15:17",
   "games": [
     {
       "game_idx": "36897",
@@ -15706,12 +15706,12 @@
       "status": "완료",
       "away": {
         "name": "서울디자인고",
-        "result": "패",
-        "score": 5
+        "result": "무",
+        "score": 6
       },
       "home": {
         "name": "수원야구단(U-18)",
-        "result": "승",
+        "result": "무",
         "score": 6
       }
     },
@@ -15741,16 +15741,16 @@
       "time": "14:30",
       "venue": "목동야구장",
       "round": "2회전",
-      "status": "예정",
+      "status": "완료",
       "away": {
         "name": "밀양BC(U-18)",
-        "result": "",
-        "score": null
+        "result": "무",
+        "score": 0
       },
       "home": {
         "name": "야탑고",
-        "result": "",
-        "score": null
+        "result": "무",
+        "score": 0
       }
     },
     {
