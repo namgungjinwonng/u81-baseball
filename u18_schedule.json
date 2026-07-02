@@ -1,6 +1,6 @@
 {
   "year": 2026,
-  "updated": "2026-07-02 14:11",
+  "updated": "2026-07-02 14:41",
   "games": [
     {
       "game_idx": "36897",
@@ -15821,12 +15821,12 @@
       "away": {
         "name": "청담고",
         "result": "승",
-        "score": 3
+        "score": 4
       },
       "home": {
         "name": "인창고",
         "result": "패",
-        "score": 1
+        "score": 3
       }
     },
     {
@@ -15883,7 +15883,7 @@
       "home": {
         "name": "마산용마고",
         "result": "승",
-        "score": 2
+        "score": 8
       }
     },
     {
