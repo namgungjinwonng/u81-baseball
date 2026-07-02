@@ -1,6 +1,6 @@
 {
   "year": 2026,
-  "updated": "2026-07-02 11:40",
+  "updated": "2026-07-02 12:10",
   "games": [
     {
       "game_idx": "36897",
@@ -15764,7 +15764,7 @@
       "away": {
         "name": "세광고",
         "result": "승",
-        "score": 4
+        "score": 6
       },
       "home": {
         "name": "상동고",
@@ -15802,7 +15802,7 @@
       "away": {
         "name": "덕수고",
         "result": "승",
-        "score": 4
+        "score": 9
       },
       "home": {
         "name": "화순고",
