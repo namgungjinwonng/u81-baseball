@@ -1,6 +1,6 @@
 {
   "year": 2026,
-  "updated": "2026-07-02 13:41",
+  "updated": "2026-07-02 14:11",
   "games": [
     {
       "game_idx": "36897",
@@ -15802,7 +15802,7 @@
       "away": {
         "name": "덕수고",
         "result": "승",
-        "score": 13
+        "score": 16
       },
       "home": {
         "name": "화순고",
@@ -15821,7 +15821,7 @@
       "away": {
         "name": "청담고",
         "result": "승",
-        "score": 2
+        "score": 3
       },
       "home": {
         "name": "인창고",
@@ -15877,13 +15877,13 @@
       "status": "완료",
       "away": {
         "name": "서울동산고",
-        "result": "무",
+        "result": "패",
         "score": 0
       },
       "home": {
         "name": "마산용마고",
-        "result": "무",
-        "score": 0
+        "result": "승",
+        "score": 2
       }
     },
     {
