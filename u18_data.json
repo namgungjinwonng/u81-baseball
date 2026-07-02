@@ -18753,7 +18753,7 @@
         "position": "투수",
         "grade": "2",
         "height_weight": "172cm / 60kg",
-        "throw_bat": "",
+        "throw_bat": "우투우타",
         "person_no": "202001002092",
         "team": "명지BC(U-18)",
         "team_idx": "1890",
@@ -19912,7 +19912,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "17",
         "name": "김지훈",
         "position": "투수",
         "grade": "3",
@@ -41656,7 +41656,7 @@
     "players": [
       {
         "type": "player",
-        "number": "",
+        "number": "1",
         "name": "강지호",
         "position": "내야수",
         "grade": "3",
@@ -41708,7 +41708,7 @@
       },
       {
         "type": "player",
-        "number": "",
+        "number": "3",
         "name": "김신유",
         "position": "내야수",
         "grade": "3",
