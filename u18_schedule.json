@@ -1,6 +1,6 @@
 {
   "year": 2026,
-  "updated": "2026-07-02 11:10",
+  "updated": "2026-07-02 11:40",
   "games": [
     {
       "game_idx": "36897",
@@ -15769,7 +15769,7 @@
       "home": {
         "name": "상동고",
         "result": "패",
-        "score": 0
+        "score": 2
       }
     },
     {
@@ -15801,12 +15801,12 @@
       "status": "완료",
       "away": {
         "name": "덕수고",
-        "result": "무",
-        "score": 0
+        "result": "승",
+        "score": 4
       },
       "home": {
         "name": "화순고",
-        "result": "무",
+        "result": "패",
         "score": 0
       }
     },
