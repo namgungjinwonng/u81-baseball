@@ -1,6 +1,6 @@
 {
   "year": 2026,
-  "updated": "2026-07-03 16:53",
+  "updated": "2026-07-03 20:42",
   "games": [
     {
       "game_idx": "36897",
@@ -15991,13 +15991,13 @@
       "status": "완료",
       "away": {
         "name": "서울디자인고",
-        "result": "무",
-        "score": 0
+        "result": "패",
+        "score": 2
       },
       "home": {
         "name": "충암고",
-        "result": "무",
-        "score": 0
+        "result": "승",
+        "score": 3
       }
     },
     {
