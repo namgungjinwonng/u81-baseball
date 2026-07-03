@@ -1,6 +1,6 @@
 {
   "year": 2026,
-  "updated": "2026-07-03 15:43",
+  "updated": "2026-07-03 16:53",
   "games": [
     {
       "game_idx": "36897",
@@ -15959,7 +15959,7 @@
       "home": {
         "name": "강원고",
         "result": "패",
-        "score": 1
+        "score": 3
       }
     },
     {
@@ -15973,12 +15973,12 @@
       "away": {
         "name": "부경고",
         "result": "패",
-        "score": 2
+        "score": 3
       },
       "home": {
         "name": "대구고",
         "result": "승",
-        "score": 8
+        "score": 13
       }
     },
     {
