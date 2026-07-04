@@ -1,6 +1,6 @@
 {
   "year": 2026,
-  "updated": "2026-07-04 13:35",
+  "updated": "2026-07-04 15:29",
   "games": [
     {
       "game_idx": "36897",
@@ -16030,12 +16030,12 @@
       "away": {
         "name": "배명고",
         "result": "승",
-        "score": 7
+        "score": 9
       },
       "home": {
         "name": "개성고",
         "result": "패",
-        "score": 0
+        "score": 8
       }
     },
     {
@@ -16110,6 +16110,44 @@
       },
       "home": {
         "name": "제물포고",
+        "result": "",
+        "score": null
+      }
+    },
+    {
+      "game_idx": "38796",
+      "title": "제81회 청룡기 전국고교야구선수권대회 겸 주말리그 왕중왕전",
+      "date": "2026-07-06",
+      "time": "09:30",
+      "venue": "목동야구장",
+      "round": "16강전",
+      "status": "예정",
+      "away": {
+        "name": "경북고",
+        "result": "",
+        "score": null
+      },
+      "home": {
+        "name": "대구고",
+        "result": "",
+        "score": null
+      }
+    },
+    {
+      "game_idx": "38797",
+      "title": "제81회 청룡기 전국고교야구선수권대회 겸 주말리그 왕중왕전",
+      "date": "2026-07-06",
+      "time": "12:00",
+      "venue": "목동야구장",
+      "round": "16강전",
+      "status": "예정",
+      "away": {
+        "name": "충암고",
+        "result": "",
+        "score": null
+      },
+      "home": {
+        "name": "전주고",
         "result": "",
         "score": null
       }
