@@ -1,6 +1,6 @@
 {
   "year": 2026,
-  "updated": "2026-07-04 09:09",
+  "updated": "2026-07-04 13:35",
   "games": [
     {
       "game_idx": "36897",
@@ -16010,13 +16010,13 @@
       "status": "완료",
       "away": {
         "name": "중앙고",
-        "result": "무",
-        "score": 0
+        "result": "패",
+        "score": 3
       },
       "home": {
         "name": "야탑고",
-        "result": "무",
-        "score": 0
+        "result": "승",
+        "score": 10
       }
     },
     {
@@ -16026,16 +16026,16 @@
       "time": "12:00",
       "venue": "목동야구장",
       "round": "16강전",
-      "status": "예정",
+      "status": "완료",
       "away": {
         "name": "배명고",
-        "result": "",
-        "score": null
+        "result": "승",
+        "score": 7
       },
       "home": {
         "name": "개성고",
-        "result": "",
-        "score": null
+        "result": "패",
+        "score": 0
       }
     },
     {
@@ -16045,16 +16045,16 @@
       "time": "14:30",
       "venue": "목동야구장",
       "round": "16강전",
-      "status": "예정",
+      "status": "완료",
       "away": {
         "name": "청담고",
-        "result": "",
-        "score": null
+        "result": "무",
+        "score": 0
       },
       "home": {
         "name": "세광고",
-        "result": "",
-        "score": null
+        "result": "무",
+        "score": 0
       }
     },
     {
