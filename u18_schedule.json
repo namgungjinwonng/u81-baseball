@@ -1,6 +1,6 @@
 {
   "year": 2026,
-  "updated": "2026-07-05 12:17",
+  "updated": "2026-07-05 15:50",
   "games": [
     {
       "game_idx": "36897",
@@ -16086,13 +16086,13 @@
       "status": "완료",
       "away": {
         "name": "마산용마고",
-        "result": "무",
-        "score": 0
+        "result": "승",
+        "score": 15
       },
       "home": {
         "name": "순천효천고BC",
-        "result": "무",
-        "score": 0
+        "result": "패",
+        "score": 5
       }
     },
     {
@@ -16102,16 +16102,16 @@
       "time": "14:30",
       "venue": "목동야구장",
       "round": "16강전",
-      "status": "예정",
+      "status": "완료",
       "away": {
         "name": "우신고",
-        "result": "",
-        "score": null
+        "result": "승",
+        "score": 1
       },
       "home": {
         "name": "제물포고",
-        "result": "",
-        "score": null
+        "result": "패",
+        "score": 0
       }
     },
     {
