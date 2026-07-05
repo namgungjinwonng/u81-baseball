@@ -1,6 +1,6 @@
 {
   "year": 2026,
-  "updated": "2026-07-05 15:50",
+  "updated": "2026-07-05 18:42",
   "games": [
     {
       "game_idx": "36897",
@@ -16106,12 +16106,12 @@
       "away": {
         "name": "우신고",
         "result": "승",
-        "score": 1
+        "score": 4
       },
       "home": {
         "name": "제물포고",
         "result": "패",
-        "score": 0
+        "score": 1
       }
     },
     {
