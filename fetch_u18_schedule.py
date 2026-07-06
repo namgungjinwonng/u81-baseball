@@ -21,6 +21,7 @@ sys.stdout.reconfigure(encoding='utf-8')
 BASE = "https://www.korea-baseball.com"
 CAL_URL = f"{BASE}/game/calendar"
 BOX_URL = f"{BASE}/game/box_score"
+MATCH_URL = f"{BASE}/game/match_table"
 KIND_CD = 31  # 18세 이하부
 
 HEADERS = {
@@ -165,6 +166,49 @@ def parse_box_score(game_idx):
 SCHEDULE_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "u18_schedule.json")
 
 
+def fetch_official_ranks(year):
+    """전적표(match_table)에서 주말리그 권역별 협회 공식 순위(팀명 순서) 수집.
+
+    동률 처리(승자승·실점률 등)는 협회 기준이 복잡해 자체 계산과 어긋날 수 있으므로
+    전적표에 표시되는 공식 순서를 그대로 가져와 순위표에 사용한다.
+    실패한 권역은 건너뛴다 (JS 쪽에서 자체 계산으로 폴백).
+    """
+    ranks = {}
+    try:
+        r = session.get(MATCH_URL, params={"kind_cd": KIND_CD, "season": year}, timeout=20)
+        if r.status_code != 200:
+            raise Exception(f"HTTP {r.status_code}")
+        r.encoding = "utf-8"
+        ligs = re.findall(r'<option lig_idx="(\d+)"[^>]*>\s*([^<]*주말리그[^<]*?)\s*</option>',
+                          r.text, re.S)
+    except Exception as e:
+        print(f"  전적표 목록 조회 실패: {e}")
+        return ranks
+    for lig_idx, raw_name in ligs:
+        name = re.sub(r"\s+", " ", raw_name).strip()
+        try:
+            rr = session.get(MATCH_URL, params={"kind_cd": KIND_CD, "season": year,
+                                                "lig_idx": lig_idx}, timeout=20)
+            if rr.status_code != 200:
+                raise Exception(f"HTTP {rr.status_code}")
+            rr.encoding = "utf-8"
+            soup = BeautifulSoup(rr.text, "html.parser")
+            teams = []
+            for club in soup.select("div.match-club"):   # 행 순서 = 공식 순위(order_number)
+                team_el = club.select_one("span.team")
+                if team_el:
+                    t = re.sub(r"\s+", " ", team_el.get_text(" ", strip=True)).strip()
+                    if t:
+                        teams.append(t)
+            if teams:
+                ranks[name] = teams
+        except Exception as e:
+            print(f"  전적표 조회 실패({name}): {e}")
+        time.sleep(0.2)
+    print(f"  공식 순위 수집: {len(ranks)}개 권역")
+    return ranks
+
+
 def collect_games(idxs):
     """주어진 game_idx 목록을 병렬+재시도로 파싱해 {idx: game} 반환."""
     total = len(idxs)
@@ -202,7 +246,7 @@ def collect_games(idxs):
     return games_by_idx
 
 
-def save_schedule(year, games):
+def save_schedule(year, games, official_ranks=None):
     """games 리스트를 정렬해 u18_schedule.json에 저장."""
     games = sorted(games, key=lambda g: (g["date"] or "9999", g["time"] or ""))
     out = {
@@ -210,6 +254,8 @@ def save_schedule(year, games):
         "updated": datetime.now(KST).strftime("%Y-%m-%d %H:%M"),
         "games": games,
     }
+    if official_ranks:
+        out["official_ranks"] = official_ranks
     with open(SCHEDULE_PATH, "w", encoding="utf-8") as f:
         json.dump(out, f, ensure_ascii=False, indent=2)
     return games
@@ -219,13 +265,16 @@ def main():
     year = datetime.now(KST).year
     months = list(range(1, 13))
     print(f"=== U-18 {year}시즌 일정/결과 수집 ===\n")
-    print(f"[1/2] {year}년 월별 game_idx 수집 중...")
+    print(f"[1/3] {year}년 월별 game_idx 수집 중...")
     idxs = collect_game_idxs(year, months)
     print(f"  총 {len(idxs)}경기 발견\n")
 
-    print(f"[2/2] 경기 상세 수집 중... (구장/시간 포함)")
+    print(f"[2/3] 경기 상세 수집 중... (구장/시간 포함)")
     games_by_idx = collect_games(idxs)
-    games = save_schedule(year, list(games_by_idx.values()))
+
+    print(f"\n[3/3] 주말리그 공식 순위(전적표) 수집 중...")
+    official_ranks = fetch_official_ranks(year)
+    games = save_schedule(year, list(games_by_idx.values()), official_ranks)
 
     done_cnt = sum(1 for g in games if g["status"] == "완료")
     print(f"\n=== 완료 ===")
@@ -263,28 +312,28 @@ def main_incremental():
     pending_idx = {g["game_idx"] for g in existing_games if g.get("status") == "예정"}
     recent_days = {(now - timedelta(days=k)).strftime("%Y-%m-%d") for k in range(3)}
     recent_idx = {g["game_idx"] for g in existing_games if g.get("date") in recent_days}
-    print(f"[1/2] {year}년 전체 calendar 스캔 (신규/누락 game_idx 탐지)...")
+    print(f"[1/3] {year}년 전체 calendar 스캔 (신규/누락 game_idx 탐지)...")
     all_idx = set(collect_game_idxs(year, list(range(1, 13))))
     new_idx = all_idx - existing_idx
     candidates = sorted(pending_idx | new_idx | recent_idx, key=int)
     print(f"  대상 {len(candidates)}건 (예정 {len(pending_idx)} + 신규/누락 {len(new_idx)} + 최근3일 {len(recent_idx)})\n")
 
-    if not candidates:
-        print("재수집할 경기가 없습니다. (변경 없음)")
-        return
-
-    print(f"[2/2] 대상 경기 상세 수집 중...")
-    fetched = collect_games(candidates)
+    print(f"[2/3] 대상 경기 상세 수집 중...")
+    fetched = collect_games(candidates) if candidates else {}
     print(f"  {len(fetched)}건 수집 완료")
 
-    if not fetched:
-        print("갱신할 경기 데이터가 없습니다. (변경 없음)")
+    # 공식 순위는 경기 변경과 무관하게 매번 갱신 (실패 시 기존 값 유지)
+    print(f"\n[3/3] 주말리그 공식 순위(전적표) 수집 중...")
+    official_ranks = fetch_official_ranks(base_year) or existing.get("official_ranks") or {}
+
+    if not fetched and official_ranks == (existing.get("official_ranks") or {}):
+        print("갱신할 데이터가 없습니다. (변경 없음)")
         return
 
     # 병합: game_idx 기준 덮어쓰기/추가, 완료/취소 등 나머지는 그대로 유지
     merged = {g["game_idx"]: g for g in existing_games}
     merged.update(fetched)
-    games = save_schedule(base_year, list(merged.values()))
+    games = save_schedule(base_year, list(merged.values()), official_ranks)
 
     done_cnt = sum(1 for g in games if g["status"] == "완료")
     print(f"\n=== 완료 (증분 갱신) ===")
