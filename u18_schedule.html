@@ -245,7 +245,7 @@ table.stand .lv { color: #C8102E; font-weight: 800; }
   <h1>KBSA U-18 SCHEDULE</h1>
   <div class="subtitle">2026 시즌 18세 이하부 경기 일정 · 결과</div>
   <div class="subtitle" style="margin-top:4px">출처: 대한야구소프트볼협회 (korea-baseball.com)</div>
-  <div class="subtitle update-info" style="margin-top:6px">마지막 갱신: 2026-07-06 13:21</div>
+  <div class="subtitle update-info" style="margin-top:6px">마지막 갱신: 2026-07-06 13:45</div>
   <div class="subtitle update-info" style="margin-top:4px">본 앱은 비상업적 목적으로 운영되며, 모든 데이터 권한은 대한야구소프트볼협회에 있습니다.</div>
   <button class="reload-btn" onclick="reloadPage()">&#x21bb; 새로고침</button>
   <button class="install-btn" id="installBtn" onclick="installApp()">&#x1F4F2; 앱 설치</button>
@@ -520,7 +520,19 @@ function compStandings(title){
   const arr=Object.values(T);
   arr.forEach(t=>{ t.pts=t.w*2+t.d; });   // 승점: 승2 / 무1 / 패0
 
-  // 동률(승점) 팀들 간 미니리그 집계 (승자승 → 실점 → 득점)
+  // 협회 공식 순위(전적표)가 있으면 그 순서를 그대로 사용
+  // (동률 처리 기준이 협회 내부 규정이라 자체 계산으로는 재현 불가한 케이스가 있음)
+  const off=(scheduleData.official_ranks||{})[title];
+  if(off && off.length){
+    const oidx={}; off.forEach((n,k)=>{ oidx[n]=k; });
+    if(arr.every(t=>oidx[t.name]!=null)){
+      arr.sort((a,b)=>oidx[a.name]-oidx[b.name]);
+      arr.official=true;
+      return arr;
+    }
+  }
+
+  // (폴백) 동률(승점) 팀들 간 미니리그 집계 (승자승 → 실점 → 득점)
   function mini(group){
     const set=new Set(group.map(t=>t.name)), m={};
     group.forEach(t=>m[t.name]={pts:0,ra:0,rf:0});
@@ -583,7 +595,9 @@ function renderStandings(c, box){
   const arr=compStandings(c);
   const hasD=arr.some(r=>r.d>0);
   let html=`<div class="stand-title">${compLabel(c)}</div>`;
-  html+='<div class="stand-note">순위: 승점(승 2 · 무 1 · 패 0) → 승자승(맞대결) → 전체 실점 → 전체 득점</div>';
+  html+='<div class="stand-note">'+(arr.official
+    ?'순위: 대한야구소프트볼협회 공식 순위(전적표) 기준'
+    :'순위: 승점(승 2 · 무 1 · 패 0) → 승자승(맞대결) → 전체 실점 → 전체 득점')+'</div>';
   if(!arr.length){ box.innerHTML=html+'<div class="empty">완료된 경기가 없습니다.</div>'; return; }
   html+='<div class="stand-wrap"><table class="stand"><thead><tr><th>순위</th><th>학교</th><th>경기</th><th>승</th><th>패</th>'+(hasD?'<th>무</th>':'')+'<th>승점</th><th>실점</th><th>득점</th></tr></thead><tbody>';
   arr.forEach((r,i)=>{
