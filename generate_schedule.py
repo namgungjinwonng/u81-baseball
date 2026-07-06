@@ -706,21 +706,27 @@ function renderStandings(c, box){
 function renderBracket(c, box){
   const rf=document.getElementById('roundFilter').value;
   const _t=new Date(); _t.setHours(0,0,0,0); const T0=_t.getTime();
-  const dist=d=> d ? Math.abs((new Date(d+'T00:00:00').getTime()-T0)/86400000) : 1e9;
+  const dayTs=d=> d ? new Date(d+'T00:00:00').getTime() : Infinity;   // 날짜 미정은 미래 취급(뒤로)
+  // 정렬: 오늘 → 이후 일정(날짜 오름차순) → 지난 경기(최근 날짜부터)
+  const prio=g=>{ const t=dayTs(g.date); return t===T0?0:(t>T0?1:2); };
   const list=GAMES.filter(g=>g.title===c && (!rf || g.round===rf)).sort((x,y)=>{
-    const rr=roundRank(x.round)-roundRank(y.round); if(rr) return rr;
-    const dd=dist(x.date)-dist(y.date); if(dd) return dd;             // 오늘과 가까운 날짜부터
-    return (x.date+(x.time||'')).localeCompare(y.date+(y.time||''));  // 같은 날짜 → 시간 오름차순
+    const p=prio(x)-prio(y); if(p) return p;
+    const tx=dayTs(x.date), ty=dayTs(y.date);
+    if(tx!==ty) return prio(x)===2 ? ty-tx : tx-ty;                   // 과거는 최근부터, 나머지는 날짜순
+    const tt=(x.time||'').localeCompare(y.time||''); if(tt) return tt; // 같은 날짜 → 시간 오름차순
+    return roundRank(x.round)-roundRank(y.round);                     // 같은 시간 → 상위 라운드 먼저
   });
   let html=`<div class="stand-title">${compLabel(c)}</div>`;
   if(!list.length){ box.innerHTML=html+'<div class="empty">경기가 없습니다.</div>'; return; }
-  // 라운드(결승→예선) → 그 안에서 편성일(날짜)별로 다시 구분
-  let lastR=null, lastD=null;
+  // 날짜별로 그룹핑 (라운드는 각 카드의 단계 칩으로 표시)
+  let lastD=null;
   list.forEach(g=>{
-    const r=g.round||'기타';
-    if(r!==lastR){ html+=`<div class="round-group">${r}</div>`; lastR=r; lastD=null; }
     const d=g.date||'';
-    if(d!==lastD){ html+=`<div class="bracket-date">${d?fmtDateHeader(d):'일정 미정'}</div>`; lastD=d; }
+    if(d!==lastD){
+      const today = d && dayTs(d)===T0;
+      html+=`<div class="round-group">${d?fmtDateHeader(d):'일정 미정'}${today?' · 오늘':''}</div>`;
+      lastD=d;
+    }
     html+=gameCard(g, true);
   });
   box.innerHTML=html;
