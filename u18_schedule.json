@@ -1,6 +1,6 @@
 {
   "year": 2026,
-  "updated": "2026-07-07 13:45",
+  "updated": "2026-07-07 15:59",
   "games": [
     {
       "game_idx": "36897",
@@ -16181,13 +16181,13 @@
       "status": "완료",
       "away": {
         "name": "세광고",
-        "result": "무",
-        "score": 0
+        "result": "승",
+        "score": 12
       },
       "home": {
         "name": "강릉고",
-        "result": "무",
-        "score": 0
+        "result": "패",
+        "score": 1
       }
     },
     {
