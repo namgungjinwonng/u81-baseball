@@ -1,6 +1,6 @@
 {
   "year": 2026,
-  "updated": "2026-07-07 15:59",
+  "updated": "2026-07-07 21:12",
   "games": [
     {
       "game_idx": "36897",
@@ -16219,6 +16219,310 @@
       "status": "예정",
       "away": {
         "name": "경북고",
+        "result": "",
+        "score": null
+      },
+      "home": {
+        "name": "전주고",
+        "result": "",
+        "score": null
+      }
+    },
+    {
+      "game_idx": "38832",
+      "title": "제60회 대통령배 전국고교야구대회",
+      "date": "2026-07-18",
+      "time": "09:00",
+      "venue": "포항야구장",
+      "round": "예선전",
+      "status": "예정",
+      "away": {
+        "name": "경남고",
+        "result": "",
+        "score": null
+      },
+      "home": {
+        "name": "상동고",
+        "result": "",
+        "score": null
+      }
+    },
+    {
+      "game_idx": "38835",
+      "title": "제60회 대통령배 전국고교야구대회",
+      "date": "2026-07-18",
+      "time": "09:00",
+      "venue": "포항 생활체육 야구장",
+      "round": "예선전",
+      "status": "예정",
+      "away": {
+        "name": "경북고",
+        "result": "",
+        "score": null
+      },
+      "home": {
+        "name": "광주진흥고",
+        "result": "",
+        "score": null
+      }
+    },
+    {
+      "game_idx": "38836",
+      "title": "제60회 대통령배 전국고교야구대회",
+      "date": "2026-07-18",
+      "time": "11:30",
+      "venue": "포항 생활체육 야구장",
+      "round": "예선전",
+      "status": "예정",
+      "away": {
+        "name": "청담고",
+        "result": "",
+        "score": null
+      },
+      "home": {
+        "name": "율곡고야구단",
+        "result": "",
+        "score": null
+      }
+    },
+    {
+      "game_idx": "38833",
+      "title": "제60회 대통령배 전국고교야구대회",
+      "date": "2026-07-18",
+      "time": "11:30",
+      "venue": "포항야구장",
+      "round": "예선전",
+      "status": "예정",
+      "away": {
+        "name": "세광고",
+        "result": "",
+        "score": null
+      },
+      "home": {
+        "name": "제물포고",
+        "result": "",
+        "score": null
+      }
+    },
+    {
+      "game_idx": "38837",
+      "title": "제60회 대통령배 전국고교야구대회",
+      "date": "2026-07-18",
+      "time": "18:00",
+      "venue": "포항 생활체육 야구장",
+      "round": "예선전",
+      "status": "예정",
+      "away": {
+        "name": "부원고야구단",
+        "result": "",
+        "score": null
+      },
+      "home": {
+        "name": "선린인터넷고",
+        "result": "",
+        "score": null
+      }
+    },
+    {
+      "game_idx": "38834",
+      "title": "제60회 대통령배 전국고교야구대회",
+      "date": "2026-07-18",
+      "time": "18:00",
+      "venue": "포항야구장",
+      "round": "예선전",
+      "status": "예정",
+      "away": {
+        "name": "충암고",
+        "result": "",
+        "score": null
+      },
+      "home": {
+        "name": "김해고",
+        "result": "",
+        "score": null
+      }
+    },
+    {
+      "game_idx": "38838",
+      "title": "제60회 대통령배 전국고교야구대회",
+      "date": "2026-07-19",
+      "time": "09:00",
+      "venue": "포항야구장",
+      "round": "예선전",
+      "status": "예정",
+      "away": {
+        "name": "김포과학기술고",
+        "result": "",
+        "score": null
+      },
+      "home": {
+        "name": "강릉고",
+        "result": "",
+        "score": null
+      }
+    },
+    {
+      "game_idx": "38841",
+      "title": "제60회 대통령배 전국고교야구대회",
+      "date": "2026-07-19",
+      "time": "09:00",
+      "venue": "포항 생활체육 야구장",
+      "round": "예선전",
+      "status": "예정",
+      "away": {
+        "name": "물금고",
+        "result": "",
+        "score": null
+      },
+      "home": {
+        "name": "경민IT고",
+        "result": "",
+        "score": null
+      }
+    },
+    {
+      "game_idx": "38839",
+      "title": "제60회 대통령배 전국고교야구대회",
+      "date": "2026-07-19",
+      "time": "11:30",
+      "venue": "포항야구장",
+      "round": "예선전",
+      "status": "예정",
+      "away": {
+        "name": "대전고",
+        "result": "",
+        "score": null
+      },
+      "home": {
+        "name": "서울HK야구단(U-18)",
+        "result": "",
+        "score": null
+      }
+    },
+    {
+      "game_idx": "38842",
+      "title": "제60회 대통령배 전국고교야구대회",
+      "date": "2026-07-19",
+      "time": "11:30",
+      "venue": "포항 생활체육 야구장",
+      "round": "예선전",
+      "status": "예정",
+      "away": {
+        "name": "성남고",
+        "result": "",
+        "score": null
+      },
+      "home": {
+        "name": "부산고",
+        "result": "",
+        "score": null
+      }
+    },
+    {
+      "game_idx": "38840",
+      "title": "제60회 대통령배 전국고교야구대회",
+      "date": "2026-07-19",
+      "time": "18:00",
+      "venue": "포항야구장",
+      "round": "예선전",
+      "status": "예정",
+      "away": {
+        "name": "광남고BC",
+        "result": "",
+        "score": null
+      },
+      "home": {
+        "name": "신일고",
+        "result": "",
+        "score": null
+      }
+    },
+    {
+      "game_idx": "38843",
+      "title": "제60회 대통령배 전국고교야구대회",
+      "date": "2026-07-19",
+      "time": "18:00",
+      "venue": "포항 생활체육 야구장",
+      "round": "예선전",
+      "status": "예정",
+      "away": {
+        "name": "덕수고",
+        "result": "",
+        "score": null
+      },
+      "home": {
+        "name": "서울컨벤션고",
+        "result": "",
+        "score": null
+      }
+    },
+    {
+      "game_idx": "38844",
+      "title": "제60회 대통령배 전국고교야구대회",
+      "date": "2026-07-20",
+      "time": "09:00",
+      "venue": "포항야구장",
+      "round": "예선전",
+      "status": "예정",
+      "away": {
+        "name": "마산고",
+        "result": "",
+        "score": null
+      },
+      "home": {
+        "name": "장안고",
+        "result": "",
+        "score": null
+      }
+    },
+    {
+      "game_idx": "38847",
+      "title": "제60회 대통령배 전국고교야구대회",
+      "date": "2026-07-20",
+      "time": "09:00",
+      "venue": "포항 생활체육 야구장",
+      "round": "예선전",
+      "status": "예정",
+      "away": {
+        "name": "청원고",
+        "result": "",
+        "score": null
+      },
+      "home": {
+        "name": "우신고",
+        "result": "",
+        "score": null
+      }
+    },
+    {
+      "game_idx": "38845",
+      "title": "제60회 대통령배 전국고교야구대회",
+      "date": "2026-07-20",
+      "time": "11:30",
+      "venue": "포항야구장",
+      "round": "예선전",
+      "status": "예정",
+      "away": {
+        "name": "공주고",
+        "result": "",
+        "score": null
+      },
+      "home": {
+        "name": "의성고",
+        "result": "",
+        "score": null
+      }
+    },
+    {
+      "game_idx": "38846",
+      "title": "제60회 대통령배 전국고교야구대회",
+      "date": "2026-07-20",
+      "time": "18:00",
+      "venue": "포항야구장",
+      "round": "예선전",
+      "status": "예정",
+      "away": {
+        "name": "광주제일고",
         "result": "",
         "score": null
       },
