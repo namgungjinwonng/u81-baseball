@@ -28,14 +28,21 @@ session.headers.update(HEADERS)
 
 
 def fetch_all_teams():
-    """Fetch all U-18 teams from all pages."""
+    """Fetch all U-18 teams from all pages. 페이지별 실패 시 지수 백오프 재시도.
+
+    협회 사이트 일시 오류로 예외가 나면 워크플로우 전체가 즉사하던 문제 방지.
+    일부 페이지가 최종 실패하면 부분 데이터 저장을 막기 위해 예외를 던진다.
+    """
     teams = []
-    for page in range(1, 5):
-        print(f"  팀 목록 {page}페이지 수집 중...")
-        resp = session.get(TEAM_LIST_URL, params={"kind_cd": 31, "page": page})
+
+    def fetch_page(page):
+        """한 페이지 조회 → 팀 리스트 반환. 실패 시 예외."""
+        resp = session.get(TEAM_LIST_URL, params={"kind_cd": 31, "page": page}, timeout=20)
+        if resp.status_code != 200:
+            raise Exception(f"HTTP {resp.status_code}")
         resp.encoding = "utf-8"
         soup = BeautifulSoup(resp.text, "html.parser")
-
+        found = []
         for a_tag in soup.select("a[href*='team_player?club_idx=']"):
             href = a_tag.get("href", "")
             if "club_idx=" in href:
@@ -55,7 +62,7 @@ def fetch_all_teams():
                                 field_map[dt.get_text(strip=True)] = dd.get_text(strip=True)
                             region = field_map.get("지역", "")
                             manager = field_map.get("감독", "")
-                        teams.append({
+                        found.append({
                             "club_idx": club_idx,
                             "name": team_name,
                             "region": region,
@@ -63,7 +70,38 @@ def fetch_all_teams():
                         })
                 except Exception as e:
                     print(f"    Error: {e}")
+        return found
+
+    # 1차 수집 (실패한 페이지만 모아 재시도)
+    failed = []
+    for page in range(1, 5):
+        print(f"  팀 목록 {page}페이지 수집 중...")
+        try:
+            teams.extend(fetch_page(page))
+        except Exception as e:
+            print(f"  {page}페이지 수집 실패(재시도예정): {e}")
+            failed.append(page)
         time.sleep(0.3)
+
+    # 실패한 페이지 재시도 (일정 수집기와 동일한 지수 백오프)
+    for attempt in range(1, 6):
+        if not failed:
+            break
+        retry, failed = failed, []
+        wait = min(5 * (2 ** (attempt - 1)), 40)   # 5,10,20,40,40초
+        print(f"  [팀 목록 재시도 {attempt}] {len(retry)}개 페이지, {wait}초 대기 후 재조회...")
+        time.sleep(wait)
+        for page in retry:
+            try:
+                teams.extend(fetch_page(page))
+                print(f"  {page}페이지 재시도 성공")
+            except Exception as e:
+                print(f"  {page}페이지 재시도 실패: {e}")
+                failed.append(page)
+
+    if failed:
+        # 일부 페이지 누락 상태로 진행하면 해당 팀들이 데이터에서 사라지므로 중단
+        raise Exception(f"팀 목록 수집 최종 실패: {sorted(failed)}페이지")
 
     print(f"  총 {len(teams)}개 팀 발견")
     return teams
