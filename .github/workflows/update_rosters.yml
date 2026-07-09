@@ -20,6 +20,8 @@ jobs:
     steps:
       - name: 체크아웃
         uses: actions/checkout@v4
+        with:
+          ref: main   # 큐잉 시점 커밋이 아닌 실행 시점의 최신 main (연달아 실행 시 push 충돌 방지)
 
       - name: 파이썬 설정
         uses: actions/setup-python@v5
@@ -41,5 +43,6 @@ jobs:
             echo "변경사항 없음 - 커밋 생략"
           else
             git commit -m "선수 데이터 갱신 ($(TZ='Asia/Seoul' date +'%Y-%m-%d %H:%M KST'))"
+            git pull --rebase origin main   # 빌드 중 다른 push가 있었으면 그 위로 재적용
             git push
           fi
