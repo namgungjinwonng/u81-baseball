@@ -23131,9 +23131,21 @@
       },
       {
         "type": "staff",
+        "name": "임호정",
+        "role": "코치",
+        "person_no": "202606T01290"
+      },
+      {
+        "type": "staff",
         "name": "장성재",
         "role": "코치",
         "person_no": "201201T00388"
+      },
+      {
+        "type": "staff",
+        "name": "조진호",
+        "role": "코치",
+        "person_no": "201202T01378"
       }
     ],
     "players": [
@@ -25243,6 +25255,19 @@
       },
       {
         "type": "player",
+        "number": "",
+        "name": "구현욱",
+        "position": "미지정",
+        "grade": "2",
+        "height_weight": "",
+        "throw_bat": "",
+        "person_no": "202001000371",
+        "team": "상우고야구단",
+        "team_idx": "1899",
+        "region": "경기"
+      },
+      {
+        "type": "player",
         "number": "8",
         "name": "권대환",
         "position": "투수",
@@ -25289,6 +25314,19 @@
         "height_weight": "174cm / 65kg",
         "throw_bat": "우투우타",
         "person_no": "201901001353",
+        "team": "상우고야구단",
+        "team_idx": "1899",
+        "region": "경기"
+      },
+      {
+        "type": "player",
+        "number": "",
+        "name": "김영광",
+        "position": "미지정",
+        "grade": "1",
+        "height_weight": "",
+        "throw_bat": "",
+        "person_no": "202102001854",
         "team": "상우고야구단",
         "team_idx": "1899",
         "region": "경기"
@@ -25580,7 +25618,7 @@
         "region": "경기"
       }
     ],
-    "player_count": 28
+    "player_count": 30
   },
   {
     "team": "서울HG야구단(U-18)",
@@ -32355,6 +32393,19 @@
       },
       {
         "type": "player",
+        "number": "",
+        "name": "김주한",
+        "position": "미지정",
+        "grade": "2",
+        "height_weight": "",
+        "throw_bat": "",
+        "person_no": "201901002396",
+        "team": "세명컴퓨터고야구단",
+        "team_idx": "1827",
+        "region": "서울"
+      },
+      {
+        "type": "player",
         "number": "11",
         "name": "김준연",
         "position": "투수",
@@ -32427,6 +32478,19 @@
         "height_weight": "178cm / 75kg",
         "throw_bat": "좌투좌타",
         "person_no": "201902003212",
+        "team": "세명컴퓨터고야구단",
+        "team_idx": "1827",
+        "region": "서울"
+      },
+      {
+        "type": "player",
+        "number": "",
+        "name": "안우진",
+        "position": "미지정",
+        "grade": "1",
+        "height_weight": "",
+        "throw_bat": "",
+        "person_no": "202107000597",
         "team": "세명컴퓨터고야구단",
         "team_idx": "1827",
         "region": "서울"
@@ -32576,6 +32640,19 @@
       },
       {
         "type": "player",
+        "number": "",
+        "name": "최주환",
+        "position": "미지정",
+        "grade": "2",
+        "height_weight": "",
+        "throw_bat": "",
+        "person_no": "201803000340",
+        "team": "세명컴퓨터고야구단",
+        "team_idx": "1827",
+        "region": "서울"
+      },
+      {
+        "type": "player",
         "number": "5",
         "name": "최지민",
         "position": "내야수",
@@ -32588,7 +32665,7 @@
         "region": "서울"
       }
     ],
-    "player_count": 20
+    "player_count": 23
   },
   {
     "team": "세원고",
@@ -49637,6 +49714,19 @@
       },
       {
         "type": "player",
+        "number": "",
+        "name": "이민혁",
+        "position": "미지정",
+        "grade": "1",
+        "height_weight": "",
+        "throw_bat": "",
+        "person_no": "202102003463",
+        "team": "청주고",
+        "team_idx": "421",
+        "region": "충북"
+      },
+      {
+        "type": "player",
         "number": "24",
         "name": "이승원",
         "position": "포수",
@@ -49831,7 +49921,7 @@
         "region": "충북"
       }
     ],
-    "player_count": 39
+    "player_count": 40
   },
   {
     "team": "충암고",
@@ -51739,6 +51829,19 @@
       },
       {
         "type": "player",
+        "number": "",
+        "name": "윤상",
+        "position": "미지정",
+        "grade": "1",
+        "height_weight": "",
+        "throw_bat": "",
+        "person_no": "201905001033",
+        "team": "한광BC(U-18)",
+        "team_idx": "1637",
+        "region": "서울"
+      },
+      {
+        "type": "player",
         "number": "8",
         "name": "윤종현",
         "position": "내야수",
@@ -51868,7 +51971,7 @@
         "region": "서울"
       }
     ],
-    "player_count": 20
+    "player_count": 21
   },
   {
     "team": "한국마사고BC",
