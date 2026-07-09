@@ -1,6 +1,6 @@
 {
   "year": 2026,
-  "updated": "2026-07-08 23:41",
+  "updated": "2026-07-09 12:17",
   "games": [
     {
       "game_idx": "36897",
@@ -16235,6 +16235,44 @@
       "time": "10:00",
       "venue": "목동야구장",
       "round": "준결승전",
+      "status": "완료",
+      "away": {
+        "name": "세광고",
+        "result": "승",
+        "score": 1
+      },
+      "home": {
+        "name": "배명고",
+        "result": "패",
+        "score": 0
+      }
+    },
+    {
+      "game_idx": "38854",
+      "title": "제81회 청룡기 전국고교야구선수권대회 겸 주말리그 왕중왕전",
+      "date": "2026-07-09",
+      "time": "13:00",
+      "venue": "목동야구장",
+      "round": "준결승전",
+      "status": "취소",
+      "away": {
+        "name": "경북고",
+        "result": "",
+        "score": null
+      },
+      "home": {
+        "name": "마산용마고",
+        "result": "",
+        "score": null
+      }
+    },
+    {
+      "game_idx": "38857",
+      "title": "제81회 청룡기 전국고교야구선수권대회 겸 주말리그 왕중왕전",
+      "date": "2026-07-10",
+      "time": "10:00",
+      "venue": "목동야구장",
+      "round": "준결승전",
       "status": "예정",
       "away": {
         "name": "세광고",
@@ -16248,9 +16286,9 @@
       }
     },
     {
-      "game_idx": "38854",
+      "game_idx": "38858",
       "title": "제81회 청룡기 전국고교야구선수권대회 겸 주말리그 왕중왕전",
-      "date": "2026-07-09",
+      "date": "2026-07-10",
       "time": "13:00",
       "venue": "목동야구장",
       "round": "준결승전",
@@ -16262,6 +16300,44 @@
       },
       "home": {
         "name": "마산용마고",
+        "result": "",
+        "score": null
+      }
+    },
+    {
+      "game_idx": "38860",
+      "title": "2026 고교야구 주말리그 후반기(서울권B)",
+      "date": "2026-07-11",
+      "time": "09:00",
+      "venue": "목동야구장",
+      "round": "리그전",
+      "status": "예정",
+      "away": {
+        "name": "서울아이티고BC",
+        "result": "",
+        "score": null
+      },
+      "home": {
+        "name": "한광BC(U-18)",
+        "result": "",
+        "score": null
+      }
+    },
+    {
+      "game_idx": "38859",
+      "title": "2026 고교야구 주말리그 후반기(서울권A)",
+      "date": "2026-07-11",
+      "time": "11:30",
+      "venue": "목동야구장",
+      "round": "리그전",
+      "status": "예정",
+      "away": {
+        "name": "충암고",
+        "result": "",
+        "score": null
+      },
+      "home": {
+        "name": "서울컨벤션고",
         "result": "",
         "score": null
       }
