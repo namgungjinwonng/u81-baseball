@@ -129,6 +129,24 @@ def build_generate_only():
     print("\n=== 빌드 완료: docs/ 반영됨 (생성 전용) ===")
 
 
+def build_generate_players():
+    print("=== U-18 선수 생성 전용 빌드 시작 (수집 없음) ===")
+    # 외부에서 갱신된 u18_data.json 으로 선수 페이지만 재생성·반영 (일정은 건드리지 않음)
+    run("generate_html.py")
+    os.makedirs(os.path.join(BASE_DIR, "docs"), exist_ok=True)
+    reflect_players()
+    print("\n=== 빌드 완료: docs/ 반영됨 (선수 생성 전용) ===")
+
+
+def build_generate_schedule():
+    print("=== U-18 일정 생성 전용 빌드 시작 (수집 없음) ===")
+    # 외부에서 갱신된 u18_schedule.json 으로 일정 페이지만 재생성·반영 (선수는 건드리지 않음)
+    run("generate_schedule.py")
+    os.makedirs(os.path.join(BASE_DIR, "docs"), exist_ok=True)
+    reflect_schedule()
+    print("\n=== 빌드 완료: docs/ 반영됨 (일정 생성 전용) ===")
+
+
 def main():
     if "--rosters-only" in sys.argv:
         build_rosters_only()
@@ -136,6 +154,10 @@ def main():
         build_incremental()
     elif "--schedule-only" in sys.argv:
         build_schedule_only()
+    elif "--generate-players" in sys.argv:
+        build_generate_players()
+    elif "--generate-schedule" in sys.argv:
+        build_generate_schedule()
     elif "--generate-only" in sys.argv:
         build_generate_only()
     else:
