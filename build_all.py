@@ -116,6 +116,19 @@ def build_incremental():
     print("\n=== 빌드 완료: docs/ 반영됨 (일정 증분) ===")
 
 
+def build_generate_only():
+    print("=== U-18 생성 전용 빌드 시작 (수집 없음) ===")
+    # 외부 저장소(U18-baseball-player-Stats)가 갱신해 둔 u18_data.json / u18_schedule.json 을
+    # 그대로 사용해 HTML/JS 만 재생성하고 docs/ 에 반영한다.
+    run("generate_html.py")
+    run("generate_schedule.py")
+    os.makedirs(os.path.join(BASE_DIR, "docs"), exist_ok=True)
+    reflect_players()
+    reflect_schedule()
+    ensure_static()
+    print("\n=== 빌드 완료: docs/ 반영됨 (생성 전용) ===")
+
+
 def main():
     if "--rosters-only" in sys.argv:
         build_rosters_only()
@@ -123,6 +136,8 @@ def main():
         build_incremental()
     elif "--schedule-only" in sys.argv:
         build_schedule_only()
+    elif "--generate-only" in sys.argv:
+        build_generate_only()
     else:
         build_full()
 

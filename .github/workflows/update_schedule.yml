@@ -1,13 +1,9 @@
 name: 3. U18 일정 변경사항 업데이트
 
+# 자동(cron) 수집은 제거 — 일상 갱신은 U18-baseball-player-Stats 워크플로우가
+# 데이터를 동기화해 준다. 이 워크플로우는 수동 실행 전용.
 on:
-  schedule:
-    # 시간은 UTC 기준 (KST = UTC + 9). 정각 혼잡을 피해 17분으로 설정.
-    # 완료 경기는 보존하고 예정·신규(누락 포함)만 재수집하는 증분 갱신.
-    - cron: "17 3 * * *"     # 매일 12:17 KST
-    - cron: "17 9 * * *"     # 매일 18:17 KST
-    - cron: "17 12 * * *"    # 매일 21:17 KST
-  workflow_dispatch: {}   # GitHub에서 수동 실행도 가능
+  workflow_dispatch: {}   # 수동 실행 전용
 
 permissions:
   contents: write
