@@ -50,6 +50,7 @@ total_teams = len(data)
 total_staff = len(all_staff)
 
 from datetime import datetime, timezone, timedelta
+from sunset_notice import SUNSET_HTML
 KST = timezone(timedelta(hours=9))
 update_date = datetime.now(KST).strftime('%Y-%m-%d %H:%M')
 
@@ -931,7 +932,7 @@ function openExternalBrowser(){{
 // Initial render
 filterTeams();
 </script>
-
+{SUNSET_HTML}
 </body>
 </html>"""
 

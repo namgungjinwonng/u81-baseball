@@ -809,6 +809,9 @@ function openExternalBrowser(){
 </body>
 </html>"""
 
+# 서비스 종료 안내 팝업 삽입 (</body> 직전)
+from sunset_notice import SUNSET_HTML
+HTML = HTML.replace("</body>", SUNSET_HTML + "\n</body>")
 HTML = HTML.replace("__YEAR__", str(year)).replace("__UPDATED__", updated)
 with open(os.path.join(BASE_DIR, "u18_schedule.html"), "w", encoding="utf-8") as f:
     f.write(HTML)
