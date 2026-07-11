@@ -39,6 +39,7 @@ SUNSET_HTML = """
     font-size: 15px; padding: 13px 0; border-radius: 2px; margin-top: 4px;
 }
 #sunsetCard .go:active { background: #001f45; }
+#sunsetCard button.go { border: 0; cursor: pointer; font-family: inherit; }
 #sunsetCard .foot {
     display: flex; justify-content: space-between; align-items: center;
     padding: 12px 20px 16px; font-size: 13px; color: #555;
@@ -70,7 +71,8 @@ SUNSET_HTML = """
                 새로워진 <b class="app">__BASE_NAME__</b>에서 서비스를 계속 이용하실 수 있습니다.
             </div>
             <div class="date">서비스 종료일: __SUNSET_DATE__</div>
-            <a class="go" href="__BASE_URL__" target="_blank" rel="noopener">__BASE_NAME__ 설치하러 가기</a>
+            <button class="go" type="button" onclick="openBaseInstall()">__BASE_NAME__ 설치하러 가기</button>
+            <div class="inapp-note" id="sunsetOpenResult" role="status"></div>
             <div class="del-note">※ <b class="app">__BASE_NAME__</b> 설치 후, 기존 <b class="app">__MERGE_NAME__</b> 앱은 홈 화면에서 아이콘을 길게 눌러 직접 삭제해 주세요.</div>
             <div class="inapp-note">※ 카카오톡·네이버 등 인앱 브라우저에서는 앱 설치가 불가하니, Chrome/Safari 등 기본 브라우저로 열어 설치해 주세요.</div>
         </div>
@@ -92,6 +94,40 @@ SUNSET_HTML = """
             try { localStorage.setItem(KEY, today()); } catch (e) {}
         }
         document.getElementById('sunsetOverlay').classList.remove('show');
+    };
+    var BASE_URL = '__BASE_URL__';
+    function copyBaseUrl() {
+        var done = function () {
+            document.getElementById('sunsetOpenResult').textContent = '설치 주소를 복사했습니다. Safari 주소창에 붙여넣어 열어 주세요.';
+        };
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(BASE_URL).then(done).catch(copyFallback);
+        } else {
+            copyFallback();
+        }
+        function copyFallback() {
+            var input = document.createElement('textarea');
+            input.value = BASE_URL;
+            input.setAttribute('readonly', '');
+            input.style.position = 'fixed'; input.style.opacity = '0';
+            document.body.appendChild(input); input.select();
+            try { document.execCommand('copy'); done(); }
+            catch (e) { document.getElementById('sunsetOpenResult').textContent = 'Safari에서 다음 주소를 열어 주세요: ' + BASE_URL; }
+            document.body.removeChild(input);
+        }
+    }
+    window.openBaseInstall = function () {
+        var ua = navigator.userAgent || '';
+        if (/Android/i.test(ua)) {
+            var path = BASE_URL.replace(/^https?:\/\//, '');
+            location.href = 'intent://' + path + '#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=' + encodeURIComponent(BASE_URL) + ';end';
+            return;
+        }
+        if (/iPad|iPhone|iPod/i.test(ua)) {
+            copyBaseUrl();
+            return;
+        }
+        window.open(BASE_URL, '_blank', 'noopener');
     };
     // 2026-08-01 00:00 KST 부터 차단 화면 (닫기 불가, 안내만). ?sunset_ended=1 = 미리보기.
     var ended = Date.now() >= new Date('2026-08-01T00:00:00+09:00').getTime()
