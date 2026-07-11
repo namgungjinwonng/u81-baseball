@@ -1,5 +1,7 @@
 # 서비스 종료(2026-07-31) 안내 팝업 스니펫 — generate_html.py / generate_schedule.py 공용.
 # </body> 직전에 삽입한다. 오늘 하루 보지 않기 = localStorage 'u18SunsetHideDate'.
+# 2026-08-01(KST)부터는 닫을 수 없는 차단 화면으로 전환(안내만 표시).
+# 차단 화면 미리보기: URL 에 ?sunset_ended=1 을 붙이면 날짜와 무관하게 강제 표시.
 
 BASE_APP_NAME = "U-18 Player Stats"
 BASE_APP_URL = "https://namgungjinwonng.github.io/U18-baseball-player-Stats/"
@@ -25,6 +27,8 @@ SUNSET_HTML = """
 }
 #sunsetCard .body { padding: 20px; font-size: 14px; line-height: 1.65; color: #222; }
 #sunsetCard .body b { color: #002D62; }
+/* 앱 이름 강조: 볼드 + 본문보다 1pt 크게 + 블랙 */
+#sunsetCard .body b.app { color: #000; font-size: 15px; font-weight: 800; }
 #sunsetCard .date {
     margin: 14px 0; padding: 10px 12px; background: #F4F6F8; border-left: 3px solid #BA0C2F;
     font-weight: 700; font-size: 14px;
@@ -45,17 +49,29 @@ SUNSET_HTML = """
     border-radius: 2px; cursor: pointer;
 }
 #sunsetCard .inapp-note { font-size: 12px; color: #777; margin-top: 10px; }
+#sunsetCard .del-note { font-size: 13px; color: #222; margin-top: 12px; padding: 10px 12px; background: #F4F6F8; border-radius: 2px; }
+/* 종료일 이후: 닫기 불가 차단 화면 — 푸터(닫기/오늘 하루 보지 않기) 숨김 */
+#sunsetOverlay.sunset-ended .foot { display: none; }
+#sunsetOverlay.sunset-ended #sunsetCard { border-color: #BA0C2F; }
 </style>
 <div id="sunsetOverlay">
     <div id="sunsetCard" role="alertdialog" aria-label="서비스 종료 및 통합 안내">
         <div class="head">[서비스 종료 및 통합 안내]</div>
         <div class="body">
-            안녕하세요, <b>__MERGE_NAME__</b>을(를) 이용해 주셔서 감사합니다.<br>
-            <b>__MERGE_NAME__</b> 서비스가 <b>__SUNSET_DATE__</b>부로 종료될 예정입니다.<br><br>
-            지속적인 서비스 이용을 위해 새로워진 <b>__BASE_NAME__</b>을(를) 설치하여 이용해 주시기 바랍니다.
-            기존에 이용하시던 서비스는 <b>__BASE_NAME__</b>에서 더욱 편리하게 이어 나가실 수 있습니다.
+            <div id="sunsetMsgPre">
+                안녕하세요, <b class="app">__MERGE_NAME__</b>을(를) 이용해 주셔서 감사합니다.<br>
+                <b class="app">__MERGE_NAME__</b> 서비스가 <b>__SUNSET_DATE__</b>부로 종료될 예정입니다.<br><br>
+                지속적인 서비스 이용을 위해 새로워진 <b class="app">__BASE_NAME__</b>을(를) 설치하여 이용해 주시기 바랍니다.
+                기존에 이용하시던 서비스는 <b class="app">__BASE_NAME__</b>에서 더욱 편리하게 이어 나가실 수 있습니다.
+            </div>
+            <div id="sunsetMsgEnded" style="display:none">
+                <b class="app">__MERGE_NAME__</b> 서비스가 <b>__SUNSET_DATE__</b>부로 종료되었습니다.<br>
+                그동안 이용해 주셔서 감사합니다.<br><br>
+                새로워진 <b class="app">__BASE_NAME__</b>에서 서비스를 계속 이용하실 수 있습니다.
+            </div>
             <div class="date">서비스 종료일: __SUNSET_DATE__</div>
             <a class="go" href="__BASE_URL__" target="_blank" rel="noopener">__BASE_NAME__ 설치하러 가기</a>
+            <div class="del-note">※ <b class="app">__BASE_NAME__</b> 설치 후, 기존 <b class="app">__MERGE_NAME__</b> 앱은 홈 화면에서 아이콘을 길게 눌러 직접 삭제해 주세요.</div>
             <div class="inapp-note">※ 카카오톡·네이버 등 인앱 브라우저에서는 앱 설치가 불가하니, Chrome/Safari 등 기본 브라우저로 열어 설치해 주세요.</div>
         </div>
         <div class="foot">
@@ -77,10 +93,21 @@ SUNSET_HTML = """
         }
         document.getElementById('sunsetOverlay').classList.remove('show');
     };
+    // 2026-08-01 00:00 KST 부터 차단 화면 (닫기 불가, 안내만). ?sunset_ended=1 = 미리보기.
+    var ended = Date.now() >= new Date('2026-08-01T00:00:00+09:00').getTime()
+        || /[?&]sunset_ended=1/.test(location.search);
+    var overlay = document.getElementById('sunsetOverlay');
+    if (ended) {
+        document.getElementById('sunsetMsgPre').style.display = 'none';
+        document.getElementById('sunsetMsgEnded').style.display = 'block';
+        overlay.classList.add('show', 'sunset-ended');
+        document.body.style.overflow = 'hidden'; // 뒤 화면 스크롤 차단
+        return;
+    }
     var hidden = null;
     try { hidden = localStorage.getItem(KEY); } catch (e) {}
     if (hidden !== today()) {
-        document.getElementById('sunsetOverlay').classList.add('show');
+        overlay.classList.add('show');
     }
 })();
 </script>
