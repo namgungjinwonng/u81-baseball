@@ -231,3 +231,4 @@ local_runner/run.bat                 # 포트 9091, 30분마다 자동
 - 설치 버튼은 Android에서 Chrome 패키지를 지정한 `intent://`로 Base 앱 URL을 연다.
 - iOS PWA에서 Safari를 강제로 실행하는 표준 API가 없으므로 설치 URL을 클립보드에 복사하고 Safari 주소창에 붙여넣도록 안내한다. Clipboard API 실패 시 숨은 textarea와 `execCommand('copy')`를 사용하고, 복사도 실패하면 URL을 화면에 표시한다.
 - 기타 브라우저는 새 탭으로 연다. Merge 서비스워커는 network-first라 HTML 변경만으로 기존 설치본도 온라인 재접속 시 갱신된다.
+- `오늘 하루 보지 않기` 기능은 제거되어 일반 안내 기간에는 닫기 버튼만 표시되고, 새로 페이지를 열면 팝업이 다시 표시된다.

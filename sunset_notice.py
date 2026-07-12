@@ -1,5 +1,5 @@
 # 서비스 종료(2026-07-31) 안내 팝업 스니펫 — generate_html.py / generate_schedule.py 공용.
-# </body> 직전에 삽입한다. 오늘 하루 보지 않기 = localStorage 'u18SunsetHideDate'.
+# </body> 직전에 삽입한다.
 # 2026-08-01(KST)부터는 닫을 수 없는 차단 화면으로 전환(안내만 표시).
 # 차단 화면 미리보기: URL 에 ?sunset_ended=1 을 붙이면 날짜와 무관하게 강제 표시.
 
@@ -41,17 +41,16 @@ SUNSET_HTML = """
 #sunsetCard .go:active { background: #001f45; }
 #sunsetCard button.go { border: 0; cursor: pointer; font-family: inherit; }
 #sunsetCard .foot {
-    display: flex; justify-content: space-between; align-items: center;
+    display: flex; justify-content: flex-end; align-items: center;
     padding: 12px 20px 16px; font-size: 13px; color: #555;
 }
-#sunsetCard .foot label { display: flex; align-items: center; gap: 6px; cursor: pointer; }
 #sunsetCard .foot button {
     border: 1px solid #ccc; background: #fff; padding: 7px 16px; font-size: 13px;
     border-radius: 2px; cursor: pointer;
 }
 #sunsetCard .inapp-note { font-size: 12px; color: #777; margin-top: 10px; }
 #sunsetCard .del-note { font-size: 13px; color: #222; margin-top: 12px; padding: 10px 12px; background: #F4F6F8; border-radius: 2px; }
-/* 종료일 이후: 닫기 불가 차단 화면 — 푸터(닫기/오늘 하루 보지 않기) 숨김 */
+/* 종료일 이후: 닫기 불가 차단 화면 — 닫기 푸터 숨김 */
 #sunsetOverlay.sunset-ended .foot { display: none; }
 #sunsetOverlay.sunset-ended #sunsetCard { border-color: #BA0C2F; }
 </style>
@@ -77,22 +76,13 @@ SUNSET_HTML = """
             <div class="inapp-note">※ 카카오톡·네이버 등 인앱 브라우저에서는 앱 설치가 불가하니, Chrome/Safari 등 기본 브라우저로 열어 설치해 주세요.</div>
         </div>
         <div class="foot">
-            <label><input type="checkbox" id="sunsetHideToday"> 오늘 하루 보지 않기</label>
             <button type="button" onclick="closeSunsetNotice()">닫기</button>
         </div>
     </div>
 </div>
 <script>
 (function () {
-    var KEY = 'u18SunsetHideDate';
-    function today() {
-        var d = new Date();
-        return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
-    }
     window.closeSunsetNotice = function () {
-        if (document.getElementById('sunsetHideToday').checked) {
-            try { localStorage.setItem(KEY, today()); } catch (e) {}
-        }
         document.getElementById('sunsetOverlay').classList.remove('show');
     };
     var BASE_URL = '__BASE_URL__';
@@ -140,11 +130,7 @@ SUNSET_HTML = """
         document.body.style.overflow = 'hidden'; // 뒤 화면 스크롤 차단
         return;
     }
-    var hidden = null;
-    try { hidden = localStorage.getItem(KEY); } catch (e) {}
-    if (hidden !== today()) {
-        overlay.classList.add('show');
-    }
+    overlay.classList.add('show');
 })();
 </script>
 """
